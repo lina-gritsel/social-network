@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC } from 'react'
+import Router from './router/router'
 
 const App: FC = () => {
-  return <div className="App">New Network</div>;
-};
+  return <Router />
+}
 
-export default App;
+export default App
