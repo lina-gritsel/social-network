@@ -1,5 +1,15 @@
 .container {
+  border-right: 2px solid var(--gray-color);
   display: flex;
   flex-direction: column;
   gap: 30px;
+  height: 100vh;
+  width: 200px;
+  padding: 20px;
+}
+
+.menuItem {
+  color: var(--gray-color);
+  display: flex;
+  gap: 10px;
 }
