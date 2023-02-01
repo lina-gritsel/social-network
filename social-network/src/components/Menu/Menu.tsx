@@ -1,18 +1,23 @@
+import { ForumRounded } from '@mui/icons-material'
+import { Link, NavLink } from 'react-router-dom'
+import { PATHS } from '../../router/paths'
 import { FC } from 'react'
-import { NavLink } from 'react-router-dom'
 
 import { NAVIGATION_MENU } from './constants'
-
-
 import styles from './Menu.module.scss'
+
 
 const Menu: FC = () => {
   return (
     <nav className={styles.container}>
-      {NAVIGATION_MENU.map(({ to, label }, index) => (
+      <Link to={PATHS.ROOT} className={styles.mainMenuItem}>
+        <ForumRounded color="primary" sx={{ fontSize: 50 }} />
+        OurNetwork
+      </Link>
+      {NAVIGATION_MENU.map(({ to, label, icon }, index) => (
         <NavLink key={index} to={to} className={styles.menuItem}>
-          {/* <div>{icon}</div> */}
-          <div>{label}</div>
+          {icon}
+          {label}
         </NavLink>
       ))}
     </nav>
