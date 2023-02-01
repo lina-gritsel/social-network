@@ -2,7 +2,6 @@ import { FC } from 'react'
 
 import RegistrationPage from '../pages/RegistrationPage'
 import { PATHS } from './paths'
-import RootPage from '../pages/RootPage'
 import ProfilePage from '../pages/ProfilePage'
 import NewsPage from '../pages/NewsPage'
 import LoginPage from '../pages/LoginPage'
@@ -14,10 +13,6 @@ interface Routes {
 }
 
 export const routes: Routes[] = [
-  {
-    path: PATHS.ROOT,
-    component: RootPage,
-  },
   {
     path: PATHS.REGISTRATION,
     component: RegistrationPage,

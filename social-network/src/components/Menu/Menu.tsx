@@ -10,7 +10,7 @@ import styles from './Menu.module.scss'
 const Menu: FC = () => {
   return (
     <nav className={styles.container}>
-      <Link to={PATHS.ROOT} className={styles.mainMenuItem}>
+      <Link to={PATHS.NEWS} className={styles.mainMenuItem}>
         <ForumRounded color="primary" sx={{ fontSize: 50 }} />
         OurNetwork
       </Link>
