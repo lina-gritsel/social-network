@@ -1,16 +1,24 @@
 import { FC } from 'react'
-import { Controller, Control } from 'react-hook-form'
+import { Controller, Control, FieldErrors } from 'react-hook-form'
 import { TextField } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+
+import { FormValues } from '../../pages/RegistrationPage/RegistrationForm'
 
 interface InputDateProps {
   className?: string
   name: string
   control: Control<any>
+  errors?: FieldErrors<FormValues>
 }
 
-const InputDate: FC<InputDateProps> = ({ className, control, name }) => {
+const InputDate: FC<InputDateProps> = ({
+  className,
+  control,
+  name,
+  errors,
+}) => {
   return (
     <Controller
       name={name}
@@ -21,7 +29,13 @@ const InputDate: FC<InputDateProps> = ({ className, control, name }) => {
             {...field}
             label="Date of birth"
             className={className}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                error={errors[name]}
+                helperText={errors[name]?.message}
+              />
+            )}
           />
         </LocalizationProvider>
       )}

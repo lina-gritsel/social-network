@@ -1,6 +1,8 @@
 import { FC } from 'react'
-import { Control, Controller } from 'react-hook-form'
+import { Control, Controller, FieldErrors } from 'react-hook-form'
 import { TextField } from '@mui/material'
+
+import { FormValues } from '../../pages/RegistrationPage/RegistrationForm'
 
 interface InputProps {
   type?: string
@@ -11,6 +13,7 @@ interface InputProps {
   }
   name: string
   control: Control<any>
+  errors?: FieldErrors<FormValues>
 }
 
 const Input: FC<InputProps> = ({
@@ -19,6 +22,7 @@ const Input: FC<InputProps> = ({
   inputProps,
   name,
   control,
+  errors,
 }) => {
   return (
     <Controller
@@ -31,6 +35,8 @@ const Input: FC<InputProps> = ({
           placeholder={placeholder}
           type={type}
           InputProps={inputProps}
+          error={errors[name]}
+          helperText={errors[name]?.message}
         />
       )}
     />

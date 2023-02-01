@@ -23,7 +23,7 @@ const RegistrationForm: FC = () => {
     showPassword,
     onChangeShowPassword,
     handleMouseDownPassword,
-    errors
+    errors,
   } = useRegistrationForm()
 
   return (
@@ -40,6 +40,7 @@ const RegistrationForm: FC = () => {
             </InputAdornment>
           ),
         }}
+        errors={errors}
       />
       <Input
         name="name"
@@ -52,8 +53,8 @@ const RegistrationForm: FC = () => {
             </InputAdornment>
           ),
         }}
+        errors={errors}
       />
-
       <InputPassword
         name="password"
         control={control}
@@ -77,9 +78,15 @@ const RegistrationForm: FC = () => {
             </InputAdornment>
           ),
         }}
+        errors={errors}
       />
       <div className={styles.block}>
-        <InputDate className={styles.inputDate} name="date" control={control} />
+        <InputDate
+          className={styles.inputDate}
+          name="date"
+          control={control}
+          errors={errors}
+        />
         <InputGender
           name="gender"
           control={control}

@@ -13,8 +13,13 @@ const InputGender: FC<InputGenderProps> = ({ className, name, control }) => {
     <Controller
       name={name}
       control={control}
-      render={({ field }) => (
-        <RadioGroup {...field} row className={className} defaultValue="male">
+      render={({ field: { onChange } }) => (
+        <RadioGroup
+          onChange={onChange}
+          row
+          className={className}
+          defaultValue="male"
+        >
           <FormControlLabel
             value="male"
             control={<Radio size="small" />}
