@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 
 import { NAVIGATION_MENU } from './constants'
 
-
 import styles from './Menu.module.scss'
 
 const Menu: FC = () => {

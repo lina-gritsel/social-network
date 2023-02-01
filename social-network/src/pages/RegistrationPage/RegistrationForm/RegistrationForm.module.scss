@@ -1,0 +1,42 @@
+.form {
+  align-items: center;
+  border: var(--border-primary);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 35%;
+}
+.block {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.link {
+  color: var(--blue-color);
+  transition: all 0.5s ease-in-out;
+}
+
+.inputDate {
+  width: 220px;
+}
+
+.inputGender {
+  align-items: center;
+  border: var(--border-primary);
+  border-radius: 5px;
+  display: flex;
+  gap: 7px;
+  padding-left: 15px;
+}
+
+input[type='date'] {
+  &::-webkit-inner-spin-button,
+  &::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+}
