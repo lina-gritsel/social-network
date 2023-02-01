@@ -7,12 +7,15 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px;
-  width: 35%;
+  max-width: 500px;
+  width: 100%;
 }
 .block {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   gap: 15px;
+  width: 100%;
 }
 
 .link {
@@ -21,7 +24,7 @@
 }
 
 .inputDate {
-  width: 220px;
+  width: 50%;
 }
 
 .inputGender {
@@ -29,8 +32,9 @@
   border: var(--border-primary);
   border-radius: 5px;
   display: flex;
-  gap: 7px;
+  gap: 4px;
   padding-left: 15px;
+  width: 50%;
 }
 
 input[type='date'] {

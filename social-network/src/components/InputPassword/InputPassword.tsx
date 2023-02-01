@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { TextField } from '@mui/material'
+import { Control, Controller } from 'react-hook-form'
 
 interface InputPasswordProps {
   type: string
@@ -8,19 +9,30 @@ interface InputPasswordProps {
     startAdornment?: JSX.Element
     endAdornment?: JSX.Element
   }
+  name: string
+  control: Control<any>
 }
 
 const InputPassword: FC<InputPasswordProps> = ({
   type,
   placeholder,
   inputProps,
+  control,
+  name,
 }) => {
   return (
-    <TextField
-      fullWidth
-      type={type}
-      placeholder={placeholder}
-      InputProps={inputProps}
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          fullWidth
+          type={type}
+          placeholder={placeholder}
+          InputProps={inputProps}
+        />
+      )}
     />
   )
 }

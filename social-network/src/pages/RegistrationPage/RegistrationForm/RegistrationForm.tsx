@@ -1,9 +1,8 @@
-import { FC, useState, MouseEvent } from 'react'
+import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Button, IconButton, InputAdornment } from '@mui/material'
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import LockIcon from '@mui/icons-material/Lock'
 
 import Input from '../../../components/Input'
@@ -12,27 +11,25 @@ import InputGender from '../../../components/InputGender'
 import InputPassword from '../../../components/InputPassword'
 import { PATHS } from '../../../router/paths'
 
+import { useRegistrationForm } from './hooks'
+
 import styles from './RegistrationForm.module.scss'
 
 const RegistrationForm: FC = () => {
-  const [showPassword, setShowPassword] = useState(false)
-  const [isDateType, setIsDateType] = useState(false)
-
-  const onChangeShowPassword = () => setShowPassword((show) => !show)
-
-  const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-  }
-
-  const onChangeDateType = () => setIsDateType((date) => !date)
-
-  const handleMouseDownOnDate = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-  }
+  const {
+    control,
+    handleSubmit,
+    onSubmit,
+    showPassword,
+    onChangeShowPassword,
+    handleMouseDownPassword,
+  } = useRegistrationForm()
 
   return (
-    <div className={styles.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <Input
+        name="email"
+        control={control}
         placeholder="Your Email"
         type="email"
         inputProps={{
@@ -44,8 +41,9 @@ const RegistrationForm: FC = () => {
         }}
       />
       <Input
+        name="name"
+        control={control}
         placeholder="Your Name"
-        type="text"
         inputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -54,7 +52,10 @@ const RegistrationForm: FC = () => {
           ),
         }}
       />
+
       <InputPassword
+        name="password"
+        control={control}
         placeholder="Create Password"
         type={showPassword ? 'text' : 'password'}
         inputProps={{
@@ -77,24 +78,12 @@ const RegistrationForm: FC = () => {
         }}
       />
       <div className={styles.block}>
-        <InputDate
-          type={isDateType ? 'date' : 'text'}
-          placeholder="Date of birth"
-          className={styles.inputDate}
-          inputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <IconButton
-                  onClick={onChangeDateType}
-                  onMouseDown={handleMouseDownOnDate}
-                >
-                  <CalendarMonthIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+        <InputDate className={styles.inputDate} name="date" control={control} />
+        <InputGender
+          name="gender"
+          control={control}
+          className={styles.inputGender}
         />
-        <InputGender className={styles.inputGender} />
       </div>
       <Button variant="contained" fullWidth type="submit">
         Sign Up
@@ -105,7 +94,7 @@ const RegistrationForm: FC = () => {
           <div className={styles.link}>Sign In</div>
         </NavLink>
       </div>
-    </div>
+    </form>
   )
 }
 
