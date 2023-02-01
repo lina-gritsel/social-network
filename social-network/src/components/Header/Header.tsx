@@ -1,3 +1,5 @@
+import { Avatar } from '@mui/material'
+import { deepPurple } from '@mui/material/colors'
 import { FC } from 'react'
 
 import styles from './Header.module.scss'
@@ -5,7 +7,17 @@ import styles from './Header.module.scss'
 const Header: FC = () => {
   return (
     <div className={styles.content}>
-      <input type="text" className={styles.searchInput} placeholder='Search for something here...'/>
+      <input
+        type="text"
+        className={styles.searchInput}
+        placeholder="Search for something here..."
+      />
+      <div className={styles.user}>
+        <div className={styles.userName}>Remy Sharp</div>
+        <Avatar
+          sx={{ bgcolor: deepPurple[500], width: 45, height: 45 }}
+        />
+      </div>
     </div>
   )
 }

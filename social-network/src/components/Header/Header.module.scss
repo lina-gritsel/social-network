@@ -1,11 +1,29 @@
 .content {
-  height: 50px;
+  align-items: center;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
   padding-left: 250px;
+  width: 85%;
 }
 
 .searchInput {
   border: 2px solid var(--light-gray);
-  height: 30px;
+  border-radius: 10px;
+  height: 40px;
   margin: 10px;
+  padding-left: 10px;
   width: 350px;
+}
+
+.user {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}
+
+.userName {
+  color: var(--gray-color);
+  font-size: 17px;
+  font-weight: 700;
 }
