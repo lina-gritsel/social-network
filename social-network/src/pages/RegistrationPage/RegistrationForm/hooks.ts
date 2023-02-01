@@ -1,8 +1,16 @@
 import { useState, MouseEvent } from 'react'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+import { schema } from './helpers'
 
 export const useRegistrationForm = () => {
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: {
       email: '',
       name: '',
@@ -23,6 +31,7 @@ export const useRegistrationForm = () => {
   }
 
   return {
+    errors,
     control,
     showPassword,
     onSubmit,

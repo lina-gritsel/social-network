@@ -23,6 +23,7 @@ const RegistrationForm: FC = () => {
     showPassword,
     onChangeShowPassword,
     handleMouseDownPassword,
+    errors
   } = useRegistrationForm()
 
   return (
