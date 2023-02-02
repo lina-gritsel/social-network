@@ -1,13 +1,13 @@
-import * as React from 'react'
-import {FC} from 'react'
+import { FC } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Avatar from '@mui/material/Avatar'
 import PhotoIcon from '@mui/icons-material/InsertPhotoOutlined'
-import MoodIcon from '@mui/icons-material/MoodOutlined';
+import MoodIcon from '@mui/icons-material/MoodOutlined'
+
+import Button from '../Button'
 
 import styles from './NewsCreator.module.scss'
-import Button from '../Button'
 
 interface NewsCreatorProps {
   name: string
@@ -40,7 +40,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   )
 }
 
-function ContentInput() {
+const ContentInput = () => {
   return (
     <Box
       component="form"
@@ -61,11 +61,11 @@ const CreateIcons: FC = () => {
   return (
     <div className={styles.createIcons}>
       <div className={styles.createItem}>
-        <PhotoIcon fontSize="medium" sx={{ color: '--gray-color' }} />
+        <PhotoIcon fontSize="medium" className={styles.icon} />
         <p>Photo / video</p>
       </div>
       <div className={styles.createItem}>
-        <MoodIcon fontSize="medium" sx={{ color: '--gray-color' }} />
+        <MoodIcon fontSize="medium" className={styles.icon} />
         <p>Feeling</p>
       </div>
     </div>

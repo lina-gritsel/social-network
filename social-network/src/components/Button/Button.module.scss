@@ -1,9 +1,9 @@
 .primaryButton {
-  background-color: rgb(119, 172, 240);
+  background-color: var(--blue-color);
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  color: #fff;
+  color: var(--white-color);
   font-size: 17px;
   width: 100px;
   height: 40px;
@@ -11,5 +11,5 @@
 
 .outlined {
   background-color: transparent;
-  color: rgb(119, 172, 240);
+  color: var(--blue-color);
 }
