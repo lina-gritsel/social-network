@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+}
+
+.layout {
+  display: flex;
+}
+
+.content {
+  background-color: var(--light-gray);
+  border-radius: 20px;
+  height: 89%;
+  left: 200px;
+  padding: 40px;
+  position: absolute;
+  top: 70px;
+  width: 85%;
+}
