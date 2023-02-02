@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import NewsCreator from './NewsPageComponents/CreateNews'
-import NewsCard from './NewsPageComponents/NewsCard'
+import NewsCreator from '../../components/NewsCreator/NewsCreator'
+import NewsCard from '../../components/NewsCard/NewsCard'
 import { userNews } from './NewsPageComponents/userNews'
 import styles from './NewsPage.module.scss'
 

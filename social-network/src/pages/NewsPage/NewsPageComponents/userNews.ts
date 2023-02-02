@@ -1,4 +1,4 @@
-import { News } from "./NewsCard"
+import { News } from "../../../components/NewsCard/NewsCard"
 
 function getRandomInt(max: number, min: number): number {
   return Math.floor(Math.random() * (max - min)) + min

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {FC} from 'react'
 import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -42,7 +43,7 @@ interface NewsCardProps {
   props: News
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({ props }) => {
+const NewsCard: FC<NewsCardProps> = ({ props }) => {
   const { name, date, img, content, moreContent, avatarColor, avatarImg } = props
   const [expanded, setExpanded] = React.useState(false)
 

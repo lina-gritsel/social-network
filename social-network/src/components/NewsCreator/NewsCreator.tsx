@@ -1,12 +1,13 @@
 import * as React from 'react'
+import {FC} from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Avatar from '@mui/material/Avatar'
 import PhotoIcon from '@mui/icons-material/InsertPhotoOutlined'
 import MoodIcon from '@mui/icons-material/MoodOutlined';
 
-import styles from '../NewsPage.module.scss'
-import Button from '../../../components/Button'
+import styles from './NewsCreator.module.scss'
+import Button from '../Button'
 
 interface NewsCreatorProps {
   name: string
@@ -14,7 +15,7 @@ interface NewsCreatorProps {
   avatarImg?: string
 }
 
-const NewsCreator: React.FC<NewsCreatorProps> = ({
+const NewsCreator: FC<NewsCreatorProps> = ({
   name,
   avatarColor,
   avatarImg,
@@ -43,13 +44,7 @@ function ContentInput() {
   return (
     <Box
       component="form"
-      sx={{
-        '& > :not(style)': {
-          m: 1,
-          width: '65ch',
-          bgcolor: 'var(--light-gray)',
-        },
-      }}
+      className={styles.contentInput}
       noValidate
       autoComplete="off"
     >
@@ -62,7 +57,7 @@ function ContentInput() {
   )
 }
 
-const CreateIcons: React.FC = () => {
+const CreateIcons: FC = () => {
   return (
     <div className={styles.createIcons}>
       <div className={styles.createItem}>
