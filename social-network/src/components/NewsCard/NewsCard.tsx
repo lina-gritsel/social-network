@@ -1,5 +1,4 @@
-import * as React from 'react'
-import {FC} from 'react'
+import { FC, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -13,6 +12,8 @@ import Typography from '@mui/material/Typography'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+
+import styles from './NewsCard.module.scss'
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean
@@ -43,19 +44,25 @@ interface NewsCardProps {
   props: News
 }
 
-const NewsCard: FC<NewsCardProps> = ({ props }) => {
-  const { name, date, img, content, moreContent, avatarColor, avatarImg } = props
-  const [expanded, setExpanded] = React.useState(false)
+const NewsCard: FC<NewsCardProps> = ({
+  props: { name, date, img, content, moreContent, avatarColor, avatarImg },
+}) => {
+  const [expanded, setExpanded] = useState(false)
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
 
   return (
-    <Card sx={{ maxWidth: 600 }}>
+    <Card className={styles.card}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: avatarColor }} aria-label="recipe" alt={name} src={avatarImg}>
+          <Avatar
+            sx={{ bgcolor: avatarColor }}
+            aria-label="recipe"
+            alt={name}
+            src={avatarImg}
+          >
             {name[0]}
           </Avatar>
         }

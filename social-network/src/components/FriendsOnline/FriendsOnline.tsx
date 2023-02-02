@@ -21,8 +21,8 @@ const FriendsOnline: FC = () => {
         placeholder="Search Friends!"
       />
       <div className={styles.friends}>
-        {friends.map((friend, i) => (
-          <Friend key={i} {...friend} />
+        {friends.map((friend, index) => (
+          <Friend key={index} {...friend} />
         ))}
       </div>
     </div>

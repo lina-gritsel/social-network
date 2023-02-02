@@ -1,10 +1,12 @@
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
+
+import logo from '../../assets/rsSchool.svg'
+import copyright from '../../assets/copyright.svg'
+
+import { GITHUB_LINKS } from './constants'
 
 import styles from './Footer.module.scss'
-import logo from '../../assets/rsSchool.svg'
-import { Link } from 'react-router-dom'
-import copyright from '../../assets/copyright.svg'
-import { GITHUB_LINKS } from './constants'
 
 const Footer: FC = () => {
   return (
@@ -15,7 +17,7 @@ const Footer: FC = () => {
       </div>
       <div className={styles.authors}>
         <Link to={GITHUB_LINKS.PASHA} target="_blank">
-          Pavel Pike
+          Pavel Shchuka
         </Link>
         <div className={styles.line}></div>
         <Link to={GITHUB_LINKS.LINA} target="_blank">

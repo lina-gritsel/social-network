@@ -1,5 +1,6 @@
-import { PATHS } from '../../router/paths'
 import { Person, Newspaper } from '@mui/icons-material'
+
+import { PATHS } from '../../router/paths'
 
 export const NAVIGATION_MENU = [
   {

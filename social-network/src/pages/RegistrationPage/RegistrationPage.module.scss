@@ -1,0 +1,21 @@
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  gap: 20px;
+  width: 100%;
+}
+
+.title {
+  color: var(--gray-color);
+}
+
+.subtitle {
+  color: var(--gray-color);
+  font-size: 18px;
+}

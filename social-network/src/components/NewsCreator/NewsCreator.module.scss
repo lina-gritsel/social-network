@@ -1,30 +1,35 @@
 .create {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: #fff;
-  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  border-radius: 4px;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-}
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--white-color);
+    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 4px;
+    box-shadow: 0px 2px 1px -1px var(--shadow-dark-color),
+      0px 1px 1px 0px var(--shadow-dark-color),
+      0px 1px 3px 0px var(--shadow-dark-color);
+  }
+
 .createHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px;
 }
+
 .createFooter {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px;
 }
+
 .createIcons {
   display: flex;
   gap: 25px;
 }
+
 .createItem {
   display: flex;
   gap: 5px;
@@ -34,10 +39,15 @@
   font-weight: 700;
   cursor: pointer;
 }
+
 .contentInput {
   & > :not(style) {
     width: 65ch;
-    background-color: var(--light-gray);
+    background-color: var(--light-gray-color);
     margin: 1;
   }
+}
+
+.icon {
+  color: var(--gray-color);
 }
