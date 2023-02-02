@@ -24,7 +24,7 @@ export const useRegistrationForm = () => {
       name: '',
       password: '',
       date: '',
-      gender: '',
+      gender: 'male',
     },
   })
 

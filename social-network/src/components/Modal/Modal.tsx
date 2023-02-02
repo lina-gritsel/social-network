@@ -1,3 +1,4 @@
+import { FC, ReactNode } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -5,7 +6,6 @@ import {
   Button,
   DialogTitle,
 } from '@mui/material'
-import { FC, ReactNode } from 'react'
 
 interface ModalProps {
   open: boolean
