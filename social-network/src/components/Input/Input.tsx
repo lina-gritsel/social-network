@@ -35,7 +35,7 @@ const Input: FC<InputProps> = ({
           placeholder={placeholder}
           type={type}
           InputProps={inputProps}
-          error={errors[name]}
+          error={!!errors[name]}
           helperText={errors[name]?.message}
         />
       )}

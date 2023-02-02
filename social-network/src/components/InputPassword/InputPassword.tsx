@@ -35,7 +35,7 @@ const InputPassword: FC<InputPasswordProps> = ({
           type={type}
           placeholder={placeholder}
           InputProps={inputProps}
-          error={errors[name]}
+          error={!!errors[name]}
           helperText={errors[name]?.message}
         />
       )}

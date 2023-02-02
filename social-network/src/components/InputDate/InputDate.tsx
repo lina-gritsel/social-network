@@ -32,7 +32,7 @@ const InputDate: FC<InputDateProps> = ({
             renderInput={(params) => (
               <TextField
                 {...params}
-                error={errors[name]}
+                error={!!errors[name]}
                 helperText={errors[name]?.message}
               />
             )}
