@@ -33,7 +33,9 @@ const InputDate: FC<InputDateProps> = ({
               <TextField
                 {...params}
                 error={!!errors[name]}
-                helperText={errors[name]?.message}
+                helperText={
+                  errors[name]?.message ? 'Date is a required field' : ''
+                }
               />
             )}
           />

@@ -40,7 +40,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   )
 }
 
-function ContentInput() {
+const ContentInput = () => {
   return (
     <Box
       component="form"

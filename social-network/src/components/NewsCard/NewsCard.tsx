@@ -44,8 +44,9 @@ interface NewsCardProps {
   props: News
 }
 
-const NewsCard: FC<NewsCardProps> = ({ props }) => {
-  const { name, date, img, content, moreContent, avatarColor, avatarImg } = props
+const NewsCard: FC<NewsCardProps> = ({
+  props: { name, date, img, content, moreContent, avatarColor, avatarImg },
+}) => {
   const [expanded, setExpanded] = useState(false)
 
   const handleExpandClick = () => {
@@ -56,7 +57,12 @@ const NewsCard: FC<NewsCardProps> = ({ props }) => {
     <Card className={styles.card}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: avatarColor }} aria-label="recipe" alt={name} src={avatarImg}>
+          <Avatar
+            sx={{ bgcolor: avatarColor }}
+            aria-label="recipe"
+            alt={name}
+            src={avatarImg}
+          >
             {name[0]}
           </Avatar>
         }

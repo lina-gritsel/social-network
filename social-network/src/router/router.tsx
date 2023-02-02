@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+
 import Layout from '../components/Layout'
 import { routes } from './routes'
 
