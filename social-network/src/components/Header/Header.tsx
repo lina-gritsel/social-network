@@ -1,5 +1,5 @@
 import { Avatar } from '@mui/material'
-import { deepPurple } from '@mui/material/colors'
+import { blue, deepPurple } from '@mui/material/colors'
 import { FC } from 'react'
 
 import styles from './Header.module.scss'
@@ -15,7 +15,7 @@ const Header: FC = () => {
       <div className={styles.user}>
         <div className={styles.userName}>Remy Sharp</div>
         <Avatar
-          sx={{ bgcolor: deepPurple[500], width: 45, height: 45 }}
+          sx={{ bgcolor: blue[500], width: 45, height: 45 }}
         />
       </div>
     </div>
