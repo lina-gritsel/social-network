@@ -3,5 +3,6 @@ export const PATHS = {
     LOGIN: '/login',
     REGISTRATION: '/registration',
     NEWS: '/news',
+    EXPLORE: '/explore',
     PAGE_404: '*'
 }

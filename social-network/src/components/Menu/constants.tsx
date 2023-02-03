@@ -1,4 +1,4 @@
-import { Person, Newspaper } from '@mui/icons-material'
+import { Person, Newspaper, Explore } from '@mui/icons-material'
 
 import { PATHS } from '../../router/paths'
 
@@ -12,5 +12,10 @@ export const NAVIGATION_MENU = [
     to: PATHS.NEWS,
     label: 'News',
     icon: <Newspaper />,
+  },
+  {
+    to: PATHS.EXPLORE,
+    label: 'Explore',
+    icon: <Explore />,
   },
 ]
