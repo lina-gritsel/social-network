@@ -1,6 +1,8 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import Avatar from '@mui/material/Avatar'
 
+import useDebounce from '../hooks/useDebounce'
+import InputSearch from '../InputSearch'
 import { friends } from '../../pages/NewsPage/NewsPageComponents/userNews'
 
 import styles from './FriendsOnline.module.scss'
@@ -13,17 +15,24 @@ interface FriendsOnline {
 }
 
 const FriendsOnline: FC = () => {
+  const [search, setSearch] = useState<string>('')
+
+  const searchDebounced = useDebounce(search, 500)
+
   return (
     <div className={styles.block}>
-      <input
-        type="text"
-        className={styles.searchInput}
+      <InputSearch
         placeholder="Search Friends!"
+        onChange={(e) => setSearch(e.target.value)}
       />
       <div className={styles.friends}>
-        {friends.map((friend, index) => (
-          <Friend key={index} {...friend} />
-        ))}
+        {friends
+          .filter(({ name }) =>
+            name.toLocaleLowerCase().includes(searchDebounced),
+          )
+          .map((friend, index) => (
+            <Friend key={index} {...friend} />
+          ))}
       </div>
     </div>
   )
