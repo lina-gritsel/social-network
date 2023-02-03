@@ -13,12 +13,4 @@ export const NAVIGATION_MENU = [
     label: 'News',
     icon: <Newspaper />,
   },
-  {
-    to: PATHS.REGISTRATION,
-    label: 'Registration',
-  },
-  {
-    to: PATHS.LOGIN,
-    label: 'Login',
-  },
 ]
