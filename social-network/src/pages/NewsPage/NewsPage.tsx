@@ -21,7 +21,7 @@ const NewsPage: FC = () => {
           avatarImg={owner.avatarImg}
         />
         {userNews.map((news, index) => (
-          <NewsCard key={index} props={news} />
+          <NewsCard key={index} {...news} />
         ))}
       </div>
       <FriendsOnline/>

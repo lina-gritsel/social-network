@@ -15,6 +15,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 import styles from './NewsCard.module.scss'
 
+const DEFAULT_IMG = 'https://bazatoka.ru/image/cache/no_image-800x800.png'
+
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean
 }
@@ -36,17 +38,12 @@ export interface News {
   img?: string
   content: string
   moreContent?: string
-  avatarColor: string
+  avatarColor?: string
   avatarImg?: string
 }
 
-interface NewsCardProps {
-  props: News
-}
-
-const NewsCard: FC<NewsCardProps> = ({
-  props: { name, date, img, content, moreContent, avatarColor, avatarImg },
-}) => {
+const NewsCard: FC<News> = ({ name, date, img, content, moreContent, avatarColor, avatarImg },
+) => {
   const [expanded, setExpanded] = useState(false)
 
   const handleExpandClick = () => {
@@ -56,7 +53,7 @@ const NewsCard: FC<NewsCardProps> = ({
   return (
     <Card className={styles.card}>
       <CardHeader
-        avatar={
+        avatar= {
           <Avatar
             sx={{ bgcolor: avatarColor }}
             aria-label="recipe"
