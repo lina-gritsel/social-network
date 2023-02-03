@@ -3,7 +3,6 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  overflow-x: hidden;
   padding: 0;
 
   &::-webkit-scrollbar {
@@ -12,7 +11,7 @@
 
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: var(--blue-color);
+    background-color: var(--gray-color);
     height: 10px;
   }
 }

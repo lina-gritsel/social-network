@@ -17,12 +17,4 @@ export const NAVIGATION_MENU = [
     to: PATHS.SETTINGS,
     label: 'Settings',
   },
-  {
-    to: PATHS.REGISTRATION,
-    label: 'Registration',
-  },
-  {
-    to: PATHS.LOGIN,
-    label: 'Login',
-  },
 ]

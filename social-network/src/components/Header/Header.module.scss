@@ -1,9 +1,8 @@
 .content {
   align-items: center;
   display: flex;
-  height: 60px;
-  justify-content: space-between;
-  padding-left: 250px;
+  gap:10px;
+  justify-content: flex-end;
   width: 85%;
 }
 
@@ -14,12 +13,6 @@
   margin: 10px;
   padding-left: 10px;
   width: 350px;
-}
-
-.user {
-  align-items: center;
-  display: flex;
-  gap: 15px;
 }
 
 .userName {
