@@ -2,10 +2,12 @@ import { FC } from 'react'
 
 import NewsCreator from '../../components/NewsCreator'
 import NewsCard from '../../components/NewsCard'
+import FriendsOnline from '../../components/FriendsOnline'
 
 import { userNews } from './NewsPageComponents/userNews'
 
 import styles from './NewsPage.module.scss'
+
 
 const NewsPage: FC = () => {
   const owner = userNews[4]
@@ -22,6 +24,7 @@ const NewsPage: FC = () => {
           <NewsCard key={index} props={news} />
         ))}
       </div>
+      <FriendsOnline/>
     </div>
   )
 }

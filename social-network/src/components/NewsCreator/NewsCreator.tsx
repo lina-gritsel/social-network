@@ -62,7 +62,7 @@ const CreateIcons: FC = () => {
     <div className={styles.createIcons}>
       <div className={styles.createItem}>
         <PhotoIcon fontSize="medium" className={styles.icon} />
-        <p>Photo / video</p>
+        <p>Photo / Video</p>
       </div>
       <div className={styles.createItem}>
         <MoodIcon fontSize="medium" className={styles.icon} />
