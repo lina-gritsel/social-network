@@ -11,10 +11,6 @@ import styles from './Menu.module.scss'
 const Menu: FC = () => {
   return (
     <nav className={styles.container}>
-      <Link to={PATHS.NEWS} className={styles.mainMenuItem}>
-        <ForumRounded color="primary" className={styles.forum} />
-        OurNetwork
-      </Link>
       {NAVIGATION_MENU.map(({ to, label, icon }, index) => (
         <NavLink key={index} to={to} className={styles.menuItem}>
           {icon}

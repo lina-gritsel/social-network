@@ -12,7 +12,7 @@ const useDebounce = (value: string, delay = 1000) => {
     }
   }, [value])
 
-  return debounceValue.toLocaleLowerCase()
+  return debounceValue
 }
 
 export default useDebounce

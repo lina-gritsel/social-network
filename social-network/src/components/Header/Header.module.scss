@@ -1,16 +1,18 @@
 .content {
   align-items: center;
   display: flex;
-  height: 60px;
-  justify-content: space-between;
-  padding-left: 250px;
+  gap:10px;
+  justify-content: flex-end;
   width: 85%;
 }
 
-.user {
-  align-items: center;
-  display: flex;
-  gap: 15px;
+.searchInput {
+  border: 2px solid var(--light-gray-color);
+  border-radius: 10px;
+  height: 40px;
+  margin: 10px;
+  padding-left: 10px;
+  width: 350px;
 }
 
 .userName {

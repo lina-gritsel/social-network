@@ -23,7 +23,7 @@ const FriendsOnline: FC = () => {
     <div className={styles.block}>
       <InputSearch
         placeholder="Search Friends!"
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => setSearch(e.target.value.trim().toLocaleLowerCase())}
       />
       <div className={styles.friends}>
         {friends
