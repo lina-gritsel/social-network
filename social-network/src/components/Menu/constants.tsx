@@ -14,6 +14,10 @@ export const NAVIGATION_MENU = [
     icon: <Newspaper />,
   },
   {
+    to: PATHS.SETTINGS,
+    label: 'Settings',
+  },
+  {
     to: PATHS.REGISTRATION,
     label: 'Registration',
   },

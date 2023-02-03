@@ -5,6 +5,7 @@ import { PATHS } from './paths'
 import ProfilePage from '../pages/ProfilePage'
 import NewsPage from '../pages/NewsPage'
 import LoginPage from '../pages/LoginPage'
+import SettingsPage from '../pages/SettingsPage'
 import Page404 from '../pages/404Page'
 
 interface Routes {
@@ -28,6 +29,10 @@ export const routes: Routes[] = [
   {
     path: PATHS.NEWS,
     component: NewsPage,
+  },
+  {
+    path: PATHS.SETTINGS,
+    component: SettingsPage,
   },
   {
     path: PATHS.PAGE_404,
