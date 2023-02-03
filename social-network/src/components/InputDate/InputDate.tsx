@@ -27,7 +27,6 @@ const InputDate: FC<InputDateProps> = ({
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             {...field}
-            label="Date of birth"
             className={className}
             renderInput={(params) => (
               <TextField
