@@ -10,6 +10,7 @@ export interface FormValues {
   gender: string
   bio: string
   location: string
+  language: string
 }
 
 export const useSettingsForm = () => {
@@ -26,6 +27,7 @@ export const useSettingsForm = () => {
       gender: 'male',
       bio: '',
       location: '',
+      language: 'english',
     },
   })
 

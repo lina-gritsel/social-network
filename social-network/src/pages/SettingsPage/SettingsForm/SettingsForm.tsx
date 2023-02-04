@@ -8,6 +8,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import Input from '../../../components/Input'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
+import InputLanguages from '../../../components/InputLanguages'
 
 import { useSettingsForm } from './hooks'
 
@@ -107,6 +108,8 @@ const SettingsForm: FC = () => {
           />
         </div>
       </div>
+      <h2 className={styles.title}>Languages</h2>
+      <InputLanguages name='language' control={control} />
       <div className={styles.btnBlock}>
         <Button variant="outlined" onClick={onCancel}>
           Cancel

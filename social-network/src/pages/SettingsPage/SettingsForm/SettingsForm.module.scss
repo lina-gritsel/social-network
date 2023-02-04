@@ -45,3 +45,15 @@
   flex-direction: row;
   gap: 20px;
 }
+
+.label {
+  color: var(--gray-color) !important;
+  font-weight: 700 !important;
+}
+
+.title {
+  color: var(--gray-color);
+  font-size: 18px;
+  text-align: start;
+  width: 100%;
+}
