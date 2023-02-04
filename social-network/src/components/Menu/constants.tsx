@@ -1,4 +1,5 @@
-import { Person, Newspaper,People } from '@mui/icons-material'
+import { Person, Newspaper,People,Settings } from '@mui/icons-material'
+// import SettingsIcon from '@mui/icons-material/Settings'
 
 import { PATHS } from '../../router/paths'
 
@@ -18,4 +19,9 @@ export const NAVIGATION_MENU = [
     label: 'About',
     icon: <People />,
   },
+  {
+    to: PATHS.SETTINGS,
+    label: 'Settings',
+    icon: <Settings />,
+  }
 ]

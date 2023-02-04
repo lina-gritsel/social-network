@@ -1,8 +1,5 @@
 import { FC } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { ForumRounded } from '@mui/icons-material'
-
-import { PATHS } from '../../router/paths'
+import { NavLink } from 'react-router-dom'
 
 import { NAVIGATION_MENU } from './constants'
 

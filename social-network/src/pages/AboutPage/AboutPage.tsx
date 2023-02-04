@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import styles from './AboutPage.module.scss'
 import { GITHUB_LINKS } from './constants'
 
-import copyright from '../../assets/copyright.svg'
-import logo from '../../assets/rsSchool.svg'
+import copyright from '../../assets/icons/copyright.svg'
+import logo from '../../assets/icons/rsSchool.svg'
 
 const AboutPage: FC = () => {
   return (
