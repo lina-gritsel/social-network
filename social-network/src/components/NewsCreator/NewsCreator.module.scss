@@ -13,7 +13,7 @@
 
 .createHeader {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 5px 10px;
   gap: 10px;
@@ -43,7 +43,7 @@
 
 .contentInput {
   & > :not(style) {
-    width: 60ch;
+    width: 75ch;
     background-color: var(--light-gray-color);
     margin: 1;
   }

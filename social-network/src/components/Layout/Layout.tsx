@@ -61,8 +61,8 @@ const Layout: FC<LayotProps> = (props) => {
           </List>
           <Divider />
         </Drawer>
-        <Box component="main" className={styles.content} sx={{ flexGrow: 1 }}>
-          <div className={styles.content}>{props.children}</div>
+        <Box component="main" className={styles.wrapperContent} sx={{ flexGrow: 1 }}>
+         {props.children}
         </Box>
       </Box>
     </>
