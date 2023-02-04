@@ -29,5 +29,9 @@
   "signUp": "Inscribirse",
   "signIn": "Iniciar sesión",
   "logIn": "Acceso",
-  "account": "Ya tienes una cuenta?"
+  "account": "Ya tienes una cuenta?",
+  "about": "Acerca de",
+  "authors": "Autores:",
+  "year": "Año de creación:",
+  "support": "Creado con el apoyo:"
 }

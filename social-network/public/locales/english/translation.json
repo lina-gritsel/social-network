@@ -29,5 +29,9 @@
   "signUp": "Sign Up",
   "signIn": "Sign In",
   "logIn": "Log In",
-  "account": "Already have an account?"
+  "account": "Already have an account?",
+  "about": "About",
+  "authors": "Authors:",
+  "year": "Year of creation:",
+  "support": "Created with the support:"
 }

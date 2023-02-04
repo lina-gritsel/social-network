@@ -29,5 +29,9 @@
   "signUp": "報名",
   "signIn": "登入",
   "logIn": "登錄",
-  "account": "已有帳戶？"
+  "account": "已有帳戶？",
+  "about": "關於",
+  "authors": "作者:",
+  "year": "創建年份:",
+  "support": "在支持下創建:"
 }
