@@ -6,6 +6,7 @@ import ProfilePage from '../pages/ProfilePage'
 import NewsPage from '../pages/NewsPage'
 import LoginPage from '../pages/LoginPage'
 import Page404 from '../pages/404Page'
+import About from '../pages/AboutPage'
 
 interface Routes {
   path: string
@@ -32,5 +33,9 @@ export const routes: Routes[] = [
   {
     path: PATHS.PAGE_404,
     component: Page404,
+  },
+  {
+    path: PATHS.ABOUT,
+    component: About,
   },
 ]
