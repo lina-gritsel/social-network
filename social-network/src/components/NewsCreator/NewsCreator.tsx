@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Avatar from '@mui/material/Avatar'
@@ -20,6 +21,8 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   avatarColor,
   avatarImg,
 }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={styles.create}>
       <div className={styles.createHeader}>
@@ -34,13 +37,15 @@ const NewsCreator: FC<NewsCreatorProps> = ({
       </div>
       <div className={styles.createFooter}>
         <CreateIcons />
-        <Button>Post</Button>
+        <Button>{t('post')}</Button>
       </div>
     </div>
   )
 }
 
 const ContentInput = () => {
+  const { t } = useTranslation()
+
   return (
     <Box
       component="form"
@@ -48,25 +53,25 @@ const ContentInput = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField
-        id="outlined-basic"
-        label="Whats happening?"
-        variant="standard"
-      />
+      <TextField id="outlined-basic" label={t('question')} variant="standard" />
     </Box>
   )
 }
 
 const CreateIcons: FC = () => {
+  const { t } = useTranslation()
+
   return (
     <div className={styles.createIcons}>
       <div className={styles.createItem}>
         <PhotoIcon fontSize="medium" className={styles.icon} />
-        <p>Photo / Video</p>
+        <p>
+          {t('photo')} / {t('video')}
+        </p>
       </div>
       <div className={styles.createItem}>
         <MoodIcon fontSize="medium" className={styles.icon} />
-        <p>Feeling</p>
+        <p>{t('feeling')}</p>
       </div>
     </div>
   )

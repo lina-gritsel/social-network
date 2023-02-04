@@ -6,17 +6,17 @@ import { PATHS } from '../../router/paths'
 export const NAVIGATION_MENU = [
   {
     to: PATHS.PROFILE,
-    label: 'Profile',
+    label: 'profile',
     icon: <Person />,
   },
   {
     to: PATHS.NEWS,
-    label: 'News',
+    label: 'news',
     icon: <Newspaper />,
   },
   {
     to: PATHS.SETTINGS,
-    label: 'Settings',
+    label: 'settings',
     icon: <SettingsIcon />,
   },
 ]

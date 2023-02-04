@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button, FormLabel, InputAdornment } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
@@ -15,6 +16,8 @@ import { useSettingsForm } from './hooks'
 import styles from './SettingsForm.module.scss'
 
 const SettingsForm: FC = () => {
+  const { t } = useTranslation()
+
   const { control, handleSubmit, onCancel, onSubmit, errors } =
     useSettingsForm()
 
@@ -22,11 +25,11 @@ const SettingsForm: FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.block}>
         <div className={styles.labelBlock}>
-          <FormLabel className={styles.label}>Your Name</FormLabel>
+          <FormLabel className={styles.label}>{t('name')}</FormLabel>
           <Input
             name="name"
             control={control}
-            placeholder="Your Name"
+            placeholder={t('name')}
             inputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -38,7 +41,7 @@ const SettingsForm: FC = () => {
           />
         </div>
         <div className={styles.labelBlock}>
-          <FormLabel className={styles.label}>Birthday</FormLabel>
+          <FormLabel className={styles.label}>{t('birthday')}</FormLabel>
           <InputDate
             className={styles.inputDate}
             name="date"
@@ -49,11 +52,11 @@ const SettingsForm: FC = () => {
       </div>
       <div className={styles.block}>
         <div className={styles.labelBlock}>
-          <FormLabel className={styles.label}>Your Email</FormLabel>
+          <FormLabel className={styles.label}>{t('email')}</FormLabel>
           <Input
             name="email"
             control={control}
-            placeholder="Your Email"
+            placeholder={t('email')}
             type="email"
             inputProps={{
               startAdornment: (
@@ -66,11 +69,11 @@ const SettingsForm: FC = () => {
           />
         </div>
         <div className={styles.labelBlock}>
-          <FormLabel className={styles.label}>Bio</FormLabel>
+          <FormLabel className={styles.label}>{t('bio')}</FormLabel>
           <Input
             name="bio"
             control={control}
-            placeholder="Biography"
+            placeholder={t('bio')}
             inputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -84,7 +87,7 @@ const SettingsForm: FC = () => {
       </div>
       <div className={styles.block}>
         <div className={styles.labelBlock}>
-          <FormLabel className={styles.label}>Gender</FormLabel>
+          <FormLabel className={styles.label}>{t('gender')}</FormLabel>
           <InputGender
             name="gender"
             control={control}
@@ -92,11 +95,11 @@ const SettingsForm: FC = () => {
           />
         </div>
         <div className={styles.labelBlock}>
-          <FormLabel className={styles.label}>Location</FormLabel>
+          <FormLabel className={styles.label}>{t('location')}</FormLabel>
           <Input
             name="location"
             control={control}
-            placeholder="Location"
+            placeholder={t('location')}
             inputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -108,14 +111,14 @@ const SettingsForm: FC = () => {
           />
         </div>
       </div>
-      <h2 className={styles.title}>Languages</h2>
-      <InputLanguages name='language' control={control} />
+      <h2 className={styles.title}>{t('languages')}</h2>
+      <InputLanguages name="language" control={control} />
       <div className={styles.btnBlock}>
         <Button variant="outlined" onClick={onCancel}>
-          Cancel
+          {t('cancel')}
         </Button>
         <Button variant="contained" type="submit">
-          Save
+          {t('save')}
         </Button>
       </div>
     </form>

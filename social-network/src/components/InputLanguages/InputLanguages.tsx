@@ -5,6 +5,10 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
+import { languages } from '../../i18next/constants'
+
+import { useInputLanguages } from './hooks'
+
 import styles from './InputLanguages.module.scss'
 
 interface InputLanguagesProps {
@@ -13,6 +17,8 @@ interface InputLanguagesProps {
 }
 
 const InputLanguages: FC<InputLanguagesProps> = ({ name, control }) => {
+  const { changeLanguage, actualLanguage } = useInputLanguages()
+
   return (
     <Controller
       name={name}
@@ -20,12 +26,16 @@ const InputLanguages: FC<InputLanguagesProps> = ({ name, control }) => {
       render={({ field: { onChange } }) => (
         <Box className={styles.box}>
           <FormControl fullWidth>
-            <Select onChange={onChange} defaultValue="english">
-              <MenuItem value={'english'}>English</MenuItem>
-              <MenuItem value={'spanish'}>Español</MenuItem>
-              <MenuItem value={'russian'}>Русский</MenuItem>
-              <MenuItem value={'сhinese'}>中國人</MenuItem>
-              <MenuItem value={'hindi'}>हिंदी</MenuItem>
+            <Select onChange={onChange} value={actualLanguage}>
+              {Object.keys(languages).map((lng) => (
+                <MenuItem
+                  value={lng}
+                  key={lng}
+                  onClick={() => changeLanguage(lng)}
+                >
+                  {languages[lng].nativeName}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>

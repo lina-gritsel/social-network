@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Button, IconButton, InputAdornment } from '@mui/material'
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
@@ -16,6 +17,7 @@ import { useRegistrationForm } from './hooks'
 import styles from './RegistrationForm.module.scss'
 
 const RegistrationForm: FC = () => {
+  const { t } = useTranslation()
   const {
     control,
     handleSubmit,
@@ -31,7 +33,7 @@ const RegistrationForm: FC = () => {
       <Input
         name="email"
         control={control}
-        placeholder="Your Email"
+        placeholder={t('email')}
         type="email"
         inputProps={{
           startAdornment: (
@@ -45,7 +47,7 @@ const RegistrationForm: FC = () => {
       <Input
         name="name"
         control={control}
-        placeholder="Your Name"
+        placeholder={t('name')}
         inputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -58,7 +60,7 @@ const RegistrationForm: FC = () => {
       <InputPassword
         name="password"
         control={control}
-        placeholder="Create Password"
+        placeholder={t('createPassword')}
         type={showPassword ? 'text' : 'password'}
         inputProps={{
           startAdornment: (
@@ -94,12 +96,12 @@ const RegistrationForm: FC = () => {
         />
       </div>
       <Button variant="contained" fullWidth type="submit">
-        Sign Up
+        {t('signUp')}
       </Button>
       <div className={styles.block}>
-        <p className={styles.text}>Already have an account?</p>
+        <p className={styles.text}>{t('account')}</p>
         <NavLink to={PATHS.LOGIN}>
-          <div className={styles.link}>Sign In</div>
+          <div className={styles.link}>{t('signIn')}</div>
         </NavLink>
       </div>
     </form>
