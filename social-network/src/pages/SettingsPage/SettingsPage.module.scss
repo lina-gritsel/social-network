@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.title {
+  color: var(--gray-color);
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+}
