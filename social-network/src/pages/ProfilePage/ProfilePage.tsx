@@ -36,9 +36,9 @@ const ProfilePage: FC = () => {
             <div className={styles.nameUser}>{userNews[4].name}</div>
             <div className={styles.workUser}>UI Designer</div>
           </div>
-          <Button className={styles.editInfo}>
-            <NavLink to={PATHS.SETTINGS}>{t('settings')}</NavLink>
-          </Button>
+          <NavLink to={PATHS.SETTINGS}>
+            <Button className={styles.editInfo}>{t('settings')}</Button>
+          </NavLink>
         </div>
       </div>
       <div className={styles.content}>
