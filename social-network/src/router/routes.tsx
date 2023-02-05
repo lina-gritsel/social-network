@@ -1,7 +1,6 @@
 import { FC } from 'react'
 
 import RegistrationPage from '../pages/RegistrationPage'
-import { PATHS } from './paths'
 import ProfilePage from '../pages/ProfilePage'
 import NewsPage from '../pages/NewsPage'
 import LoginPage from '../pages/LoginPage'
@@ -9,6 +8,7 @@ import SettingsPage from '../pages/SettingsPage'
 import Page404 from '../pages/404Page'
 import About from '../pages/AboutPage'
 import ExplorePage from '../pages/ExplorePage'
+import { PATHS } from './paths'
 
 interface Routes {
   path: string

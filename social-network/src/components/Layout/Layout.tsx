@@ -1,3 +1,5 @@
+import { FC, ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -7,14 +9,12 @@ import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import { ForumRounded } from '@mui/icons-material'
 
-import { FC, ReactNode } from 'react'
-import { Link } from 'react-router-dom'
-
-
-import styles from './Layout.module.scss'
 import { PATHS } from '../../router/paths'
+
 import Header from '../Header'
 import Menu from '../Menu'
+
+import styles from './Layout.module.scss'
 
 
 const drawerWidth = 240
