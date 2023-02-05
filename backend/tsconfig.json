@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "outDir": "./build",
+      "incremental": true,
+      "target": "es6",
+      "module": "commonjs",
+      "strict": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+    }
+  }
+  
