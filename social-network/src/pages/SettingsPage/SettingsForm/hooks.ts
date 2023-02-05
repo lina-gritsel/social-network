@@ -14,6 +14,7 @@ export interface FormValues {
 }
 
 export const useSettingsForm = () => {
+  const actualLanguage = localStorage.getItem('i18nextLng')
   const {
     control,
     handleSubmit,
@@ -27,7 +28,7 @@ export const useSettingsForm = () => {
       gender: 'male',
       bio: '',
       location: '',
-      language: 'english',
+      language: actualLanguage,
     },
   })
 
