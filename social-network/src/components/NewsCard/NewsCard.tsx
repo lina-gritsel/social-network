@@ -13,6 +13,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 
+import classNames from 'classnames'
+
 import styles from './NewsCard.module.scss'
 
 const DEFAULT_IMG = 'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -40,6 +42,8 @@ export interface News {
   moreContent?: string
   avatarColor?: string
   avatarImg?: string
+  className?: string
+  url?: string
 }
 
 const NewsCard: FC<News> = ({
@@ -50,6 +54,8 @@ const NewsCard: FC<News> = ({
   moreContent,
   avatarColor,
   avatarImg,
+  className,
+  url,
 }) => {
   const [expanded, setExpanded] = useState(false)
 
@@ -58,7 +64,10 @@ const NewsCard: FC<News> = ({
   }
 
   return (
-    <Card className={styles.card}>
+    <Card      
+     className={classNames(
+      styles.card,
+      className)}>
       <CardHeader
         avatar={
           <Avatar
@@ -92,6 +101,7 @@ const NewsCard: FC<News> = ({
         <Typography variant="body2" color="text.secondary">
           {content}
         </Typography>
+        {(!!url && !moreContent) && (<a className={styles.link} href={url}>Click to read more</a>)}
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -110,7 +120,8 @@ const NewsCard: FC<News> = ({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{moreContent}</Typography>
+          <Typography paragraph>{moreContent?.split('[')[0]}</Typography>
+          {!!url && (<a className={styles.link} href={url}>Click to read more</a>)}
         </CardContent>
       </Collapse>
     </Card>
