@@ -11,6 +11,9 @@ export interface FormValues {
   bio: string
   location: string
   language: string
+  facebook: string
+  twitter: string
+  instagram: string
 }
 
 export const useSettingsForm = () => {
@@ -29,6 +32,9 @@ export const useSettingsForm = () => {
       bio: '',
       location: '',
       language: actualLanguage,
+      facebook: '',
+      twitter: '',
+      instagram: '',
     },
   })
 
