@@ -30,7 +30,6 @@ interface NewsList {
   articles: Article[]
 }
 
-
 const ExplorePage: FC = () => {
   const [articles, setArticles] = useState<Article[] | []>([])
   const [category, setCategory] = useState<string>('general')
@@ -50,6 +49,11 @@ const ExplorePage: FC = () => {
 
   return (
     <div className={styles.container}>
+      {isLoading ? (
+        <div className={styles.loading}>Loading...</div>
+      ) : (
+        <NewsList articles={articles} />
+      )}
       <div className={styles.options}>
         {newsOptions.map((option, index) => (
           <Button
@@ -61,11 +65,6 @@ const ExplorePage: FC = () => {
           </Button>
         ))}
       </div>
-      {isLoading ? (
-        <div className={styles.loading}>Loading...</div>
-      ) : (
-        <NewsList articles={articles} />
-      )}
     </div>
   )
 }
@@ -75,18 +74,27 @@ const NewsList: FC<NewsList> = ({ articles }) => {
     <div className={styles.news}>
       {articles.map(
         (
-          { author, source, description, content, urlToImage, publishedAt },
+          {
+            author,
+            source,
+            description,
+            content,
+            urlToImage,
+            publishedAt,
+            url,
+          },
           index: number,
         ) =>
           !!description || !!content || !!urlToImage ? (
             <NewsCard
               key={index}
               name={author || source.name}
-              date={publishedAt}
+              date={publishedAt.split('T').join(' / ').slice(0, -4)}
               img={urlToImage}
-              content={description}
+              content={description || content}
               moreContent={content}
               avatarColor={getRandomColor()}
+              url={url}
             />
           ) : null,
       )}
