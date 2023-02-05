@@ -1,9 +1,11 @@
 import { FC, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import Avatar from '@mui/material/Avatar'
 
-import useDebounce from '../hooks/useDebounce'
-import InputSearch from '../InputSearch'
 import { friends } from '../../pages/NewsPage/NewsPageComponents/userNews'
+
+import InputSearch from '../InputSearch'
+import useDebounce from './hooks'
 
 import styles from './FriendsOnline.module.scss'
 
@@ -15,6 +17,7 @@ interface FriendsOnline {
 }
 
 const FriendsOnline: FC = () => {
+  const { t } = useTranslation()
   const [search, setSearch] = useState<string>('')
 
   const searchDebounced = useDebounce(search, 500)
@@ -22,7 +25,7 @@ const FriendsOnline: FC = () => {
   return (
     <div className={styles.block}>
       <InputSearch
-        placeholder="Search Friends!"
+        placeholder={t('searchFriends')}
         onChange={(e) => setSearch(e.target.value.trim().toLocaleLowerCase())}
       />
       <div className={styles.friends}>
@@ -44,6 +47,8 @@ const Friend: FC<FriendsOnline> = ({
   avatarImg,
   isOnline,
 }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={styles.friend}>
       <div className={styles.name}>
@@ -59,7 +64,7 @@ const Friend: FC<FriendsOnline> = ({
       {isOnline ? (
         <span className={styles.online}></span>
       ) : (
-        <span>offline</span>
+        <span>{t('offline')}</span>
       )}
     </div>
   )

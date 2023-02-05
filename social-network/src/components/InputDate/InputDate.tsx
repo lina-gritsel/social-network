@@ -27,6 +27,7 @@ const InputDate: FC<InputDateProps> = ({
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             {...field}
+            inputFormat="DD/MM/YYYY"
             className={className}
             renderInput={(params) => (
               <TextField
