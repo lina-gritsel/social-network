@@ -1,0 +1,103 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.pofileHeader {
+  border-radius: 20px;
+  background-color: var(--white-color);
+  border-bottom: 1px solid #000;
+  max-height: 465px;
+  padding: 10px;
+  position: relative;
+}
+
+.bgProfile {
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+}
+
+.wrapperCover {
+  position: relative;
+}
+
+.editCoverPhoto {
+  background-color: var(--white-color);
+  bottom: 20px;
+  color: var(--gray-color);
+  position: absolute;
+  padding: 0 5px;
+  right: 20px;
+  width: 130px;
+  font-size: 14px;
+}
+
+.profileAvatar {
+  height: 150px !important;
+  width: 150px !important;
+  position: relative;
+  bottom: 120px;
+  left: 40px;
+  border: 3px solid var(--white-color);
+}
+
+.nameUser {
+  color: var(--gray-color);
+  font-size: 25px;
+}
+
+.workUser {
+  color: var(--gray-color);
+  font-size: 15px;
+}
+
+.wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 5px;
+  padding: 0 30px;
+  width: 100%;
+}
+
+.editInfo {
+  background-color: rgb(241, 241, 241);
+  color: var(--gray-color);
+  font-size: 15px;
+  padding: 10px;
+  width: 140px;
+}
+
+.userInfo {
+  padding-left: 30px;
+}
+
+.content {
+  display: flex;
+  gap: 34px;
+}
+
+.intro {
+  background-color: var(--white-color);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  min-width: 300px;
+}
+
+.title {
+  color: var(--gray-color);
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.intoItem {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  color: var(--gray-color);
+}
