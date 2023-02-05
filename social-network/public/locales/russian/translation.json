@@ -33,5 +33,17 @@
   "about": "О нас",
   "authors": "Авторы:",
   "year": "Год создания:",
-  "support": "Создано при поддержке:"
+  "support": "Создано при поддержке:",
+  "editCoverPhoto": "Изменить обложку",
+  "intro": "Данные",
+  "profileGender": "Пол: ",
+  "born": "День рождения: ",
+  "profileLocation": "Расположение: ",
+  "facebook": "Facebook: ",
+  "twitter": "Twitter: ",
+  "instagram": "Instagram: ",
+  "followers": "Подписчики: ",
+  "following": "Подписки: ",
+  "editAvatar": "Изменить фото",
+  "socialLinks": "Социальные сети"
 }

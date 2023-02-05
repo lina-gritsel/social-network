@@ -33,5 +33,17 @@
   "about": "Acerca de",
   "authors": "Autores:",
   "year": "Año de creación:",
-  "support": "Creado con el apoyo:"
+  "support": "Creado con el apoyo:",
+  "editCoverPhoto": "Editar foto",
+  "intro": "INTRODUCCIÓN",
+  "profileGender": "Género: ",
+  "profileLocation": "Ubicación: ",
+  "born": "Nacido: ",
+  "facebook": "Facebook: ",
+  "twitter": "Twitter: ",
+  "instagram": "Instagram: ",
+  "followers": "Seguidores: ",
+  "following": "Siguiente: ",
+  "editAvatar": "Editar foto",
+  "socialLinks": "Vínculos sociales"
 }

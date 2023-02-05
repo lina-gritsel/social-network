@@ -5,6 +5,9 @@ import { AccountCircle } from '@mui/icons-material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import InstagramIcon from '@mui/icons-material/Instagram'
 
 import Input from '../../../components/Input'
 import InputDate from '../../../components/InputDate'
@@ -104,6 +107,57 @@ const SettingsForm: FC = () => {
               startAdornment: (
                 <InputAdornment position="start">
                   <LocationOnIcon />
+                </InputAdornment>
+              ),
+            }}
+            errors={errors}
+          />
+        </div>
+      </div>
+      <h2 className={styles.title}>{t('socialLinks')}</h2>
+      <div className={styles.block}>
+        <div className={styles.labelBlock}>
+          <FormLabel className={styles.label}>{t('facebook')}</FormLabel>
+          <Input
+            name="facebook"
+            control={control}
+            placeholder={t('facebook')}
+            inputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FacebookIcon />
+                </InputAdornment>
+              ),
+            }}
+            errors={errors}
+          />
+        </div>
+        <div className={styles.labelBlock}>
+          <FormLabel className={styles.label}>{t('twitter')}</FormLabel>
+          <Input
+            name="twitter"
+            control={control}
+            placeholder={t('twitter')}
+            inputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <TwitterIcon />
+                </InputAdornment>
+              ),
+            }}
+            errors={errors}
+          />
+        </div>
+        <div className={styles.labelBlock}>
+          <FormLabel className={styles.label}>{t('instagram')}</FormLabel>
+          <Input
+            name="instagram"
+            control={control}
+            placeholder={t('instagram')}
+            inputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <InstagramIcon />
                 </InputAdornment>
               ),
             }}

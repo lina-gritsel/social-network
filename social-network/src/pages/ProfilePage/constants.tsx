@@ -5,36 +5,35 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 
-
 export const FIELD_INTO = [
   {
     icon: <PermIdentityIcon />,
-    label: 'Male: ',
+    label: 'profileGender',
   },
   {
     icon: <CakeIcon />,
-    label: 'Born: ',
+    label: 'born',
   },
   {
     icon: <LocationOnIcon />,
-    label: ' Location:',
+    label: 'profileLocation',
   },
   {
     icon: <FacebookIcon />,
-    label: 'Facebook: ',
+    label: 'facebook',
   },
   {
     icon: <TwitterIcon />,
-    label: 'Twitter: ',
+    label: 'twitter',
   },
   {
     icon: <InstagramIcon />,
-    label: 'Instagram: ',
+    label: 'instagram',
   },
   {
-    label: 'Followers: ',
+    label: 'followers',
   },
   {
-    label: 'Following: ',
+    label: 'following',
   },
 ]

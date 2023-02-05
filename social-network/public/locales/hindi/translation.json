@@ -33,5 +33,17 @@
   "about": "के बारे में",
   "authors": "लेखक:",
   "year": "निर्माण का वर्ष:",
-  "support": "समर्थन से बनाया गया है:"
+  "support": "समर्थन से बनाया गया है:",
+  "editCoverPhoto": "छवि बदलो",
+  "intro": "परिचय",
+  "profileGender": "लिंग: ",
+  "profileLocation": "जगह: ",
+  "born": "जन्म: ",
+  "facebook": "Facebook: ",
+  "twitter": "Twitter: ",
+  "instagram": "Instagram: ",
+  "followers": "समर्थक: ",
+  "following": "अगले: ",
+  "editAvatar": "फ़ोटो संपादित करें",
+  "socialLinks": "सामाजिक कड़ियाँ"
 }
