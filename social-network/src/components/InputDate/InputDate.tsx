@@ -9,6 +9,7 @@ import { FormValues } from '../../pages/RegistrationPage/RegistrationForm'
 interface InputDateProps {
   className?: string
   name: string
+  placeholder: string
   control: Control<any>
   errors?: FieldErrors<FormValues>
 }
@@ -18,6 +19,7 @@ const InputDate: FC<InputDateProps> = ({
   control,
   name,
   errors,
+  placeholder,
 }) => {
   return (
     <Controller
@@ -33,6 +35,7 @@ const InputDate: FC<InputDateProps> = ({
               <TextField
                 {...params}
                 error={!!errors[name]}
+                placeholder={placeholder}
                 helperText={
                   errors[name]?.message ? 'Date is a required field' : ''
                 }

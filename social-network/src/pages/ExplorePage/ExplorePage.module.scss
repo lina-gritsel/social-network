@@ -2,25 +2,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  gap: 30px;
+  width: 80%;
 }
 .news {
   display: flex;
   flex-direction: column;
   gap: 60px;
-  padding-top: 20px;
 }
 
 .options {
   display: flex;
-  gap: 15px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--blue-color);
+  flex-direction: column;
+  gap: 35px;
+  padding: 0 20px;
+  border-left: 1px solid var(--blue-color);
+  position: fixed;
+  right: 0;
+  top: 80px;
 }
 
 .loading {
   color: var(--gray-color);
+  font: var(--font-text-2);
   font-weight: 700;
-  padding-top: 40px;
-  font-size: 25px;
+  padding-top: 30px;
 }

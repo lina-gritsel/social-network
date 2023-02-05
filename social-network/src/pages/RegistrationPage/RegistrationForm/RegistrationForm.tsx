@@ -86,6 +86,7 @@ const RegistrationForm: FC = () => {
         <InputDate
           className={styles.inputDate}
           name="date"
+          placeholder={t('birthday')}
           control={control}
           errors={errors}
         />
@@ -99,7 +100,7 @@ const RegistrationForm: FC = () => {
         {t('signUp')}
       </Button>
       <div className={styles.block}>
-        <p className={styles.text}>{t('account')}</p>
+        <p className={styles.account}>{t('account')}</p>
         <NavLink to={PATHS.LOGIN}>
           <div className={styles.link}>{t('signIn')}</div>
         </NavLink>
