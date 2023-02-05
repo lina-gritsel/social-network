@@ -49,24 +49,26 @@ const ExplorePage: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <div className={styles.container}>
-      {isLoading ? (
-        <div className={styles.loading}>Loading...</div>
-      ) : (
-        <NewsList articles={articles} />
-      )}
-      <div className={styles.options}>
-        {newsOptions.map((option, index) => (
-          <Button
-            key={index}
-            className={category === option ? 'activeBtn' : ''}
-            onClick={() => setCategory(option)}
-          >
-            {t(option).toUpperCase()}
-          </Button>
-        ))}
+    <Layout>
+      <div className={styles.container}>
+        {isLoading ? (
+          <div className={styles.loading}>Loading...</div>
+        ) : (
+          <NewsList articles={articles} />
+        )}
+        <div className={styles.options}>
+          {newsOptions.map((option, index) => (
+            <Button
+              key={index}
+              className={category === option ? 'activeBtn' : ''}
+              onClick={() => setCategory(option)}
+            >
+              {t(option).toUpperCase()}
+            </Button>
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   )
 }
 
