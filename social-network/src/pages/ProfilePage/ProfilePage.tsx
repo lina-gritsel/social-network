@@ -1,10 +1,11 @@
 import { Avatar } from '@mui/material'
 import { FC } from 'react'
 
-import { FIELD_INTO } from './constants'
-import { userNews } from '../NewsPage/NewsPageComponents/userNews'
-import Button from '../../components/Button'
 import NewsCreator from '../../components/NewsCreator'
+import Button from '../../components/Button'
+
+import { userNews } from '../NewsPage/NewsPageComponents/userNews'
+import { FIELD_INTO } from './constants'
 
 import styles from './Profile.module.scss'
 
