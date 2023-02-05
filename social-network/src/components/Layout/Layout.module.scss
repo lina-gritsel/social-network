@@ -2,10 +2,9 @@
   display: flex;
 }
 
-.content {
+.wrapperContent {
   background-color: var(--light-gray-color);
-  border-radius: 20px;
-  padding: 50px 30px 20px;
+  padding: 80px 24px 50px;
 }
 
 .mainMenuItem {
@@ -22,6 +21,6 @@
   font-size: 50;
 }
 
-.toolbar{
+.toolbar {
   background-color: var(--white-color);
 }

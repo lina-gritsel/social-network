@@ -1,6 +1,7 @@
 .container {
     display: flex;
-    gap: 100px;
+    gap: 32px;
+    justify-content: space-between;
 }
 .news{
     display: flex;

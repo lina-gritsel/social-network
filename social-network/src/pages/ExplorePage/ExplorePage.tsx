@@ -1,9 +1,11 @@
-import { FC, useEffect, useState, MouseEvent } from 'react'
+import { FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import Axios from 'axios'
 
 import NewsCard from '../../components/NewsCard'
 import Button from '../../components/Button'
 import { getRandomColor } from '../NewsPage/NewsPageComponents/userNews'
+
 import { getAPI, newsOptions } from './constants'
 
 import styles from './ExplorePage.module.scss'
@@ -44,6 +46,8 @@ const ExplorePage: FC = () => {
     getArticles()
   }, [category])
 
+  const { t } = useTranslation()
+
   return (
     <div className={styles.container}>
       <div className={styles.options}>
@@ -53,7 +57,7 @@ const ExplorePage: FC = () => {
             className={category === option ? 'activeBtn' : ''}
             onClick={() => setCategory(option)}
           >
-            {option.toUpperCase()}
+            {t(option).toUpperCase()}
           </Button>
         ))}
       </div>

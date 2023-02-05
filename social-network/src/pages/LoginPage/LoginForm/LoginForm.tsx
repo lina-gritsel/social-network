@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button, IconButton, InputAdornment } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
@@ -12,6 +13,7 @@ import { useLoginForm } from './hooks'
 import styles from './LoginForm.module.scss'
 
 const LoginForm: FC = () => {
+  const { t } = useTranslation()
   const {
     control,
     handleSubmit,
@@ -21,12 +23,13 @@ const LoginForm: FC = () => {
     handleMouseDownPassword,
     errors,
   } = useLoginForm()
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <Input
         name="email"
         control={control}
-        placeholder="Your Email"
+        placeholder={t('email')}
         type="email"
         inputProps={{
           startAdornment: (
@@ -40,7 +43,7 @@ const LoginForm: FC = () => {
       <InputPassword
         name="password"
         control={control}
-        placeholder="Enter Password"
+        placeholder={t('enterPassword')}
         type={showPassword ? 'text' : 'password'}
         inputProps={{
           startAdornment: (
@@ -63,7 +66,7 @@ const LoginForm: FC = () => {
         errors={errors}
       />
       <Button variant="contained" fullWidth type="submit">
-        Log in
+        {t('logIn')}
       </Button>
     </form>
   )

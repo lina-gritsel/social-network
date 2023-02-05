@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Control, Controller } from 'react-hook-form'
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material'
 
@@ -9,6 +10,8 @@ interface InputGenderProps {
 }
 
 const InputGender: FC<InputGenderProps> = ({ className, name, control }) => {
+  const { t } = useTranslation()
+  
   return (
     <Controller
       name={name}
@@ -23,12 +26,12 @@ const InputGender: FC<InputGenderProps> = ({ className, name, control }) => {
           <FormControlLabel
             value="male"
             control={<Radio size="small" />}
-            label="Male"
+            label={t('male')}
           />
           <FormControlLabel
             value="female"
             control={<Radio size="small" />}
-            label="Female"
+            label={t('female')}
           />
         </RadioGroup>
       )}
