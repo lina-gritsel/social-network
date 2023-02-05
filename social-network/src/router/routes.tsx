@@ -8,6 +8,7 @@ import LoginPage from '../pages/LoginPage'
 import SettingsPage from '../pages/SettingsPage'
 import Page404 from '../pages/404Page'
 import About from '../pages/AboutPage'
+import ExplorePage from '../pages/ExplorePage'
 
 interface Routes {
   path: string
@@ -34,6 +35,10 @@ export const routes: Routes[] = [
   {
     path: PATHS.SETTINGS,
     component: SettingsPage,
+  },
+  {
+    path: PATHS.EXPLORE,
+    component: ExplorePage,
   },
   {
     path: PATHS.PAGE_404,

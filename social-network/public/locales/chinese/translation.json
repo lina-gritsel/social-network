@@ -13,6 +13,7 @@
   "save": "節省",
   "profile": "輪廓",
   "news": "消息",
+  "explore": "探索",
   "settings": "設置",
   "question": "發生了什麼?",
   "photo": "照片",
@@ -45,5 +46,12 @@
   "followers": "追隨者: ",
   "following": "下列的: ",
   "editAvatar": "修改照片",
-  "socialLinks": "社交鏈接"
+  "socialLinks": "社交鏈接",
+  "general": "一般事务",
+  "sport": "运动",
+  "health": "健康",
+  "business": "业务",
+  "science": "科学",
+  "technology": "科技"
+
 }

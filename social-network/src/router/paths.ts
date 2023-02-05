@@ -5,5 +5,6 @@ export const PATHS = {
   REGISTRATION: '/registration',
   NEWS: '/news',
   SETTINGS: '/settings',
+  EXPLORE: '/explore',
   PAGE_404: '*'
 }

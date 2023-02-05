@@ -5,8 +5,9 @@
   cursor: pointer;
   color: var(--white-color);
   font-size: 17px;
-  width: 100px;
+  min-width: 100px;
   height: 40px;
+  padding: 0 5px;
 }
 
 .outlined {

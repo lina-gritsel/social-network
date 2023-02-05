@@ -13,6 +13,7 @@
   "save": "Save",
   "profile": "Profile",
   "news": "News",
+  "explore": "Explore",
   "settings": "Settings",
   "question": "Whats happening?",
   "photo": "Photo",
@@ -45,5 +46,11 @@
   "followers": "Followers: ",
   "following": "Following: ",
   "editAvatar": "Edit photo",
-  "socialLinks": "Social links"
+  "socialLinks": "Social links",
+  "general": "general",
+  "sport": "sport",
+  "health": "health",
+  "business": "businness",
+  "science": "science",
+  "technology": "technology"
 }

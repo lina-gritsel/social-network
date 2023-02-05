@@ -13,6 +13,7 @@
   "save": "Сохранить",
   "profile": "Профиль",
   "news": "Новости",
+  "explore": "В мире",
   "settings": "Настройки",
   "question": "Что случилось?",
   "photo": "Фото",
@@ -45,5 +46,12 @@
   "followers": "Подписчики: ",
   "following": "Подписки: ",
   "editAvatar": "Изменить фото",
-  "socialLinks": "Социальные сети"
+  "socialLinks": "Социальные сети",
+  "general": "главные",
+  "sport": "спорт",
+  "health": "здоровье",
+  "business": "бизнес",
+  "science": "наука",
+  "technology": "технологии"
+
 }

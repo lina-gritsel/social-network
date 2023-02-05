@@ -13,6 +13,7 @@
   "save": "Ahorrar",
   "profile": "Perfil",
   "news": "Noticias",
+  "explore": "Explorar",
   "settings": "Ajustes",
   "question": "Lo que está sucediendo?",
   "photo": "Foto",
@@ -45,5 +46,11 @@
   "followers": "Seguidores: ",
   "following": "Siguiente: ",
   "editAvatar": "Editar foto",
-  "socialLinks": "Vínculos sociales"
+  "socialLinks": "Vínculos sociales",
+  "general": "general",
+  "sport": "deporte",
+  "health": "salud",
+  "business": "negocio",
+  "science": "ciencia",
+  "technology": "tecnología"
 }
