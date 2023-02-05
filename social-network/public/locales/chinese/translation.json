@@ -31,7 +31,17 @@
   "logIn": "登錄",
   "account": "已有帳戶？",
   "about": "關於",
-  "authors": "作者:",
-  "year": "創建年份:",
-  "support": "在支持下創建:"
+  "authors": "作者: ",
+  "year": "創建年份: ",
+  "support": "在支持下創建:",
+  "editCoverPhoto": "編輯封面照片",
+  "intro": "介紹",
+  "profileGender": "性別: ",
+  "profileLocation": "地面: ",
+  "born": "出生: ",
+  "facebook": "Facebook: ",
+  "twitter": "Twitter: ",
+  "instagram": "Instagram: ",
+  "followers": "追隨者: ",
+  "following": "下列的: "
 }

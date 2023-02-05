@@ -33,5 +33,15 @@
   "about": "About",
   "authors": "Authors:",
   "year": "Year of creation:",
-  "support": "Created with the support:"
+  "support": "Created with the support:",
+  "editCoverPhoto": "Edit cover photo",
+  "intro": "INTRO",
+  "profileGender": "Gender: ",
+  "profileLocation": "Location: ",
+  "born": "Born: ",
+  "facebook": "Facebook: ",
+  "twitter": "Twitter: ",
+  "instagram": "Instagram: ",
+  "followers": "Followers: ",
+  "following": "Following: "
 }
