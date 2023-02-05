@@ -40,6 +40,17 @@
   "health": "स्वास्थ्य",
   "business": "व्यापार",
   "science": "विज्ञान",
-  "technology": "प्रौद्योगिकी"
-
+  "technology": "प्रौद्योगिकी",
+  "editCoverPhoto": "छवि बदलो",
+  "intro": "परिचय",
+  "profileGender": "लिंग: ",
+  "profileLocation": "जगह: ",
+  "born": "जन्म: ",
+  "facebook": "Facebook: ",
+  "twitter": "Twitter: ",
+  "instagram": "Instagram: ",
+  "followers": "समर्थक: ",
+  "following": "अगले: ",
+  "editAvatar": "फ़ोटो संपादित करें",
+  "socialLinks": "सामाजिक कड़ियाँ"
 }
