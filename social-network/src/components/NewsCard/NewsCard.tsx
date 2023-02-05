@@ -42,8 +42,15 @@ export interface News {
   avatarImg?: string
 }
 
-const NewsCard: FC<News> = ({ name, date, img, content, moreContent, avatarColor, avatarImg },
-) => {
+const NewsCard: FC<News> = ({
+  name,
+  date,
+  img,
+  content,
+  moreContent,
+  avatarColor,
+  avatarImg,
+}) => {
   const [expanded, setExpanded] = useState(false)
 
   const handleExpandClick = () => {
@@ -53,7 +60,7 @@ const NewsCard: FC<News> = ({ name, date, img, content, moreContent, avatarColor
   return (
     <Card className={styles.card}>
       <CardHeader
-        avatar= {
+        avatar={
           <Avatar
             sx={{ bgcolor: avatarColor }}
             aria-label="recipe"
@@ -72,7 +79,13 @@ const NewsCard: FC<News> = ({ name, date, img, content, moreContent, avatarColor
         subheader={date}
       />
       {!!img && (
-        <CardMedia component="img" height="300" image={img} alt={name} />
+        <CardMedia
+          component="img"
+          height="300"
+          image={img}
+          alt={name}
+          onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
+        />
       )}
       <CardContent>
         <Typography variant="body2" color="text.secondary">

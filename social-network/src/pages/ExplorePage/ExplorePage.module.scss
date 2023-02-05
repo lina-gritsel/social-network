@@ -1,5 +1,26 @@
-.news{
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.news {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding-top: 20px;
+}
+
+.options {
+  display: flex;
+  gap: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--blue-color);
+}
+
+.loading {
+  color: var(--gray-color);
+  font-weight: 700;
+  padding-top: 40px;
+  font-size: 25px;
 }

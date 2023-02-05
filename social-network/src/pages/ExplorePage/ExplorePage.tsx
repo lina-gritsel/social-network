@@ -1,8 +1,10 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState, MouseEvent } from 'react'
 import Axios from 'axios'
 
 import NewsCard from '../../components/NewsCard'
+import Button from '../../components/Button'
 import { getRandomColor } from '../NewsPage/NewsPageComponents/userNews'
+import { getAPI, newsOptions } from './constants'
 
 import styles from './ExplorePage.module.scss'
 
@@ -22,33 +24,54 @@ interface Article {
   content: string
 }
 
-const API =
-  'https://newsapi.org/v2/top-headlines?category=sport&apiKey=d5bc1a1db88b4f3aadb1383f0d20a11f'
+interface NewsList {
+  articles: Article[]
+}
+
 
 const ExplorePage: FC = () => {
   const [articles, setArticles] = useState<Article[] | []>([])
+  const [category, setCategory] = useState<string>('general')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    (async () => {
-      const res = await Axios.get(API)
+    const getArticles = async () => {
+      setIsLoading(true)
+      const res = await Axios.get(getAPI(category))
       setArticles(res.data.articles)
+      setIsLoading(false)
+    }
+    getArticles()
+  }, [category])
 
-      console.log(articles)
-    })()
-  }, [])
+  return (
+    <div className={styles.container}>
+      <div className={styles.options}>
+        {newsOptions.map((option, index) => (
+          <Button
+            key={index}
+            className={category === option ? 'activeBtn' : ''}
+            onClick={() => setCategory(option)}
+          >
+            {option.toUpperCase()}
+          </Button>
+        ))}
+      </div>
+      {isLoading ? (
+        <div className={styles.loading}>Loading...</div>
+      ) : (
+        <NewsList articles={articles} />
+      )}
+    </div>
+  )
+}
 
+const NewsList: FC<NewsList> = ({ articles }) => {
   return (
     <div className={styles.news}>
       {articles.map(
         (
-          {
-            author,
-            source,
-            description,
-            content,
-            urlToImage,
-            publishedAt,
-          },
+          { author, source, description, content, urlToImage, publishedAt },
           index: number,
         ) =>
           !!description || !!content || !!urlToImage ? (
@@ -66,37 +89,5 @@ const ExplorePage: FC = () => {
     </div>
   )
 }
-
-// const NewsList: FC<Article[]> = ({articles})=> {
-//     return (
-//         <div className={styles.news}>
-//         {articles.map(
-//           (
-//             {
-//               author,
-//               source,
-//               description,
-//               content,
-//               urlToImage,
-//               publishedAt,
-//             },
-//             index: number,
-//           ) =>
-//             !!description || !!content || !!urlToImage ? (
-//               <NewsCard
-//                 key={index}
-//                 name={author || source.name}
-//                 date={publishedAt}
-//                 img={urlToImage}
-//                 content={description}
-//                 moreContent={content}
-//                 avatarColor={getRandomColor()}
-//               />
-//             ) : null,
-//         )}
-//       </div>
-  
-//     )
-// }
 
 export default ExplorePage
