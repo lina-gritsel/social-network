@@ -3,6 +3,7 @@ import { News } from '../../../components/NewsCard/NewsCard'
 const getRandomInt = (max: number, min: number): number => {
   return Math.floor(Math.random() * (max - min)) + min
 }
+
 export const getRandomColor = (): string => {
   return `rgb(${getRandomInt(0, 256)}, ${getRandomInt(0, 256)}, ${getRandomInt(
     0,

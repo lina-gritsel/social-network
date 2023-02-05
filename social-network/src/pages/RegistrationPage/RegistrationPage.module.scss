@@ -3,19 +3,33 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  height: 100vh;
   gap: 20px;
   width: 100%;
 }
 
 .title {
   color: var(--gray-color);
+  font: var(--font-h3);
+  transition: all 0.5s ease-in-out;
 }
 
 .subtitle {
   color: var(--gray-color);
-  font-size: 18px;
+  font: var(--font-text-3);
+  font-weight: 700;
+  transition: all 0.5s ease-in-out;
+}
+
+@media (max-width: 820px) {
+  .title {
+    font: var(--font-text-1);
+    font-size: 30px;
+  }
+
+  .subtitle {
+    font: var(--font-text-5);
+    padding: 0 5px;
+    text-align: center;
+  }
 }

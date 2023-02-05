@@ -11,7 +11,7 @@ interface InputGenderProps {
 
 const InputGender: FC<InputGenderProps> = ({ className, name, control }) => {
   const { t } = useTranslation()
-  
+
   return (
     <Controller
       name={name}

@@ -8,5 +8,12 @@
   gap: 20px;
   padding: 20px;
   max-width: 500px;
+  transition: all 0.5s ease-in-out;
   width: 100%;
+}
+
+@media(max-width: 1200px) {
+  .form {
+    max-width: 300px;
+  }
 }

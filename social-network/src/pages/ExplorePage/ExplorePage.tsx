@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next'
 import Axios from 'axios'
 
 import NewsCard from '../../components/NewsCard'
+import Layout from '../../components/Layout'
 import Button from '../../components/Button'
-import { getRandomColor } from '../NewsPage/NewsPageComponents/userNews'
 
+import { getRandomColor } from '../NewsPage/NewsPageComponents/userNews'
 import { getAPI, newsOptions } from './constants'
 
 import styles from './ExplorePage.module.scss'
@@ -30,7 +31,6 @@ interface NewsList {
   articles: Article[]
 }
 
-
 const ExplorePage: FC = () => {
   const [articles, setArticles] = useState<Article[] | []>([])
   const [category, setCategory] = useState<string>('general')
@@ -49,24 +49,26 @@ const ExplorePage: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <div className={styles.container}>
-      <div className={styles.options}>
-        {newsOptions.map((option, index) => (
-          <Button
-            key={index}
-            className={category === option ? 'activeBtn' : ''}
-            onClick={() => setCategory(option)}
-          >
-            {t(option).toUpperCase()}
-          </Button>
-        ))}
+    <Layout>
+      <div className={styles.container}>
+        <div className={styles.options}>
+          {newsOptions.map((option, index) => (
+            <Button
+              key={index}
+              className={category === option ? 'activeBtn' : ''}
+              onClick={() => setCategory(option)}
+            >
+              {t(option).toUpperCase()}
+            </Button>
+          ))}
+        </div>
+        {isLoading ? (
+          <div className={styles.loading}>Loading...</div>
+        ) : (
+          <NewsList articles={articles} />
+        )}
       </div>
-      {isLoading ? (
-        <div className={styles.loading}>Loading...</div>
-      ) : (
-        <NewsList articles={articles} />
-      )}
-    </div>
+    </Layout>
   )
 }
 

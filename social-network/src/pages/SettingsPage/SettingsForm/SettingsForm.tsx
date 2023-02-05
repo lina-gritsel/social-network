@@ -48,6 +48,7 @@ const SettingsForm: FC = () => {
           <InputDate
             className={styles.inputDate}
             name="date"
+            placeholder={t('birthday')}
             control={control}
             errors={errors}
           />

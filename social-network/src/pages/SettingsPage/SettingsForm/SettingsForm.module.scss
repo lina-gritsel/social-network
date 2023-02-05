@@ -53,7 +53,8 @@
 
 .title {
   color: var(--gray-color);
-  font-size: 22px;
+  font: var(--font-text-2);
+  font-weight: 700;
   text-align: start;
   width: 100%;
 }

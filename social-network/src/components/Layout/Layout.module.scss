@@ -11,10 +11,10 @@
   align-items: center;
   color: var(--gray-color);
   display: flex;
-  font-size: 20px;
-  font-weight: 800;
-  padding-left: 25px;
+  font: var(--font-text-2);
+  font-weight: 700;
   min-height: 64px;
+  padding-left: 25px;
 }
 
 .forum {

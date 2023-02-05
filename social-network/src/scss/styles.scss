@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: var(--font-family-montserrat);
   margin: 0;
   padding: 0;
 
@@ -27,7 +28,7 @@ a {
   color: var(--white-color);
 }
 
-.activeBtn{
+.activeBtn {
   background-color: transparent;
-  color: var(--blue-color);  
+  color: var(--blue-color);
 }
