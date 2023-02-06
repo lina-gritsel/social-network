@@ -52,6 +52,7 @@
   "health": "健康",
   "business": "业务",
   "science": "科学",
-  "technology": "科技"
-
+  "technology": "科技",
+  "notFound": "404 未找到",
+  "keepCalm": "請保持冷靜並返回上一頁"
 }

@@ -52,5 +52,7 @@
   "health": "salud",
   "business": "negocio",
   "science": "ciencia",
-  "technology": "tecnología"
+  "technology": "tecnología",
+  "notFound": "404 NO ENCONTRADO",
+  "keepCalm": "Por favor, mantén la calma y vuelve a la página anterior."
 }
