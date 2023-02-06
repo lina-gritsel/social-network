@@ -87,7 +87,7 @@ export const findUserController = async (
     if (!user) {
       return res.status(404).json({
         status: "fail",
-        message: "Note with that ID not found",
+        message: "User with that ID not found",
       })
     }
 
