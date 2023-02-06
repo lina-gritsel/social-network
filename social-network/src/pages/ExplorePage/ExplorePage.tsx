@@ -52,7 +52,7 @@ const ExplorePage: FC = () => {
     <Layout>
       <div className={styles.container}>
         {isLoading ? (
-          <div className={styles.loading}>Loading...</div>
+          <div className={styles.loading}>{t('loading')}</div>
         ) : (
           <NewsList articles={articles} />
         )}

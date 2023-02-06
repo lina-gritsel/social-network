@@ -56,5 +56,6 @@
   "backgroundTitle": "Choose a suitable background",
   "addImgLabel": "Or add a link to your picture",
   "addImg": "add",
-  "errMessage": "Oops, it seems your link is incorrect"
+  "errMessage": "Oops, it seems your link is incorrect",
+  "loading": "Loading..."
 }

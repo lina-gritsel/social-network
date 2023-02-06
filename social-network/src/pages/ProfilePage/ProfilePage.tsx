@@ -24,25 +24,24 @@ import { FIELD_INTO, BG_IMAGES } from './constants'
 import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [bgImage, setBgImage] = useState<string>(BG_IMAGES[0])
 
-  useEffect(() => {
-    setBgImage(JSON.parse(window.localStorage.getItem("bgImage")));
-  }, []);
-  useEffect(() => {
-    window.localStorage.setItem("bgImage", JSON.stringify(bgImage));
-  }, [bgImage]);
-
-
   const { t } = useTranslation()
+
+  useEffect(() => {
+    setBgImage(JSON.parse(window.localStorage.getItem('bgImage')))
+  }, [])
+  useEffect(() => {
+    window.localStorage.setItem('bgImage', JSON.stringify(bgImage))
+  }, [bgImage])
 
   const errorImg = (e: SyntheticEvent) => {
     setIsErrorImg(true)
-    const img = (e.target) as HTMLImageElement
+    const img = e.target as HTMLImageElement
     img.onerror = null
-    setBgImage(BG_IMAGES[0]);
+    setBgImage(BG_IMAGES[0])
     img.src = bgImage
   }
 
@@ -53,7 +52,13 @@ const ProfilePage: FC = () => {
         onClose={() => setIsOpen(false)}
         onConfirm={() => setIsOpen(false)}
         title={t('backgroundTitle')}
-        content={<ModalContent setBgImage={setBgImage} isErrorImg={isErrorImg} setIsErrorImg={setIsErrorImg}/>}
+        content={
+          <ModalContent
+            setBgImage={setBgImage}
+            isErrorImg={isErrorImg}
+            setIsErrorImg={setIsErrorImg}
+          />
+        }
         isDialogActions={false}
       />
       <div className={styles.container}>
@@ -67,7 +72,10 @@ const ProfilePage: FC = () => {
             />
             <Button
               className={styles.editCoverPhoto}
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                setIsOpen(true)
+                setIsErrorImg(false)
+              }}
             >
               {t('editCoverPhoto')}
             </Button>
@@ -114,17 +122,32 @@ interface IModalContent {
   setIsErrorImg: Dispatch<SetStateAction<boolean>>
 }
 
-const ModalContent: FC<IModalContent> = ({ setBgImage, isErrorImg,  setIsErrorImg}) => {
+const ModalContent: FC<IModalContent> = ({
+  setBgImage,
+  isErrorImg,
+  setIsErrorImg,
+}) => {
+  const [isDisabled, setIsDisabled] = useState<boolean>(true)
+
   const inputRef = useRef<HTMLInputElement>()
   const { t } = useTranslation()
 
   const handleClickImg = (e: MouseEvent) => {
     setBgImage((e.target as HTMLImageElement).src)
+    setIsErrorImg(false)
   }
 
   const handleClickBtn = () => {
-    setBgImage(inputRef.current.value.trim())
-    console.log(inputRef.current.value)
+    const newImg = inputRef.current.value.trim()
+    setBgImage(newImg)
+    inputRef.current.value = ''
+  }
+
+  const onChangeInput = () => {
+    setIsErrorImg(false)
+    inputRef.current.value.trim() === ''
+      ? setIsDisabled(true)
+      : setIsDisabled(false)
   }
 
   return (
@@ -146,9 +169,9 @@ const ModalContent: FC<IModalContent> = ({ setBgImage, isErrorImg,  setIsErrorIm
           variant="standard"
           className={styles.imgInput}
           inputRef={inputRef}
-          onChange={()=> setIsErrorImg(false)}
+          onChange={() => onChangeInput()}
         />
-        <Button onClick={handleClickBtn}>
+        <Button onClick={handleClickBtn} isDisabled={isDisabled}>
           {t('addImg').toLocaleUpperCase()}
         </Button>
       </div>
