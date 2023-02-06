@@ -1,9 +1,9 @@
 import { sequelize, DataTypes } from '../../db'
 
 const PostModel = sequelize.define('post', {
-    content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false,
     }
 })
 
