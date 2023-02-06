@@ -1,20 +1,20 @@
-import { Request, Response } from 'express'
-import UserModel from './model'
+import { Request, Response } from "express"
+import UserModel from "./model"
 import {
   CreateUserInput,
   FilterQueryInput,
   ParamsInput,
   UpdateUserInput,
-} from './user.schema'
+} from "./user.schema"
 
 export const createUserController = async (
   req: Request<{}, {}, CreateUserInput>,
-  res: Response
+  res: Response,
 ) => {
   try {
     const { name, email, gender, password } = req.body
 
-    const note = await UserModel.create({
+    const user = await UserModel.create({
       name,
       email,
       gender,
@@ -22,29 +22,29 @@ export const createUserController = async (
     })
 
     res.status(201).json({
-      status: 'success',
+      status: "success",
       data: {
-        note,
+        user,
       },
     })
   } catch (error: any) {
-    if (error.name === 'SequelizeUniqueConstraintError') {
+    if (error.name === "SequelizeUniqueConstraintError") {
       return res.status(409).json({
-        status: 'failed',
-        message: 'Note with that title already exists',
+        status: "failed",
+        message: "Note with that title already exists",
       })
     }
 
     res.status(500).json({
-      status: 'error',
+      status: "error",
       message: error.message,
     })
   }
 }
 
 export const updateUserController = async (
-  req: Request<UpdateUserInput['params'], {}, UpdateUserInput['body']>,
-  res: Response
+  req: Request<UpdateUserInput["params"], {}, UpdateUserInput["body"]>,
+  res: Response,
 ) => {
   try {
     const result = await UserModel.update(
@@ -53,25 +53,25 @@ export const updateUserController = async (
         where: {
           id: req.params.userId,
         },
-      }
+      },
     )
 
     if (result[0] === 0) {
       return res.status(404).json({
-        status: 'fail',
-        message: 'Note with that ID not found',
+        status: "fail",
+        message: "Note with that ID not found",
       })
     }
 
     const user = await UserModel.findByPk(req.params.userId)
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: { user },
     })
   } catch (error: any) {
     res.status(500).json({
-      status: 'error',
+      status: "error",
       message: error.message,
     })
   }
@@ -79,25 +79,25 @@ export const updateUserController = async (
 
 export const findUserController = async (
   req: Request<ParamsInput>,
-  res: Response
+  res: Response,
 ) => {
   try {
     const user = await UserModel.findByPk(req.params.userId)
 
     if (!user) {
       return res.status(404).json({
-        status: 'fail',
-        message: 'Note with that ID not found',
+        status: "fail",
+        message: "Note with that ID not found",
       })
     }
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: { user },
     })
   } catch (error: any) {
     res.status(500).json({
-      status: 'error',
+      status: "error",
       message: error.message,
     })
   }
@@ -105,7 +105,7 @@ export const findUserController = async (
 
 export const findAllUserController = async (
   req: Request<{}, {}, {}, FilterQueryInput>,
-  res: Response
+  res: Response,
 ) => {
   try {
     const page = req.query.page || 1
@@ -114,13 +114,13 @@ export const findAllUserController = async (
 
     const users = await UserModel.findAll({ limit, offset: skip })
     res.status(200).json({
-      status: 'success',
+      status: "success",
       results: users.length,
       users,
     })
   } catch (error: any) {
     res.status(500).json({
-      status: 'error',
+      status: "error",
       message: error.message,
     })
   }
@@ -128,7 +128,7 @@ export const findAllUserController = async (
 
 export const deleteUserController = async (
   req: Request<ParamsInput>,
-  res: Response
+  res: Response,
 ) => {
   try {
     const result = await UserModel.destroy({
@@ -138,15 +138,15 @@ export const deleteUserController = async (
 
     if (result === 0) {
       return res.status(404).json({
-        status: 'fail',
-        message: 'Note with that ID not found',
+        status: "fail",
+        message: "Note with that ID not found",
       })
     }
 
     res.status(204).json()
   } catch (error: any) {
     res.status(500).json({
-      status: 'error',
+      status: "error",
       message: error.message,
     })
   }
@@ -154,13 +154,13 @@ export const deleteUserController = async (
 
 export const followUserController = async (
   req: Request<ParamsInput>,
-  res: Response
+  res: Response,
 ) => {
   const user = req.params.userId
   const currentUserId = req.body.currentUserId
 
   if (user === currentUserId) {
-    res.status(403).json('Action forbidden')
+    res.status(403).json("Action forbidden")
   } else {
     try {
       const followUser = (await UserModel.findByPk(user)) as any
@@ -168,20 +168,20 @@ export const followUserController = async (
       if (!followUser?.followers?.includes(currentUserId)) {
         await UserModel.update(
           { updatedAt: Date.now(), following: [user] },
-          { where: { id: user } }
+          { where: { id: user } },
         )
         await UserModel.update(
           { updatedAt: Date.now(), followers: [currentUserId] },
-          { where: { id: currentUserId } }
+          { where: { id: currentUserId } },
         )
-        res.status(200).json('User followed!')
+        res.status(200).json("User followed!")
       } else {
-        res.status(403).json('User is Already followed by you')
+        res.status(403).json("User is Already followed by you")
       }
       res.status(204).json()
     } catch (error: any) {
       res.status(500).json({
-        status: 'error',
+        status: "error",
         message: error.message,
       })
     }
