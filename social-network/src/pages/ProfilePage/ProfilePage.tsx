@@ -1,17 +1,7 @@
-import {
-  FC,
-  useState,
-  useEffect,
-  useRef,
-  MouseEvent,
-  Dispatch,
-  SetStateAction,
-  SyntheticEvent,
-} from 'react'
+import { FC, useState, useEffect, SyntheticEvent } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Avatar, TextField } from '@mui/material'
-import CancelIcon from '@mui/icons-material/CancelOutlined'
+import { Avatar } from '@mui/material'
 
 import NewsCreator from '../../components/NewsCreator'
 import Layout from '../../components/Layout'
@@ -20,8 +10,10 @@ import { PATHS } from '../../router/paths'
 
 import { userNews } from '../NewsPage/NewsPageComponents/userNews'
 import Modal from '../../components/Modal'
+import ModalContent from './ModalContent'
 
 import { FIELD_INTO, BG_IMAGES } from './constants'
+
 import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
@@ -48,7 +40,6 @@ const ProfilePage: FC = () => {
     img.onerror = null
     setBgImage(BG_IMAGES[0])
     img.src = bgImage
-    console.log('imgError')
   }
 
   return (
@@ -121,87 +112,6 @@ const ProfilePage: FC = () => {
         </div>
       </div>
     </Layout>
-  )
-}
-
-interface IModalContent {
-  setBgImage: Dispatch<SetStateAction<string>>
-  isErrorImg: boolean
-  setIsErrorImg: Dispatch<SetStateAction<boolean>>
-  bgImageArr: string[]
-  setBgImageArr: Dispatch<SetStateAction<string[]>>
-}
-
-const ModalContent: FC<IModalContent> = ({
-  setBgImage,
-  isErrorImg,
-  setIsErrorImg,
-  bgImageArr,
-  setBgImageArr,
-}) => {
-  const [isDisabled, setIsDisabled] = useState<boolean>(true)
-
-  const inputRef = useRef<HTMLInputElement>()
-  const imgRef = useRef<HTMLImageElement>()
-  const { t } = useTranslation()
-
-  const handleClickImg = (e: MouseEvent) => {
-    setBgImage((e.target as HTMLImageElement).src)
-    setIsErrorImg(false)
-  }
-
-  const handleClickBtn = () => {
-    const newImg = inputRef.current.value.trim()
-    setBgImage(newImg)
-    setBgImageArr((prev) => (prev.includes(newImg) ? prev : [...prev, newImg]))
-    inputRef.current.value = ''
-  }
-
-  const onChangeInput = () => {
-    setIsErrorImg(false)
-    inputRef.current.value.trim() === ''
-      ? setIsDisabled(true)
-      : setIsDisabled(false)
-  }
-
-  const clickCancel = (e: MouseEvent) => {
-    const i = +(e.currentTarget as HTMLSpanElement).id
-    setBgImageArr((prev) => [...prev.slice(0, i), ...prev.slice(i + 1)])
-  }
-
-  return (
-    <div className={styles.modal}>
-      <div className={styles.imgContainer}>
-        {bgImageArr.map((img, index) => (
-          <div className={styles.imgItem} key={index}>
-            {index > 9 && (
-              <span id={`${index}`} onClick={(e) => clickCancel(e)}>
-                <CancelIcon className={styles.cancel} fontSize="small" />
-              </span>
-            )}
-            <img
-              src={img}
-              className={styles.img}
-              onClick={(e) => handleClickImg(e)}
-            ></img>
-          </div>
-        ))}
-      </div>
-      <div className={styles.addingImg}>
-        <TextField
-          id="outlined-basic"
-          label={t('addImgLabel')}
-          variant="standard"
-          className={styles.imgInput}
-          inputRef={inputRef}
-          onChange={() => onChangeInput()}
-        />
-        <Button onClick={handleClickBtn} isDisabled={isDisabled}>
-          {t('addImg').toLocaleUpperCase()}
-        </Button>
-      </div>
-      {isErrorImg && <div className={styles.errMessage}>{t('errMessage')}</div>}
-    </div>
   )
 }
 
