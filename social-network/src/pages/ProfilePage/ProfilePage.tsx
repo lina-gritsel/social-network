@@ -1,7 +1,15 @@
-import { FC } from 'react'
+import {
+  FC,
+  useState,
+  useRef,
+  MouseEvent,
+  Dispatch,
+  SetStateAction,
+  SyntheticEvent,
+} from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Avatar } from '@mui/material'
+import { Avatar, TextField } from '@mui/material'
 
 import NewsCreator from '../../components/NewsCreator'
 import Layout from '../../components/Layout'
@@ -9,22 +17,46 @@ import Button from '../../components/Button'
 import { PATHS } from '../../router/paths'
 
 import { userNews } from '../NewsPage/NewsPageComponents/userNews'
-import { FIELD_INTO } from './constants'
+import Modal from '../../components/Modal'
 
+import { FIELD_INTO, BG_IMAGES } from './constants'
 import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [bgImage, setBgImage] = useState<string>(BG_IMAGES[0])
+
   const { t } = useTranslation()
-  const bgImage =
-    'https://images.unsplash.com/photo-1450387635522-8ecb968079bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2017&q=80'
+
+  const errorImg = (e: SyntheticEvent) => {
+    const img = (e.target) as HTMLImageElement
+    img.onerror = null
+    setBgImage(BG_IMAGES[0]);
+    img.src = bgImage
+  }
 
   return (
     <Layout>
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={() => setIsOpen(false)}
+        title={t('backgroundTitle')}
+        content={<ModalContent setBgImage={setBgImage} />}
+      />
       <div className={styles.container}>
         <div className={styles.pofileHeader}>
           <div className={styles.wrapperCover}>
-            <img className={styles.bgProfile} src={bgImage} alt="" />
-            <Button className={styles.editCoverPhoto}>
+            <img
+              className={styles.bgProfile}
+              src={bgImage}
+              alt="background"
+              onError={(e) => errorImg(e)}
+            />
+            <Button
+              className={styles.editCoverPhoto}
+              onClick={() => setIsOpen(true)}
+            >
               {t('editCoverPhoto')}
             </Button>
           </div>
@@ -61,6 +93,52 @@ const ProfilePage: FC = () => {
         </div>
       </div>
     </Layout>
+  )
+}
+
+interface IModalContent {
+  setBgImage: Dispatch<SetStateAction<string>>
+}
+
+const ModalContent: FC<IModalContent> = ({ setBgImage }) => {
+  const inputRef = useRef<HTMLInputElement>()
+  const { t } = useTranslation()
+
+  const handleClickImg = (e: MouseEvent) => {
+    setBgImage((e.target as HTMLImageElement).src)
+  }
+
+  const handleClickBtn = () => {
+    setBgImage(inputRef.current.value.trim())
+    console.log(inputRef.current.value)
+  }
+
+  return (
+    <div className={styles.modal}>
+      <div className={styles.imgContainer}>
+        {BG_IMAGES.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            className={styles.imgItem}
+            onClick={(e) => handleClickImg(e)}
+          ></img>
+        ))}
+      </div>
+      <div className={styles.addingImg}>
+        <TextField
+          id="outlined-basic"
+          label={t('addImgLabel')}
+          variant="standard"
+          className={styles.imgInput}
+          inputRef={inputRef}
+        />
+        <Button onClick={handleClickBtn}>
+          {t('addImg').toLocaleUpperCase()}
+        </Button>
+      </div>
+      <div className={styles.errMessage}>Упс, кажется, Ваша ссылка неверна</div>
+    </div>
   )
 }
 

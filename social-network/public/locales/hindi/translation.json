@@ -52,5 +52,8 @@
   "followers": "समर्थक: ",
   "following": "अगले: ",
   "editAvatar": "फ़ोटो संपादित करें",
-  "socialLinks": "सामाजिक कड़ियाँ"
+  "socialLinks": "सामाजिक कड़ियाँ",
+  "backgroundTitle": "एक उपयुक्त पृष्ठभूमि चुनें",
+  "addImgLabel": "या अपनी तस्वीर के लिए एक लिंक जोड़ें",
+  "addImg": "जोड़ें"
 }

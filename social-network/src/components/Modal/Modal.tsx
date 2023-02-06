@@ -7,11 +7,13 @@ import {
   DialogTitle,
 } from '@mui/material'
 
+import styles from './Modal.module.scss'
+
 interface ModalProps {
   open: boolean
   onClose?: () => void
   title?: string
-  content?: ReactNode
+  content?: ReactNode | JSX.Element
   onConfirm?: () => void
   className?: string
 }
@@ -26,7 +28,7 @@ const Modal: FC<ModalProps> = ({
 }) => {
   return (
     <Dialog className={className} open={open} onClose={onClose}>
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle className={styles.title}>{title}</DialogTitle>
       <DialogContent>{content}</DialogContent>
       <DialogActions>
         <Button onClick={onConfirm} color="primary">

@@ -52,5 +52,9 @@
   "health": "health",
   "business": "businness",
   "science": "science",
-  "technology": "technology"
+  "technology": "technology",
+  "backgroundTitle": "Choose a suitable background",
+  "addImgLabel": "Or add a link to your picture",
+  "addImg": "add"
+
 }

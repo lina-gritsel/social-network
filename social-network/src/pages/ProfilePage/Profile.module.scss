@@ -101,3 +101,41 @@
   gap: 10px;
   color: var(--gray-color);
 }
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px ;
+}
+
+.imgContainer {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.imgItem {
+  border-radius: 10px;
+  width: 40%;
+  height: 70px;
+  cursor: pointer;
+}
+
+.addingImg {
+  display: flex;
+  justify-self: center;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.imgInput {
+  width: 48%;
+}
+
+.errMessage {
+  color: var(--blue-color);
+}

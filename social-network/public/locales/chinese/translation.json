@@ -52,6 +52,8 @@
   "health": "健康",
   "business": "业务",
   "science": "科学",
-  "technology": "科技"
-
+  "technology": "科技",
+  "backgroundTitle": "选择合适的背景",
+  "addImgLabel": "或添加链接到您的图片",
+  "addImg": "添加"
 }
