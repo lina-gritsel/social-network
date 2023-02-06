@@ -11,6 +11,7 @@ import {
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar, TextField } from '@mui/material'
+import CancelIcon from '@mui/icons-material/CancelOutlined'
 
 import NewsCreator from '../../components/NewsCreator'
 import Layout from '../../components/Layout'
@@ -26,23 +27,28 @@ import styles from './Profile.module.scss'
 const ProfilePage: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
-  const [bgImage, setBgImage] = useState<string>(BG_IMAGES[0])
+  const [bgImageArr, setBgImageArr] = useState<string[]>(BG_IMAGES)
+  const [bgImage, setBgImage] = useState<string>(bgImageArr[0])
 
   const { t } = useTranslation()
 
   useEffect(() => {
     setBgImage(JSON.parse(window.localStorage.getItem('bgImage')))
+    setBgImageArr(JSON.parse(window.localStorage.getItem('bgImageArr')))
   }, [])
   useEffect(() => {
     window.localStorage.setItem('bgImage', JSON.stringify(bgImage))
-  }, [bgImage])
+    window.localStorage.setItem('bgImageArr', JSON.stringify(bgImageArr))
+  }, [bgImage, bgImageArr])
 
   const errorImg = (e: SyntheticEvent) => {
+    setBgImageArr((prev) => prev.slice(0, -1))
     setIsErrorImg(true)
     const img = e.target as HTMLImageElement
     img.onerror = null
     setBgImage(BG_IMAGES[0])
     img.src = bgImage
+    console.log('imgError')
   }
 
   return (
@@ -57,6 +63,8 @@ const ProfilePage: FC = () => {
             setBgImage={setBgImage}
             isErrorImg={isErrorImg}
             setIsErrorImg={setIsErrorImg}
+            bgImageArr={bgImageArr}
+            setBgImageArr={setBgImageArr}
           />
         }
         isDialogActions={false}
@@ -120,16 +128,21 @@ interface IModalContent {
   setBgImage: Dispatch<SetStateAction<string>>
   isErrorImg: boolean
   setIsErrorImg: Dispatch<SetStateAction<boolean>>
+  bgImageArr: string[]
+  setBgImageArr: Dispatch<SetStateAction<string[]>>
 }
 
 const ModalContent: FC<IModalContent> = ({
   setBgImage,
   isErrorImg,
   setIsErrorImg,
+  bgImageArr,
+  setBgImageArr,
 }) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
 
   const inputRef = useRef<HTMLInputElement>()
+  const imgRef = useRef<HTMLImageElement>()
   const { t } = useTranslation()
 
   const handleClickImg = (e: MouseEvent) => {
@@ -140,6 +153,7 @@ const ModalContent: FC<IModalContent> = ({
   const handleClickBtn = () => {
     const newImg = inputRef.current.value.trim()
     setBgImage(newImg)
+    setBgImageArr((prev) => (prev.includes(newImg) ? prev : [...prev, newImg]))
     inputRef.current.value = ''
   }
 
@@ -150,16 +164,27 @@ const ModalContent: FC<IModalContent> = ({
       : setIsDisabled(false)
   }
 
+  const clickCancel = (e: MouseEvent) => {
+    const i = +(e.currentTarget as HTMLSpanElement).id
+    setBgImageArr((prev) => [...prev.slice(0, i), ...prev.slice(i + 1)])
+  }
+
   return (
     <div className={styles.modal}>
       <div className={styles.imgContainer}>
-        {BG_IMAGES.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            className={styles.imgItem}
-            onClick={(e) => handleClickImg(e)}
-          ></img>
+        {bgImageArr.map((img, index) => (
+          <div className={styles.imgItem} key={index}>
+            {index > 9 && (
+              <span id={`${index}`} onClick={(e) => clickCancel(e)}>
+                <CancelIcon className={styles.cancel} fontSize="small" />
+              </span>
+            )}
+            <img
+              src={img}
+              className={styles.img}
+              onClick={(e) => handleClickImg(e)}
+            ></img>
+          </div>
         ))}
       </div>
       <div className={styles.addingImg}>

@@ -47,6 +47,6 @@ export const BG_IMAGES = [
   'https://images.unsplash.com/photo-1597667382183-811916f0a4aa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80',
   'https://images.unsplash.com/photo-1620512921355-aeeb1156a5af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2530&q=80',
   'https://images.unsplash.com/photo-1567429611415-7a7574a04f34?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1911&q=80',
-  'https://cdn.pixabay.com/photo/2017/03/27/13/38/canyon-2178786_960_720.jpg',
+  'https://pbs.twimg.com/profile_banners/1389369913/1404333518/1500x500',
   'https://krot.info/uploads/posts/2021-12/1639067747_3-krot-info-p-kosmos-panorama-krasivie-foto-3.jpg',
 ]
