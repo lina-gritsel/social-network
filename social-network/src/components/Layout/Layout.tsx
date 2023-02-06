@@ -27,7 +27,6 @@ const Layout: FC<LayotProps> = (props) => {
     <Box className={styles.layout}>
       <CssBaseline />
       <AppBar
-      className={styles.hidden}
         position="fixed"
         sx={{
           width: `calc(100% - ${drawerWidth}px)`,
@@ -39,7 +38,6 @@ const Layout: FC<LayotProps> = (props) => {
         </Toolbar>
       </AppBar>
       <Drawer
-        className={styles.hidden}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
