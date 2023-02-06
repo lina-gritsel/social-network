@@ -55,6 +55,6 @@
   "technology": "technology",
   "backgroundTitle": "Choose a suitable background",
   "addImgLabel": "Or add a link to your picture",
-  "addImg": "add"
-
+  "addImg": "add",
+  "errMessage": "Oops, it seems your link is incorrect"
 }

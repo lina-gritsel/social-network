@@ -1,6 +1,7 @@
 import {
   FC,
   useState,
+  useEffect,
   useRef,
   MouseEvent,
   Dispatch,
@@ -24,11 +25,21 @@ import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [bgImage, setBgImage] = useState<string>(BG_IMAGES[0])
+
+  useEffect(() => {
+    setBgImage(JSON.parse(window.localStorage.getItem("bgImage")));
+  }, []);
+  useEffect(() => {
+    window.localStorage.setItem("bgImage", JSON.stringify(bgImage));
+  }, [bgImage]);
+
 
   const { t } = useTranslation()
 
   const errorImg = (e: SyntheticEvent) => {
+    setIsErrorImg(true)
     const img = (e.target) as HTMLImageElement
     img.onerror = null
     setBgImage(BG_IMAGES[0]);
@@ -42,7 +53,8 @@ const ProfilePage: FC = () => {
         onClose={() => setIsOpen(false)}
         onConfirm={() => setIsOpen(false)}
         title={t('backgroundTitle')}
-        content={<ModalContent setBgImage={setBgImage} />}
+        content={<ModalContent setBgImage={setBgImage} isErrorImg={isErrorImg} setIsErrorImg={setIsErrorImg}/>}
+        isDialogActions={false}
       />
       <div className={styles.container}>
         <div className={styles.pofileHeader}>
@@ -98,9 +110,11 @@ const ProfilePage: FC = () => {
 
 interface IModalContent {
   setBgImage: Dispatch<SetStateAction<string>>
+  isErrorImg: boolean
+  setIsErrorImg: Dispatch<SetStateAction<boolean>>
 }
 
-const ModalContent: FC<IModalContent> = ({ setBgImage }) => {
+const ModalContent: FC<IModalContent> = ({ setBgImage, isErrorImg,  setIsErrorImg}) => {
   const inputRef = useRef<HTMLInputElement>()
   const { t } = useTranslation()
 
@@ -132,12 +146,13 @@ const ModalContent: FC<IModalContent> = ({ setBgImage }) => {
           variant="standard"
           className={styles.imgInput}
           inputRef={inputRef}
+          onChange={()=> setIsErrorImg(false)}
         />
         <Button onClick={handleClickBtn}>
           {t('addImg').toLocaleUpperCase()}
         </Button>
       </div>
-      <div className={styles.errMessage}>Упс, кажется, Ваша ссылка неверна</div>
+      {isErrorImg && <div className={styles.errMessage}>{t('errMessage')}</div>}
     </div>
   )
 }
