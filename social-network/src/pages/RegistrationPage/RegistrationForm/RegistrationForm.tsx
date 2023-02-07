@@ -45,9 +45,9 @@ const RegistrationForm: FC = () => {
         errors={errors}
       />
       <Input
-        name="name"
+        name="nickname"
         control={control}
-        placeholder={t('name')}
+        placeholder={t('nickname')}
         inputProps={{
           startAdornment: (
             <InputAdornment position="start">
