@@ -1,15 +1,17 @@
 import { Request, Response } from 'express'
 import PostModel from './model'
-import { CreatePost, FilterQuery, Params } from './post.schema'
+import { CreatePost, FilterQuery, Params, UpdatePost } from './post.schema'
 
 export const createPost = async (
   req: Request<{}, CreatePost>,
   res: Response,
 ) => {
   try {
-    const { content } = req.body
+    const { username, content } = req.body
+    console.log({ username, content })
 
     const post = await PostModel.create({
+      username,
       content,
     })
 
@@ -64,6 +66,62 @@ export const findAllPosts = async (
       status: 'success',
       results: posts.length,
       posts,
+    })
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+    })
+  }
+}
+
+export const deletePost = async (req: Request<Params>, res: Response) => {
+  try {
+    const result = await PostModel.destroy({
+      where: { id: req.params.postId },
+      force: true,
+    })
+
+    if (result === 0) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'Note with that ID not found',
+      })
+    }
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+    })
+  }
+}
+
+export const updatePost = async (
+  req: Request<UpdatePost['params'], {}, UpdatePost['body']>,
+  res: Response,
+) => {
+  try {
+    const result = await PostModel.update(
+      { ...req.body, updatedAt: Date.now() },
+      {
+        where: {
+          id: req.params.postId,
+        },
+      },
+    )
+
+    if (result[0] === 0) {
+      return res.status(404).json({
+        status: 'fail',
+        messsage: 'Note whit that ID not found',
+      })
+    }
+
+    const post = await PostModel.findByPk(req.params.postId)
+
+    res.status(200).json({
+      status: 'success',
+      data: { post },
     })
   } catch (error: any) {
     res.status(500).json({

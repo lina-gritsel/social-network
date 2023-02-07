@@ -2,6 +2,9 @@ import { z } from 'zod'
 
 export const createPostSchema = z.object({
   body: z.object({
+    username: z.string({
+      required_error: '',
+    }),
     content: z.string({
       required_error: '',
     }),
@@ -9,7 +12,7 @@ export const createPostSchema = z.object({
 })
 
 export const params = z.object({
-    postId: z.number(),
+  postId: z.string(),
 })
 
 export const filterQuery = z.object({
@@ -17,6 +20,16 @@ export const filterQuery = z.object({
   page: z.number().default(10),
 })
 
+export const updatePostSchema = z.object({
+  params,
+  body: z
+    .object({
+      content: z.string(),
+    })
+    .partial(),
+})
+
 export type Params = z.TypeOf<typeof params>
 export type CreatePost = z.TypeOf<typeof createPostSchema>
 export type FilterQuery = z.TypeOf<typeof filterQuery>
+export type UpdatePost = z.TypeOf<typeof updatePostSchema>
