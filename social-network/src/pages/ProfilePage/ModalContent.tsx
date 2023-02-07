@@ -53,9 +53,10 @@ const ModalContent: FC<IModalContent> = ({
       : setIsDisabled(false)
   }
 
-  const clickCancel = (e: MouseEvent) => {
-    const i = +(e.currentTarget as HTMLSpanElement).id
-    setBgImageArr((prev) => [...prev.slice(0, i), ...prev.slice(i + 1)])
+  const deleteImg = (e: MouseEvent) => {
+    const index = (e.currentTarget as HTMLSpanElement).id
+    const indexNumber = parseFloat(index)
+    setBgImageArr((prev) => [...prev.slice(0, indexNumber), ...prev.slice(indexNumber + 1)])
   }
 
   return (
@@ -64,7 +65,7 @@ const ModalContent: FC<IModalContent> = ({
         {bgImageArr.map((img, index) => (
           <div className={styles.imgItem} key={index}>
             {index > 9 && (
-              <span id={`${index}`} onClick={(e) => clickCancel(e)}>
+              <span id={`${index}`} onClick={(e) => deleteImg(e)}>
                 <CancelIcon className={styles.cancel} fontSize="small" />
               </span>
             )}
