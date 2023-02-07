@@ -7,7 +7,7 @@ import {
   deleteUserController,
   findAllUserController,
   findUserController,
-  followUserController,
+  // followUserController,
   updateUserController,
 } from '../api/users/user.controller'
 
@@ -24,6 +24,6 @@ userRouter
   .patch(validate(updateUserSchema), updateUserController)
   .delete(deleteUserController)
 
-userRouter.route('/:userId/follow').patch(followUserController)
+// userRouter.route('/:userId/follow').patch(followUserController)
 
 export default userRouter

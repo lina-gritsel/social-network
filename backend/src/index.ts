@@ -7,6 +7,7 @@ import cors from "cors"
 import { connectDB, sequelize } from "./db"
 import userRouter from "./routes/UserRouter"
 import postRouter from "./routes/PostRouter"
+import loginRouter from "./routes/LoginRouter"
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use(
 
 app.use("/api/users", userRouter)
 app.use("/api/posts", postRouter)
+app.use("/api/login", loginRouter)
 
 app.get("/api/healthchecker", (req: Request, res: Response) => {
   res.status(200).json({
