@@ -7,11 +7,10 @@ import NewsCreator from '../../components/NewsCreator'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import { PATHS } from '../../router/paths'
+import Modal from '../../components/Modal'
 
 import { userNews } from '../NewsPage/NewsPageComponents/userNews'
-import Modal from '../../components/Modal'
 import ModalContent from './ModalContent'
-
 import { FIELD_INTO, BG_IMAGES } from './constants'
 
 import styles from './Profile.module.scss'
