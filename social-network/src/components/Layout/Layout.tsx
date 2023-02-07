@@ -16,7 +16,6 @@ import Menu from '../Menu'
 
 import styles from './Layout.module.scss'
 
-
 const drawerWidth = 240
 
 type LayotProps = {
@@ -25,47 +24,49 @@ type LayotProps = {
 
 const Layout: FC<LayotProps> = (props) => {
   return (
-    <>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          sx={{
-            width: `calc(100% - ${drawerWidth}px)`,
-            ml: `${drawerWidth}px`,
-          }}
-        >
-          <Toolbar className={styles.toolbar}>
-            <Header />
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          sx={{
+    <Box className={styles.layout}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{
+          width: `calc(100% - ${drawerWidth}px)`,
+          ml: `${drawerWidth}px`,
+        }}
+      >
+        <Toolbar className={styles.toolbar}>
+          <Header />
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
             width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: drawerWidth,
-              boxSizing: 'border-box',
-            },
-          }}
-          variant="permanent"
-          anchor="left"
-        >
-          <Link to={PATHS.NEWS} className={styles.mainMenuItem}>
-            <ForumRounded color="primary" className={styles.forum} />
-            OurNetwork
-          </Link>
-          <Divider />
-          <List>
-            <Menu />
-          </List>
-          <Divider />
-        </Drawer>
-        <Box component="main" className={styles.wrapperContent} sx={{ flexGrow: 1 }}>
-         {props.children}
-        </Box>
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="permanent"
+        anchor="left"
+      >
+        <Link to={PATHS.NEWS} className={styles.mainMenuItem}>
+          <ForumRounded color="primary" className={styles.forum} />
+          OurNetwork
+        </Link>
+        <Divider />
+        <List>
+          <Menu />
+        </List>
+        <Divider />
+      </Drawer>
+      <Box
+        component="main"
+        className={styles.wrapperContent}
+        sx={{ flexGrow: 1 }}
+      >
+        {props.children}
       </Box>
-    </>
+    </Box>
   )
 }
 

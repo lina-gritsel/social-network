@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transition: all 0.5s ease-in-out;
   width: 100%;
 }
 
@@ -10,6 +11,7 @@
   flex-direction: row;
   position: relative;
   max-width: 220px;
+  transition: all 0.5s ease-in-out;
   width: 100%;
 }
 
@@ -22,15 +24,43 @@
   position: absolute !important;
   right: -17%;
   max-width: 120px;
+  transition: all 0.5s ease-in-out;
   width: 100%;
 }
 
 .profileAvatar {
   height: 150px !important;
+  transition: all 0.5s ease-in-out;
   width: 150px !important;
 }
 
 .title {
   color: var(--gray-color);
   font: var(--font-h3);
+  transition: all 0.5s ease-in-out;
+}
+
+@media (max-width: 620px) {
+  .wrapper {
+    gap: 10px;
+  }
+
+  .avatarBlock {
+    max-width: 160px;
+  }
+
+  .editAvatar {
+    font-size: 7px !important;
+    max-width: 90px;
+  }
+
+  .profileAvatar {
+    height: 100px !important;
+    width: 100px !important;
+  }
+
+  .title {
+    font: var(--font-text-3);
+    font-weight: 700;
+  }
 }
