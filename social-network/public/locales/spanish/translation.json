@@ -53,6 +53,11 @@
   "business": "negocio",
   "science": "ciencia",
   "technology": "tecnología",
+  "backgroundTitle": "Elija un fondo adecuado",
+  "addImgLabel": "O agregue un enlace a su imagen",
+  "addImg": "añadir",
+  "errMessage": "Oops, parece que Tu enlace es incorrecto",
+  "loading": "Carga ...",
   "notFound": "404 NO ENCONTRADO",
   "keepCalm": "Por favor, mantén la calma y vuelve a la página anterior."
 }

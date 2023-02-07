@@ -53,6 +53,11 @@
   "business": "业务",
   "science": "科学",
   "technology": "科技",
+  "backgroundTitle": "选择合适的背景",
+  "addImgLabel": "或添加链接到您的图片",
+  "addImg": "添加",
+  "errMessage": "哎呀，看来你的链接不正确",
+  "loading": "装货。。。",
   "notFound": "404 未找到",
   "keepCalm": "請保持冷靜並返回上一頁"
 }

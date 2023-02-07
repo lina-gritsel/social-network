@@ -53,6 +53,11 @@
   "business": "businness",
   "science": "science",
   "technology": "technology",
+  "backgroundTitle": "Choose a suitable background",
+  "addImgLabel": "Or add a link to your picture",
+  "addImg": "add",
+  "errMessage": "Oops, it seems your link is incorrect",
+  "loading": "Loading...",
   "notFound": "404 NOT FOUND",
   "keepCalm": "Please, keep calm and return to the previous page"
 }
