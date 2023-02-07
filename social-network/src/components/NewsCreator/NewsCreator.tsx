@@ -43,7 +43,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   )
 }
 
-const ContentInput = () => {
+const ContentInput: FC = () => {
   const { t } = useTranslation()
 
   return (
