@@ -8,6 +8,7 @@ import { connectDB, sequelize } from "./db"
 import userRouter from "./routes/UserRouter"
 import postRouter from "./routes/PostRouter"
 import loginRouter from "./routes/LoginRouter"
+import wallpaperRouter from "./routes/WallpaperRouter"
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.use(
 app.use("/api/users", userRouter)
 app.use("/api/posts", postRouter)
 app.use("/api/login", loginRouter)
+app.use("/api/wallpaper", wallpaperRouter)
 
 app.get("/api/healthchecker", (req: Request, res: Response) => {
   res.status(200).json({
