@@ -1,11 +1,7 @@
 .card {
   width: 100%;
-}
-
-.img {
-  object-fit: contain !important;
-}
-
-.link {
-  text-decoration: underline;
+  & a {
+    color: var(--blue-color);
+    font-weight: 800;
+  }
 }
