@@ -49,6 +49,10 @@ const UserModel = sequelize.define('user', {
     type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: true,
   },
+  password: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
 })
 
 export default UserModel
