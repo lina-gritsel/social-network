@@ -53,6 +53,18 @@ const UserModel = sequelize.define('user', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  instagramm: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  twitter: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  facebook: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 })
 
 export default UserModel

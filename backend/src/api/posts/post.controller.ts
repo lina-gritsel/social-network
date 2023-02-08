@@ -8,7 +8,6 @@ export const createPost = async (
 ) => {
   try {
     const { username, content } = req.body
-    console.log({ username, content })
 
     const post = await PostModel.create({
       username,
@@ -88,6 +87,8 @@ export const deletePost = async (req: Request<Params>, res: Response) => {
         message: 'Note with that ID not found',
       })
     }
+    
+    res.status(204).json()
   } catch (error: any) {
     res.status(500).json({
       status: 'error',

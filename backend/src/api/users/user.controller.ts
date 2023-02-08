@@ -13,24 +13,47 @@ export const createUserController = async (
   res: Response,
 ) => {
   try {
-    const { name, email, gender, password } = req.body
+    const { name, email, gender, password, instagramm, twitter, facebook } =
+      req.body
 
     const salt = await bcrypt.genSalt(10)
     const hashedPass = await bcrypt.hash(password, salt)
 
-    const user = await UserModel.create({
-      name,
-      email,
-      gender,
-      password: hashedPass,
-    })
+    const existUser = await UserModel.findOne({ where: { name } })
+    const existEmail = await UserModel.findOne({ where: { email } })
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        user,
-      },
-    })
+    if (existEmail) {
+      res.status(401).json('this email is already registered')
+      return
+    }
+
+    if (existUser) {
+      const validity = await bcrypt.compare(
+        password,
+        existUser.dataValues.password,
+      )
+
+      validity
+        ? res.status(200).json(existUser)
+        : res.status(401).json('a user with the same name already exists')
+    } else {
+      const user = await UserModel.create({
+        name,
+        email,
+        gender,
+        password: hashedPass,
+        instagramm,
+        twitter,
+        facebook,
+      })
+
+      res.status(201).json({
+        status: 'success',
+        data: {
+          user,
+        },
+      })
+    }
   } catch (error: any) {
     if (error.name === 'SequelizeUniqueConstraintError') {
       return res.status(409).json({

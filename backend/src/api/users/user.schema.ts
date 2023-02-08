@@ -17,6 +17,9 @@ export const createUserSchema = z.object({
     date: z.number({
       required_error: 'Date is required',
     }),
+    instagramm: z.string(),
+    twitter: z.string(),
+    facebook: z.string(),
   }),
 })
 
@@ -32,6 +35,9 @@ export const updateUserSchema = z.object({
       email: z.string(),
       date: z.number(),
       location: z.string(),
+      instagramm: z.string(),
+      twitter: z.string(),
+      facebook: z.string(),
     })
     .partial(),
 })
