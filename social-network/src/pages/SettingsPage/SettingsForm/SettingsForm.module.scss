@@ -7,6 +7,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  transition: all 0.5s ease-in-out;
   max-width: 800px;
   width: 100%;
 }
@@ -16,16 +17,19 @@
   flex-direction: row;
   justify-content: center;
   gap: 15px;
+  transition: all 0.5s ease-in-out;
   width: 100%;
 }
 
 .labelBlock {
   display: flex;
   flex-direction: column;
+  transition: all 0.5s ease-in-out;
   width: 50%;
 }
 
 .inputDate {
+  transition: all 0.5s ease-in-out;
   width: 100%;
 }
 
@@ -37,6 +41,7 @@
   gap: 15px;
   height: 56px;
   padding-left: 15px;
+  transition: all 0.5s ease-in-out;
   width: 100%;
 }
 
@@ -44,11 +49,13 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
+  transition: all 0.5s ease-in-out;
 }
 
 .label {
   color: var(--gray-color) !important;
   font-weight: 700 !important;
+  transition: all 0.5s ease-in-out;
 }
 
 .title {
@@ -56,5 +63,33 @@
   font: var(--font-text-2);
   font-weight: 700;
   text-align: start;
+  transition: all 0.5s ease-in-out;
   width: 100%;
+}
+
+@media (max-width: 620px) {
+  .form {
+    gap: 10px;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .block {
+    flex-direction: column;
+  }
+
+  .labelBlock {
+    gap: 5px;
+    width: 100%;
+  }
+
+  .label {
+    font: var(--font-text-5) !important;
+    font-weight: 700 !important;
+  }
+
+  .title {
+    font: var(--font-text-3);
+    font-weight: 700;
+  }
 }

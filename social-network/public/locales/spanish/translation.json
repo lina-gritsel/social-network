@@ -1,12 +1,12 @@
 {
   "settingsTitle": "Editar perfil",
-  "name": "Su nombre",
+  "nickname": "Su nombre",
   "birthday": "Cumpleaños",
   "email": "Tu correo electrónico",
   "bio": "Biografía",
   "gender": "Género",
-  "male": "Masculino",
-  "female": "Femenina",
+  "male": "Hombre",
+  "female": "Mujer",
   "location": "Ubicación",
   "languages": "Idiomas",
   "cancel": "Cancelar",
@@ -52,5 +52,12 @@
   "health": "salud",
   "business": "negocio",
   "science": "ciencia",
-  "technology": "tecnología"
+  "technology": "tecnología",
+  "backgroundTitle": "Elija un fondo adecuado",
+  "addImgLabel": "O agregue un enlace a su imagen",
+  "addImg": "añadir",
+  "errMessage": "Oops, parece que Tu enlace es incorrecto",
+  "loading": "Carga ...",
+  "notFound": "404 NO ENCONTRADO",
+  "keepCalm": "Por favor, mantén la calma y vuelve a la página anterior."
 }

@@ -1,5 +1,6 @@
 .wrapper {
   align-items: center;
+  background-image: url('../../assets/images/bg.jpg');
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -11,12 +12,14 @@
 .title {
   color: var(--gray-color);
   font: var(--font-h1);
+  text-align: center;
   transition: all 0.5s ease-in-out;
 }
 
 .text {
   color: var(--gray-color);
   font: var(--font-text-3);
+  text-align: center;
   text-decoration: underline;
   transition: all 0.5s ease-in-out;
 }
@@ -25,12 +28,10 @@
   .title {
     font: var(--font-text-2);
     font-weight: 700;
-    text-align: center;
   }
 
   .text {
     font: var(--font-text-5);
     padding: 0 5px;
-    text-align: center;
   }
 }

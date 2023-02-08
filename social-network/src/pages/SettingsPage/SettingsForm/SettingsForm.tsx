@@ -28,11 +28,11 @@ const SettingsForm: FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.block}>
         <div className={styles.labelBlock}>
-          <FormLabel className={styles.label}>{t('name')}</FormLabel>
+          <FormLabel className={styles.label}>{t('nickname')}</FormLabel>
           <Input
-            name="name"
+            name="nickname"
             control={control}
-            placeholder={t('name')}
+            placeholder={t('nickname')}
             inputProps={{
               startAdornment: (
                 <InputAdornment position="start">

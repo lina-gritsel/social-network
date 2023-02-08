@@ -6,7 +6,7 @@ import { schema } from './helpers'
 
 export interface FormValues {
   email: string
-  name: string
+  nickname: string
   password: string
   date: string
   gender: string
@@ -21,7 +21,7 @@ export const useRegistrationForm = () => {
     resolver: yupResolver(schema),
     defaultValues: {
       email: '',
-      name: '',
+      nickname: '',
       password: '',
       date: '',
       gender: 'male',

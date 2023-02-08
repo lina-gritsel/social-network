@@ -14,3 +14,10 @@
   background-color: transparent;
   color: var(--blue-color);
 }
+
+.disabled {
+  background-color: transparent;
+  color: var(--blue-color);
+  border: 1px solid var(--blue-color);
+  cursor: default;
+}
