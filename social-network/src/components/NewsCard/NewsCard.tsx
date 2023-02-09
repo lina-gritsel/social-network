@@ -99,11 +99,15 @@ const NewsCard: FC<News> = ({
       )}
       {!avatarColor && <CardHeader title={name} subheader={date} />}
       <CardContent>
-        <Typography variant="body2" color="text.secondary" height={!avatarColor ? 100: null}>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          height={!avatarColor ? 100 : null}
+        >
           {content}
         </Typography>
         {!!url && !moreContent && (
-          <a className={styles.link} href={url}>
+          <a target="_blank" rel="noreferrer" href={url}>
             Click to read more 🢅
           </a>
         )}

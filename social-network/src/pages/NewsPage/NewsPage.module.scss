@@ -1,12 +1,11 @@
 .container {
     display: flex;
-    gap: 32px;
     justify-content: space-between;
     width: 100%;
 }
 .news{
     display: flex;
     flex-direction: column;
-    gap: 60px;
-    width: 60%;
+    gap: 30px;
+    width: 40%;
 }

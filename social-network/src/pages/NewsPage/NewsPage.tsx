@@ -8,6 +8,7 @@ import FriendsOnline from '../../components/FriendsOnline'
 import { userNews } from './NewsPageComponents/userNews'
 
 import styles from './NewsPage.module.scss'
+import RandomFriend from '../../components/RandomFriend'
 
 const NewsPage: FC = () => {
   const owner = userNews[4]
@@ -25,6 +26,7 @@ const NewsPage: FC = () => {
             <NewsCard key={index} {...news} />
           ))}
         </div>
+        <RandomFriend/>
         <FriendsOnline />
       </div>
     </Layout>
