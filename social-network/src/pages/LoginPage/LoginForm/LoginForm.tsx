@@ -1,9 +1,8 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, IconButton, InputAdornment } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import LockIcon from '@mui/icons-material/Lock'
+import { Button, IconButton, InputAdornment } from '@mui/material'
+import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material'
 
 import Input from '../../../components/Input'
 import InputPassword from '../../../components/InputPassword'
@@ -27,14 +26,13 @@ const LoginForm: FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <Input
-        name="email"
+        name="nickname"
         control={control}
-        placeholder={t('email')}
-        type="email"
+        placeholder={t('nickname')}
         inputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <AlternateEmailIcon />
+              <AccountCircle />
             </InputAdornment>
           ),
         }}
