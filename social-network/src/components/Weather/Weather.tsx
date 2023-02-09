@@ -61,7 +61,9 @@ const Weather: FC = () => {
           className={styles.input}
           onKeyPress={(e) => changeCity(e)}
         />
-        <div className={styles.city}>{city[0].toUpperCase() + city.slice(1)}</div>
+        <div className={styles.city}>
+          {city[0].toUpperCase() + city.slice(1)}
+        </div>
         <div className={styles.mainIfo}>
           <img src={getSrc(weatherIcon)} alt="weather" />
           <div>
@@ -71,7 +73,9 @@ const Weather: FC = () => {
         </div>
         <div>Wind speed: {wind} m/s</div>
         <div>Humidity: {humidity}%</div>
-        {isError && <div className={styles.errMessage}>{t('errMessageWeather')}</div>}
+        {isError && (
+          <div className={styles.errMessage}>{t('errMessageWeather')}</div>
+        )}
       </div>
     </div>
   )
