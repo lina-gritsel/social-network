@@ -61,5 +61,10 @@
   "notFound": "404 未找到",
   "keepCalm": "請保持冷靜並返回上一頁",
   "ignore": "忽略",
-  "follow": "跟我来"
+  "follow": "跟我来",
+  "errMessageWeather": "哎呀，没有这样的城市",
+  "weather": "天气情况",
+  "enterCity": "进入城市",
+  "mightLike": "你可能会喜欢"
+  
 }

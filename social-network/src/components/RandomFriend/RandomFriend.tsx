@@ -22,14 +22,12 @@ const RandomFriend: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <div className={styles.block}>
       <div className={styles.friends}>
-        <div>You Might Like</div>
+        <div>{t('mightLike')}</div>
         {friends.map((friend, index) =>
-          index % 4 === 0 ? <Friend key={index} {...friend} /> : null,
+          index % 5 === 0 ? <Friend key={index} {...friend} /> : null,
         )}
       </div>
-    </div>
   )
 }
 
@@ -42,7 +40,7 @@ const Friend: FC<RandomFriend> = ({
   const { t } = useTranslation()
 
   return (
-    <Card>
+    <Card className={styles.friend}>
       <CardHeader
         avatar={
           <Avatar

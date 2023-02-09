@@ -1,0 +1,42 @@
+.weather {
+  align-items: center;
+  color: var(--gray-color);
+  display: flex;
+  font: var(--font-text-4);
+  font-weight: 700;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 15px;
+}
+
+.content {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 85%;
+  background-color: #fff;
+  font: var(--font-text-4);
+  font-weight: 500;
+  padding: 10px 0;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+.city {
+  font-weight: 700;
+}
+
+.mainIfo {
+  display: flex;
+  gap: 20px;
+}
+
+.input {
+  width: 80%;
+}
+
+.errMessage {
+  color: var(--blue-color);
+}

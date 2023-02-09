@@ -61,6 +61,10 @@
   "notFound": "404 NO ENCONTRADO",
   "keepCalm": "Por favor, mantén la calma y vuelve a la página anterior.",
   "ignore": "Ignorar",
-  "follow": "Seguir"
+  "follow": "Seguir",
+  "errMessageWeather": "No hay tal ciudad",
+  "weather": "Weather",
+  "enterCity": "Introduzca la ciudad",
+  "mightLike": "Puede que te guste"
 
 }

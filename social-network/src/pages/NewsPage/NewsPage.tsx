@@ -4,6 +4,7 @@ import Layout from '../../components/Layout'
 import NewsCard from '../../components/NewsCard'
 import NewsCreator from '../../components/NewsCreator'
 import FriendsOnline from '../../components/FriendsOnline'
+import Weather from '../../components/Weather'
 
 import { userNews } from './NewsPageComponents/userNews'
 
@@ -26,7 +27,11 @@ const NewsPage: FC = () => {
             <NewsCard key={index} {...news} />
           ))}
         </div>
-        <RandomFriend/>
+        <div className={styles.friendAndWeather}>
+          <RandomFriend />
+          <Weather />
+        </div>
+
         <FriendsOnline />
       </div>
     </Layout>

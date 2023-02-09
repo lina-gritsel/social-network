@@ -61,5 +61,10 @@
   "notFound": "404 NOT FOUND",
   "keepCalm": "Please, keep calm and return to the previous page",
   "ignore": "Ignore",
-  "follow": "Follow"
+  "follow": "Follow",
+  "errMessageWeather": "Oops, there is no such city",
+  "weather": "Weather",
+  "enterCity": "Enter the city",
+  "mightLike": "You might like"
+
 }
