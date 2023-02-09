@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
@@ -9,6 +9,8 @@ import MoodIcon from '@mui/icons-material/MoodOutlined'
 import Button from '../Button'
 
 import styles from './NewsCreator.module.scss'
+
+import { createPost } from '../../api/request'
 
 interface NewsCreatorProps {
   name: string
@@ -23,6 +25,13 @@ const NewsCreator: FC<NewsCreatorProps> = ({
 }) => {
   const { t } = useTranslation()
 
+  const [contentInput, setContentInput] = useState('')
+
+  const createNewPost = async () => {
+    const result = await createPost({ content: contentInput, username:'Ula' })
+    console.log(result)
+  }
+
   return (
     <div className={styles.create}>
       <div className={styles.createHeader}>
@@ -33,17 +42,17 @@ const NewsCreator: FC<NewsCreatorProps> = ({
         >
           {name[0]}
         </Avatar>
-        <ContentInput />
+        <ContentInput onChange={(event) => setContentInput(event.target.value)} />
       </div>
       <div className={styles.createFooter}>
         <CreateIcons />
-        <Button>{t('post')}</Button>
+        <Button onClick={createNewPost}>{t('post')}</Button>
       </div>
     </div>
   )
 }
 
-const ContentInput: FC = () => {
+const ContentInput: FC<{ onChange: any }> = ({ onChange }) => {
   const { t } = useTranslation()
 
   return (
@@ -53,7 +62,12 @@ const ContentInput: FC = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label={t('question')} variant="standard" />
+      <TextField
+        onChange={onChange}
+        id="outlined-basic"
+        label={t('question')}
+        variant="standard"
+      />
     </Box>
   )
 }
