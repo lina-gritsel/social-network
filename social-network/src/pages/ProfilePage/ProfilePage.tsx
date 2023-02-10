@@ -85,7 +85,7 @@ const ProfilePage: FC = () => {
           />
           <div className={styles.wrapper}>
             <div className={styles.userInfo}>
-              <div className={styles.nameUser}>{userNews[4].name}</div>
+              <div className={styles.nameUser}>{userNews[4].username}</div>
               <div className={styles.workUser}>UI Designer</div>
             </div>
             <NavLink to={PATHS.SETTINGS}>
@@ -104,7 +104,7 @@ const ProfilePage: FC = () => {
             ))}
           </div>
           <NewsCreator
-            name={userNews[4].name}
+            name={userNews[4].username}
             avatarImg={userNews[4].avatarImg}
             avatarColor={userNews[4].avatarColor}
           />

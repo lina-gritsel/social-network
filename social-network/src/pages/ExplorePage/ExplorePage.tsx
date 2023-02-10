@@ -10,6 +10,7 @@ import { DEFAULT_IMG } from '../../components/NewsCard/NewsCard'
 import { getAPI, newsOptions } from './constants'
 
 import styles from './ExplorePage.module.scss'
+import { dateConversion } from '../../constants/constants'
 
 interface Source {
   id: string | null
@@ -91,8 +92,8 @@ const NewsList: FC<NewsList> = ({ articles }) => {
           !!description || !!content || !!urlToImage ? (
             <NewsCard
               key={index}
-              name={author?.split(',')[0] || source.name}
-              date={publishedAt.split('T').join(' / ').slice(0, -4)}
+              username={author?.split(',')[0].split('//')[1]?.split('/')[0] || source.name}
+              createdAt={dateConversion(publishedAt)}
               img={urlToImage || DEFAULT_IMG}
               content={(content?.slice(0, 150) || description) + '...'}
               className={styles.card}

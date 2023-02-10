@@ -12,7 +12,7 @@ import Button from '../Button'
 import styles from './RandomFriend.module.scss'
 
 interface RandomFriend {
-  name: string
+  username: string
   avatarColor: string
   avatarImg?: string
   profession: string
@@ -32,7 +32,7 @@ const RandomFriend: FC = () => {
 }
 
 const Friend: FC<RandomFriend> = ({
-  name,
+  username,
   avatarColor,
   avatarImg,
   profession,
@@ -46,13 +46,13 @@ const Friend: FC<RandomFriend> = ({
           <Avatar
             sx={{ bgcolor: avatarColor }}
             aria-label="recipe"
-            alt={name}
+            alt={username}
             src={avatarImg}
           >
-            {name[0]}
+            {username[0]}
           </Avatar>
         }
-        title={name}
+        title={username}
         subheader={profession}
         className={styles.cardHeader}
       />

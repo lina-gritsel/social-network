@@ -36,8 +36,9 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }))
 
 export interface News {
-  name: string
-  date: string
+  username: string
+  createdAt: string
+  updatedAt?: string
   img?: string
   content: string
   moreContent?: string
@@ -45,11 +46,12 @@ export interface News {
   avatarImg?: string
   className?: string
   url?: string
+  id?: string
 }
 
 const NewsCard: FC<News> = ({
-  name,
-  date,
+  username,
+  createdAt,
   img,
   content,
   moreContent,
@@ -72,10 +74,10 @@ const NewsCard: FC<News> = ({
             <Avatar
               sx={{ bgcolor: avatarColor }}
               aria-label="recipe"
-              alt={name}
+              alt={username}
               src={avatarImg}
             >
-              {name[0]}
+              {username[0]}
             </Avatar>
           }
           action={
@@ -83,8 +85,8 @@ const NewsCard: FC<News> = ({
               <MoreVertIcon />
             </IconButton>
           }
-          title={name}
-          subheader={date}
+          title={username}
+          subheader={createdAt}
         />
       )}
       {!!img && (
@@ -92,12 +94,12 @@ const NewsCard: FC<News> = ({
           component="img"
           height="300"
           image={img}
-          alt={name}
+          alt={username}
           className={styles.img}
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
-      {!avatarColor && <CardHeader title={name} subheader={date} />}
+      {!avatarColor && <CardHeader title={username} subheader={createdAt} />}
       <CardContent>
         <Typography
           variant="body2"
