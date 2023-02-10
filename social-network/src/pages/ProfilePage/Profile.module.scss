@@ -53,7 +53,7 @@
   font: var(--font-text-4);
 }
 
-.wrapper {
+.wrapperInfoUser {
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -74,7 +74,7 @@
   padding-left: 30px;
 }
 
-.content {
+.wrapperContent {
   display: flex;
   gap: 34px;
 }
@@ -116,7 +116,7 @@
   flex-wrap: wrap;
   justify-content: center;
   max-height: 625px;
-  overflow:scroll;
+  overflow: scroll;
 }
 
 .imgItem {
@@ -152,4 +152,10 @@
   right: 35px;
   top: 2px;
   right: 7px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }

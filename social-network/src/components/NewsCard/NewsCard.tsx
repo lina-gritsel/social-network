@@ -37,19 +37,19 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export interface News {
   name: string
-  date: string
   img?: string
   content: string
   moreContent?: string
   avatarColor?: string
   avatarImg?: string
   className?: string
-  url?: string
+  url?: string,
+  createdAt: string
 }
 
 const NewsCard: FC<News> = ({
   name,
-  date,
+  createdAt,
   img,
   content,
   moreContent,

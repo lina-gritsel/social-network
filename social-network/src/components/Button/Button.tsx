@@ -8,7 +8,7 @@ interface ButtonProps {
   children: ReactNode
   isDisabled?: boolean
   outlined?: boolean
-  onClick?: (args?: MouseEvent<HTMLButtonElement> | TouchEvent) => void
+  onClick?: any
 }
 
 const Button: FC<ButtonProps> = ({
