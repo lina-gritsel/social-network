@@ -84,7 +84,7 @@ const NewsCard: FC<News> = ({
             </IconButton>
           }
           title={name}
-          subheader={date}
+          subheader={createdAt}
         />
       )}
       {!!img && (
@@ -97,7 +97,7 @@ const NewsCard: FC<News> = ({
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
-      {!avatarColor && <CardHeader title={name} subheader={date} />}
+      {!avatarColor && <CardHeader title={name} subheader={createdAt} />}
       <CardContent>
         <Typography
           variant="body2"

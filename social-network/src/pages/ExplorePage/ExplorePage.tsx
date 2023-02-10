@@ -92,7 +92,7 @@ const NewsList: FC<NewsList> = ({ articles }) => {
             <NewsCard
               key={index}
               name={author?.split(',')[0] || source.name}
-              date={publishedAt.split('T').join(' / ').slice(0, -4)}
+              createdAt={publishedAt.split('T').join(' / ').slice(0, -4)}
               img={urlToImage || DEFAULT_IMG}
               content={(content?.slice(0, 150) || description) + '...'}
               className={styles.card}

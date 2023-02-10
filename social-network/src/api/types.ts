@@ -9,3 +9,8 @@ export interface User {
 export interface Registration {
   success: boolean
 }
+
+export interface CreatePostParams {
+  content: string
+  username: string
+}

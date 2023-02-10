@@ -6,11 +6,11 @@ import Avatar from '@mui/material/Avatar'
 import PhotoIcon from '@mui/icons-material/InsertPhotoOutlined'
 import MoodIcon from '@mui/icons-material/MoodOutlined'
 
-import Button from '../Button'
+import { createPost } from '../../api/requests'
 
+import Button from '../Button'
 import styles from './NewsCreator.module.scss'
 
-import { createPost } from '../../api/request'
 
 interface NewsCreatorProps {
   name: string

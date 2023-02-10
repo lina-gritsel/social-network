@@ -1,18 +1,16 @@
 import { FC, useEffect, useState } from 'react'
 
 import FriendsOnline from '../../components/FriendsOnline'
-
 import NewsCreator from '../../components/NewsCreator'
 import NewsCard from '../../components/NewsCard'
-import { getAllPosts } from '../../api/request'
+import { getAllPosts } from '../../api/requests'
 import Layout from '../../components/Layout'
 import Weather from '../../components/Weather'
-
+import RandomFriend from '../../components/RandomFriend'
 
 import { userNews } from './NewsPageComponents/userNews'
 
 import styles from './NewsPage.module.scss'
-import RandomFriend from '../../components/RandomFriend'
 
 const NewsPage: FC = () => {
   const owner = userNews[4]
@@ -39,8 +37,13 @@ const NewsPage: FC = () => {
             avatarColor={owner.avatarColor}
             avatarImg={owner.avatarImg}
           />
-          {allPosts.map(({ username, content, createdAt}, index) => (
-            <NewsCard key={index} name={username} content={content} createdAt={createdAt} />
+          {allPosts.map(({ username, content, createdAt }, index) => (
+            <NewsCard
+              key={index}
+              name={username}
+              content={content}
+              createdAt={createdAt}
+            />
           ))}
         </div>
         <div className={styles.friendAndWeather}>
