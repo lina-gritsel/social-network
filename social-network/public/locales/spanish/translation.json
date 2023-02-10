@@ -59,5 +59,12 @@
   "errMessage": "Oops, parece que Tu enlace es incorrecto",
   "loading": "Carga ...",
   "notFound": "404 NO ENCONTRADO",
-  "keepCalm": "Por favor, mantén la calma y vuelve a la página anterior."
+  "keepCalm": "Por favor, mantén la calma y vuelve a la página anterior.",
+  "ignore": "Ignorar",
+  "follow": "Seguir",
+  "errMessageWeather": "No hay tal ciudad",
+  "weather": "Tiempo",
+  "enterCity": "Introduzca la ciudad",
+  "mightLike": "Puede que te guste"
+
 }
