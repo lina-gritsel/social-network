@@ -16,22 +16,23 @@ const NewsPage: FC = () => {
 
   return (
     <Layout>
-      <div className={styles.container}>
-        <div className={styles.news}>
-          <NewsCreator
-            name={owner.name}
-            avatarColor={owner.avatarColor}
-            avatarImg={owner.avatarImg}
-          />
-          {userNews.map((news, index) => (
-            <NewsCard key={index} {...news} />
-          ))}
+      <div className={styles.containerWrapper}>
+        <div className={styles.container}>
+          <div className={styles.news}>
+            <NewsCreator
+              name={owner.name}
+              avatarColor={owner.avatarColor}
+              avatarImg={owner.avatarImg}
+            />
+            {userNews.map((news, index) => (
+              <NewsCard key={index} {...news} />
+            ))}
+          </div>
+          <div className={styles.friendAndWeather}>
+            <RandomFriend />
+            <Weather />
+          </div>
         </div>
-        <div className={styles.friendAndWeather}>
-          <RandomFriend />
-          <Weather />
-        </div>
-
         <FriendsOnline />
       </div>
     </Layout>
