@@ -1,0 +1,41 @@
+.friends {
+  align-items: center;
+  color: var(--gray-color);
+  display: flex;
+  font: var(--font-text-4);
+  font-weight: 700;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 15px;
+  width: 100%;
+  & > * {
+    border-radius: 20px !important;
+  }
+}
+.friend {
+  width: 80%;
+}
+.cardHeader {
+  gap: 30px;
+  padding-left: 30px !important;
+  font: var(--font-text-4) !important;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  color: var(--gray-color);
+  cursor: pointer;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  & > * {
+    min-width: 50px;
+    height: 30px;
+    font-size: 16px;
+  }
+}

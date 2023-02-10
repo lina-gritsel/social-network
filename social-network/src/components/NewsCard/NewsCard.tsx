@@ -17,7 +17,8 @@ import classNames from 'classnames'
 
 import styles from './NewsCard.module.scss'
 
-const DEFAULT_IMG = 'https://bazatoka.ru/image/cache/no_image-800x800.png'
+export const DEFAULT_IMG =
+  'https://bazatoka.ru/image/cache/no_image-800x800.png'
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean
@@ -64,29 +65,28 @@ const NewsCard: FC<News> = ({
   }
 
   return (
-    <Card      
-     className={classNames(
-      styles.card,
-      className)}>
-      <CardHeader
-        avatar={
-          <Avatar
-            sx={{ bgcolor: avatarColor }}
-            aria-label="recipe"
-            alt={name}
-            src={avatarImg}
-          >
-            {name[0]}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={name}
-        subheader={createdAt}
-      />
+    <Card className={classNames(styles.card, className)}>
+      {!!avatarColor && (
+        <CardHeader
+          avatar={
+            <Avatar
+              sx={{ bgcolor: avatarColor }}
+              aria-label="recipe"
+              alt={name}
+              src={avatarImg}
+            >
+              {name[0]}
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={name}
+          subheader={date}
+        />
+      )}
       {!!img && (
         <CardMedia
           component="img"
@@ -97,31 +97,41 @@ const NewsCard: FC<News> = ({
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
+      {!avatarColor && <CardHeader title={name} subheader={date} />}
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          height={!avatarColor ? 100 : null}
+        >
           {content}
         </Typography>
-        {(!!url && !moreContent) && (<a className={styles.link} href={url}>Click to read more</a>)}
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        {!!moreContent && (
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
+        {!!url && !moreContent && (
+          <a target="_blank" rel="noreferrer" href={url}>
+            Click to read more 🢅
+          </a>
         )}
-      </CardActions>
+      </CardContent>
+      {!!avatarColor && (
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          {!!moreContent && (
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          )}
+        </CardActions>
+      )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{moreContent?.split('[')[0]}</Typography>
-          {!!url && (<a className={styles.link} href={url}>Click to read more</a>)}
+          <Typography paragraph>{moreContent}</Typography>
         </CardContent>
       </Collapse>
     </Card>

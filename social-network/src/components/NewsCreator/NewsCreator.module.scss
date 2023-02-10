@@ -1,6 +1,6 @@
 .create {
   background-color: var(--white-color);
-  border-radius: 4px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -11,6 +11,7 @@
   box-shadow: 0px 2px 1px -1px var(--shadow-dark-color),
     0px 1px 1px 0px var(--shadow-dark-color),
     0px 1px 3px 0px var(--shadow-dark-color);
+  overflow: hidden;
 }
 
 .createHeader {
@@ -45,7 +46,7 @@
 
 .contentInput {
   & > :not(style) {
-    width: 75ch;
+    width: 45ch;
     background-color: var(--light-gray-color);
     margin: 1;
   }
