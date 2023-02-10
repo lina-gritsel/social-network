@@ -3,8 +3,9 @@
 }
 
 .wrapperContent {
-  background-color: var(--light-gray-color);
-  padding: 80px 24px 50px;
+  margin-top: 65px;
+
+
 }
 
 .mainMenuItem {
@@ -25,3 +26,6 @@
   background-color: var(--white-color);
 }
 
+.appBar{
+  box-shadow: none!important;
+}
