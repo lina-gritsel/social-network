@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
@@ -10,18 +10,30 @@ import Button from '../Button'
 
 import styles from './NewsCreator.module.scss'
 
+import { createPost } from '../../api/request'
+
 interface NewsCreatorProps {
   name: string
   avatarColor: string
   avatarImg?: string
+  setIsAllPosts?: (boolean) => void
 }
 
 const NewsCreator: FC<NewsCreatorProps> = ({
   name,
   avatarColor,
   avatarImg,
+  setIsAllPosts,
 }) => {
   const { t } = useTranslation()
+
+  const [contentInput, setContentInput] = useState('')
+
+  const createNewPost = async () => {
+    await createPost({ content: contentInput, username: 'Ula' })
+    setContentInput('')
+    setIsAllPosts(true)
+  }
 
   return (
     <div className={styles.create}>
@@ -33,17 +45,25 @@ const NewsCreator: FC<NewsCreatorProps> = ({
         >
           {name[0]}
         </Avatar>
-        <ContentInput />
+        <ContentInput
+          value={contentInput}
+          onChange={(event) => setContentInput(event.target.value)}
+        />
       </div>
       <div className={styles.createFooter}>
         <CreateIcons />
-        <Button>{t('post')}</Button>
+        <Button onClick={createNewPost}>{t('post')}</Button>
       </div>
     </div>
   )
 }
 
-const ContentInput: FC = () => {
+interface ContentInputProps {
+  onChange: any
+  value: string
+}
+
+const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
   const { t } = useTranslation()
 
   return (
@@ -53,7 +73,13 @@ const ContentInput: FC = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label={t('question')} variant="standard" />
+      <TextField
+        value={value}
+        onChange={onChange}
+        id="outlined-basic"
+        label={t('question')}
+        variant="standard"
+      />
     </Box>
   )
 }
