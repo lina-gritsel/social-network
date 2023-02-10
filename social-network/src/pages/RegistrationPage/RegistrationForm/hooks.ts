@@ -1,9 +1,11 @@
 import { useState, MouseEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import moment from 'moment'
 
 import { createUser } from '../../../api/requests'
+import { PATHS } from '../../../router/paths'
 
 import { schema } from './helpers'
 
@@ -16,6 +18,7 @@ export interface FormValues {
 }
 
 export const useRegistrationForm = () => {
+  const navigate = useNavigate()
   const {
     control,
     handleSubmit,
@@ -34,8 +37,13 @@ export const useRegistrationForm = () => {
     },
   })
 
-  const onSubmit = (data) => {
-    createUser({ ...data, date: moment(data.date).unix() })
+  const onSubmit = async (data) => {
+    const { success } = await createUser({
+      ...data,
+      date: moment(data.date).unix(),
+    })
+
+    success ? navigate(PATHS.NEWS) : alert('error')
   }
 
   const [showPassword, setShowPassword] = useState(false)

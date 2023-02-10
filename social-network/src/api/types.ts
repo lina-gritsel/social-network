@@ -5,3 +5,7 @@ export interface User {
   date: number
   gender: string
 }
+
+export interface Registration {
+  success: boolean
+}
