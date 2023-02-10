@@ -19,9 +19,7 @@ const NewsPage: FC = () => {
   useEffect(() => {
     const getAllExistPosts = async () => {
       const allExistPosts = await getAllPosts()
-      const newOrderAllPost = allExistPosts.posts
       setAllPosts(allExistPosts.posts)
-      console.log(newOrderAllPost)
     }
 
     getAllExistPosts()
