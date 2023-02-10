@@ -5,7 +5,7 @@ export const schema = yup.object({
     .string()
     .email('Invalid email')
     .required('Email is a required field'),
-  nickname: yup
+  name: yup
     .string()
     .min(2, 'Mininum 2 characters')
     .max(15, 'Maximum 15 characters')

@@ -45,7 +45,7 @@ const RegistrationForm: FC = () => {
         errors={errors}
       />
       <Input
-        name="nickname"
+        name="name"
         control={control}
         placeholder={t('nickname')}
         inputProps={{

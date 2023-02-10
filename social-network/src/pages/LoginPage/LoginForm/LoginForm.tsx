@@ -26,7 +26,7 @@ const LoginForm: FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <Input
-        name="nickname"
+        name="name"
         control={control}
         placeholder={t('nickname')}
         inputProps={{

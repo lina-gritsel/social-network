@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from './helpers'
 
 export interface FormValues {
-  nickname: string
+  name: string
   password: string
 }
 
@@ -17,7 +17,7 @@ export const useLoginForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      nickname: '',
+      name: '',
       password: '',
     },
   })

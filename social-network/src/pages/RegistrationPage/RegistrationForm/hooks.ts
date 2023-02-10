@@ -1,12 +1,15 @@
 import { useState, MouseEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import moment from 'moment'
+
+import { createUser } from '../../../api/requests'
 
 import { schema } from './helpers'
 
 export interface FormValues {
   email: string
-  nickname: string
+  name: string
   password: string
   date: string
   gender: string
@@ -21,14 +24,19 @@ export const useRegistrationForm = () => {
     resolver: yupResolver(schema),
     defaultValues: {
       email: '',
-      nickname: '',
+      name: '',
       password: '',
       date: '',
       gender: 'male',
+      instagramm: '',
+      twitter: '',
+      facebook: '',
     },
   })
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data) => {
+    createUser({ ...data, date: moment(data.date).unix() })
+  }
 
   const [showPassword, setShowPassword] = useState(false)
 
