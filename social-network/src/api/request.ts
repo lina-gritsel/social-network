@@ -6,16 +6,25 @@ interface CreatePostParams {
 }
 
 export const createPost = async (content: CreatePostParams) => {
-  console.log(JSON.stringify(content))
-
   try {
     const response = await fetch(`${BASE_URL}/posts`, {
       method: 'POST',
       body: JSON.stringify(content),
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getAllPosts = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts`)
+
     return response.json()
   } catch (error) {
     console.log(error)

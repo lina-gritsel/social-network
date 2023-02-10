@@ -16,20 +16,23 @@ interface NewsCreatorProps {
   name: string
   avatarColor: string
   avatarImg?: string
+  setIsAllPosts?: (boolean) => void
 }
 
 const NewsCreator: FC<NewsCreatorProps> = ({
   name,
   avatarColor,
   avatarImg,
+  setIsAllPosts,
 }) => {
   const { t } = useTranslation()
 
   const [contentInput, setContentInput] = useState('')
 
   const createNewPost = async () => {
-    const result = await createPost({ content: contentInput, username:'Ula' })
-    console.log(result)
+    await createPost({ content: contentInput, username: 'Ula' })
+    setContentInput('')
+    setIsAllPosts(true)
   }
 
   return (
@@ -42,7 +45,10 @@ const NewsCreator: FC<NewsCreatorProps> = ({
         >
           {name[0]}
         </Avatar>
-        <ContentInput onChange={(event) => setContentInput(event.target.value)} />
+        <ContentInput
+          value={contentInput}
+          onChange={(event) => setContentInput(event.target.value)}
+        />
       </div>
       <div className={styles.createFooter}>
         <CreateIcons />
@@ -52,7 +58,12 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   )
 }
 
-const ContentInput: FC<{ onChange: any }> = ({ onChange }) => {
+interface ContentInputProps {
+  onChange: any
+  value: string
+}
+
+const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
   const { t } = useTranslation()
 
   return (
@@ -63,6 +74,7 @@ const ContentInput: FC<{ onChange: any }> = ({ onChange }) => {
       autoComplete="off"
     >
       <TextField
+        value={value}
         onChange={onChange}
         id="outlined-basic"
         label={t('question')}

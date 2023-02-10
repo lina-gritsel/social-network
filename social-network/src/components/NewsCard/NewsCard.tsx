@@ -36,7 +36,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export interface News {
   name: string
-  date: string
+  date?: string
   img?: string
   content: string
   moreContent?: string
