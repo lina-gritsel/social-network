@@ -1,10 +1,22 @@
 .container {
     display: flex;
-    gap: 32px;
     justify-content: space-between;
+    width: 100%;
 }
 .news{
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 30px;
+    width: 40%;
 }
+
+.friendAndWeather {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    width: 30%;
+    padding-bottom: 10px;
+    position: sticky;
+    top: 80px;
+  }

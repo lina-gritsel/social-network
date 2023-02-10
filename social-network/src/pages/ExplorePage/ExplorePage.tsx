@@ -5,8 +5,8 @@ import Axios from 'axios'
 import NewsCard from '../../components/NewsCard'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
+import { DEFAULT_IMG } from '../../components/NewsCard/NewsCard'
 
-import { getRandomColor } from '../NewsPage/NewsPageComponents/userNews'
 import { getAPI, newsOptions } from './constants'
 
 import styles from './ExplorePage.module.scss'
@@ -51,11 +51,6 @@ const ExplorePage: FC = () => {
   return (
     <Layout>
       <div className={styles.container}>
-        {isLoading ? (
-          <div className={styles.loading}>{t('loading')}</div>
-        ) : (
-          <NewsList articles={articles} />
-        )}
         <div className={styles.options}>
           {newsOptions.map((option, index) => (
             <Button
@@ -67,6 +62,11 @@ const ExplorePage: FC = () => {
             </Button>
           ))}
         </div>
+        {isLoading ? (
+          <div className={styles.loading}>{t('loading')}</div>
+        ) : (
+          <NewsList articles={articles} />
+        )}
       </div>
     </Layout>
   )
@@ -91,12 +91,11 @@ const NewsList: FC<NewsList> = ({ articles }) => {
           !!description || !!content || !!urlToImage ? (
             <NewsCard
               key={index}
-              name={author || source.name}
+              name={author?.split(',')[0] || source.name}
               date={publishedAt.split('T').join(' / ').slice(0, -4)}
-              img={urlToImage}
-              content={description || content}
-              moreContent={content}
-              avatarColor={getRandomColor()}
+              img={urlToImage || DEFAULT_IMG}
+              content={(content?.slice(0, 150) || description) + '...'}
+              className={styles.card}
               url={url}
             />
           ) : null,
