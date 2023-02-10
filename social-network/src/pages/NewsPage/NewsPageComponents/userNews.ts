@@ -72,46 +72,63 @@ export const friends = [
       avatarImg:
         'https://shopikk.ru/wp-content/uploads/b/3/4/b34b45927a64dc700ca4490b09c31100.jpeg',
       isOnline: true,
+      profession: 'astronaut',
     },
     {
       name: 'Anna',
       avatarColor: getRandomColor(),
       isOnline: true,
+      profession: 'astronaut',
+
     },
     {
       name: 'Tim',
       avatarColor: getRandomColor(),
       isOnline: false,
+      profession: 'astronaut',
+
     },
     {
       name: 'Barik',
       avatarColor: getRandomColor(),
       isOnline: true,
+      profession: 'astronaut',
+
     },
     {
       name: 'Angelina',
       avatarColor: getRandomColor(),
       isOnline: true,
+      profession: 'astronaut',
+
     },
     {
       name: 'Max',
       avatarColor: getRandomColor(),
       isOnline: false,
+      profession: 'astronaut',
+
     },
     {
       name: 'Simon',
       avatarColor: getRandomColor(),
       isOnline: true,
+      profession: 'astronaut',
+
     },
     {
       name: 'Pasha',
       avatarColor: getRandomColor(),
       isOnline: true,
+      profession: 'astronaut',
+
     },
     {
       name: 'Alina',
       avatarColor: getRandomColor(),
       isOnline: false,
+      profession: 'astronaut',
+
     },
   ]
   
