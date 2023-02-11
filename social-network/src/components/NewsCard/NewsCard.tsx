@@ -93,7 +93,7 @@ const NewsCard: FC<News> = ({
           height="300"
           image={img}
           alt={name}
-          className={styles.img}
+          className={styles.image}
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
