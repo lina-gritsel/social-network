@@ -55,7 +55,7 @@
   font: var(--font-text-4);
 }
 
-.wrapper {
+.wrapperInfoUser {
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -79,6 +79,8 @@
 .content {
   background-color: var(--light-gray-color);
   border-radius: 20px;
+}
+.wrapperContent {
   display: flex;
   gap: 34px;
   padding: 24px;
@@ -157,4 +159,10 @@
   right: 35px;
   top: 2px;
   right: 7px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }

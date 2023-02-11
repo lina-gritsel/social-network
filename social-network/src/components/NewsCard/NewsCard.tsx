@@ -37,7 +37,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export interface News {
   name: string
-  date: string
   img?: string
   content: string
   moreContent?: string
@@ -45,11 +44,12 @@ export interface News {
   avatarImg?: string
   className?: string
   url?: string
+  createdAt: string
 }
 
 const NewsCard: FC<News> = ({
   name,
-  date,
+  createdAt,
   img,
   content,
   moreContent,
@@ -84,7 +84,7 @@ const NewsCard: FC<News> = ({
             </IconButton>
           }
           title={name}
-          subheader={date}
+          subheader={createdAt}
         />
       )}
       {!!img && (
@@ -97,7 +97,7 @@ const NewsCard: FC<News> = ({
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
-      {!avatarColor && <CardHeader title={name} subheader={date} />}
+      {!avatarColor && <CardHeader title={name} subheader={createdAt} />}
       <CardContent>
         <Typography
           variant="body2"
