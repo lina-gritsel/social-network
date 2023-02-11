@@ -25,7 +25,7 @@ const NewsPage: FC = () => {
               avatarImg={owner.avatarImg}
             />
             {userNews.map((news, index) => (
-              <NewsCard key={index} {...news} />
+              <NewsCard className={styles.cardNews} key={index} {...news} />
             ))}
           </div>
           <div className={styles.friendAndWeather}>

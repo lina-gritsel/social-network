@@ -30,6 +30,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
           sx={{ bgcolor: avatarColor }}
           aria-label="recipe"
           src={avatarImg}
+          className={styles.avatar}
         >
           {name[0]}
         </Avatar>
@@ -53,7 +54,15 @@ const ContentInput: FC = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label={t('question')} variant="standard" />
+      <TextField
+        className={styles.textField}
+        id="outlined-basic"
+        label={t('question')}
+        variant="outlined"
+        sx={{
+          '& fieldset': { border: 'none' },
+        }}
+      />
     </Box>
   )
 }
