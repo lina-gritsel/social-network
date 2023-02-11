@@ -44,6 +44,7 @@ const Weather: FC = () => {
     const value = (e.target as HTMLInputElement).value
     if (e.key === 'Enter' && value !== '') {
       setCity(value)
+      e.target.value = ''
     }
     setIsError(false)
   }
@@ -52,8 +53,8 @@ const Weather: FC = () => {
 
   return (
     <div className={styles.weather}>
-      <div>{t('weather')}</div>
       <div className={styles.content}>
+        <div className={styles.weatherTitle}>{t('weather')}</div>
         <TextField
           id="outlined-basic"
           label={t('enterCity')}
