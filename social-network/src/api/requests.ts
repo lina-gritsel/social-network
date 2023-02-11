@@ -24,7 +24,7 @@ export const createUser = async (
     })
     return data.status !== 201 ? { success: false } : { success: true }
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
 
@@ -39,7 +39,15 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
     })
     return { status: data.status }
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
+  }
+}
+
+export const getUser = async (id: string): Promise<RegistrationUser> => {
+  try {
+    return await (await fetch(`${BASE_URL}/${id}`)).json()
+  } catch (error) {
+    throw new Error(`${error}`)
   }
 }
 
@@ -55,7 +63,7 @@ export const createPost = async (content: CreatePostParams) => {
 
     return response.json()
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
 
@@ -65,6 +73,6 @@ export const getAllPosts = async () => {
 
     return response.json()
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
