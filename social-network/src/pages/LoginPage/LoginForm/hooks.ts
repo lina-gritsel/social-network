@@ -35,14 +35,21 @@ export const useLoginForm = () => {
   const onSubmit = async (data) => {
     const { status } = await loginUser(data)
 
-    status === 200
-      ? navigate(PATHS.NEWS)
-      : status === 400
-      ? (setIsLoginError(true),
-        setErrorMessage('Change your name or enter the correct password'))
-      : status === 404
-      ? (setIsUserExist(false), setErrorMessage('User does not exists'))
-      : ''
+    if (status === 200) {
+      return navigate(PATHS.NEWS)
+    }
+
+    if (status === 400) {
+      setIsLoginError(true)
+      setErrorMessage('Change your name or enter the correct password')
+      return
+    }
+
+    if (status === 404) {
+      setIsUserExist(false)
+      setErrorMessage('User does not exists')
+      return
+    }
   }
 
   const onChangeShowPassword = () => setShowPassword((show) => !show)
