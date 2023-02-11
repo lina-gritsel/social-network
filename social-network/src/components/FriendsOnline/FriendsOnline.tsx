@@ -64,7 +64,7 @@ const Friend: FC<FriendsOnline> = ({
       {isOnline ? (
         <span className={styles.online}></span>
       ) : (
-        <span>{t('offline')}</span>
+        <span className={styles.offline}>{t('offline')}</span>
       )}
     </div>
   )

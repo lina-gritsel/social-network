@@ -14,7 +14,7 @@
   color: var(--gray-color);
   display: flex;
   font: var(--font-text-4);
-  font-weight: 700;
+  font-weight: 600;
   flex-direction: column;
   gap: 20px;
 }
@@ -36,6 +36,11 @@
 .online {
   background: var(--green-color);
   border-radius: 50%;
-  height: 12px;
-  width: 12px;
+  height: 8px;
+  width: 8px;
+}
+
+.offline {
+  font: var(--font-text-5);
+  color: var(--gray-color);
 }

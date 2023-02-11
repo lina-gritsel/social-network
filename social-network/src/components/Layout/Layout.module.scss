@@ -4,8 +4,6 @@
 
 .wrapperContent {
   margin-top: 65px;
-
-
 }
 
 .mainMenuItem {
@@ -19,13 +17,13 @@
 }
 
 .forum {
-  font-size: 50;
+  font: var(--font-h2);
 }
 
 .toolbar {
   background-color: var(--white-color);
 }
 
-.appBar{
-  box-shadow: none!important;
+.appBar {
+  box-shadow: none !important;
 }

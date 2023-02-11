@@ -53,7 +53,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
       </div>
       <div className={styles.createFooter}>
         <CreateIcons />
-        <Button onClick={createNewPost}>{t('post')}</Button>
+        <Button className={styles.createPost} onClick={createNewPost}>{t('post')}</Button>
       </div>
     </div>
   )
