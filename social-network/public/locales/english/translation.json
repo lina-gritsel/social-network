@@ -65,6 +65,8 @@
   "errMessageWeather": "Oops, there is no such city",
   "weather": "Weather",
   "enterCity": "Enter the city",
-  "mightLike": "You might like"
-
+  "mightLike": "You might like",
+  "addPostImg": "Insert a link to your image",
+  "addPostImgLabel": "Your link",
+  "addMessage": "Your image has been added!"
 }

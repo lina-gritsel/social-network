@@ -48,6 +48,7 @@ const ProfilePage: FC = () => {
         onClose={() => setIsOpen(false)}
         onConfirm={() => setIsOpen(false)}
         title={t('backgroundTitle')}
+        isDialogActions={false}
         content={
           <ModalContent
             setBgImage={setBgImage}
@@ -57,7 +58,6 @@ const ProfilePage: FC = () => {
             setBgImageArr={setBgImageArr}
           />
         }
-        isDialogActions={false}
       />
       <div className={styles.container}>
         <div className={styles.pofileHeader}>
@@ -83,7 +83,7 @@ const ProfilePage: FC = () => {
             src={userNews[4].avatarImg}
             className={styles.profileAvatar}
           />
-          <div className={styles.wrapper}>
+          <div className={styles.wrapperInfoUser}>
             <div className={styles.userInfo}>
               <div className={styles.nameUser}>{userNews[4].username}</div>
               <div className={styles.workUser}>UI Designer</div>
@@ -93,7 +93,7 @@ const ProfilePage: FC = () => {
             </NavLink>
           </div>
         </div>
-        <div className={styles.content}>
+        <div className={styles.wrapperContent}>
           <div className={styles.intro}>
             <div className={styles.title}>{t('intro')}</div>
             {FIELD_INTO.map(({ icon, label }, index) => (
@@ -103,11 +103,13 @@ const ProfilePage: FC = () => {
               </div>
             ))}
           </div>
-          <NewsCreator
-            name={userNews[4].username}
-            avatarImg={userNews[4].avatarImg}
-            avatarColor={userNews[4].avatarColor}
-          />
+          <div className={styles.content}>
+            <NewsCreator
+              name={userNews[4].username}
+              avatarImg={userNews[4].avatarImg}
+              avatarColor={userNews[4].avatarColor}
+            />
+          </div>
         </div>
       </div>
     </Layout>

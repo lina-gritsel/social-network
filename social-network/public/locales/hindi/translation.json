@@ -65,6 +65,8 @@
   "errMessageWeather": "मौसम",
   "weather": "मौसम",
   "enterCity": "शहर में प्रवेश करें",
-  "mightLike": "आपको पसंद आ सकता है"
-
+  "mightLike": "आपको पसंद आ सकता है",
+  "addPostImg": "अपनी छवि के लिए एक लिंक डालें",
+  "addPostImgLabel": "आपका लिंक",
+  "addMessage": "आपकी छवि जोड़ दी गई है!"
 }

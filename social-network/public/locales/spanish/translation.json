@@ -65,6 +65,8 @@
   "errMessageWeather": "No hay tal ciudad",
   "weather": "Tiempo",
   "enterCity": "Introduzca la ciudad",
-  "mightLike": "Puede que te guste"
-
+  "mightLike": "Puede que te guste",
+  "addPostImg": "Pegue el enlace a Su imagen",
+  "addPostImgLabel": "Su enlace",
+  "addMessage": "¡Tu imagen ha sido añadida!"
 }

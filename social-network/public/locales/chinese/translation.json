@@ -65,6 +65,8 @@
   "errMessageWeather": "哎呀，没有这样的城市",
   "weather": "天气情况",
   "enterCity": "进入城市",
-  "mightLike": "你可能会喜欢"
-  
+  "mightLike": "你可能会喜欢",
+  "addPostImg": "插入图像的链接",
+  "addPostImgLabel": "您的链接",
+  "addMessage": "您的图像已添加！"
 }

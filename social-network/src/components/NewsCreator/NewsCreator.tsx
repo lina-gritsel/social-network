@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useRef, useState, SyntheticEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
@@ -7,6 +7,8 @@ import PhotoIcon from '@mui/icons-material/InsertPhotoOutlined'
 import MoodIcon from '@mui/icons-material/MoodOutlined'
 
 import Button from '../Button'
+import { createPost } from '../../api/request'
+import Modal from '../Modal'
 
 import styles from './NewsCreator.module.scss'
 
@@ -14,17 +16,37 @@ interface NewsCreatorProps {
   name: string
   avatarColor: string
   avatarImg?: string
+  setIsAllPosts?: (boolean) => void
 }
 
 const NewsCreator: FC<NewsCreatorProps> = ({
   name,
   avatarColor,
   avatarImg,
+  setIsAllPosts,
 }) => {
   const { t } = useTranslation()
 
+  const [contentInput, setContentInput] = useState('')
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const createNewPost = async () => {
+    await createPost({ content: contentInput, username: 'Alina' })
+    setContentInput('')
+    setIsAllPosts((prev) => !prev)
+  }
+
   return (
     <div className={styles.create}>
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={() => setIsOpen(false)}
+        title={t('addPostImg')}
+        isDialogActions={false}
+        content={<ModalContent />}
+      />
+
       <div className={styles.createHeader}>
         <Avatar
           sx={{ bgcolor: avatarColor }}
@@ -33,17 +55,25 @@ const NewsCreator: FC<NewsCreatorProps> = ({
         >
           {name[0]}
         </Avatar>
-        <ContentInput />
+        <ContentInput
+          value={contentInput}
+          onChange={(event) => setContentInput(event.target.value.trim())}
+        />
       </div>
       <div className={styles.createFooter}>
-        <CreateIcons />
-        <Button>{t('post')}</Button>
+        <CreateIcons setIsOpen={setIsOpen} />
+        <Button onClick={createNewPost}>{t('post')}</Button>
       </div>
     </div>
   )
 }
 
-const ContentInput: FC = () => {
+interface ContentInputProps {
+  onChange: any
+  value: string
+}
+
+const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
   const { t } = useTranslation()
 
   return (
@@ -53,17 +83,27 @@ const ContentInput: FC = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label={t('question')} variant="standard" />
+      <TextField
+        value={value}
+        onChange={onChange}
+        id="outlined-basic"
+        label={t('question')}
+        variant="standard"
+      />
     </Box>
   )
 }
 
-const CreateIcons: FC = () => {
+interface CreateIconsProps {
+  setIsOpen: any
+}
+
+const CreateIcons: FC<CreateIconsProps> = ({ setIsOpen }) => {
   const { t } = useTranslation()
 
   return (
     <div className={styles.createIcons}>
-      <div className={styles.createItem}>
+      <div className={styles.createItem} onClick={() => setIsOpen(true)}>
         <PhotoIcon fontSize="medium" className={styles.icon} />
         <p>
           {t('photo')} / {t('video')}
@@ -76,4 +116,59 @@ const CreateIcons: FC = () => {
     </div>
   )
 }
+
+const ModalContent: FC = () => {
+  const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
+  const [isAddImg, setIsAddImg] = useState<boolean>(false)
+  const [isDisabled, setIsDisabled] = useState<boolean>(true)
+  const [currentImg, setCurrentImg] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>()
+  const { t } = useTranslation()
+
+  const onChangeInput = () => {
+    setIsErrorImg(false)
+    setIsAddImg(false)
+    inputRef.current.value.trim() === ''
+      ? setIsDisabled(true)
+      : setIsDisabled(false)
+  }
+
+  const handleClickBtn = () => {
+    const newImg = inputRef.current.value.trim()
+    setCurrentImg(newImg)
+    inputRef.current.value = ''
+    setIsDisabled(true)
+    setIsAddImg(true)
+  }
+
+  const errorImg = (e: SyntheticEvent) => {
+    setIsAddImg(false)
+    setIsErrorImg(true)
+    const img = e.target as HTMLImageElement
+    img.onerror = null
+    setCurrentImg('')
+  }
+
+  return (
+    <div className={styles.modalContent}>
+      {currentImg ? (
+        <img src={currentImg} onError={(e) => errorImg(e)} ></img>
+      ) : null}
+      <TextField
+        id="outlined-basic"
+        label={t('addPostImgLabel')}
+        variant="standard"
+        className={styles.imgInput}
+        inputRef={inputRef}
+        onChange={() => onChangeInput()}
+      />
+      <Button onClick={handleClickBtn} isDisabled={isDisabled}>
+        {t('addImg').toLocaleUpperCase()}
+      </Button>
+      {isErrorImg && <div className={styles.errMessage}>{t('errMessage')}</div>}
+      {isAddImg && <div className={styles.addMessage}>{t('addMessage')}</div>}
+    </div>
+  )
+}
+
 export default NewsCreator
