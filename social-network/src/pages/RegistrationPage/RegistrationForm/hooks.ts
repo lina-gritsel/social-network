@@ -37,16 +37,17 @@ export const useRegistrationForm = () => {
     },
   })
 
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [isRegistrError, setIsRegistrError] = useState<boolean>(false)
+
   const onSubmit = async (data) => {
     const { success } = await createUser({
       ...data,
       date: moment(data.date).unix(),
     })
 
-    success ? navigate(PATHS.NEWS) : alert('error')
+    success ? navigate(PATHS.NEWS) : setIsRegistrError(true)
   }
-
-  const [showPassword, setShowPassword] = useState(false)
 
   const onChangeShowPassword = () => setShowPassword((show) => !show)
 
@@ -58,6 +59,7 @@ export const useRegistrationForm = () => {
     errors,
     control,
     showPassword,
+    isRegistrError,
     onSubmit,
     handleSubmit,
     onChangeShowPassword,

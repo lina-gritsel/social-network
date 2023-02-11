@@ -1,10 +1,10 @@
-import { CreatePostParams, Registration, User } from './types'
+import { CreatePostParams, RegistrationSuccess, User } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
 
 const USERS_URL = `${BASE_URL}/users`
 
-export const createUser = async (user: User): Promise<Registration> => {
+export const createUser = async (user: User): Promise<RegistrationSuccess> => {
   try {
     const data = await fetch(`${USERS_URL}`, {
       method: 'POST',
@@ -15,7 +15,7 @@ export const createUser = async (user: User): Promise<Registration> => {
     })
     return data.status !== 201 ? { success: false } : { success: true }
   } catch (error) {
-    throw new Error(`${error}`)
+    console.log(error)
   }
 }
 

@@ -6,7 +6,7 @@ export interface User {
   gender: string
 }
 
-export interface Registration {
+export interface RegistrationSuccess {
   success: boolean
 }
 
