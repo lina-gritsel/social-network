@@ -19,15 +19,12 @@ interface RandomFriend {
 }
 
 const RandomFriend: FC = () => {
-  const { t } = useTranslation()
-
   return (
-      <div className={styles.friends}>
-        <div>{t('mightLike')}</div>
-        {friends.map((friend, index) =>
-          index % 5 === 0 ? <Friend key={index} {...friend} /> : null,
-        )}
-      </div>
+    <div className={styles.friends}>
+      {friends.map((friend, index) =>
+        index % 5 === 0 ? <Friend key={index} {...friend} /> : null,
+      )}
+    </div>
   )
 }
 
@@ -41,28 +38,30 @@ const Friend: FC<RandomFriend> = ({
 
   return (
     <Card className={styles.friend}>
-      <CardHeader
-        avatar={
-          <Avatar
-            sx={{ bgcolor: avatarColor }}
-            aria-label="recipe"
-            alt={name}
-            src={avatarImg}
-          >
-            {name[0]}
-          </Avatar>
-        }
-        title={name}
-        subheader={profession}
-        className={styles.cardHeader}
-      />
+      <div className={styles.mightLike}>{t('mightLike')}</div>
+      <div className={styles.cardHeader}>
+        <Avatar
+          sx={{ bgcolor: avatarColor }}
+          aria-label="recipe"
+          alt={name}
+          src={avatarImg}
+          className={styles.avatar}
+        ></Avatar>
+        <div>
+          <div className={styles.title}>{name}</div>
+          <div className={styles.subTitle}>{profession}</div>
+        </div>
+      </div>
+
       <div className={styles.icons}>
         <InstagramIcon />
         <FacebookIcon />
         <TwitterIcon />
       </div>
       <div className={styles.btnWrapper}>
-        <Button outlined={true}>{t('ignore')}</Button>
+        <Button className={styles.ignorFriends} outlined={true}>
+          {t('ignore')}
+        </Button>
         <Button>{t('follow')}</Button>
       </div>
     </Card>
