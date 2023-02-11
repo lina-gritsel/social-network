@@ -8,20 +8,23 @@
   gap: 24px;
   padding: 32px;
   display: flex;
+  width: 100%;
 }
 .news {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  max-width: 600px;
+  gap: 32px;
+  width: 100%;
 }
 
 .friendAndWeather {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   height: 100%;
   position: sticky;
+  min-width: 290px;
+  max-width: 290px;
 }
 
 .cardNews {

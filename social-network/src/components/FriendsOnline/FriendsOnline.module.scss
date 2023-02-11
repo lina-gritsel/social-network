@@ -3,11 +3,11 @@
   flex-direction: column;
   gap: 20px;
   height: 100%;
-  width: 25%;
-  padding-bottom: 10px;
+  width: 100%;
+  max-width: 250px;
   position: sticky;
   top: 80px;
-
+  padding: 16px;
 }
 
 .friends {
@@ -17,8 +17,8 @@
   font-weight: 700;
   flex-direction: column;
   gap: 20px;
-  padding: 0 15px;
 }
+
 .friend {
   align-items: center;
   display: flex;

@@ -49,16 +49,23 @@
   gap: 20px;
   color: var(--gray-color);
   cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .btnWrapper {
   display: flex;
   gap: 10px;
+  width: 100%;
   & > * {
     min-width: 100px;
-    height: 35px;
+    height: 36px;
     font-size: 14px;
     font-weight: 520;
+    width: 100%;
   }
 }
 
@@ -68,6 +75,6 @@
 }
 
 .avatar {
-  width: 50px !important;
-  height: 50px !important;
+  width: 32px !important;
+  height: 32px !important;
 }
