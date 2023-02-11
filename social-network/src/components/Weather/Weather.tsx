@@ -1,76 +1,82 @@
-import { FC, useEffect, useState, KeyboardEvent } from 'react'
+import { TextField } from '@mui/material'
+import { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Axios from 'axios'
-import moment from 'moment'
 
-import { DEFAULT_CITY, TOKEN_ADDRESS } from './constants'
 import styles from './Weather.module.scss'
 
-const getUrl = (city: string): string => {
-  const weatherUrl = `http://api.weatherapi.com/v1/current.json?`
-  return `${weatherUrl}key=${TOKEN_ADDRESS}&q=${city}&aqi=no`
+const getUrl = (city: string) => {
+  const token = `a3af42ebefd88cd481454f659190bc54`
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=`
+  return `${weatherUrl}${city}&lang=en&appid=${token}&units=metric`
+}
+const getSrc = (weatherIcon: string) => {
+  return `http://openweathermap.org/img/w/${weatherIcon}.png`
 }
 
 const Weather: FC = () => {
-  const { t } = useTranslation()
-
   const [isError, setIsError] = useState<boolean>(false)
-  const [city, setCity] = useState<string>(DEFAULT_CITY)
-  const [weatherIcon, setWeatherIcon] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [temp, setTemp] = useState<string>('')
+  const [city, setCity] = useState('Minsk')
+  const [weatherIcon, setWeatherIcon] = useState('')
+  const [wind, setWind] = useState('')
+  const [temp, setTemp] = useState('')
+  const [description, setDescription] = useState('')
+  const [humidity, setHumidity] = useState('')
 
   useEffect(() => {
-    (async () => {
+    const getWeather = async () => {
       try {
-        const { data } = await Axios.get(getUrl(city))
-        const { location, current } = data
-
-        const weatherDescription = current.condition.text
-        const weatherIcon = `http:${current.condition.icon}`
-        const temperature = current.temp_c
-
-        setDescription(weatherDescription)
-        setWeatherIcon(weatherIcon)
-        setTemp(temperature)
+        const res = await Axios.get(getUrl(city))
+        setWeatherIcon(res.data.weather[0].icon)
+        setDescription(res.data.weather[0].description)
+        setWind(res.data.wind.speed)
+        setTemp(res.data.main.temp)
+        setHumidity(res.data.main.humidity)
       } catch {
         setIsError(true)
-        setCity(DEFAULT_CITY)
+        setCity('Minsk')
       }
-    })()
+    }
+    getWeather()
   }, [city])
 
-  const changeCity = (e: KeyboardEvent<HTMLInputElement>) => {
+  const changeCity = (e) => {
     const value = (e.target as HTMLInputElement).value
     if (e.key === 'Enter' && value !== '') {
       setCity(value)
-      ;(e.target as HTMLInputElement).value = ''
     }
     setIsError(false)
   }
 
-  const currentTime = moment(moment(), 'YYYY/MM/DD').format('dddd, D MMMM')
+  const { t } = useTranslation()
 
   return (
     <div className={styles.weather}>
       <div className={styles.content}>
-        <p className={styles.temperature}>{temp}°</p>
-        <input
-          placeholder="Minsk"
+        <div className={styles.title}>{t('weather')}</div>
+        <TextField
+          id="outlined-basic"
+          label={t('enterCity')}
+          variant="standard"
           className={styles.input}
-          onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => changeCity(e)}
+          onKeyPress={(e) => changeCity(e)}
         />
-      </div>
-      <div className={styles.mainContent}>
-        <p className={styles.date}>{currentTime}</p>
-        <div className={styles.mainInfo}>
-          <p className={styles.description}>{description}</p>
-          <img src={weatherIcon} alt="weather" />
+        <div className={styles.city}>
+          {city[0].toUpperCase() + city.slice(1)}
         </div>
+        <div className={styles.mainIfo}>
+          <img src={getSrc(weatherIcon)} alt="weather" />
+          <div>
+            <div>{temp}°C</div>
+            <div>{description}</div>
+          </div>
+        </div>
+        <div>Wind speed: {wind} m/s</div>
+        <div>Humidity: {humidity}%</div>
+        {isError && (
+          <div className={styles.errMessage}>{t('errMessageWeather')}</div>
+        )}
       </div>
-      {isError && (
-        <div className={styles.errMessage}>{t('errMessageWeather')}</div>
-      )}
     </div>
   )
 }
