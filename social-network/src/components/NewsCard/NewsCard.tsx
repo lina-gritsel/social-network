@@ -43,7 +43,7 @@ export interface News {
   avatarColor?: string
   avatarImg?: string
   className?: string
-  url?: string,
+  url?: string
   createdAt: string
 }
 
@@ -84,7 +84,7 @@ const NewsCard: FC<News> = ({
             </IconButton>
           }
           title={name}
-          subheader={date}
+          subheader={createdAt}
         />
       )}
       {!!img && (
@@ -93,11 +93,11 @@ const NewsCard: FC<News> = ({
           height="300"
           image={img}
           alt={name}
-          className={styles.img}
+          className={styles.image}
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
-      {!avatarColor && <CardHeader title={name} subheader={date} />}
+      {!avatarColor && <CardHeader title={name} subheader={createdAt} />}
       <CardContent>
         <Typography
           variant="body2"

@@ -8,7 +8,6 @@ import { getAllPosts } from '../../api/request'
 import Layout from '../../components/Layout'
 import Weather from '../../components/Weather'
 
-
 import { userNews } from './NewsPageComponents/userNews'
 
 import styles from './NewsPage.module.scss'
@@ -31,23 +30,29 @@ const NewsPage: FC = () => {
 
   return (
     <Layout>
-      <div className={styles.container}>
-        <div className={styles.news}>
-          <NewsCreator
-            setIsAllPosts={setIsAllPosts}
-            name={owner.name}
-            avatarColor={owner.avatarColor}
-            avatarImg={owner.avatarImg}
-          />
-          {allPosts.map(({ username, content, createdAt}, index) => (
-            <NewsCard key={index} name={username} content={content} createdAt={createdAt} />
-          ))}
+      <div className={styles.containerWrapper}>
+        <div className={styles.container}>
+          <div className={styles.news}>
+            <NewsCreator
+              setIsAllPosts={setIsAllPosts}
+              name={owner.name}
+              avatarColor={owner.avatarColor}
+              avatarImg={owner.avatarImg}
+            />
+            {allPosts.map(({ username, content, createdAt }, index) => (
+              <NewsCard
+                key={index}
+                name={username}
+                content={content}
+                createdAt={createdAt}
+              />
+            ))}
+          </div>
+          <div className={styles.friendAndWeather}>
+            <RandomFriend />
+            <Weather />
+          </div>
         </div>
-        <div className={styles.friendAndWeather}>
-          <RandomFriend />
-          <Weather />
-        </div>
-
         <FriendsOnline />
       </div>
     </Layout>

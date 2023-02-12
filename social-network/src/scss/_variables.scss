@@ -1,24 +1,25 @@
 :root {
   --white-color: #fff;
+  --dark-gray-color: #4e5d78;
   --gray-color: #606d85;
-  --green-color: #0eb556;
-  --dark-gray-color: #333;
+  --medium-gray-color: #b8bec9;
   --light-gray-color: #f9fafb;
-  --blue-color: #1976d2;
+  --blue-color: #377dff;
+  --green-color: #38cb89 ;
   --shadow-dark-color: rgba(0, 0, 0, 0.2);
   --black-color: #000;
 
   --border-primary: 1px solid #c4c4c4;
 
-  --font-family-montserrat: 'Montserrat', sans-serif;
+  --font-family-sans: 'Open Sans', sans-serif;
 
-  --font-h1: 600 64px var(--font-family-montserrat);
-  --font-h2: 600 48px var(--font-family-montserrat);
-  --font-h3: 600 36px var(--font-family-montserrat);
+  --font-h1: 600 64px var(--font-family-sans);
+  --font-h2: 600 52px var(--font-family-sans);
+  --font-h3: 600 36px var(--font-family-sans);
 
-  --font-text-1: 600 34px var(--font-family-montserrat);
-  --font-text-2: 400 24px var(--font-family-montserrat);
-  --font-text-3: 400 18px var(--font-family-montserrat);
-  --font-text-4: 400 16px var(--font-family-montserrat);
-  --font-text-5: 400 14px var(--font-family-montserrat);
+  --font-text-1: 600 32px var(--font-family-sans);
+  --font-text-2: 400 24px var(--font-family-sans);
+  --font-text-3: 400 18px var(--font-family-sans);
+  --font-text-4: 400 16px var(--font-family-sans);
+  --font-text-5: 400 14px var(--font-family-sans);
 }

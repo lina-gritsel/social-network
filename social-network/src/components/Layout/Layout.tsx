@@ -25,8 +25,8 @@ type LayotProps = {
 const Layout: FC<LayotProps> = (props) => {
   return (
     <Box className={styles.layout}>
-      <CssBaseline />
       <AppBar
+        className={styles.appBar}
         position="fixed"
         sx={{
           width: `calc(100% - ${drawerWidth}px)`,
@@ -43,21 +43,22 @@ const Layout: FC<LayotProps> = (props) => {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: 'border-box',
+          },
+          '& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
+            borderRight: 0,
           },
         }}
         variant="permanent"
         anchor="left"
+        className={styles.mainMenu}
       >
         <Link to={PATHS.NEWS} className={styles.mainMenuItem}>
           <ForumRounded color="primary" className={styles.forum} />
           OurNetwork
         </Link>
-        <Divider />
         <List>
           <Menu />
         </List>
-        <Divider />
       </Drawer>
       <Box
         component="main"

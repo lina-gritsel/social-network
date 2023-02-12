@@ -42,6 +42,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
           sx={{ bgcolor: avatarColor }}
           aria-label="recipe"
           src={avatarImg}
+          className={styles.avatar}
         >
           {name[0]}
         </Avatar>
@@ -52,7 +53,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
       </div>
       <div className={styles.createFooter}>
         <CreateIcons />
-        <Button onClick={createNewPost}>{t('post')}</Button>
+        <Button className={styles.createPost} onClick={createNewPost}>{t('post')}</Button>
       </div>
     </div>
   )
@@ -74,11 +75,15 @@ const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
       autoComplete="off"
     >
       <TextField
+        className={styles.textField}
+        id="outlined-basic"
+        variant="outlined"
+        sx={{
+          '& fieldset': { border: 'none' },
+        }}
         value={value}
         onChange={onChange}
-        id="outlined-basic"
         label={t('question')}
-        variant="standard"
       />
     </Box>
   )
