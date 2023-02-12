@@ -7,7 +7,7 @@ interface CreatePostParams {
 
 export const createPost = async (content: CreatePostParams) => {
   try {
-    const response = await fetch(`${BASE_URL}/posts`, {
+    const response = await fetch(`${BASE_URL}/posts?limit=100`, {
       method: 'POST',
       body: JSON.stringify(content),
       headers: {

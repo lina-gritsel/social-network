@@ -1,4 +1,6 @@
 import { FC, useRef, useState, SyntheticEvent } from 'react'
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
@@ -28,23 +30,36 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   const { t } = useTranslation()
 
   const [contentInput, setContentInput] = useState('')
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpenImg, setIsOpenImg] = useState<boolean>(false)
+  const [isOpenFeeling, setIsOpenFeeling] = useState<boolean>(false)
 
   const createNewPost = async () => {
     await createPost({ content: contentInput, username: 'Alina' })
     setContentInput('')
-    setIsAllPosts((prev) => !prev)
+    setIsAllPosts(prev=> !prev)
+  }
+
+  const onEmojiSelect = (e) => {
+    setContentInput((prev) => prev + e.native)
   }
 
   return (
     <div className={styles.create}>
       <Modal
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        onConfirm={() => setIsOpen(false)}
+        open={isOpenImg}
+        onClose={() => setIsOpenImg(false)}
+        onConfirm={() => setIsOpenImg(false)}
         title={t('addPostImg')}
         isDialogActions={false}
         content={<ModalContent />}
+      />
+      <Modal
+        open={isOpenFeeling}
+        onClose={() => setIsOpenFeeling(false)}
+        onConfirm={() => setIsOpenFeeling(false)}
+        isDialogActions={false}
+        className={styles.feeling}
+        content={<Picker theme="light" data={data} onEmojiSelect={(e) => onEmojiSelect(e)} />}
       />
 
       <div className={styles.createHeader}>
@@ -57,11 +72,14 @@ const NewsCreator: FC<NewsCreatorProps> = ({
         </Avatar>
         <ContentInput
           value={contentInput}
-          onChange={(event) => setContentInput(event.target.value.trim())}
+          onChange={(event) => setContentInput(event.target.value)}
         />
       </div>
       <div className={styles.createFooter}>
-        <CreateIcons setIsOpen={setIsOpen} />
+        <CreateIcons
+          setIsOpenImg={setIsOpenImg}
+          setIsOpenFeeling={setIsOpenFeeling}
+        />
         <Button onClick={createNewPost}>{t('post')}</Button>
       </div>
     </div>
@@ -95,21 +113,25 @@ const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
 }
 
 interface CreateIconsProps {
-  setIsOpen: any
+  setIsOpenImg: any
+  setIsOpenFeeling: any
 }
 
-const CreateIcons: FC<CreateIconsProps> = ({ setIsOpen }) => {
+const CreateIcons: FC<CreateIconsProps> = ({
+  setIsOpenImg,
+  setIsOpenFeeling,
+}) => {
   const { t } = useTranslation()
 
   return (
     <div className={styles.createIcons}>
-      <div className={styles.createItem} onClick={() => setIsOpen(true)}>
+      <div className={styles.createItem} onClick={() => setIsOpenImg(true)}>
         <PhotoIcon fontSize="medium" className={styles.icon} />
         <p>
           {t('photo')} / {t('video')}
         </p>
       </div>
-      <div className={styles.createItem}>
+      <div className={styles.createItem} onClick={() => setIsOpenFeeling(true)}>
         <MoodIcon fontSize="medium" className={styles.icon} />
         <p>{t('feeling')}</p>
       </div>
@@ -152,7 +174,7 @@ const ModalContent: FC = () => {
   return (
     <div className={styles.modalContent}>
       {currentImg ? (
-        <img src={currentImg} onError={(e) => errorImg(e)} ></img>
+        <img src={currentImg} onError={(e) => errorImg(e)}></img>
       ) : null}
       <TextField
         id="outlined-basic"

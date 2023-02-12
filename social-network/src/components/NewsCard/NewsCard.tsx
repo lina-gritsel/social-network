@@ -59,6 +59,7 @@ const NewsCard: FC<News> = ({
   avatarImg,
   className,
   url,
+  id,
 }) => {
   const [expanded, setExpanded] = useState(false)
 
@@ -67,7 +68,7 @@ const NewsCard: FC<News> = ({
   }
 
   return (
-    <Card className={classNames(styles.card, className)}>
+    <Card className={classNames(styles.card, className)} id={id}>
       {!!avatarColor && (
         <CardHeader
           avatar={
@@ -81,7 +82,7 @@ const NewsCard: FC<News> = ({
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
+            <IconButton aria-label="settings" onClick={(e)=>console.log(e.currentTarget)}>
               <MoreVertIcon />
             </IconButton>
           }

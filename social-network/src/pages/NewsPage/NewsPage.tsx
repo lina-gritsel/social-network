@@ -51,6 +51,7 @@ const NewsPage: FC = () => {
       setIsLoading(false)
     }
     getAllExistPosts()
+    console.log(allPosts)
   }, [isAllPosts])
 
   const owner = userNews[4]
