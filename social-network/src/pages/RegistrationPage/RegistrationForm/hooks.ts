@@ -46,6 +46,8 @@ export const useRegistrationForm = () => {
       date: moment(data.date).unix(),
     })
 
+    // localStorage.setItem('userId', JSON.stringify(data.id))
+
     success ? navigate(PATHS.NEWS) : setIsRegistrError(true)
   }
 

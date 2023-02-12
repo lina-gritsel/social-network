@@ -6,6 +6,23 @@ export interface RegistrationUser {
   gender: string
 }
 
+export interface User {
+  id: string
+  email: string
+  name: string
+  password: string
+  date: number
+  gender: string
+  avatar: string | null
+  location: string | null
+  isFriend: boolean
+  instagram: string
+  facebook: string
+  twitter: string
+  createdAt: string
+  updatedAt: string
+}
+
 export interface LoginUser {
   name: string
   password: string

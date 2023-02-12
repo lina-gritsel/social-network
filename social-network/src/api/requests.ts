@@ -10,12 +10,13 @@ const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
 
 const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
+const POSTS_URL = `${BASE_URL}/posts`
 
 export const createUser = async (
   user: RegistrationUser,
 ): Promise<RegistrationSuccess> => {
   try {
-    const data = await fetch(`${USERS_URL}`, {
+    const data = await fetch(USERS_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +31,7 @@ export const createUser = async (
 
 export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
   try {
-    const data = await fetch(`${LOGIN_URL}`, {
+    const data = await fetch(LOGIN_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ export const getUser = async (id: string): Promise<RegistrationUser> => {
 
 export const createPost = async (content: CreatePostParams) => {
   try {
-    const response = await fetch(`${BASE_URL}/posts`, {
+    const response = await fetch(POSTS_URL, {
       method: 'POST',
       body: JSON.stringify(content),
       headers: {
@@ -69,7 +70,7 @@ export const createPost = async (content: CreatePostParams) => {
 
 export const getAllPosts = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/posts`)
+    const response = await fetch(POSTS_URL)
 
     return response.json()
   } catch (error) {
