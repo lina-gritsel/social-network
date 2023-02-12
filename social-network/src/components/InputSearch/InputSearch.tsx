@@ -1,4 +1,5 @@
 import { FC, ChangeEventHandler } from 'react'
+import SearchIcon from '@mui/icons-material/Search'
 
 import styles from './InputSearch.module.scss'
 
@@ -9,12 +10,15 @@ interface Search {
 
 const InputSearch: FC<Search> = ({ placeholder, onChange }) => {
   return (
-    <input
-      type="search"
-      className={styles.searchInput}
-      placeholder={placeholder}
-      onChange={onChange}
-    />
+    <div className={styles.wrapper}>
+      <SearchIcon className={styles.searchIcon}/>
+      <input
+        type="search"
+        className={styles.searchInput}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
+    </div>
   )
 }
 

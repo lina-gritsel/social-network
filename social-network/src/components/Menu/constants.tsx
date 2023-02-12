@@ -1,5 +1,10 @@
-import { Person, Newspaper,People, Explore } from '@mui/icons-material'
-import SettingsIcon from '@mui/icons-material/Settings'
+import {
+  PersonOutline,
+  NewspaperOutlined,
+  ExploreOutlined,
+  PeopleOutline,
+  SettingsOutlined,
+} from '@mui/icons-material'
 
 import { PATHS } from '../../router/paths'
 
@@ -7,26 +12,26 @@ export const NAVIGATION_MENU = [
   {
     to: PATHS.PROFILE,
     label: 'profile',
-    icon: <Person />,
+    icon: <PersonOutline />,
   },
   {
     to: PATHS.NEWS,
     label: 'news',
-    icon: <Newspaper />,
+    icon: <NewspaperOutlined />,
   },
   {
     to: PATHS.EXPLORE,
     label: 'explore',
-    icon: <Explore />,
+    icon: <ExploreOutlined />,
   },
   {
     to: PATHS.SETTINGS,
     label: 'settings',
-    icon: <SettingsIcon />,
+    icon: <SettingsOutlined />,
   },
   {
     to: PATHS.ABOUT,
     label: 'about',
-    icon: <People />,
+    icon: <PeopleOutline />,
   },
 ]

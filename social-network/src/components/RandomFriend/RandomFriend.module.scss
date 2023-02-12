@@ -1,24 +1,46 @@
 .friends {
-  align-items: center;
   color: var(--gray-color);
   display: flex;
   font: var(--font-text-4);
   font-weight: 700;
   flex-direction: column;
   gap: 15px;
-  padding: 0 15px;
-  width: 100%;
   & > * {
     border-radius: 20px !important;
   }
 }
-.friend {
-  width: 80%;
+
+.mightLike {
+  color: var(--dark-gray-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--medium-gray-color);
 }
+
+.wrapperContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 16px;
+}
+
 .cardHeader {
-  gap: 30px;
-  padding-left: 30px !important;
-  font: var(--font-text-4) !important;
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}
+
+.title {
+  color: var(--dark-gray-color);
+  font-size: var(--font-text-3);
+  font-weight: 600;
+}
+
+.subTitle {
+  color: var(--gray-color);
+  font: var(--font-text-4);
 }
 
 .icons {
@@ -27,15 +49,32 @@
   gap: 20px;
   color: var(--gray-color);
   cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .btnWrapper {
   display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
+  gap: 10px;
+  width: 100%;
   & > * {
-    min-width: 50px;
-    height: 30px;
-    font-size: 16px;
+    min-width: 100px;
+    height: 36px;
+    font: var(--font-text-5);
+    font-weight: 520;
+    width: 100%;
   }
+}
+
+.ignorFriends {
+  border: 2px solid var(--medium-gray-color);
+  color: var(--medium-gray-color);
+}
+
+.avatar {
+  width: 48px !important;
+  height: 48px !important;
 }
