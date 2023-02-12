@@ -14,19 +14,22 @@ import styles from './LoginForm.module.scss'
 const LoginForm: FC = () => {
   const { t } = useTranslation()
   const {
+    errors,
     control,
-    handleSubmit,
-    onSubmit,
+    isUserExist,
+    isLoginError,
     showPassword,
+    onSubmit,
+    handleSubmit,
+    changeErrorMessage,
     onChangeShowPassword,
     handleMouseDownPassword,
-    errors,
   } = useLoginForm()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <Input
-        name="nickname"
+        name="name"
         control={control}
         placeholder={t('nickname')}
         inputProps={{
@@ -63,6 +66,9 @@ const LoginForm: FC = () => {
         }}
         errors={errors}
       />
+      <p className={styles.errorMessage}>
+        {changeErrorMessage(isLoginError, isUserExist)}
+      </p>
       <Button variant="contained" fullWidth type="submit">
         {t('logIn')}
       </Button>

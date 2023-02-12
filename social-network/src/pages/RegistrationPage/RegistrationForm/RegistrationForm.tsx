@@ -19,13 +19,14 @@ import styles from './RegistrationForm.module.scss'
 const RegistrationForm: FC = () => {
   const { t } = useTranslation()
   const {
+    errors,
     control,
-    handleSubmit,
-    onSubmit,
     showPassword,
+    isRegistrError,
+    onSubmit,
+    handleSubmit,
     onChangeShowPassword,
     handleMouseDownPassword,
-    errors,
   } = useRegistrationForm()
 
   return (
@@ -45,7 +46,7 @@ const RegistrationForm: FC = () => {
         errors={errors}
       />
       <Input
-        name="nickname"
+        name="name"
         control={control}
         placeholder={t('nickname')}
         inputProps={{
@@ -96,6 +97,9 @@ const RegistrationForm: FC = () => {
           className={styles.inputGender}
         />
       </div>
+      <p className={styles.errorMessage}>
+        {isRegistrError && 'This email or name is already in use'}
+      </p>
       <Button variant="contained" fullWidth type="submit">
         {t('signUp')}
       </Button>

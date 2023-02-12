@@ -63,6 +63,12 @@
   }
 }
 
+.errorMessage {
+  color: var(--red-color);
+  font: var(--font-text-4);
+  text-align: center;
+}
+
 input[type='date'] {
   &::-webkit-inner-spin-button,
   &::-webkit-calendar-picker-indicator {

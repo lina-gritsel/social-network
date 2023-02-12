@@ -5,7 +5,7 @@ import { schema } from './helpers'
 
 export interface FormValues {
   email: string
-  nickname: string
+  name: string
   date: string
   gender: string
   bio: string
@@ -26,7 +26,7 @@ export const useSettingsForm = () => {
     resolver: yupResolver(schema),
     defaultValues: {
       email: '',
-      nickname: '',
+      name: '',
       date: '',
       gender: 'male',
       bio: '',
