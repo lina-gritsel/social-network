@@ -14,9 +14,7 @@ export const createUserSchema = z.object({
     gender: z.string({
       required_error: 'Gender is required',
     }),
-    date: z.number({
-      required_error: 'Date is required',
-    }),
+    date: z.number(),
     instagramm: z.string(),
     twitter: z.string(),
     facebook: z.string(),
