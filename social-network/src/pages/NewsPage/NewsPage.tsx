@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react'
 
-import FriendsOnline from '../../components/FriendsOnline'
-import NewsCreator from '../../components/NewsCreator'
-import NewsCard from '../../components/NewsCard'
-import { getAllPosts } from '../../api/requests'
 import Layout from '../../components/Layout'
 import Weather from '../../components/Weather'
+import NewsCard from '../../components/NewsCard'
+import { getAllPosts } from '../../api/requests'
+import NewsCreator from '../../components/NewsCreator'
 import RandomFriend from '../../components/RandomFriend'
+import FriendsOnline from '../../components/FriendsOnline'
 
 import { userNews } from './NewsPageComponents/userNews'
 
