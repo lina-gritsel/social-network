@@ -52,6 +52,18 @@ export const useLoginForm = () => {
     }
   }
 
+  const changeErrorMessage = (isLoginErr, isUserExist) => {
+    if (isLoginErr) {
+      return errorMessage
+    }
+
+    if (!isUserExist) {
+      return errorMessage
+    }
+
+    return errorMessage
+  }
+
   const onChangeShowPassword = () => setShowPassword((show) => !show)
 
   const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
@@ -64,9 +76,9 @@ export const useLoginForm = () => {
     isUserExist,
     showPassword,
     isLoginError,
-    errorMessage,
     onSubmit,
     handleSubmit,
+    changeErrorMessage,
     onChangeShowPassword,
     handleMouseDownPassword,
   }

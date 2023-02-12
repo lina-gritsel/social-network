@@ -19,9 +19,9 @@ const LoginForm: FC = () => {
     isUserExist,
     isLoginError,
     showPassword,
-    errorMessage,
     onSubmit,
     handleSubmit,
+    changeErrorMessage,
     onChangeShowPassword,
     handleMouseDownPassword,
   } = useLoginForm()
@@ -67,7 +67,7 @@ const LoginForm: FC = () => {
         errors={errors}
       />
       <p className={styles.errorMessage}>
-        {isLoginError ? errorMessage : !isUserExist ? errorMessage : ''}
+        {changeErrorMessage(isLoginError, isUserExist)}
       </p>
       <Button variant="contained" fullWidth type="submit">
         {t('logIn')}
