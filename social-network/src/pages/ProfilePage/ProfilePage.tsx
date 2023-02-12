@@ -14,12 +14,14 @@ import ModalContent from './ModalContent'
 import { FIELD_INTO, BG_IMAGES } from './constants'
 
 import styles from './Profile.module.scss'
+import NewsList from '../../components/NewsList'
 
 const ProfilePage: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [bgImageArr, setBgImageArr] = useState<string[]>(BG_IMAGES)
   const [bgImage, setBgImage] = useState<string>(bgImageArr[0])
+  const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
 
   const { t } = useTranslation()
 
@@ -108,7 +110,9 @@ const ProfilePage: FC = () => {
               name={userNews[4].username}
               avatarImg={userNews[4].avatarImg}
               avatarColor={userNews[4].avatarColor}
+              setIsAllPosts={setIsAllPosts}
             />
+            <NewsList isAllPosts={isAllPosts} filter={true}/>
           </div>
         </div>
       </div>
