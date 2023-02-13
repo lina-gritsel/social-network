@@ -8,9 +8,13 @@ import NewsCreator from '../../components/NewsCreator'
 import RandomFriend from '../../components/RandomFriend'
 import FriendsOnline from '../../components/FriendsOnline'
 
-import { userNews } from './NewsPageComponents/userNews'
+import { getRandomColor, userNews } from './NewsPageComponents/userNews'
 
 import styles from './NewsPage.module.scss'
+
+const setAvatarColor = (arr) => {
+return arr.map(post=> Object.assign(post, {avatarColor: getRandomColor}))
+}
 
 const NewsPage: FC = () => {
   const owner = userNews[4]
@@ -21,7 +25,7 @@ const NewsPage: FC = () => {
   useEffect(() => {
     const getAllExistPosts = async () => {
       const allExistPosts = await getAllPosts()
-      setAllPosts(allExistPosts.posts)
+      setAllPosts(setAvatarColor(allExistPosts.posts))
     }
 
     getAllExistPosts()
@@ -38,12 +42,13 @@ const NewsPage: FC = () => {
               avatarColor={owner.avatarColor}
               avatarImg={owner.avatarImg}
             />
-            {allPosts.map(({ username, content, createdAt }, index) => (
+            {allPosts.map(({ username, content, createdAt, avatarColor }, index) => (
               <NewsCard
                 key={index}
                 name={username}
                 content={content}
                 createdAt={createdAt}
+                avatarColor={avatarColor}
               />
             ))}
           </div>
