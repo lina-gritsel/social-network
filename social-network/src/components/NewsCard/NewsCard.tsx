@@ -13,6 +13,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 
+import Comment from '../../components/Comment'
+
 import classNames from 'classnames'
 
 import styles from './NewsCard.module.scss'

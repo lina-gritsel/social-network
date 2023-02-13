@@ -65,6 +65,6 @@
   "errMessageWeather": "Oops, there is no such city",
   "weather": "Weather",
   "enterCity": "Enter the city",
-  "mightLike": "You might like"
-
+  "mightLike": "You might like",
+  "comment": "Write a comment..."
 }
