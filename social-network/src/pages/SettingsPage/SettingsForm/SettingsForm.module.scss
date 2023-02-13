@@ -67,6 +67,13 @@
   width: 100%;
 }
 
+.loading {
+  color: var(--gray-color);
+  font: var(--font-text-2);
+  font-weight: 700;
+  text-align: center;
+}
+
 @media (max-width: 620px) {
   .form {
     gap: 10px;

@@ -1,9 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 
-import { useAppDispatch } from '../../store'
 import Layout from '../../components/Layout'
 import Weather from '../../components/Weather'
-import { fetchUser } from '../../store/actions'
 import NewsCard from '../../components/NewsCard'
 import { getAllPosts } from '../../api/requests'
 import NewsCreator from '../../components/NewsCreator'
@@ -15,12 +13,9 @@ import { userNews } from './NewsPageComponents/userNews'
 import styles from './NewsPage.module.scss'
 
 const NewsPage: FC = () => {
-  const dispatch = useAppDispatch()
-
   const owner = userNews[4]
   const [allPosts, setAllPosts] = useState([])
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
-  const userId = JSON.parse(localStorage.getItem('userId'))
 
   useEffect(() => {
     const getAllExistPosts = async () => {
@@ -30,10 +25,6 @@ const NewsPage: FC = () => {
 
     getAllExistPosts()
   }, [isAllPosts])
-
-  useEffect(() => {
-    dispatch(fetchUser(userId))
-  }, [dispatch, userId])
 
   return (
     <Layout>
