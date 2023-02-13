@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { FC, KeyboardEvent } from 'react'
+import { FC, KeyboardEvent, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 
 import styles from './Comment.module.scss'
@@ -13,7 +13,11 @@ interface CommentProps {
 const Comment: FC<CommentProps> = ({ avatarColor, avatarImg }) => {
   const { t } = useTranslation()
 
-  const changeComment = (event) => {}
+  const [comment, setComment] = useState<string>('')
+
+  const changeComment = (event) => {
+    setComment(event.target.value)
+  }
 
   return (
     <div className={styles.container}>
