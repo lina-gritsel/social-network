@@ -41,14 +41,14 @@ export const useRegistrationForm = () => {
   const [isRegistrError, setIsRegistrError] = useState<boolean>(false)
 
   const onSubmit = async (data) => {
-    const { success } = await createUser({
+    const result = await createUser({
       ...data,
       date: moment(data.date).unix(),
     })
 
-    // localStorage.setItem('userId', JSON.stringify(data.id))
+    localStorage.setItem('userId', JSON.stringify(result.data.user.id))
 
-    success ? navigate(PATHS.NEWS) : setIsRegistrError(true)
+    result.status === 'success' ? navigate(PATHS.NEWS) : setIsRegistrError(true)
   }
 
   const onChangeShowPassword = () => setShowPassword((show) => !show)

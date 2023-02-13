@@ -4,7 +4,6 @@ import { AppDispatch } from '../types'
 
 export const GET_USER_INFO = 'GET_USER_INFO'
 
-
 export const fetchUser =
   (id: string) => async (dispatch: AppDispatch) => {
     try {

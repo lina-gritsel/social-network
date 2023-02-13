@@ -1,11 +1,3 @@
-export interface RegistrationUser {
-  email: string
-  name: string
-  password: string
-  date: number
-  gender: string
-}
-
 export interface User {
   id: string
   email: string
@@ -23,19 +15,20 @@ export interface User {
   updatedAt: string
 }
 
+export interface RegistrationData {
+  data: {
+    user: User
+  }
+  status: string
+}
 export interface LoginUser {
   name: string
   password: string
 }
 
-export interface RegistrationSuccess {
-  success: boolean
-}
-
 export interface LoginStatus {
   status: number
 }
-
 
 export interface CreatePostParams {
   content: string

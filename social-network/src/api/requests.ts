@@ -1,9 +1,9 @@
 import {
   CreatePostParams,
-  RegistrationSuccess,
+  RegistrationData,
   LoginStatus,
-  RegistrationUser,
   LoginUser,
+  User,
 } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
@@ -12,9 +12,7 @@ const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
 
-export const createUser = async (
-  user: RegistrationUser,
-): Promise<RegistrationSuccess> => {
+export const createUser = async (user: User): Promise<RegistrationData> => {
   try {
     const data = await fetch(USERS_URL, {
       method: 'POST',
@@ -23,7 +21,9 @@ export const createUser = async (
       },
       body: JSON.stringify(user),
     })
-    return data.status !== 201 ? { success: false } : { success: true }
+    const response = data.json()
+    const result = await response
+    return result
   } catch (error) {
     throw new Error(`${error}`)
   }
@@ -44,7 +44,7 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
   }
 }
 
-export const getUser = async (id: string): Promise<RegistrationUser> => {
+export const getUser = async (id: string): Promise<User> => {
   try {
     return await (await fetch(`${BASE_URL}/${id}`)).json()
   } catch (error) {
