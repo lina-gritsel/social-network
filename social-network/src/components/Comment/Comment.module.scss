@@ -1,8 +1,8 @@
 .container {
-  // align-items: center;
   display: flex;
   gap: 15px;
   width: 100%;
+  padding-top: 15px;
 }
 
 .input {
@@ -10,14 +10,8 @@
   border: 0;
   border-radius: 10px;
   outline: 0;
-
   width: 100%;
   padding-left: 15px;
-
-  // &:focus {
-  //   background-color: transparent;
-  //   border: 2px solid var(--light-gray-color);
-  // }
 }
 
 .sendComment {
@@ -28,7 +22,7 @@
   color: var(--blue-color);
   padding: 10px;
   padding-bottom: 5px;
-  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .sendComment:hover {

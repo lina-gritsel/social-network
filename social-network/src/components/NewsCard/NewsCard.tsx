@@ -9,7 +9,7 @@ import Collapse from '@mui/material/Collapse'
 import Avatar from '@mui/material/Avatar'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 
@@ -108,8 +108,6 @@ const NewsCard: FC<News> = ({
         >
           {content}
         </Typography>
-        <Comment />
-
         {!!url && !moreContent && (
           <a target="_blank" rel="noreferrer" href={url}>
             Click to read more 🢅
@@ -117,10 +115,11 @@ const NewsCard: FC<News> = ({
         )}
       </CardContent>
       {!!avatarColor && (
-        <>
-          <CardActions disableSpacing>
+        <div className={styles.footerPost}>
+          <CardActions disableSpacing className={styles.cardActions}>
             <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
+              <FavoriteBorderIcon />
+              <div className={styles.like}>{'Like'}</div>
             </IconButton>
             {!!moreContent && (
               <ExpandMore
@@ -134,7 +133,7 @@ const NewsCard: FC<News> = ({
             )}
           </CardActions>
           <Comment />
-        </>
+        </div>
       )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>

@@ -12,3 +12,17 @@
   border-radius: 20px;
   width: 500px;
 }
+
+.footerPost {
+  padding: 10px;
+}
+
+.cardActions {
+  padding: 0 !important;
+  border-bottom: 1px solid var(--medium-gray-color);
+  border-top: 1px solid var(--medium-gray-color);
+}
+
+.like {
+  font: var(--font-text-4);
+}

@@ -32,3 +32,9 @@
 .cardNews {
   padding: 0 20px;
 }
+
+@media (max-width: 1100px) {
+  .friendAndWeather {
+    display: none;
+  }
+}
