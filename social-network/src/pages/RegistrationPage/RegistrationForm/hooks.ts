@@ -46,9 +46,12 @@ export const useRegistrationForm = () => {
       date: moment(data.date).unix(),
     })
 
-    localStorage.setItem('userId', JSON.stringify(result.data.user.id))
-
-    result.status === 'success' ? navigate(PATHS.NEWS) : setIsRegistrError(true)
+    if (result.status === 'success') {
+      localStorage.setItem('userId', JSON.stringify(result.data.user.id))
+      navigate(PATHS.NEWS)
+    } else {
+      setIsRegistrError(true)
+    }
   }
 
   const onChangeShowPassword = () => setShowPassword((show) => !show)
