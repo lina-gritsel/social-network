@@ -1,6 +1,7 @@
 import { Avatar } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { FC, KeyboardEvent } from 'react'
+import SendIcon from '@mui/icons-material/Send'
 
 import styles from './Comment.module.scss'
 
@@ -9,10 +10,7 @@ interface CommentProps {
   avatarImg?: string
 }
 
-const Comment: FC<CommentProps> = ({
-  avatarColor,
-  avatarImg,
-}) => {
+const Comment: FC<CommentProps> = ({ avatarColor, avatarImg }) => {
   const { t } = useTranslation()
 
   const changeComment = (event) => {}
@@ -32,6 +30,9 @@ const Comment: FC<CommentProps> = ({
           changeComment(event)
         }
       />
+      <button className={styles.sendComment}>
+        <SendIcon />
+      </button>
     </div>
   )
 }

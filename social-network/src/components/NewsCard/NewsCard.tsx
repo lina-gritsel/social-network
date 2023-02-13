@@ -108,6 +108,8 @@ const NewsCard: FC<News> = ({
         >
           {content}
         </Typography>
+        <Comment />
+
         {!!url && !moreContent && (
           <a target="_blank" rel="noreferrer" href={url}>
             Click to read more 🢅
