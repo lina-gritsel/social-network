@@ -8,12 +8,12 @@ import { routes } from './routes'
 export const Router: FC = () => {
   const dispatch = useAppDispatch()
 
-  const userId = JSON.parse(localStorage.getItem('userId'))
+  const userId = JSON.parse(localStorage.getItem('userId')) as string
 
   useEffect(() => {
     dispatch(fetchUser(userId))
   }, [dispatch, userId])
-  
+
   return (
     <BrowserRouter>
       <Routes>
