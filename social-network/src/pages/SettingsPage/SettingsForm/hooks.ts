@@ -36,35 +36,48 @@ export const useSettingsForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      id: userInfo.id,
-      email: userInfo.email,
-      name: userInfo.name,
-      date: userInfo.date,
-      gender: userInfo.gender,
-      bio: userInfo.bio || '',
-      location: userInfo.location || '',
-      facebook: userInfo.facebook || '',
-      twitter: userInfo.twitter || '',
-      instagramm: userInfo.instagramm || '',
+      id: userInfo?.id,
+      email: userInfo?.email,
+      name: userInfo?.name,
+      date: userInfo?.date,
+      gender: userInfo?.gender,
+      bio: userInfo?.bio || '',
+      location: userInfo?.location || '',
+      facebook: userInfo?.facebook || '',
+      twitter: userInfo?.twitter || '',
+      instagramm: userInfo?.instagramm || '',
     },
   })
 
   useEffect(() => {
     reset({
-      id: userInfo.id,
-      email: userInfo.email,
-      name: userInfo.name,
-      date: userInfo.date,
-      gender: userInfo.gender,
-      bio: userInfo.bio || '',
-      location: userInfo.location || '',
-      facebook: userInfo.facebook || '',
-      twitter: userInfo.twitter || '',
-      instagramm: userInfo.instagramm || '',
+      id: userInfo?.id,
+      email: userInfo?.email,
+      name: userInfo?.name,
+      date: userInfo?.date,
+      gender: userInfo?.gender,
+      bio: userInfo?.bio || '',
+      location: userInfo?.location || '',
+      facebook: userInfo?.facebook || '',
+      twitter: userInfo?.twitter || '',
+      instagramm: userInfo?.instagramm || '',
     })
   }, [userInfo, reset])
 
-  const onCancel = () => console.log('cancel')
+  const onCancel = () => {
+    reset({
+      id: userInfo?.id,
+      email: userInfo?.email,
+      name: userInfo?.name,
+      date: userInfo?.date,
+      gender: userInfo?.gender,
+      bio: userInfo?.bio || '',
+      location: userInfo?.location || '',
+      facebook: userInfo?.facebook || '',
+      twitter: userInfo?.twitter || '',
+      instagramm: userInfo?.instagramm || '',
+    })
+  }
 
   const onSubmit = async (data: User) => {
     setIsLoading(true)

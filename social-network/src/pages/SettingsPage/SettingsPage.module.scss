@@ -29,7 +29,9 @@
 }
 
 .profileAvatar {
+  background-color: var(--blue-color) !important;
   height: 150px !important;
+  font: var(--font-h1) !important;
   transition: all 0.5s ease-in-out;
   width: 150px !important;
 }
