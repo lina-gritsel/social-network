@@ -5,16 +5,18 @@
 .container {
   background-color: var(--light-gray-color);
   border-radius: 20px;
+  display: flex;
   gap: 24px;
   padding: 32px;
-  display: flex;
   width: 100%;
+  justify-content: center;
 }
 .news {
   display: flex;
   flex-direction: column;
   gap: 32px;
   width: 100%;
+  max-width: 800px;
 }
 
 .friendAndWeather {

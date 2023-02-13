@@ -62,7 +62,9 @@ export const createPost = async (content: CreatePostParams) => {
       },
     })
 
-    return response.json()
+    const result = await response.json()
+    console.log(result)
+    return result
   } catch (error) {
     throw new Error(`${error}`)
   }
