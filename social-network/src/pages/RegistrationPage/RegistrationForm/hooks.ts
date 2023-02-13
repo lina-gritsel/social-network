@@ -1,11 +1,11 @@
-import { useState, MouseEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import moment from 'moment'
+import { useState, MouseEvent } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import { createUser } from '../../../api/requests'
 import { PATHS } from '../../../router/paths'
+import { createUser } from '../../../api/requests'
 
 import { schema } from './helpers'
 

@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { yupResolver } from '@hookform/resolvers/yup'
+import moment from 'moment'
 
+import { updateUser, User } from '../../../api'
+import { useAppDispatch } from '../../../store'
+import { fetchUser } from '../../../store/actions'
 import { getUserInfoSelector } from './../../../store/selectors/index'
 
 import { schema } from './helpers'
-import { useEffect } from 'react'
 
 export interface FormValues {
   email: string
@@ -21,8 +24,19 @@ export interface FormValues {
 }
 
 export const useSettingsForm = () => {
-  const actualLanguage = localStorage.getItem('i18nextLng')
-  const { email, name, date, gender } = useSelector(getUserInfoSelector)
+  const dispatch = useAppDispatch()
+  const {
+    email,
+    name,
+    date,
+    gender,
+    id,
+    bio,
+    location,
+    facebook,
+    instagramm,
+    twitter,
+  } = useSelector(getUserInfoSelector)
 
   const {
     control,
@@ -31,22 +45,28 @@ export const useSettingsForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
+      id: id,
       email: email,
       name: name,
       date: date,
       gender: gender,
-      bio: '',
-      location: '',
-      language: actualLanguage,
-      facebook: '',
-      twitter: '',
-      instagram: '',
+      bio: bio || '',
+      location: location || '',
+      facebook: facebook || '',
+      twitter: twitter || '',
+      instagramm: instagramm || '',
     },
   })
 
   const onCancel = () => console.log('cancel')
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = async (data: User) => {
+    await updateUser({
+      ...data,
+      date: moment(data.date).unix(),
+    })
+    dispatch(fetchUser(data.id))
+  }
 
   return {
     errors,

@@ -54,15 +54,16 @@ export const getUser = async (id: string): Promise<RegistrationData> => {
 
 export const updateUser = async (user: User): Promise<User> => {
   try {
-    return await (
-      await fetch(`${USERS_URL}/${user.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      })
-    ).json()
+    const data = await fetch(`${USERS_URL}/${user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+    const response = data.json()
+    const result = await response
+    return result
   } catch (error) {
     throw new Error(`${error}`)
   }

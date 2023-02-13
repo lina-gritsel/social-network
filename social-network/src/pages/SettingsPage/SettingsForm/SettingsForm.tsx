@@ -152,7 +152,7 @@ const SettingsForm: FC = () => {
         <div className={styles.labelBlock}>
           <FormLabel className={styles.label}>{t('instagram')}</FormLabel>
           <Input
-            name="instagram"
+            name="instagramm"
             control={control}
             placeholder={t('instagram')}
             inputProps={{

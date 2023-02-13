@@ -6,9 +6,10 @@ export interface User {
   date: number
   gender: string
   avatar: string | null
+  bio: string
   location: string | null
   isFriend: boolean
-  instagram: string
+  instagramm: string
   facebook: string
   twitter: string
   createdAt: string
