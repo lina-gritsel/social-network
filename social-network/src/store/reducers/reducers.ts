@@ -1,4 +1,4 @@
-import { User } from '../../api'
+import { RegistrationData, User } from '../../api'
 
 import { GET_USER_INFO } from '../actions'
 

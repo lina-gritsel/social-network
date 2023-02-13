@@ -44,9 +44,9 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
   }
 }
 
-export const getUser = async (id: string): Promise<User> => {
+export const getUser = async (id: string): Promise<RegistrationData> => {
   try {
-    return await (await fetch(`${BASE_URL}/${id}`)).json()
+    return await (await fetch(`${USERS_URL}/${id}`)).json()
   } catch (error) {
     throw new Error(`${error}`)
   }
