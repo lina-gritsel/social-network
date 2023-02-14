@@ -13,11 +13,12 @@ export const createPost = async (
   res: Response,
 ) => {
   try {
-    const { username, content } = req.body
+    const { username, content, image } = req.body
 
     const post = await PostModel.create({
       username,
       content,
+      image
     })
 
     res.status(201).json({

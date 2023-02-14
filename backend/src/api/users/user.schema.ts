@@ -15,9 +15,6 @@ export const createUserSchema = z.object({
       required_error: 'Gender is required',
     }),
     date: z.number(),
-    instagramm: z.string(),
-    twitter: z.string(),
-    facebook: z.string(),
   }),
 })
 
@@ -33,16 +30,17 @@ export const updateUserSchema = z.object({
       email: z.string(),
       date: z.number(),
       location: z.string(),
-      instagramm: z.string(),
+      instagram: z.string(),
       twitter: z.string(),
       facebook: z.string(),
+      bio: z.string(),
     })
     .partial(),
 })
 
 export const filterQuery = z.object({
-  limit: z.number().default(1),
-  page: z.number().default(10),
+  limit: z.number().default(10),
+  page: z.number().default(100),
 })
 
 export type ParamsInput = z.TypeOf<typeof params>

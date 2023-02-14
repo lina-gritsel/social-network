@@ -8,6 +8,7 @@ export const createPostSchema = z.object({
     content: z.string({
       required_error: '',
     }),
+    image: z.string(),
   }),
 })
 
@@ -38,7 +39,7 @@ export const addCommentSchema = z.object({
       comments: z.object({
         userId: z.string(),
         comment: z.string(),
-    }),
+      }),
     })
     .partial(),
 })

@@ -19,9 +19,6 @@ export const createUserController = async (
       date,
       gender,
       password,
-      instagramm,
-      twitter,
-      facebook,
     } = req.body
 
     const salt = await bcrypt.genSalt(10)
@@ -51,9 +48,6 @@ export const createUserController = async (
         gender,
         date,
         password: hashedPass,
-        instagramm,
-        twitter,
-        facebook,
       })
 
       res.status(201).json({
