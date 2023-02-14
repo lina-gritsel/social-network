@@ -8,22 +8,31 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 
 import { friends } from '../../pages/NewsPage/NewsPageComponents/userNews'
 import Button from '../Button'
+import { getRandomInt, sortBirthday } from '../../constants/constants'
 
 import styles from './RandomFriend.module.scss'
 
 interface RandomFriend {
   username: string
+  title: string
   avatarColor: string
   avatarImg?: string
-  profession: string
+  profession?: string
+  birthday?: string
+  isBirthday?: boolean
 }
 
 const RandomFriend: FC = () => {
+  const index = getRandomInt(0, friends.length - 1)
+  const friend = friends[index]
+  const bdFriend = friends.sort((a, b) =>
+    sortBirthday(a.birthday, b.birthday),
+  )[0]
+
   return (
     <div className={styles.friends}>
-      {friends.map((friend, index) =>
-        index % 5 === 0 ? <Friend key={index} {...friend} /> : null,
-      )}
+      <Friend {...friend} title="mightLike" />
+      <Friend {...bdFriend} title="birthday" isBirthday={true} />
     </div>
   )
 }
@@ -33,12 +42,15 @@ const Friend: FC<RandomFriend> = ({
   avatarColor,
   avatarImg,
   profession,
+  title,
+  birthday,
+  isBirthday,
 }) => {
   const { t } = useTranslation()
 
   return (
     <Card className={styles.friend}>
-      <div className={styles.mightLike}>{t('mightLike')}</div>
+      <div className={styles.mightLike}>{t(title)}</div>
       <div className={styles.wrapperContent}>
         <div className={styles.cardHeader}>
           <Avatar
@@ -48,23 +60,29 @@ const Friend: FC<RandomFriend> = ({
             src={avatarImg}
             className={styles.avatar}
           />
-          
+
           <div>
             <div className={styles.title}>{username}</div>
-            <div className={styles.subTitle}>{profession}</div>
+            <div className={styles.subTitle}>
+              {isBirthday ? t(title) + ' ' + birthday : profession}
+            </div>
           </div>
         </div>
-        <div className={styles.icons}>
-          <InstagramIcon />
-          <FacebookIcon />
-          <TwitterIcon />
-        </div>
-        <div className={styles.btnWrapper}>
-          <Button className={styles.ignorFriends} outlined>
-            {t('ignore')}
-          </Button>
-          <Button>{t('follow')}</Button>
-        </div>
+        {!isBirthday ? (
+          <>
+            <div className={styles.icons}>
+              <InstagramIcon />
+              <FacebookIcon />
+              <TwitterIcon />
+            </div>
+            <div className={styles.btnWrapper}>
+              <Button className={styles.ignorFriends} outlined>
+                {t('ignore')}
+              </Button>
+              <Button>{t('follow')}</Button>
+            </div>
+          </>
+        ) : null}
       </div>
     </Card>
   )

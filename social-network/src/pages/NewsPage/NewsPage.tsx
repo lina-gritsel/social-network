@@ -1,17 +1,12 @@
-import { FC, useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { FC, useState } from 'react'
 
 import FriendsOnline from '../../components/FriendsOnline'
 import RandomFriend from '../../components/RandomFriend'
 import NewsCreator from '../../components/NewsCreator'
-import NewsCard from '../../components/NewsCard'
-import { getAllPosts } from '../../api/request'
 import Layout from '../../components/Layout'
 import Weather from '../../components/Weather'
 import {
   getRandomColor,
-  dateConversion,
-  sortNews,
 } from '../../constants/constants'
 import { userNews } from './NewsPageComponents/userNews'
 import { News } from '../../components/NewsCard/NewsCard'

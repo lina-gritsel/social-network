@@ -1,6 +1,7 @@
 .card {
   width: 100%;
   border-radius: 20px !important;
+  position: relative;
 
   & a {
     color: var(--blue-color);
@@ -11,4 +12,29 @@
 .image {
   border-radius: 20px;
   width: 500px;
+}
+
+.settingsModal {
+  position: absolute;
+  right: 50px;
+  top: 30px;
+  min-width: 100px;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  background: var(--white-color);
+  font: var(--font-text-4);
+  box-shadow: 0px 2px 1px -1px var(--shadow-dark-color),
+    0px 1px 1px 0px var(--shadow-dark-color),
+    0px 1px 3px 0px var(--shadow-dark-color);
+  & > div {
+    padding: 5px 10px;
+    width: 100%;
+    border-radius: 10%;
+  }
+  & > div:hover {
+    cursor: pointer;
+    background: var(--dark-gray-color);
+    color: var(--white-color);
+  }
 }

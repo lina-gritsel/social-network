@@ -16,6 +16,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import classNames from 'classnames'
 
 import styles from './NewsCard.module.scss'
+import { deletePost } from '../../api/request'
+import { useTranslation } from 'react-i18next'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -47,6 +49,8 @@ export interface News {
   className?: string
   url?: string
   id?: string
+  setIsAllPosts?: (boolean) => void
+  isProfilePage?: boolean
 }
 
 const NewsCard: FC<News> = ({
@@ -60,8 +64,11 @@ const NewsCard: FC<News> = ({
   className,
   url,
   id,
+  setIsAllPosts,
+  isProfilePage,
 }) => {
   const [expanded, setExpanded] = useState(false)
+  const [isSettingModal, setIsSettingModal] = useState(false)
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
@@ -69,6 +76,9 @@ const NewsCard: FC<News> = ({
 
   return (
     <Card className={classNames(styles.card, className)} id={id}>
+      {isSettingModal && (
+        <SettingsModal id={id} setIsAllPosts={setIsAllPosts} />
+      )}
       {!!avatarColor && (
         <CardHeader
           avatar={
@@ -82,9 +92,14 @@ const NewsCard: FC<News> = ({
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings" onClick={(e)=>console.log(e.currentTarget)}>
-              <MoreVertIcon />
-            </IconButton>
+            isProfilePage ? (
+              <IconButton
+                aria-label="settings"
+                onClick={() => setIsSettingModal((prev) => !prev)}
+              >
+                <MoreVertIcon />
+              </IconButton>
+            ) : null
           }
           title={username}
           subheader={createdAt}
@@ -138,6 +153,25 @@ const NewsCard: FC<News> = ({
         </CardContent>
       </Collapse>
     </Card>
+  )
+}
+
+export interface SettingsModalProps {
+  id: string
+  setIsAllPosts?: (boolean) => void
+}
+
+const SettingsModal: FC<SettingsModalProps> = ({ id, setIsAllPosts }) => {
+  const { t } = useTranslation()
+  const onclickDelete = () => {
+    deletePost(id).then(() => setIsAllPosts((prev) => !prev))
+  }
+
+  return (
+    <div className={styles.settingsModal}>
+      <div>{t('change')}</div>
+      <div onClick={() => onclickDelete()}>{t('delete')}</div>
+    </div>
   )
 }
 

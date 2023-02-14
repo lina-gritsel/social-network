@@ -112,7 +112,7 @@ const ProfilePage: FC = () => {
               avatarColor={userNews[4].avatarColor}
               setIsAllPosts={setIsAllPosts}
             />
-            <NewsList isAllPosts={isAllPosts} filter={true}/>
+            <NewsList isAllPosts={isAllPosts} filter={true} isProfilePage={true} setIsAllPosts={setIsAllPosts}/>
           </div>
         </div>
       </div>

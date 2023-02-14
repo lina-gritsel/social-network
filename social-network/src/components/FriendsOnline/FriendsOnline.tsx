@@ -33,9 +33,13 @@ const FriendsOnline: FC = () => {
           .filter(({ username }) =>
             username.toLocaleLowerCase().includes(searchDebounced),
           )
-          .map((friend, index) => (
-            <Friend key={index} {...friend} />
-          ))}
+          .map((friend, index, friends) =>
+            friends.length === 0 ? (
+              <div key={index}>Никого нет</div>
+            ) : (
+              <Friend key={index} {...friend} />
+            ),
+          )}
       </div>
     </div>
   )

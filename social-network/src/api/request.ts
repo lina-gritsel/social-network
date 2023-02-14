@@ -30,3 +30,10 @@ export const getAllPosts = async () => {
     console.log(error)
   }
 }
+export const deletePost = async (id: string) => {
+  try {
+    await fetch(`${BASE_URL}/posts/${id}`, { method: 'DELETE' })
+  } catch (error) {
+    console.log(error)
+  }
+}

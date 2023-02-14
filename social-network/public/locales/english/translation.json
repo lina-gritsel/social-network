@@ -68,5 +68,7 @@
   "mightLike": "You might like",
   "addPostImg": "Insert a link to your image",
   "addPostImgLabel": "Your link",
-  "addMessage": "Your image has been added!"
+  "addMessage": "Your image has been added!",
+  "change": "Change",
+  "delete": "Delete"
 }

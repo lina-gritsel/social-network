@@ -11,9 +11,11 @@ import styles from './NewsList.module.scss'
 interface NewsListProps {
   isAllPosts: boolean
   filter?: boolean
+  isProfilePage?: boolean
+  setIsAllPosts?: (boolean) => void
 }
 
-const NewsList: FC<NewsListProps> = ({ isAllPosts, filter }) => {
+const NewsList: FC<NewsListProps> = ({ isAllPosts, filter, isProfilePage, setIsAllPosts }) => {
   const [allPosts, setAllPosts] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -47,7 +49,7 @@ const NewsList: FC<NewsListProps> = ({ isAllPosts, filter }) => {
   return (
     <>
       {allPosts.map((post, index) => (
-        <NewsCard key={index} {...post} />
+        <NewsCard key={index} {...post} isProfilePage={isProfilePage} setIsAllPosts={setIsAllPosts}/>
       ))}
     </>
   )

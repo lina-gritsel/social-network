@@ -64,12 +64,14 @@ export const friends = [
         'https://shopikk.ru/wp-content/uploads/b/3/4/b34b45927a64dc700ca4490b09c31100.jpeg',
       isOnline: true,
       profession: 'astronaut',
+      birthday: '28.02.2000',
     },
     {
       username: 'Anna',
       avatarColor: getRandomColor(),
       isOnline: true,
       profession: 'astronaut',
+      birthday: '20.02.2000',
 
     },
     {
@@ -77,6 +79,7 @@ export const friends = [
       avatarColor: getRandomColor(),
       isOnline: false,
       profession: 'astronaut',
+      birthday: '28.02.2000',
 
     },
     {
@@ -84,6 +87,7 @@ export const friends = [
       avatarColor: getRandomColor(),
       isOnline: true,
       profession: 'astronaut',
+      birthday: '28.02.2000',
 
     },
     {
@@ -91,6 +95,7 @@ export const friends = [
       avatarColor: getRandomColor(),
       isOnline: true,
       profession: 'astronaut',
+      birthday: '28.02.2000',
 
     },
     {
@@ -98,6 +103,7 @@ export const friends = [
       avatarColor: getRandomColor(),
       isOnline: false,
       profession: 'astronaut',
+      birthday: '28.02.2000',
 
     },
     {
@@ -105,6 +111,7 @@ export const friends = [
       avatarColor: getRandomColor(),
       isOnline: true,
       profession: 'astronaut',
+      birthday: '28.02.2000',
 
     },
     {
@@ -112,6 +119,7 @@ export const friends = [
       avatarColor: getRandomColor(),
       isOnline: true,
       profession: 'astronaut',
+      birthday: '28.02.2000',
 
     },
     {
@@ -119,6 +127,7 @@ export const friends = [
       avatarColor: getRandomColor(),
       isOnline: false,
       profession: 'astronaut',
+      birthday: '28.02.2000',
 
     },
   ]
