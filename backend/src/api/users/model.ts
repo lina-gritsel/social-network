@@ -64,10 +64,6 @@ const UserModel = sequelize.define('user', {
     type: DataTypes.NUMBER,
     allowNull: true,
   },
-  image: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   bio: {
     type: DataTypes.STRING,
     allowNull: true,
