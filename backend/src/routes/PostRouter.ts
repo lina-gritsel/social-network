@@ -2,13 +2,18 @@ import express from 'express'
 
 import { validate } from './../middleware/validate'
 import {
+  addComment,
   createPost,
   deletePost,
   findAllPosts,
   findPost,
   updatePost,
 } from '../api/posts/post.controller'
-import { createPostSchema, updatePostSchema } from '../api/posts/post.schema'
+import {
+   addCommentSchema,
+  createPostSchema,
+  updatePostSchema,
+} from '../api/posts/post.schema'
 
 const postRouter = express.Router()
 
@@ -22,5 +27,9 @@ postRouter
   .get(findPost)
   .patch(validate(updatePostSchema), updatePost)
   .delete(deletePost)
+
+postRouter
+  .route('/comments/:postId')
+  .patch(validate(addCommentSchema), addComment)
 
 export default postRouter

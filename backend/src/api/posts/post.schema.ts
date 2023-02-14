@@ -25,6 +25,20 @@ export const updatePostSchema = z.object({
   body: z
     .object({
       content: z.string(),
+      commentCreator: z.string(),
+      comment: z.any(),
+    })
+    .partial(),
+})
+
+export const addCommentSchema = z.object({
+  params,
+  body: z
+    .object({
+      comments: z.object({
+        userId: z.string(),
+        comment: z.string(),
+    }),
     })
     .partial(),
 })
@@ -33,3 +47,4 @@ export type Params = z.TypeOf<typeof params>
 export type CreatePost = z.TypeOf<typeof createPostSchema>
 export type FilterQuery = z.TypeOf<typeof filterQuery>
 export type UpdatePost = z.TypeOf<typeof updatePostSchema>
+export type AddComment = z.TypeOf<typeof addCommentSchema>

@@ -1,6 +1,12 @@
 import { Request, Response } from 'express'
 import PostModel from './model'
-import { CreatePost, FilterQuery, Params, UpdatePost } from './post.schema'
+import {
+  AddComment,
+  CreatePost,
+  FilterQuery,
+  Params,
+  UpdatePost,
+} from './post.schema'
 
 export const createPost = async (
   req: Request<{}, CreatePost>,
@@ -57,10 +63,11 @@ export const findAllPosts = async (
 ) => {
   try {
     const page = req.query.page || 1
-    const limit = req.query.limit || 10
+    const limit = req.query.limit || 1000
     const skip = (page - 1) * limit
 
     const posts = await PostModel.findAll({ limit, offset: skip })
+
     res.status(200).json({
       status: 'success',
       results: posts.length,
@@ -87,7 +94,7 @@ export const deletePost = async (req: Request<Params>, res: Response) => {
         message: 'Note with that ID not found',
       })
     }
-    
+
     res.status(204).json()
   } catch (error: any) {
     res.status(500).json({
@@ -123,6 +130,26 @@ export const updatePost = async (
     res.status(200).json({
       status: 'success',
       data: { post },
+    })
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+    })
+  }
+}
+
+export const addComment = async (req: Request, res: Response) => {
+  try {
+    await PostModel.findByPk(req.params.postId).then((post) => {
+      const commentExist = post?.dataValues?.comments
+      const comments = commentExist ? [post?.dataValues?.comments] : []
+
+      comments.push(req.body)
+
+      post
+        ?.update({ comments }, { where: { id: req.params.postId } })
+        .then((post: any) => res.json(post))
     })
   } catch (error: any) {
     res.status(500).json({

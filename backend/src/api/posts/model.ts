@@ -24,6 +24,10 @@ const PostModel = sequelize.define('post', {
     defaultValue: DataTypes.NOW,
     allowNull: false,
   },
+  comments: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
 })
 
 export default PostModel
