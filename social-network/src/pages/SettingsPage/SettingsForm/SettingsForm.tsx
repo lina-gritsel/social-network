@@ -17,11 +17,13 @@ import {
   CircularProgress,
 } from '@mui/material'
 
+import Modal from '../../../components/Modal'
 import Input from '../../../components/Input'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
 
 import { useSettingsForm } from './hooks'
+import AddAvatarModal from './AddAvatarModal'
 
 import styles from './SettingsForm.module.scss'
 
@@ -29,13 +31,19 @@ const SettingsForm: FC = () => {
   const { t } = useTranslation()
 
   const {
-    control,
+    img,
+    open,
     errors,
+    control,
     userInfo,
+    inputRef,
     isLoading,
-    handleSubmit,
-    onCancel,
     onSubmit,
+    onCancel,
+    handleOpen,
+    handleClose,
+    handleSubmit,
+    handleClickAddBtn,
   } = useSettingsForm()
 
   if (isLoading || !userInfo) {
@@ -48,11 +56,29 @@ const SettingsForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        title={t('changeAvatar')}
+        content={
+          <AddAvatarModal
+            errors={errors}
+            control={control}
+            inputRef={inputRef}
+            handleClickAddBtn={handleClickAddBtn}
+          />
+        }
+        isDialogActions={false}
+      />
       <div className={styles.avatarBlock}>
-        <Avatar className={styles.profileAvatar}>
+        <Avatar
+          alt="avatar"
+          src={img || userInfo?.avatar}
+          className={styles.profileAvatar}
+        >
           {userInfo?.name?.charAt(0)}
         </Avatar>
-        <div className={styles.editAvatar}>
+        <div className={styles.editAvatar} onClick={handleOpen}>
           <CloudDownloadOutlinedIcon />
         </div>
       </div>

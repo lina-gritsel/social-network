@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { updateUser } from '../../../api'
@@ -13,6 +13,7 @@ import { schema } from './helpers'
 
 export interface FormValues {
   id: string
+  avatar: string
   email: string
   name: string
   date: string
@@ -29,6 +30,19 @@ export const useSettingsForm = () => {
 
   const userInfo = useSelector(getUserInfoSelector)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
+  const [img, setImg] = useState<string>('')
+
+  const inputRef = useRef<HTMLInputElement>()
+
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
+  const handleClickAddBtn = () => {
+    const newImg = inputRef.current.value.trim()
+    setImg(newImg)
+    handleClose()
+  }
 
   const {
     control,
@@ -39,6 +53,7 @@ export const useSettingsForm = () => {
     resolver: yupResolver(schema),
     defaultValues: {
       id: userInfo?.id,
+      avatar: userInfo?.avatar || '',
       email: userInfo?.email,
       name: userInfo?.name,
       date: moment.unix(userInfo?.date).toDate(),
@@ -54,6 +69,7 @@ export const useSettingsForm = () => {
   useEffect(() => {
     reset({
       id: userInfo?.id,
+      avatar: userInfo?.avatar || '',
       email: userInfo?.email,
       name: userInfo?.name,
       date: moment.unix(userInfo?.date).toDate(),
@@ -79,6 +95,7 @@ export const useSettingsForm = () => {
       twitter: userInfo?.twitter || '',
       instagram: userInfo?.instagram || '',
     })
+    setImg(userInfo?.avatar || '')
   }
 
   const onSubmit = async (data) => {
@@ -97,12 +114,18 @@ export const useSettingsForm = () => {
   }
 
   return {
+    img,
+    open,
     errors,
     control,
     userInfo,
+    inputRef,
     isLoading,
     onCancel,
     onSubmit,
+    handleOpen,
+    handleClose,
     handleSubmit,
+    handleClickAddBtn,
   }
 }

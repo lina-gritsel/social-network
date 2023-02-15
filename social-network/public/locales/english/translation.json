@@ -71,5 +71,7 @@
   "deleteAcc": "Delete account",
   "deleteMessage": "You can completely delete your account, data in it and information about connected services. The profile will also be deleted.",
   "langSubtitle": "Show app in that language.",
-  "warning": "The data will be deleted from this service. This action cannot be undone. Are you sure?"
+  "warning": "The data will be deleted from this service. This action cannot be undone. Are you sure?",
+  "addAvatar": "Add a link to an image",
+  "changeAvatar": "Change your avatar"
 }

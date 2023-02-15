@@ -71,5 +71,7 @@
   "deleteAcc": "Borrar cuenta",
   "deleteMessage": "Puede eliminar completamente su cuenta, los datos que contiene y la información sobre los servicios conectados. El perfil también será eliminado.",
   "langSubtitle": "Mostrar la aplicación en ese idioma.",
-  "warning": "Los datos serán eliminados de este servicio. Esta acción no se puede deshacer. Está seguro?"
+  "warning": "Los datos serán eliminados de este servicio. Esta acción no se puede deshacer. Está seguro?",
+  "addAvatar": "Agregar un enlace a una imagen",
+  "changeAvatar": "Cambia tu avatar"
 }

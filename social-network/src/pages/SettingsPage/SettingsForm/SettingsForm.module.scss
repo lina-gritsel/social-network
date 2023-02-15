@@ -116,6 +116,18 @@
   width: 150px !important;
 }
 
+.addingImg {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.imgInput {
+  width: 70% !important;
+}
+
 @media (max-width: 620px) {
   .form {
     gap: 10px;
