@@ -1,7 +1,9 @@
 import { FC, useEffect, useState } from 'react'
 
+import { useAppDispatch } from '../../store'
 import Layout from '../../components/Layout'
 import Weather from '../../components/Weather'
+import { fetchUser } from '../../store/actions'
 import NewsCard from '../../components/NewsCard'
 import { getAllPosts } from '../../api/requests'
 import NewsCreator from '../../components/NewsCreator'
@@ -13,10 +15,12 @@ import { userNews } from './NewsPageComponents/userNews'
 import styles from './NewsPage.module.scss'
 
 const NewsPage: FC = () => {
-  const owner = userNews[4]
+  const dispatch = useAppDispatch()
 
+  const owner = userNews[4]
   const [allPosts, setAllPosts] = useState([])
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
+  const userId = JSON.parse(localStorage.getItem('userId')) as string
 
   useEffect(() => {
     const getAllExistPosts = async () => {
@@ -26,6 +30,10 @@ const NewsPage: FC = () => {
 
     getAllExistPosts()
   }, [isAllPosts])
+
+  useEffect(() => {
+    dispatch(fetchUser(userId))
+  }, [dispatch, userId])
 
   return (
     <Layout>
@@ -38,7 +46,7 @@ const NewsPage: FC = () => {
               avatarColor={owner.avatarColor}
               avatarImg={owner.avatarImg}
             />
-            {allPosts.map(({ username, content, createdAt }, index) => (
+            {allPosts?.map(({ username, content, createdAt }, index) => (
               <NewsCard
                 key={index}
                 name={username}

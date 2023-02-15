@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, FormLabel, InputAdornment } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
-import AutoStoriesIcon from '@mui/icons-material/AutoStories'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
+import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import AutoStoriesIcon from '@mui/icons-material/AutoStories'
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
+import { Button, FormLabel, InputAdornment, Avatar } from '@mui/material'
 
 import Input from '../../../components/Input'
 import InputDate from '../../../components/InputDate'
@@ -21,11 +21,28 @@ import styles from './SettingsForm.module.scss'
 const SettingsForm: FC = () => {
   const { t } = useTranslation()
 
-  const { control, handleSubmit, onCancel, onSubmit, errors } =
-    useSettingsForm()
+  const {
+    control,
+    errors,
+    userInfo,
+    isLoading,
+    handleSubmit,
+    onCancel,
+    onSubmit,
+  } = useSettingsForm()
+
+  if (isLoading || !userInfo) {
+    return <div className={styles.loading}>{t('loading')}</div>
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <div className={styles.avatarBlock}>
+        <Avatar className={styles.profileAvatar}>
+          {userInfo?.name?.charAt(0)}
+        </Avatar>
+        <Button className={styles.editAvatar}>{t('editAvatar')}</Button>
+      </div>
       <div className={styles.block}>
         <div className={styles.labelBlock}>
           <FormLabel className={styles.label}>{t('nickname')}</FormLabel>

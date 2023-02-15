@@ -1,26 +1,27 @@
 :root {
   --white-color: #fff;
-  --dark-gray-color: #4e5d78;
-  --gray-color: #606d85;
-  --medium-gray-color: #b8bec9;
   --light-gray-color: #f9fafb;
-  --blue-color: #377dff;
-  --green-color: #38cb89 ;
+  --medium-gray-color: #b8bec9;
+  --gray-color: #606d85;
+  --dark-gray-color: #4e5d78;
   --shadow-dark-color: rgba(0, 0, 0, 0.2);
   --black-color: #000;
-  --red-color: #ff0000;
+  --red-color: #ff5630;
+  --yellow-color: #ffab00;
+  --green-color: #38cb89;
+  --blue-color: #377dff;
 
   --border-primary: 1px solid #c4c4c4;
 
-  --font-family-sans: 'Open Sans', sans-serif;
+  --font-family-roboto: 'Roboto', sans-serif;
 
-  --font-h1: 600 64px var(--font-family-sans);
-  --font-h2: 600 52px var(--font-family-sans);
-  --font-h3: 600 36px var(--font-family-sans);
+  --font-h1: 600 64px var(--font-family-roboto);
+  --font-h2: 600 52px var(--font-family-roboto);
+  --font-h3: 600 36px var(--font-family-roboto);
 
-  --font-text-1: 600 32px var(--font-family-sans);
-  --font-text-2: 400 24px var(--font-family-sans);
-  --font-text-3: 400 18px var(--font-family-sans);
-  --font-text-4: 400 16px var(--font-family-sans);
-  --font-text-5: 400 14px var(--font-family-sans);
+  --font-text-1: 600 32px var(--font-family-roboto);
+  --font-text-2: 400 24px var(--font-family-roboto);
+  --font-text-3: 400 18px var(--font-family-roboto);
+  --font-text-4: 400 16px var(--font-family-roboto);
+  --font-text-5: 400 14px var(--font-family-roboto);
 }
