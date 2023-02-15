@@ -31,7 +31,7 @@ export const useRegistrationForm = () => {
       password: '',
       date: '',
       gender: 'male',
-      instagramm: '',
+      instagram: '',
       twitter: '',
       facebook: '',
     },

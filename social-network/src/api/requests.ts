@@ -21,8 +21,7 @@ export const createUser = async (user: User): Promise<RegistrationData> => {
       },
       body: JSON.stringify(user),
     })
-    const response = data.json()
-    const result = await response
+    const result = await data.json()
     return result
   } catch (error) {
     throw new Error(`${error}`)
@@ -61,8 +60,7 @@ export const updateUser = async (user: User): Promise<User> => {
       },
       body: JSON.stringify(user),
     })
-    const response = data.json()
-    const result = await response
+    const result = await data.json()
     return result
   } catch (error) {
     throw new Error(`${error}`)

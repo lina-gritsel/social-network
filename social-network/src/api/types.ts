@@ -9,7 +9,7 @@ export interface User {
   bio: string
   location: string | null
   isFriend: boolean
-  instagramm: string
+  instagram: string
   facebook: string
   twitter: string
   createdAt: string
@@ -22,6 +22,7 @@ export interface RegistrationData {
   }
   status: string
 }
+
 export interface LoginUser {
   name: string
   password: string

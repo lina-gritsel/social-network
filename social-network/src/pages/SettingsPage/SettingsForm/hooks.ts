@@ -1,10 +1,10 @@
 import moment from 'moment'
-import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { updateUser, User } from '../../../api'
+import { updateUser } from '../../../api'
 import { useAppDispatch } from '../../../store'
 import { fetchUser } from '../../../store/actions'
 import { getUserInfoSelector } from './../../../store/selectors/index'
@@ -12,6 +12,7 @@ import { getUserInfoSelector } from './../../../store/selectors/index'
 import { schema } from './helpers'
 
 export interface FormValues {
+  id: string
   email: string
   name: string
   date: string
@@ -26,8 +27,10 @@ export interface FormValues {
 
 export const useSettingsForm = () => {
   const dispatch = useAppDispatch()
+
   const userInfo = useSelector(getUserInfoSelector)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const {
     control,
     handleSubmit,
@@ -39,13 +42,13 @@ export const useSettingsForm = () => {
       id: userInfo?.id,
       email: userInfo?.email,
       name: userInfo?.name,
-      date: userInfo?.date,
+      date: moment.unix(userInfo?.date).toDate(),
       gender: userInfo?.gender,
       bio: userInfo?.bio || '',
       location: userInfo?.location || '',
       facebook: userInfo?.facebook || '',
       twitter: userInfo?.twitter || '',
-      instagramm: userInfo?.instagramm || '',
+      instagram: userInfo?.instagram || '',
     },
   })
 
@@ -54,13 +57,13 @@ export const useSettingsForm = () => {
       id: userInfo?.id,
       email: userInfo?.email,
       name: userInfo?.name,
-      date: userInfo?.date,
+      date: moment.unix(userInfo?.date).toDate(),
       gender: userInfo?.gender,
       bio: userInfo?.bio || '',
       location: userInfo?.location || '',
       facebook: userInfo?.facebook || '',
       twitter: userInfo?.twitter || '',
-      instagramm: userInfo?.instagramm || '',
+      instagram: userInfo?.instagram || '',
     })
   }, [userInfo, reset])
 
@@ -69,24 +72,29 @@ export const useSettingsForm = () => {
       id: userInfo?.id,
       email: userInfo?.email,
       name: userInfo?.name,
-      date: userInfo?.date,
+      date: moment.unix(userInfo?.date).toDate(),
       gender: userInfo?.gender,
       bio: userInfo?.bio || '',
       location: userInfo?.location || '',
       facebook: userInfo?.facebook || '',
       twitter: userInfo?.twitter || '',
-      instagramm: userInfo?.instagramm || '',
+      instagram: userInfo?.instagram || '',
     })
   }
 
-  const onSubmit = async (data: User) => {
-    setIsLoading(true)
-    await updateUser({
-      ...data,
-      date: moment(data.date).unix(),
-    })
-    dispatch(fetchUser(data.id))
-    setIsLoading(false)
+  const onSubmit = async (data) => {
+    try {
+      setIsLoading(true)
+      await updateUser({
+        ...data,
+        date: moment(data.date).unix(),
+      })
+      dispatch(fetchUser(data.id))
+    } catch (error) {
+      throw new Error(`${error}`)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return {

@@ -46,7 +46,7 @@ const NewsPage: FC = () => {
               avatarColor={owner.avatarColor}
               avatarImg={owner.avatarImg}
             />
-            {allPosts.map(({ username, content, createdAt }, index) => (
+            {allPosts?.map(({ username, content, createdAt }, index) => (
               <NewsCard
                 key={index}
                 name={username}
