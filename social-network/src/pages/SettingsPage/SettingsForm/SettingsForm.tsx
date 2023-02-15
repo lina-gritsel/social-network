@@ -7,6 +7,7 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
+import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined'
 import {
   Button,
   FormLabel,
@@ -51,7 +52,9 @@ const SettingsForm: FC = () => {
         <Avatar className={styles.profileAvatar}>
           {userInfo?.name?.charAt(0)}
         </Avatar>
-        <Button className={styles.editAvatar}>{t('editAvatar')}</Button>
+        <div className={styles.editAvatar}>
+          <CloudDownloadOutlinedIcon />
+        </div>
       </div>
       <div className={styles.block}>
         <div className={styles.labelBlock}>
