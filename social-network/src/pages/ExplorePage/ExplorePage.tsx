@@ -1,6 +1,7 @@
-import { FC, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import Axios from 'axios'
+import { useTranslation } from 'react-i18next'
+import { FC, useEffect, useState } from 'react'
+import { Box, CircularProgress } from '@mui/material'
 
 import NewsCard from '../../components/NewsCard'
 import Layout from '../../components/Layout'
@@ -63,7 +64,9 @@ const ExplorePage: FC = () => {
           ))}
         </div>
         {isLoading ? (
-          <div className={styles.loading}>{t('loading')}</div>
+          <Box className={styles.loading}>
+            <CircularProgress />
+          </Box>
         ) : (
           <NewsList articles={articles} />
         )}

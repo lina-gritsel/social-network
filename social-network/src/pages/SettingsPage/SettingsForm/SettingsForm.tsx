@@ -7,7 +7,14 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
-import { Button, FormLabel, InputAdornment, Avatar } from '@mui/material'
+import {
+  Button,
+  FormLabel,
+  InputAdornment,
+  Avatar,
+  Box,
+  CircularProgress,
+} from '@mui/material'
 
 import Input from '../../../components/Input'
 import InputDate from '../../../components/InputDate'
@@ -32,7 +39,11 @@ const SettingsForm: FC = () => {
   } = useSettingsForm()
 
   if (isLoading || !userInfo) {
-    return <div className={styles.loading}>{t('loading')}</div>
+    return (
+      <Box className={styles.loading}>
+        <CircularProgress />
+      </Box>
+    )
   }
 
   return (
