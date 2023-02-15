@@ -11,14 +11,15 @@ import styles from './SecureForm.module.scss'
 
 const SecureForm = () => {
   const { t } = useTranslation()
-  const { open, handleOpen, handleClose } = useSecureForm()
+  const { open, userId, handleOpen, handleClose, deleteAccount } =
+    useSecureForm()
 
   return (
     <div>
       <Modal
         open={open}
         onClose={handleClose}
-        content={<DeleteAccModal handleClose={handleClose} />}
+        content={<DeleteAccModal userId={userId} deleteAccount={deleteAccount} handleClose={handleClose} />}
         isDialogActions={false}
       />
       <div className={styles.secureBlock} onClick={handleOpen}>
