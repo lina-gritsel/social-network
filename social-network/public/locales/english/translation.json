@@ -69,5 +69,6 @@
   "mightLike": "You might like",
   "secure": "Secure",
   "deleteAcc": "Delete account",
-  "deleteMessage": "You can completely delete your account, data in it and information about connected services. The profile will also be deleted."
+  "deleteMessage": "You can completely delete your account, data in it and information about connected services. The profile will also be deleted.",
+  "langSubtitle": "Show app in that language."
 }

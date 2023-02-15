@@ -52,6 +52,12 @@
   transition: all 0.5s ease-in-out;
 }
 
+.subtitle {
+  color: var(--gray-color);
+  font: var(--font-text-3);
+  transition: all 0.5s ease-in-out;
+}
+
 @media (max-width: 620px) {
   .wrapper {
     gap: 10px;

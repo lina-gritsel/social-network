@@ -69,5 +69,6 @@
   "mightLike": "Puede que te guste",
   "secure": "Seguro",
   "deleteAcc": "Borrar cuenta",
-  "deleteMessage": "Puede eliminar completamente su cuenta, los datos que contiene y la información sobre los servicios conectados. El perfil también será eliminado."
+  "deleteMessage": "Puede eliminar completamente su cuenta, los datos que contiene y la información sobre los servicios conectados. El perfil también será eliminado.",
+  "langSubtitle": "Mostrar la aplicación en ese idioma."
 }

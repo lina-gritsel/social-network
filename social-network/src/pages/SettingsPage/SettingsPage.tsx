@@ -71,6 +71,7 @@ const SettingsPage: FC = () => {
           {settingsTab === SettingsTab.LANGUAGES && (
             <>
               <h2 className={styles.title}>{t('languages')}</h2>
+              <p className={styles.subtitle}>{t('langSubtitle')}</p>
               <InputLanguages />
             </>
           )}
