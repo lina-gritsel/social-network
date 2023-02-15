@@ -32,6 +32,10 @@ export interface LoginStatus {
   status: number
 }
 
+export interface DeleteUserStatus {
+  status: number
+}
+
 export interface CreatePostParams {
   content: string
   username: string
