@@ -68,10 +68,10 @@
 }
 
 .loading {
-  color: var(--gray-color);
-  font: var(--font-text-2);
-  font-weight: 700;
-  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
 }
 
 .avatarBlock {
