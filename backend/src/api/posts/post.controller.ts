@@ -18,7 +18,7 @@ export const createPost = async (
     const post = await PostModel.create({
       username,
       content,
-      image
+      image,
     })
 
     res.status(201).json({
@@ -140,11 +140,14 @@ export const updatePost = async (
   }
 }
 
-export const addComment = async (req: Request, res: Response) => {
+export const addComment = async (
+  req: Request<AddComment['params'], {}, AddComment['body']>,
+  res: Response,
+) => {
   try {
     await PostModel.findByPk(req.params.postId).then((post) => {
       const commentExist = post?.dataValues?.comments
-      const comments = commentExist ? [post?.dataValues?.comments] : []
+      const comments = commentExist ? [...post?.dataValues?.comments] : []
 
       comments.push(req.body)
 
@@ -152,6 +155,56 @@ export const addComment = async (req: Request, res: Response) => {
         ?.update({ comments }, { where: { id: req.params.postId } })
         .then((post: any) => res.json(post))
     })
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+    })
+  }
+}
+
+export const changeLikes = async (req: Request<any>, res: Response) => {
+  try {
+    const post = await PostModel.findByPk(req.params.postId)
+    const userExist = !!post?.dataValues.likes.find(
+      (item: any) => item?.userId === req.body.userId,
+    )
+
+    const likes = post?.dataValues.likes ? [...post?.dataValues.likes] : []
+
+    if (userExist) {
+      const lists = likes.filter(({ userId }) => userId !== req.body.userId)
+
+      post?.update(
+        { likes: lists },
+        {
+          where: {
+            id: req.params.postId,
+          },
+        },
+      )
+
+      res.status(200).json({
+        status: 'success',
+        data: { post },
+      })
+    } else {
+      likes.push(req.body)
+
+      post?.update(
+        { likes },
+        {
+          where: {
+            id: req.params.postId,
+          },
+        },
+      )
+
+      res.status(200).json({
+        status: 'success',
+        data: { post },
+      })
+    }
   } catch (error: any) {
     res.status(500).json({
       status: 'error',

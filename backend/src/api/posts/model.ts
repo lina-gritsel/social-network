@@ -32,6 +32,10 @@ const PostModel = sequelize.define('post', {
     type: DataTypes.JSON,
     allowNull: true,
   },
+  likes: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
 })
 
 export default PostModel

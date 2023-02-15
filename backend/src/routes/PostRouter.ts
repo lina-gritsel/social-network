@@ -3,6 +3,7 @@ import express from 'express'
 import { validate } from './../middleware/validate'
 import {
   addComment,
+  changeLikes,
   createPost,
   deletePost,
   findAllPosts,
@@ -10,7 +11,8 @@ import {
   updatePost,
 } from '../api/posts/post.controller'
 import {
-   addCommentSchema,
+  addCommentSchema,
+  changeLikesSchema,
   createPostSchema,
   updatePostSchema,
 } from '../api/posts/post.schema'
@@ -31,5 +33,9 @@ postRouter
 postRouter
   .route('/comments/:postId')
   .patch(validate(addCommentSchema), addComment)
+
+postRouter
+  .route('/likes/:postId')
+  .patch(validate(changeLikesSchema), changeLikes)
 
 export default postRouter
