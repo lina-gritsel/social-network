@@ -11,11 +11,11 @@ const DeleteAccModal = ({ handleClose }) => {
     <div className={styles.modal}>
       <div className={styles.titleBlock}>
         <p className={styles.title}>{t('deleteAcc')}</p>
-        <p className={styles.subtitle}>{t('deleteMessage')}</p>
+        <p className={styles.subtitle}>{t('warning')}</p>
       </div>
       <div className={styles.btnBlock}>
         <Button className={styles.deleteBtn}>{t('deleteAcc')}</Button>
-        <Button className={styles.cancelBtn} onClick={handleClose}>
+        <Button outlined className={styles.cancelBtn} onClick={handleClose}>
           {t('cancel')}
         </Button>
       </div>

@@ -38,7 +38,7 @@
   color: var(--gray-color);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 20px;
 }
 
 .btnBlock {
@@ -57,6 +57,7 @@
 }
 
 .cancelBtn {
+  cursor: pointer;
   font: var(--font-text-5);
   height: 30px;
 }
