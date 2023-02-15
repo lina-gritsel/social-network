@@ -31,6 +31,25 @@
   padding: 10px;
 }
 
+.createImg {
+  max-width: 400px;
+  max-height: 300px;
+  border-radius: 10px;
+  justify-self: center;
+  align-self: center;
+  object-fit: contain;
+}
+
+.cancel {
+  color: var(--white-color);
+  position: absolute;
+  right: 29px;
+  top: 70px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .createIcons {
   display: flex;
   gap: 25px;
@@ -84,6 +103,7 @@
   & > img {
     max-width: 300px;
     max-height: 200px;
+    border-radius: 10px;
     object-fit: contain;
   }
 }

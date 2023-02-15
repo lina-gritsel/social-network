@@ -16,8 +16,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import classNames from 'classnames'
 
 import styles from './NewsCard.module.scss'
-import { deletePost } from '../../api/request'
+import { deletePost, getPost } from '../../api/request'
 import { useTranslation } from 'react-i18next'
+import NewsCreator from '../NewsCreator'
+import { userNews } from '../../pages/NewsPage/NewsPageComponents/userNews'
+import Modal from '../Modal'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -162,14 +165,42 @@ export interface SettingsModalProps {
 }
 
 const SettingsModal: FC<SettingsModalProps> = ({ id, setIsAllPosts }) => {
+  const [isChange, setIsChange] = useState(false)
+  const [content, setContent] = useState('')
   const { t } = useTranslation()
+
   const onclickDelete = () => {
     deletePost(id).then(() => setIsAllPosts((prev) => !prev))
+  }
+  const onclickChange = () => {
+    getPost(id).then((response) => {
+      setContent(response.data.post.content)
+      setIsChange(true)
+    })
   }
 
   return (
     <div className={styles.settingsModal}>
-      <div>{t('change')}</div>
+      <Modal
+        open={isChange}
+        onClose={() => setIsChange(false)}
+        onConfirm={() => setIsChange(false)}
+        title={t('addPostImg')}
+        isDialogActions={false}
+        content={
+          <NewsCreator
+            name={userNews[4].username}
+            avatarImg={userNews[4].avatarImg}
+            avatarColor={userNews[4].avatarColor}
+            content={content}
+            id={id}
+            setIsAllPosts={setIsAllPosts}
+            isChange={true}
+          />
+        }
+      />
+
+      <div onClick={() => onclickChange()}>{t('change')}</div>
       <div onClick={() => onclickDelete()}>{t('delete')}</div>
     </div>
   )

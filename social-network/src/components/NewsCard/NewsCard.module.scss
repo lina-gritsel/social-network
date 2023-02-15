@@ -16,10 +16,11 @@
 
 .settingsModal {
   position: absolute;
-  right: 50px;
-  top: 30px;
-  min-width: 100px;
-  border-radius: 10%;
+  right: 32px;
+  top: px;
+  min-width: 150px;
+  min-height: 50px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   background: var(--white-color);

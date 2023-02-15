@@ -5,6 +5,7 @@ import NewsCard, { News } from '../NewsCard/NewsCard'
 import { getAllPosts } from '../../api/request'
 import { sortNews, dateConversion } from '../../constants/constants'
 import { setAvatarColor } from '../../pages/NewsPage/NewsPage'
+import { userNews } from '../../pages/NewsPage/NewsPageComponents/userNews'
 
 import styles from './NewsList.module.scss'
 

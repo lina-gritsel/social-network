@@ -20,6 +20,20 @@ export const createPost = async (content: CreatePostParams) => {
     console.log(error)
   }
 }
+export const changePost = async (content: string, id: string) => {
+  try {
+    await fetch(`${BASE_URL}/posts/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(content),
+
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const getAllPosts = async () => {
   try {
@@ -30,6 +44,16 @@ export const getAllPosts = async () => {
     console.log(error)
   }
 }
+export const getPost = async (id: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${id}`)
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const deletePost = async (id: string) => {
   try {
     await fetch(`${BASE_URL}/posts/${id}`, { method: 'DELETE' })

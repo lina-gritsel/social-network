@@ -7,9 +7,10 @@ import TextField from '@mui/material/TextField'
 import Avatar from '@mui/material/Avatar'
 import PhotoIcon from '@mui/icons-material/InsertPhotoOutlined'
 import MoodIcon from '@mui/icons-material/MoodOutlined'
+import CancelIcon from '@mui/icons-material/CancelOutlined'
 
 import Button from '../Button'
-import { createPost } from '../../api/request'
+import { changePost, createPost } from '../../api/request'
 import Modal from '../Modal'
 
 import styles from './NewsCreator.module.scss'
@@ -18,6 +19,9 @@ interface NewsCreatorProps {
   name: string
   avatarColor: string
   avatarImg?: string
+  content?: string
+  id?: string
+  isChange?: boolean
   setIsAllPosts?: (boolean) => void
 }
 
@@ -25,18 +29,24 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   name,
   avatarColor,
   avatarImg,
+  content,
   setIsAllPosts,
+  isChange,
+  id,
 }) => {
   const { t } = useTranslation()
 
-  const [contentInput, setContentInput] = useState('')
+  const [contentInput, setContentInput] = useState(content || '')
   const [isOpenImg, setIsOpenImg] = useState<boolean>(false)
   const [isOpenFeeling, setIsOpenFeeling] = useState<boolean>(false)
+  const [currentImg, setCurrentImg] = useState<string>('')
 
   const createNewPost = async () => {
-    await createPost({ content: contentInput, username: 'Alina' })
+    isChange
+      ? await changePost(contentInput, id)
+      : await createPost({ content: contentInput, username: 'Alina' })
     setContentInput('')
-    setIsAllPosts(prev=> !prev)
+    setIsAllPosts((prev) => !prev)
   }
 
   const onEmojiSelect = (e) => {
@@ -51,7 +61,9 @@ const NewsCreator: FC<NewsCreatorProps> = ({
         onConfirm={() => setIsOpenImg(false)}
         title={t('addPostImg')}
         isDialogActions={false}
-        content={<ModalContent />}
+        content={
+          <ModalContent currentImg={currentImg} setCurrentImg={setCurrentImg} />
+        }
       />
       <Modal
         open={isOpenFeeling}
@@ -59,7 +71,13 @@ const NewsCreator: FC<NewsCreatorProps> = ({
         onConfirm={() => setIsOpenFeeling(false)}
         isDialogActions={false}
         className={styles.feeling}
-        content={<Picker theme="light" data={data} onEmojiSelect={(e) => onEmojiSelect(e)} />}
+        content={
+          <Picker
+            theme="light"
+            data={data}
+            onEmojiSelect={(e) => onEmojiSelect(e)}
+          />
+        }
       />
 
       <div className={styles.createHeader}>
@@ -76,6 +94,9 @@ const NewsCreator: FC<NewsCreatorProps> = ({
           onChange={(event) => setContentInput(event.target.value)}
         />
       </div>
+      {currentImg ? (
+        <img className={styles.createImg} src={currentImg}></img>
+      ) : null}
       <div className={styles.createFooter}>
         <CreateIcons
           setIsOpenImg={setIsOpenImg}
@@ -144,11 +165,15 @@ const CreateIcons: FC<CreateIconsProps> = ({
   )
 }
 
-const ModalContent: FC = () => {
+interface ModalContentProps {
+  setCurrentImg: any
+  currentImg: string
+}
+
+const ModalContent: FC<ModalContentProps> = ({ currentImg, setCurrentImg }) => {
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [isAddImg, setIsAddImg] = useState<boolean>(false)
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
-  const [currentImg, setCurrentImg] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>()
   const { t } = useTranslation()
 
@@ -179,7 +204,14 @@ const ModalContent: FC = () => {
   return (
     <div className={styles.modalContent}>
       {currentImg ? (
-        <img src={currentImg} onError={(e) => errorImg(e)}></img>
+        <>
+          <img src={currentImg} onError={(e) => errorImg(e)}></img>
+          <CancelIcon
+            className={styles.cancel}
+            fontSize="small"
+            onClick={() => setCurrentImg('')}
+          />
+        </>
       ) : null}
       <TextField
         id="outlined-basic"

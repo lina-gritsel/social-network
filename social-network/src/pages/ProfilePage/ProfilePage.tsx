@@ -26,8 +26,10 @@ const ProfilePage: FC = () => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    setBgImage(JSON.parse(window.localStorage.getItem('bgImage')))
-    setBgImageArr(JSON.parse(window.localStorage.getItem('bgImageArr')))
+    const bg = window.localStorage.getItem('bgImage')
+    const bgArr = window.localStorage.getItem('bgImageArr')
+    if (bg) setBgImage(JSON.parse(bg))
+    if (bg) setBgImageArr(JSON.parse(bgArr))
   }, [])
   useEffect(() => {
     window.localStorage.setItem('bgImage', JSON.stringify(bgImage))
@@ -112,7 +114,12 @@ const ProfilePage: FC = () => {
               avatarColor={userNews[4].avatarColor}
               setIsAllPosts={setIsAllPosts}
             />
-            <NewsList isAllPosts={isAllPosts} filter={true} isProfilePage={true} setIsAllPosts={setIsAllPosts}/>
+            <NewsList
+              isAllPosts={isAllPosts}
+              filter={true}
+              isProfilePage={true}
+              setIsAllPosts={setIsAllPosts}
+            />
           </div>
         </div>
       </div>
