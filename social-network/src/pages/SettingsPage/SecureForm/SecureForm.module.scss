@@ -1,0 +1,33 @@
+.secureBlock {
+  align-items: center;
+  border-radius: 10px;
+  color: var(--gray-color);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  max-width: 350px;
+  padding: 15px;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--light-gray-color);
+  }
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.title {
+  font: var(--font-text-3);
+  font-weight: 700;
+}
+
+.subtitle {
+  font: var(--font-text-5);
+  max-width: 350px;
+  width: 100%;
+}

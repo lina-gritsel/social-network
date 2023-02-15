@@ -28,9 +28,9 @@
 
   &:before {
     background-color: var(--blue-color);
-    bottom: 0;
+    bottom: -10%;
     content: '';
-    height: 3px;
+    height: 2px;
     left: 0;
     position: absolute;
     transition: width 0.5s;
@@ -53,9 +53,10 @@
 .inputGender {
   border: var(--border-primary);
   border-radius: 4px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
   height: 56px;
-  padding-left: 15px;
-  transition: all 0.5s ease-in-out;
   width: 50%;
 
   &:hover {

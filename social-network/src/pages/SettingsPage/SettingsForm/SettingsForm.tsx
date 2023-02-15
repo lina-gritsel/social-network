@@ -19,7 +19,6 @@ import {
 import Input from '../../../components/Input'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
-import InputLanguages from '../../../components/InputLanguages'
 
 import { useSettingsForm } from './hooks'
 
@@ -194,8 +193,6 @@ const SettingsForm: FC = () => {
           />
         </div>
       </div>
-      <h2 className={styles.title}>{t('languages')}</h2>
-      <InputLanguages name="language" control={control} />
       <div className={styles.btnBlock}>
         <Button variant="outlined" onClick={onCancel}>
           {t('cancel')}

@@ -19,7 +19,6 @@ export interface FormValues {
   gender: string
   bio: string
   location: string
-  language: string
   facebook: string
   twitter: string
   instagram: string

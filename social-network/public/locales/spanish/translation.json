@@ -1,6 +1,6 @@
 {
   "settingsTitle": "Editar perfil",
-  "nickname": "Su nombre",
+  "nickname": "Tu apodo",
   "birthday": "Cumpleaños",
   "email": "Tu correo electrónico",
   "bio": "Biografía",
@@ -22,7 +22,8 @@
   "post": "Correo",
   "searchFriends": "Buscar amigos!",
   "offline": "desconectado",
-  "loginTitle": "Ingrese a su cuenta",
+  "loginTitle": "Iniciar sesión",
+  "loginSubtitle": "Bienvenido de nuevo, se te ha echado de menos!",
   "enterPassword": "Introducir la contraseña",
   "registerTitle": "Empezando",
   "registerSubtitle": "Crea una cuenta para continuar y conectarte con la gente.",
@@ -65,6 +66,8 @@
   "errMessageWeather": "No hay tal ciudad",
   "weather": "Tiempo",
   "enterCity": "Introduzca la ciudad",
-  "mightLike": "Puede que te guste"
-
+  "mightLike": "Puede que te guste",
+  "secure": "Seguro",
+  "deleteAcc": "Borrar cuenta",
+  "deleteMessage": "Puede eliminar completamente su cuenta, los datos que contiene y la información sobre los servicios conectados. El perfil también será eliminado."
 }

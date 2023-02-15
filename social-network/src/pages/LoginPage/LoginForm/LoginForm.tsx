@@ -1,8 +1,10 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import LockIcon from '@mui/icons-material/Lock'
+import { AccountCircleOutlined } from '@mui/icons-material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { Button, IconButton, InputAdornment } from '@mui/material'
-import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material'
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 
 import Input from '../../../components/Input'
 import InputPassword from '../../../components/InputPassword'
@@ -35,7 +37,7 @@ const LoginForm: FC = () => {
         inputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <AccountCircle />
+              <AccountCircleOutlined />
             </InputAdornment>
           ),
         }}
@@ -49,7 +51,7 @@ const LoginForm: FC = () => {
         inputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <LockIcon />
+              <LockOutlinedIcon />
             </InputAdornment>
           ),
           endAdornment: (
@@ -59,7 +61,11 @@ const LoginForm: FC = () => {
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
+                {showPassword ? (
+                  <VisibilityOffOutlinedIcon />
+                ) : (
+                  <VisibilityOutlinedIcon />
+                )}
               </IconButton>
             </InputAdornment>
           ),

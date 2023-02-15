@@ -1,6 +1,6 @@
 {
   "settingsTitle": "編輯個人資料",
-  "nickname": "你的名字",
+  "nickname": "您的暱稱",
   "birthday": "生日",
   "email": "你的郵件",
   "bio": "傳",
@@ -22,7 +22,8 @@
   "post": "郵政",
   "searchFriends": "搜索好友!",
   "offline": "離線",
-  "loginTitle": "登錄到您的帳戶",
+  "loginTitle": "登入",
+  "loginSubtitle": "歡迎回來，你已經錯過了!",
   "enterPassword": "輸入密碼",
   "registerTitle": "入門",
   "registerSubtitle": "創建一個帳戶以繼續並與人們聯繫。",
@@ -65,6 +66,8 @@
   "errMessageWeather": "哎呀，没有这样的城市",
   "weather": "天气情况",
   "enterCity": "进入城市",
-  "mightLike": "你可能会喜欢"
-  
+  "mightLike": "你可能会喜欢",
+  "secure": "安全的",
+  "deleteAcc": "刪除帳戶",
+  "deleteMessage": "您可以完全刪除您的帳戶、其中的數據以及有關連接服務的信息。配置文件也將被刪除。"
 }

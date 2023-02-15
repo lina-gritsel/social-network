@@ -1,16 +1,18 @@
 import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { AccountCircleOutlined } from '@mui/icons-material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { Button, IconButton, InputAdornment } from '@mui/material'
-import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
-import LockIcon from '@mui/icons-material/Lock'
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 
+import { PATHS } from '../../../router/paths'
 import Input from '../../../components/Input'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
 import InputPassword from '../../../components/InputPassword'
-import { PATHS } from '../../../router/paths'
 
 import { useRegistrationForm } from './hooks'
 
@@ -52,7 +54,7 @@ const RegistrationForm: FC = () => {
         inputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <AccountCircle />
+              <AccountCircleOutlined />
             </InputAdornment>
           ),
         }}
@@ -66,7 +68,7 @@ const RegistrationForm: FC = () => {
         inputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <LockIcon />
+              <LockOutlinedIcon />
             </InputAdornment>
           ),
           endAdornment: (
@@ -76,7 +78,11 @@ const RegistrationForm: FC = () => {
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
+                {showPassword ? (
+                  <VisibilityOffOutlinedIcon />
+                ) : (
+                  <VisibilityOutlinedIcon />
+                )}
               </IconButton>
             </InputAdornment>
           ),
