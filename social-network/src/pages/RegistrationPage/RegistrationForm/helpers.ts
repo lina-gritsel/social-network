@@ -8,7 +8,10 @@ export const schema = yup.object({
     .required('Email is a required field'),
   name: yup
     .string()
-    .matches(/^[a-zA-Z ]*$/, 'Nickname must be a string')
+    .matches(
+      /(?=.*[a-z])(?=.*[A-Z])\w+/,
+      'Nickname should contain at least one uppercase and lowercase character',
+    )
     .min(2, 'Mininum 2 characters')
     .max(15, 'Maximum 15 characters')
     .required('This field is required'),
