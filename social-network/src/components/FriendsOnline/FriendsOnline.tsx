@@ -10,7 +10,7 @@ import useDebounce from './hooks'
 import styles from './FriendsOnline.module.scss'
 
 interface FriendsOnline {
-  name: string
+  username: string
   avatarColor: string
   avatarImg?: string
   isOnline: boolean
@@ -30,19 +30,23 @@ const FriendsOnline: FC = () => {
       />
       <div className={styles.friends}>
         {friends
-          .filter(({ name }) =>
-            name.toLocaleLowerCase().includes(searchDebounced),
+          .filter(({ username }) =>
+            username.toLocaleLowerCase().includes(searchDebounced),
           )
-          .map((friend, index) => (
-            <Friend key={index} {...friend} />
-          ))}
+          .map((friend, index, friends) =>
+            friends.length === 0 ? (
+              <div key={index}>Никого нет</div>
+            ) : (
+              <Friend key={index} {...friend} />
+            ),
+          )}
       </div>
     </div>
   )
 }
 
 const Friend: FC<FriendsOnline> = ({
-  name,
+  username,
   avatarColor,
   avatarImg,
   isOnline,
@@ -57,9 +61,9 @@ const Friend: FC<FriendsOnline> = ({
           aria-label="recipe"
           src={avatarImg}
         >
-          {name[0]}
+          {username[0]}
         </Avatar>
-        <p>{name}</p>
+        <p>{username}</p>
       </div>
       {isOnline ? (
         <span className={styles.online}></span>

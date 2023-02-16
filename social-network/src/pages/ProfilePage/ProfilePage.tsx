@@ -1,22 +1,23 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Avatar } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-import { PATHS } from '../../router/paths'
 import Modal from '../../components/Modal'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import NewsCreator from '../../components/NewsCreator'
+import { PATHS } from '../../router/paths'
+import NewsList from '../../components/NewsList'
 
 import { useProfilePage } from './hooks'
 import { FIELD_INTO } from './constants'
 import ModalContent from './ModalContent'
-import { userNews } from '../NewsPage/NewsPageComponents/userNews'
 
 import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
+  const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
   const { t } = useTranslation()
   const {
     isOpen,
@@ -39,6 +40,7 @@ const ProfilePage: FC = () => {
         onClose={() => setIsOpen(false)}
         onConfirm={() => setIsOpen(false)}
         title={t('backgroundTitle')}
+        isDialogActions={false}
         content={
           <ModalContent
             setBgImage={setBgImage}
@@ -48,7 +50,6 @@ const ProfilePage: FC = () => {
             setBgImageArr={setBgImageArr}
           />
         }
-        isDialogActions={false}
       />
       <div className={styles.container}>
         <div className={styles.pofileHeader}>
@@ -99,7 +100,14 @@ const ProfilePage: FC = () => {
             <NewsCreator
               name={userInfo?.name}
               avatarImg={userInfo?.avatar}
-              avatarColor={userNews[4].avatarColor}
+              setIsAllPosts={setIsAllPosts}
+            />
+            <NewsList
+              isAllPosts={isAllPosts}
+              filter={true}
+              name={userInfo?.name}
+              isProfilePage={true}
+              setIsAllPosts={setIsAllPosts}
             />
           </div>
         </div>

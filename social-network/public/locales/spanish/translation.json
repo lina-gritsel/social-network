@@ -73,5 +73,10 @@
   "langSubtitle": "Mostrar la aplicación en ese idioma.",
   "warning": "Los datos serán eliminados de este servicio. Esta acción no se puede deshacer. Está seguro?",
   "addAvatar": "Agregar un enlace a una imagen",
-  "changeAvatar": "Cambia tu avatar"
+  "changeAvatar": "Cambia tu avatar",
+  "addPostImg": "Pegue el enlace a Su imagen",
+  "addPostImgLabel": "Su enlace",
+  "addMessage": "¡Tu imagen ha sido añadida!",
+  "change": "Cambio",
+  "delete": "Eliminar"
 }

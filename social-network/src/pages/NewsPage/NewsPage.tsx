@@ -1,43 +1,30 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
+import { useSelector } from 'react-redux'
 
-import { useAppDispatch } from '../../store'
 import Layout from '../../components/Layout'
 import Weather from '../../components/Weather'
-import { fetchUser } from '../../store/actions'
-import NewsCard from '../../components/NewsCard'
-import { getAllPosts } from '../../api/requests'
 import NewsCreator from '../../components/NewsCreator'
 import RandomFriend from '../../components/RandomFriend'
 import FriendsOnline from '../../components/FriendsOnline'
-
-import { getRandomColor, userNews } from './NewsPageComponents/userNews'
+import { getUserInfoSelector } from '../../store/selectors'
+import {
+  getRandomColor,
+} from '../../constants/constants'
+import { News } from '../../components/NewsCard/NewsCard'
 
 import styles from './NewsPage.module.scss'
+import NewsList from '../../components/NewsList'
 
-const setAvatarColor = (arr) => {
-return arr.map(post=> Object.assign(post, {avatarColor: getRandomColor}))
+export const setAvatarColor = (arr: News[]) => {
+  return arr.map((news) =>
+    Object.assign(news, { avatarColor: getRandomColor() }),
+  )
 }
 
 const NewsPage: FC = () => {
-  const dispatch = useAppDispatch()
-
-  const owner = userNews[4]
-  const [allPosts, setAllPosts] = useState([])
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
-  const userId = JSON.parse(localStorage.getItem('userId')) as string
-
-  useEffect(() => {
-    const getAllExistPosts = async () => {
-      const allExistPosts = await getAllPosts()
-      setAllPosts(setAvatarColor(allExistPosts.posts))
-    }
-
-    getAllExistPosts()
-  }, [isAllPosts])
-
-  useEffect(() => {
-    dispatch(fetchUser(userId))
-  }, [dispatch, userId])
+  
+  const userInfo = useSelector(getUserInfoSelector)
 
   return (
     <Layout>
@@ -46,18 +33,10 @@ const NewsPage: FC = () => {
           <div className={styles.news}>
             <NewsCreator
               setIsAllPosts={setIsAllPosts}
-              name={owner.name}
-              avatarColor={owner.avatarColor}
-              avatarImg={owner.avatarImg}
+              name={userInfo?.name}
+              avatarImg={userInfo?.avatar}
             />
-            {allPosts?.map(({ username, content, createdAt }, index) => (
-              <NewsCard
-                key={index}
-                name={username}
-                content={content}
-                createdAt={createdAt}
-              />
-            ))}
+            <NewsList isAllPosts={isAllPosts} />
           </div>
           <div className={styles.friendAndWeather}>
             <RandomFriend />
