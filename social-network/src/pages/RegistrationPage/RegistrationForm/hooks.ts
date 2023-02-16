@@ -1,18 +1,24 @@
+import moment from 'moment'
 import { useState, MouseEvent } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
+
+import { PATHS } from '../../../router/paths'
+import { createUser } from '../../../api/requests'
 
 import { schema } from './helpers'
 
 export interface FormValues {
   email: string
-  nickname: string
+  name: string
   password: string
   date: string
   gender: string
 }
 
 export const useRegistrationForm = () => {
+  const navigate = useNavigate()
   const {
     control,
     handleSubmit,
@@ -21,16 +27,32 @@ export const useRegistrationForm = () => {
     resolver: yupResolver(schema),
     defaultValues: {
       email: '',
-      nickname: '',
+      name: '',
       password: '',
       date: '',
       gender: 'male',
+      instagram: '',
+      twitter: '',
+      facebook: '',
     },
   })
 
-  const onSubmit = (data) => console.log(data)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [isRegistrError, setIsRegistrError] = useState<boolean>(false)
 
-  const [showPassword, setShowPassword] = useState(false)
+  const onSubmit = async (data) => {
+    const result = await createUser({
+      ...data,
+      date: moment(data.date).unix(),
+    })
+
+    if (result.status === 'success') {
+      localStorage.setItem('userId', JSON.stringify(result.data.user.id))
+      navigate(PATHS.NEWS)
+    } else {
+      setIsRegistrError(true)
+    }
+  }
 
   const onChangeShowPassword = () => setShowPassword((show) => !show)
 
@@ -42,6 +64,7 @@ export const useRegistrationForm = () => {
     errors,
     control,
     showPassword,
+    isRegistrError,
     onSubmit,
     handleSubmit,
     onChangeShowPassword,

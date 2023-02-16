@@ -1,11 +1,11 @@
 .form {
-  align-items: center;
-  border: var(--border-primary);
+  align-items: flex-start;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 40px;
   padding: 20px;
   transition: all 0.5s ease-in-out;
   max-width: 800px;
@@ -67,6 +67,43 @@
   width: 100%;
 }
 
+.loading {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.avatarBlock {
+  display: flex;
+  flex-direction: row;
+  max-width: 220px;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+}
+
+.editAvatar {
+  background-color: var(--white-color);
+  border: 1px solid var(--gray-color) !important;
+  bottom: 0;
+  color: var(--gray-color) !important;
+  font-size: 10px !important;
+  position: absolute !important;
+  right: -17%;
+  max-width: 120px;
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+}
+
+.profileAvatar {
+  background-color: var(--blue-color) !important;
+  height: 150px !important;
+  font: var(--font-h1) !important;
+  transition: all 0.5s ease-in-out;
+  width: 150px !important;
+}
+
 @media (max-width: 620px) {
   .form {
     gap: 10px;
@@ -91,5 +128,19 @@
   .title {
     font: var(--font-text-3);
     font-weight: 700;
+  }
+
+  .avatarBlock {
+    max-width: 160px;
+  }
+
+  .editAvatar {
+    font-size: 7px !important;
+    max-width: 90px;
+  }
+
+  .profileAvatar {
+    height: 100px !important;
+    width: 100px !important;
   }
 }

@@ -2,7 +2,7 @@ import { News } from '../../../components/NewsCard/NewsCard'
 import { getRandomColor } from '../../../constants/constants'
 
 
-export const userNews: News[] = [
+export const userNews = [
   {
     username: 'Alina',
     createdAt: '20.01.2023',

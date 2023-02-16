@@ -2,19 +2,20 @@ import { FC, useState, useEffect, SyntheticEvent } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 import NewsCreator from '../../components/NewsCreator'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import { PATHS } from '../../router/paths'
 import Modal from '../../components/Modal'
+import NewsList from '../../components/NewsList'
+import { getUserInfoSelector } from '../../store/selectors'
 
-import { userNews } from '../NewsPage/NewsPageComponents/userNews'
 import ModalContent from './ModalContent'
 import { FIELD_INTO, BG_IMAGES } from './constants'
 
 import styles from './Profile.module.scss'
-import NewsList from '../../components/NewsList'
 
 const ProfilePage: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -22,6 +23,8 @@ const ProfilePage: FC = () => {
   const [bgImageArr, setBgImageArr] = useState<string[]>(BG_IMAGES)
   const [bgImage, setBgImage] = useState<string>(bgImageArr[0])
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
+
+  const userInfo = useSelector(getUserInfoSelector)
 
   const { t } = useTranslation()
 
@@ -84,12 +87,12 @@ const ProfilePage: FC = () => {
           </div>
           <Avatar
             alt="Remy Sharp"
-            src={userNews[4].avatarImg}
+            src={userInfo.avatar}
             className={styles.profileAvatar}
           />
           <div className={styles.wrapperInfoUser}>
             <div className={styles.userInfo}>
-              <div className={styles.nameUser}>{userNews[4].username}</div>
+              <div className={styles.nameUser}>{userInfo.name}</div>
               <div className={styles.workUser}>UI Designer</div>
             </div>
             <NavLink to={PATHS.SETTINGS}>
@@ -109,14 +112,14 @@ const ProfilePage: FC = () => {
           </div>
           <div className={styles.content}>
             <NewsCreator
-              name={userNews[4].username}
-              avatarImg={userNews[4].avatarImg}
-              avatarColor={userNews[4].avatarColor}
+              name={userInfo.name}
+              avatarImg={userInfo.avatar}
               setIsAllPosts={setIsAllPosts}
             />
             <NewsList
               isAllPosts={isAllPosts}
               filter={true}
+              name={userInfo.name}
               isProfilePage={true}
               setIsAllPosts={setIsAllPosts}
             />

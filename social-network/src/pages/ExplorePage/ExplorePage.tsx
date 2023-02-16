@@ -1,6 +1,7 @@
-import { FC, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import Axios from 'axios'
+import { useTranslation } from 'react-i18next'
+import { FC, useEffect, useState } from 'react'
+import { Box, CircularProgress } from '@mui/material'
 
 import NewsCard from '../../components/NewsCard'
 import Layout from '../../components/Layout'
@@ -64,7 +65,9 @@ const ExplorePage: FC = () => {
           ))}
         </div>
         {isLoading ? (
-          <div className={styles.loading}>{t('loading')}</div>
+          <Box className={styles.loading}>
+            <CircularProgress />
+          </Box>
         ) : (
           <NewsList articles={articles} />
         )}
@@ -94,7 +97,7 @@ const NewsList: FC<NewsList> = ({ articles }) => {
               key={index}
               username={author?.split(',')[0].split('//')[1]?.split('/')[0] || source.name}
               createdAt={dateConversion(publishedAt)}
-              img={urlToImage || DEFAULT_IMG}
+              image={urlToImage || DEFAULT_IMG}
               content={(content?.slice(0, 150) || description) + '...'}
               className={styles.card}
               url={url}

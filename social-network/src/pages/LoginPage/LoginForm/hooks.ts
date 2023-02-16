@@ -1,15 +1,20 @@
 import { useState, MouseEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+
+import { loginUser } from '../../../api'
+import { PATHS } from '../../../router/paths'
 
 import { schema } from './helpers'
 
 export interface FormValues {
-  nickname: string
+  name: string
   password: string
 }
 
 export const useLoginForm = () => {
+  const navigate = useNavigate()
   const {
     control,
     handleSubmit,
@@ -17,14 +22,47 @@ export const useLoginForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      nickname: '',
+      name: '',
       password: '',
     },
   })
 
-  const onSubmit = (data) => console.log(data)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [isLoginError, setIsLoginError] = useState<boolean>(false)
+  const [isUserExist, setIsUserExist] = useState<boolean>(true)
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
-  const [showPassword, setShowPassword] = useState(false)
+  const onSubmit = async (data) => {
+    const { status } = await loginUser(data)
+
+    if (status === 200) {
+      return navigate(PATHS.NEWS)
+    }
+
+    if (status === 400) {
+      setIsLoginError(true)
+      setErrorMessage('Change your name or enter the correct password')
+      return
+    }
+
+    if (status === 404) {
+      setIsUserExist(false)
+      setErrorMessage('User does not exists')
+      return
+    }
+  }
+
+  const changeErrorMessage = (isLoginErr, isUserExist) => {
+    if (isLoginErr) {
+      return errorMessage
+    }
+
+    if (!isUserExist) {
+      return errorMessage
+    }
+
+    return errorMessage
+  }
 
   const onChangeShowPassword = () => setShowPassword((show) => !show)
 
@@ -35,9 +73,12 @@ export const useLoginForm = () => {
   return {
     errors,
     control,
+    isUserExist,
     showPassword,
+    isLoginError,
     onSubmit,
     handleSubmit,
+    changeErrorMessage,
     onChangeShowPassword,
     handleMouseDownPassword,
   }

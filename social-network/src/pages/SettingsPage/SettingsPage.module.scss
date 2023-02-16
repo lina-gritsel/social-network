@@ -6,34 +6,6 @@
   width: 100%;
 }
 
-.avatarBlock {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  max-width: 220px;
-  transition: all 0.5s ease-in-out;
-  width: 100%;
-}
-
-.editAvatar {
-  background-color: var(--white-color);
-  border: 1px solid var(--gray-color) !important;
-  bottom: 0;
-  color: var(--gray-color) !important;
-  font-size: 10px !important;
-  position: absolute !important;
-  right: -17%;
-  max-width: 120px;
-  transition: all 0.5s ease-in-out;
-  width: 100%;
-}
-
-.profileAvatar {
-  height: 150px !important;
-  transition: all 0.5s ease-in-out;
-  width: 150px !important;
-}
-
 .title {
   color: var(--gray-color);
   font: var(--font-h3);
@@ -43,20 +15,6 @@
 @media (max-width: 620px) {
   .wrapper {
     gap: 10px;
-  }
-
-  .avatarBlock {
-    max-width: 160px;
-  }
-
-  .editAvatar {
-    font-size: 7px !important;
-    max-width: 90px;
-  }
-
-  .profileAvatar {
-    height: 100px !important;
-    width: 100px !important;
   }
 
   .title {

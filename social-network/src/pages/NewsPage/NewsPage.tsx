@@ -1,10 +1,12 @@
-import { FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-import FriendsOnline from '../../components/FriendsOnline'
-import RandomFriend from '../../components/RandomFriend'
-import NewsCreator from '../../components/NewsCreator'
 import Layout from '../../components/Layout'
 import Weather from '../../components/Weather'
+import NewsCreator from '../../components/NewsCreator'
+import RandomFriend from '../../components/RandomFriend'
+import FriendsOnline from '../../components/FriendsOnline'
+import { getUserInfoSelector } from '../../store/selectors'
 import {
   getRandomColor,
 } from '../../constants/constants'
@@ -21,9 +23,12 @@ export const setAvatarColor = (arr: News[]) => {
 }
 
 const NewsPage: FC = () => {
-  const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
-
   const owner = userNews[4]
+  const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
+  
+  const userInfo = useSelector(getUserInfoSelector)
+
+  // const userId = JSON.parse(localStorage.getItem('userId')) as string
 
   return (
     <Layout>
@@ -32,9 +37,8 @@ const NewsPage: FC = () => {
           <div className={styles.news}>
             <NewsCreator
               setIsAllPosts={setIsAllPosts}
-              name={owner.username}
-              avatarColor={owner.avatarColor}
-              avatarImg={owner.avatarImg}
+              name={userInfo.name}
+              avatarImg={userInfo.avatar}
             />
             <NewsList isAllPosts={isAllPosts} />
           </div>

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, useRef } from 'react'
 import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -14,13 +14,16 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 import classNames from 'classnames'
-
-import styles from './NewsCard.module.scss'
-import { deletePost, getPost } from '../../api/request'
+import { deletePost, getPost } from '../../api/requests'
 import { useTranslation } from 'react-i18next'
 import NewsCreator from '../NewsCreator'
 import { userNews } from '../../pages/NewsPage/NewsPageComponents/userNews'
 import Modal from '../Modal'
+
+import { useOnClickOutside } from './hooks'
+
+import styles from './NewsCard.module.scss'
+
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -44,7 +47,7 @@ export interface News {
   username: string
   createdAt: string
   updatedAt?: string
-  img?: string
+  image?: string
   content: string
   moreContent?: string
   avatarColor?: string
@@ -59,7 +62,7 @@ export interface News {
 const NewsCard: FC<News> = ({
   username,
   createdAt,
-  img,
+  image,
   content,
   moreContent,
   avatarColor,
@@ -78,9 +81,9 @@ const NewsCard: FC<News> = ({
   }
 
   return (
-    <Card className={classNames(styles.card, className)} id={id}>
+    <Card className={classNames(styles.card, className)}>
       {isSettingModal && (
-        <SettingsModal id={id} setIsAllPosts={setIsAllPosts} />
+        <SettingsModal id={id} setIsAllPosts={setIsAllPosts} setIsSettingModal={setIsSettingModal}/>
       )}
       {!!avatarColor && (
         <CardHeader
@@ -108,19 +111,20 @@ const NewsCard: FC<News> = ({
           subheader={createdAt}
         />
       )}
-      {!!img && (
+      {!!image && (
         <CardMedia
           component="img"
           height="300"
-          image={img}
+          image={image}
           alt={username}
-          className={styles.img}
+          className={styles.image}
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
       {!avatarColor && <CardHeader title={username} subheader={createdAt} />}
       <CardContent>
         <Typography
+          className={avatarColor ? styles.content : null}
           variant="body2"
           color="text.secondary"
           height={!avatarColor ? 100 : null}
@@ -152,7 +156,12 @@ const NewsCard: FC<News> = ({
       )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{moreContent}</Typography>
+          <Typography
+            paragraph
+            className={avatarColor ? styles.moreContent : null}
+          >
+            {moreContent}
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>
@@ -162,12 +171,17 @@ const NewsCard: FC<News> = ({
 export interface SettingsModalProps {
   id: string
   setIsAllPosts?: (boolean) => void
+  setIsSettingModal?: (boolean) => void
 }
 
-const SettingsModal: FC<SettingsModalProps> = ({ id, setIsAllPosts }) => {
+const SettingsModal: FC<SettingsModalProps> = ({ id, setIsAllPosts, setIsSettingModal }) => {
   const [isChange, setIsChange] = useState(false)
   const [content, setContent] = useState('')
+  const [image, setImage] = useState('')
+  const modalRef = useRef();
   const { t } = useTranslation()
+
+  useOnClickOutside(modalRef, isChange, () => setIsSettingModal(false));
 
   const onclickDelete = () => {
     deletePost(id).then(() => setIsAllPosts((prev) => !prev))
@@ -175,31 +189,31 @@ const SettingsModal: FC<SettingsModalProps> = ({ id, setIsAllPosts }) => {
   const onclickChange = () => {
     getPost(id).then((response) => {
       setContent(response.data.post.content)
+      setImage(response.data.post.image)
       setIsChange(true)
     })
   }
 
   return (
-    <div className={styles.settingsModal}>
+    <div className={styles.settingsModal} ref={modalRef}>
       <Modal
+        className={styles.modal}
         open={isChange}
         onClose={() => setIsChange(false)}
         onConfirm={() => setIsChange(false)}
-        title={t('addPostImg')}
         isDialogActions={false}
         content={
           <NewsCreator
             name={userNews[4].username}
             avatarImg={userNews[4].avatarImg}
-            avatarColor={userNews[4].avatarColor}
             content={content}
             id={id}
             setIsAllPosts={setIsAllPosts}
             isChange={true}
+            image={image}
           />
         }
       />
-
       <div onClick={() => onclickChange()}>{t('change')}</div>
       <div onClick={() => onclickDelete()}>{t('delete')}</div>
     </div>

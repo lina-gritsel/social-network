@@ -1,22 +1,29 @@
 import { FC, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Box, CircularProgress } from '@mui/material'
 
 import NewsCard, { News } from '../NewsCard/NewsCard'
-import { getAllPosts } from '../../api/request'
+import { getAllPosts } from '../../api/requests'
 import { sortNews, dateConversion } from '../../constants/constants'
 import { setAvatarColor } from '../../pages/NewsPage/NewsPage'
-import { userNews } from '../../pages/NewsPage/NewsPageComponents/userNews'
 
 import styles from './NewsList.module.scss'
 
 interface NewsListProps {
   isAllPosts: boolean
   filter?: boolean
+  name?: string
   isProfilePage?: boolean
   setIsAllPosts?: (boolean) => void
 }
 
-const NewsList: FC<NewsListProps> = ({ isAllPosts, filter, isProfilePage, setIsAllPosts }) => {
+const NewsList: FC<NewsListProps> = ({
+  isAllPosts,
+  filter,
+  name,
+  isProfilePage,
+  setIsAllPosts,
+}) => {
   const [allPosts, setAllPosts] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -37,20 +44,30 @@ const NewsList: FC<NewsListProps> = ({ isAllPosts, filter, isProfilePage, setIsA
           }
         })
       const filterPost = filter
-        ? posts.filter((post) => post.username === 'Alina')
-        : posts
+      ? posts.filter((post) => post.username === name)
+      : posts
       setAllPosts(setAvatarColor(filterPost))
       setIsLoading(false)
     }
     getAllExistPosts()
   }, [isAllPosts])
 
-  if (isLoading) return <div className={styles.loading}>{t('loading')}</div>
+  if (isLoading)
+    return (
+      <Box className={styles.loading}>
+        <CircularProgress />
+      </Box>
+    )
 
   return (
     <>
       {allPosts.map((post, index) => (
-        <NewsCard key={index} {...post} isProfilePage={isProfilePage} setIsAllPosts={setIsAllPosts}/>
+        <NewsCard
+          key={index}
+          {...post}
+          isProfilePage={isProfilePage}
+          setIsAllPosts={setIsAllPosts}
+        />
       ))}
     </>
   )

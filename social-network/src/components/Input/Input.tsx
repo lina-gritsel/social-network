@@ -28,9 +28,10 @@ const Input: FC<InputProps> = ({
     <Controller
       name={name}
       control={control}
-      render={({ field }) => (
+      render={({ field: { onChange, value } }) => (
         <TextField
-          {...field}
+          onChange={onChange}
+          value={value ?? ''}
           fullWidth
           placeholder={placeholder}
           type={type}
