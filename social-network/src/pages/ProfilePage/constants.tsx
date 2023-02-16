@@ -1,9 +1,9 @@
-import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import CakeIcon from '@mui/icons-material/Cake'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
+import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 
 export const FIELD_INTO = [
   {
