@@ -24,6 +24,7 @@
 .labelBlock {
   display: flex;
   flex-direction: column;
+  gap: 5px;
   transition: all 0.5s ease-in-out;
   width: 50%;
 }
@@ -36,20 +37,26 @@
 .inputGender {
   align-items: center;
   border: var(--border-primary);
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   gap: 15px;
   height: 56px;
   padding-left: 15px;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
   width: 100%;
+
+  &:hover {
+    border: 2px solid var(--black-color);
+  }
 }
 
 .btnBlock {
   display: flex;
   flex-direction: row;
   gap: 20px;
+  justify-content: flex-end;
   transition: all 0.5s ease-in-out;
+  width: 100%;
 }
 
 .label {
@@ -84,16 +91,25 @@
 }
 
 .editAvatar {
+  align-items: center;
   background-color: var(--white-color);
-  border: 1px solid var(--gray-color) !important;
+  border: 1px solid var(--light-gray-color);
+  border-radius: 50%;
+  box-shadow: 3px 3px 3px var(--medium-gray-color);
   bottom: 0;
-  color: var(--gray-color) !important;
-  font-size: 10px !important;
-  position: absolute !important;
-  right: -17%;
-  max-width: 120px;
+  color: var(--gray-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  right: 40%;
+  position: absolute;
   transition: all 0.5s ease-in-out;
-  width: 100%;
+  width: 30px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .profileAvatar {
@@ -102,6 +118,22 @@
   font: var(--font-h1) !important;
   transition: all 0.5s ease-in-out;
   width: 150px !important;
+}
+
+.addingImg {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.imgInput {
+  width: 70% !important;
+}
+
+.cancelBtn {
+  cursor: pointer;
 }
 
 @media (max-width: 620px) {

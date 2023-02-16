@@ -1,16 +1,11 @@
-import {
-  FC,
-  useState,
-  useRef,
-  Dispatch,
-  SetStateAction,
-  MouseEvent,
-} from 'react'
-import { useTranslation } from 'react-i18next'
 import { TextField } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
+import { FC, Dispatch, SetStateAction, MouseEvent } from 'react'
 
 import Button from '../../components/Button'
+
+import { useModalContent } from './hooks'
 
 import styles from './Profile.module.scss'
 
@@ -29,10 +24,8 @@ const ModalContent: FC<IModalContent> = ({
   bgImageArr,
   setBgImageArr,
 }) => {
-  const [isDisabled, setIsDisabled] = useState<boolean>(true)
-
-  const inputRef = useRef<HTMLInputElement>()
   const { t } = useTranslation()
+  const { inputRef, isDisabled, setIsDisabled } = useModalContent()
 
   const handleClickImg = (e: MouseEvent) => {
     setBgImage((e.target as HTMLImageElement).src)
@@ -56,7 +49,10 @@ const ModalContent: FC<IModalContent> = ({
   const deleteImg = (e: MouseEvent) => {
     const index = (e.currentTarget as HTMLSpanElement).id
     const indexNumber = parseFloat(index)
-    setBgImageArr((prev) => [...prev.slice(0, indexNumber), ...prev.slice(indexNumber + 1)])
+    setBgImageArr((prev) => [
+      ...prev.slice(0, indexNumber),
+      ...prev.slice(indexNumber + 1),
+    ])
   }
 
   return (

@@ -5,15 +5,17 @@ export interface User {
   password: string
   date: number
   gender: string
-  avatar: string | null
+  avatar?: string
   bio: string
-  location: string | null
+  location?: string
   isFriend: boolean
   instagram: string
   facebook: string
   twitter: string
   createdAt: string
   updatedAt: string
+  followers?: string[]
+  following?: string[]
 }
 
 export interface RegistrationData {
@@ -29,6 +31,10 @@ export interface LoginUser {
 }
 
 export interface LoginStatus {
+  status: number
+}
+
+export interface DeleteUserStatus {
   status: number
 }
 

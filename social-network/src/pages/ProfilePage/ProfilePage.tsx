@@ -1,45 +1,36 @@
-import { FC, useState, useEffect, SyntheticEvent } from 'react'
+import { FC } from 'react'
+import { Avatar } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Avatar } from '@mui/material'
 
-import NewsCreator from '../../components/NewsCreator'
-import Layout from '../../components/Layout'
-import Button from '../../components/Button'
 import { PATHS } from '../../router/paths'
 import Modal from '../../components/Modal'
+import Layout from '../../components/Layout'
+import Button from '../../components/Button'
+import NewsCreator from '../../components/NewsCreator'
 
-import { userNews } from '../NewsPage/NewsPageComponents/userNews'
+import { useProfilePage } from './hooks'
+import { FIELD_INTO } from './constants'
 import ModalContent from './ModalContent'
-import { FIELD_INTO, BG_IMAGES } from './constants'
+import { userNews } from '../NewsPage/NewsPageComponents/userNews'
 
 import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
-  const [bgImageArr, setBgImageArr] = useState<string[]>(BG_IMAGES)
-  const [bgImage, setBgImage] = useState<string>(bgImageArr[0])
-
   const { t } = useTranslation()
-
-  useEffect(() => {
-    setBgImage(JSON.parse(window.localStorage.getItem('bgImage')))
-    setBgImageArr(JSON.parse(window.localStorage.getItem('bgImageArr')))
-  }, [])
-  useEffect(() => {
-    window.localStorage.setItem('bgImage', JSON.stringify(bgImage))
-    window.localStorage.setItem('bgImageArr', JSON.stringify(bgImageArr))
-  }, [bgImage, bgImageArr])
-
-  const errorImg = (e: SyntheticEvent) => {
-    setBgImageArr((prev) => prev.slice(0, -1))
-    setIsErrorImg(true)
-    const img = e.target as HTMLImageElement
-    img.onerror = null
-    setBgImage(BG_IMAGES[0])
-    img.src = bgImage
-  }
+  const {
+    isOpen,
+    bgImage,
+    userInfo,
+    bgImageArr,
+    isErrorImg,
+    profileInfoArr,
+    errorImg,
+    setIsOpen,
+    setBgImage,
+    setBgImageArr,
+    setIsErrorImg,
+  } = useProfilePage()
 
   return (
     <Layout>
@@ -79,14 +70,14 @@ const ProfilePage: FC = () => {
             </Button>
           </div>
           <Avatar
-            alt="Remy Sharp"
-            src={userNews[4].avatarImg}
+            alt="avatar"
+            src={userInfo?.avatar}
             className={styles.profileAvatar}
           />
           <div className={styles.wrapperInfoUser}>
             <div className={styles.userInfo}>
-              <div className={styles.nameUser}>{userNews[4].name}</div>
-              <div className={styles.workUser}>UI Designer</div>
+              <div className={styles.nameUser}>{userInfo?.name}</div>
+              <div className={styles.workUser}>{userInfo?.bio}</div>
             </div>
             <NavLink to={PATHS.SETTINGS}>
               <Button className={styles.editInfo}>{t('settings')}</Button>
@@ -100,13 +91,14 @@ const ProfilePage: FC = () => {
               <div key={index} className={styles.intoItem}>
                 {icon}
                 <div>{t(label)}</div>
+                <div className={styles.profileInfo}>{profileInfoArr[index]}</div>
               </div>
             ))}
           </div>
           <div className={styles.content}>
             <NewsCreator
-              name={userNews[4].name}
-              avatarImg={userNews[4].avatarImg}
+              name={userInfo?.name}
+              avatarImg={userInfo?.avatar}
               avatarColor={userNews[4].avatarColor}
             />
           </div>

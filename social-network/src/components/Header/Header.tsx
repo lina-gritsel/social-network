@@ -1,14 +1,25 @@
 import { FC } from 'react'
 import { Avatar } from '@mui/material'
-import { blue } from '@mui/material/colors'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+import { PATHS } from '../../router/paths'
+import { getUserInfoSelector } from '../../store/selectors'
 
 import styles from './Header.module.scss'
 
 const Header: FC = () => {
+  const navigate = useNavigate()
+  const userInfo = useSelector(getUserInfoSelector)
+
   return (
     <div className={styles.content}>
-      <div className={styles.userName}>Remy Sharp</div>
-      <Avatar sx={{ bgcolor: blue[500], width: 40, height: 40 }} />
+      <div className={styles.userName}>{userInfo?.name}</div>
+      <Avatar
+        src={userInfo?.avatar}
+        className={styles.avatar}
+        onClick={() => navigate(PATHS.PROFILE)}
+      />
     </div>
   )
 }

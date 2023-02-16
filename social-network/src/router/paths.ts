@@ -1,10 +1,10 @@
 export const PATHS = {
-  ABOUT: '/about',
-  PROFILE: '/profile',
-  LOGIN: '/login',
-  REGISTRATION: '/registration',
+  PAGE_404: '*',
   NEWS: '/news',
-  SETTINGS: '/settings',
+  ABOUT: '/about',
+  LOGIN: '/login',
+  PROFILE: '/profile',
   EXPLORE: '/explore',
-  PAGE_404: '*'
+  SETTINGS: '/settings',
+  REGISTRATION: '/registration',
 }

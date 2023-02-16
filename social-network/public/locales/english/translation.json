@@ -1,6 +1,6 @@
 {
   "settingsTitle": "Edit Profile",
-  "nickname": "Your name",
+  "nickname": "Your nickname",
   "birthday": "Birthday",
   "email": "Your email",
   "bio": "Biography",
@@ -22,7 +22,8 @@
   "post": "Post",
   "searchFriends": "Search Friends!",
   "offline": "offline",
-  "loginTitle": "Login To Your Account",
+  "loginTitle": "Sign In",
+  "loginSubtitle": "Welcome back, you've been missed!",
   "enterPassword": "Enter Password",
   "registerTitle": "Getting Started",
   "registerSubtitle": "Create an account to continue and connect with the people.",
@@ -65,6 +66,12 @@
   "errMessageWeather": "Oops, there is no such city",
   "weather": "Weather",
   "enterCity": "Enter the city",
-  "mightLike": "You might like"
-
+  "mightLike": "You might like",
+  "secure": "Secure",
+  "deleteAcc": "Delete account",
+  "deleteMessage": "You can completely delete your account, data in it and information about connected services. The profile will also be deleted.",
+  "langSubtitle": "Show app in that language.",
+  "warning": "The data will be deleted from this service. This action cannot be undone. Are you sure?",
+  "addAvatar": "Add a link to an image",
+  "changeAvatar": "Change your avatar"
 }
