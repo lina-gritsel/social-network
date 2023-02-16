@@ -16,6 +16,8 @@ import ChangesIcon from '@mui/icons-material/PublishedWithChanges'
 import DeleteIcon from '@mui/icons-material/DeleteForever'
 import { useSelector } from 'react-redux'
 
+import Comment from '../../components/Comment'
+
 import classNames from 'classnames'
 import { deletePost, getPost } from '../../api/requests'
 import { useTranslation } from 'react-i18next'
@@ -145,21 +147,24 @@ const NewsCard: FC<News> = ({
         )}
       </CardContent>
       {!!avatarColor && (
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          {!!moreContent && (
-            <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </ExpandMore>
-          )}
-        </CardActions>
+        <>
+          <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            {!!moreContent && (
+              <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </ExpandMore>
+            )}
+          </CardActions>
+          <Comment />
+        </>
       )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
