@@ -53,3 +53,9 @@ export interface ChangePostParams {
   content: string
   image: string
 }
+
+export interface ChangeComment {
+  postId: string
+  comment: string
+  userId: string
+}
