@@ -2,11 +2,12 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AccountCircleOutlined } from '@mui/icons-material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { Button, IconButton, InputAdornment } from '@mui/material'
+import { IconButton, InputAdornment } from '@mui/material'
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 
 import Input from '../../../components/Input'
+import Button from '../../../components/Button'
 import InputPassword from '../../../components/InputPassword'
 
 import { useLoginForm } from './hooks'
@@ -75,7 +76,7 @@ const LoginForm: FC = () => {
       <p className={styles.errorMessage}>
         {changeErrorMessage(isLoginError, isUserExist)}
       </p>
-      <Button variant="contained" fullWidth type="submit">
+      <Button className={styles.logInBtn} type="submit">
         {t('logIn')}
       </Button>
     </form>

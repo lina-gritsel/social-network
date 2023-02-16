@@ -9,7 +9,6 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined'
 import {
-  Button,
   FormLabel,
   InputAdornment,
   Avatar,
@@ -19,6 +18,7 @@ import {
 
 import Modal from '../../../components/Modal'
 import Input from '../../../components/Input'
+import Button from '../../../components/Button'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
 
@@ -223,12 +223,10 @@ const SettingsForm: FC = () => {
         </div>
       </div>
       <div className={styles.btnBlock}>
-        <Button variant="outlined" onClick={onCancel}>
+        <Button className={styles.cancelBtn} outlined onClick={onCancel}>
           {t('cancel')}
         </Button>
-        <Button variant="contained" type="submit">
-          {t('save')}
-        </Button>
+        <Button type="submit">{t('save')}</Button>
       </div>
     </form>
   )

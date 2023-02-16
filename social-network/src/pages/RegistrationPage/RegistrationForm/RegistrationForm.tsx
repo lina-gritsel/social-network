@@ -3,13 +3,14 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { AccountCircleOutlined } from '@mui/icons-material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { Button, IconButton, InputAdornment } from '@mui/material'
+import { IconButton, InputAdornment } from '@mui/material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 
 import { PATHS } from '../../../router/paths'
 import Input from '../../../components/Input'
+import Button from '../../../components/Button'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
 import InputPassword from '../../../components/InputPassword'
@@ -106,7 +107,7 @@ const RegistrationForm: FC = () => {
       <p className={styles.errorMessage}>
         {isRegistrError && 'This email or name is already in use'}
       </p>
-      <Button variant="contained" fullWidth type="submit">
+      <Button className={styles.singInBtn} type="submit">
         {t('signUp')}
       </Button>
       <div className={styles.block}>
