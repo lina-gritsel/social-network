@@ -19,9 +19,26 @@ const Comment: FC<CommentProps> = ({ postId, avatarImg, avatarColor }) => {
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   const [comment, setComment] = useState<string>('')
+  const [postComments, setPostComments] = useState([])
 
   const changeComment = (event) => {
     setComment(event.target.value)
+  }
+
+  const createComment = async (userId, comment, postId) => {
+    const result = await addComment({ userId, comment, postId })
+    console.log(result.comments)
+
+    const allComments = result.comments
+    setPostComments(allComments)
+  }
+
+  const commentsList = (postComments) => {
+    if (postComments) {
+      postComments.map((comment, index) => {
+        return <ExistComment key={index} comment={comment.comment} />
+      })
+    }
   }
 
   return (
@@ -40,12 +57,14 @@ const Comment: FC<CommentProps> = ({ postId, avatarImg, avatarColor }) => {
         />
         <button
           className={styles.sendComment}
-          onClick={() => addComment({ userId, comment, postId })}
+          onClick={() => createComment(userId, comment, postId)}
         >
           <SendIcon />
         </button>
       </div>
-      <ExistComment />
+      {postComments.map((comment, index) => {
+        return <ExistComment key={index} comment={comment.comment} />
+      })}
     </>
   )
 }
