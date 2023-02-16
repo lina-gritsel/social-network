@@ -17,7 +17,7 @@ export const Router: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate replace to="/news" />} />
+        <Route path="/" element={<Navigate replace to="/registration" />} />
         {routes.map(({ path, component: Component }, index) => (
           <Route key={index} path={path} element={<Component />} />
         ))}
