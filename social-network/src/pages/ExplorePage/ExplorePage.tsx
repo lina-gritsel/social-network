@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
 import NewsCard from '../../components/NewsCard'
+import { ExploreNewsCard } from '../../components/NewsCard/ExploreCard'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import { DEFAULT_IMG } from '../../components/NewsCard/NewsCard'
@@ -93,7 +94,7 @@ const NewsList: FC<NewsList> = ({ articles }) => {
           index: number,
         ) =>
           !!description || !!content || !!urlToImage ? (
-            <NewsCard
+            <ExploreNewsCard
               key={index}
               username={author?.split(',')[0].split('//')[1]?.split('/')[0] || source.name}
               createdAt={dateConversion(publishedAt)}

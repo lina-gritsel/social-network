@@ -1,14 +1,10 @@
 import { FC, useState, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
-import { useSelector } from 'react-redux'
 
 import NewsCard, { News } from '../NewsCard/NewsCard'
 import { getAllPosts, getUser } from '../../api/requests'
 import { sortNews, dateConversion } from '../../constants/constants'
 import { setAvatarColor } from '../../pages/NewsPage/NewsPage'
-import { useAppDispatch } from '../../store'
-import { fetchUser } from '../../store/actions'
-import { getUserInfoSelector } from '../../store/selectors'
 
 import styles from './NewsList.module.scss'
 
@@ -55,7 +51,6 @@ const NewsList: FC<NewsListProps> = ({
       } else {
         setAllPosts(setAvatarColor(posts))
       }
-
       setIsLoading(false)
     }
     getAllExistPosts()

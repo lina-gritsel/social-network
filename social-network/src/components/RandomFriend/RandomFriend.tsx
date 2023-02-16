@@ -7,7 +7,6 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import moment from 'moment'
 
-import { friends } from '../../pages/NewsPage/NewsPageComponents/userNews'
 import Button from '../Button'
 import { getRandomInt, sortBirthday } from '../../constants/constants'
 import { getAllUsers, User } from '../../api'
@@ -31,6 +30,7 @@ const RandomFriend: FC = () => {
   }, [])
 
   const index = getRandomInt(0, allUsers?.length)
+  console.log(index)
 
   const randomUser = allUsers[index]
 
@@ -50,7 +50,7 @@ const RandomFriend: FC = () => {
 const Friend: FC<RandomFriend> = ({ user, isBirthday, title }) => {
   const { t } = useTranslation()
 
-  const bdDate = moment.unix(user?.date).format('DD.MM')
+  const bdDate = moment.unix(user?.date).format('DD/MM')
 
   return (
     <Card className={styles.friend}>

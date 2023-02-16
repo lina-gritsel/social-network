@@ -1,18 +1,19 @@
 import { Avatar } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { FC, KeyboardEvent } from 'react'
+import { useSelector } from 'react-redux'
+
+import { getUserInfoSelector } from '../../store/selectors'
 
 import styles from './Comment.module.scss'
 
-interface CommentProps {
-  avatarColor?: string
-  avatarImg?: string
-}
+// interface CommentProps {
+// }
 
-const Comment: FC<CommentProps> = ({
-  avatarColor,
-  avatarImg,
-}) => {
+const Comment: FC = () => {
+
+  const userInfo = useSelector(getUserInfoSelector)
+
   const { t } = useTranslation()
 
   const changeComment = (event) => {}
@@ -20,9 +21,8 @@ const Comment: FC<CommentProps> = ({
   return (
     <div className={styles.container}>
       <Avatar
-        sx={{ bgcolor: avatarColor }}
         aria-label="recipe"
-        src={avatarImg}
+        src={userInfo?.avatar}
         className={styles.avatar}
       />
       <input

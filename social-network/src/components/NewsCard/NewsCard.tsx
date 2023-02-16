@@ -58,7 +58,6 @@ export interface News {
   avatarColor?: string
   avatarImg?: string
   className?: string
-  url?: string
   id?: string
   setIsAllPosts?: (boolean) => void
   isProfilePage?: boolean
@@ -73,7 +72,6 @@ const NewsCard: FC<News> = ({
   avatarColor,
   avatarImg,
   className,
-  url,
   id,
   setIsAllPosts,
   isProfilePage,
@@ -94,32 +92,30 @@ const NewsCard: FC<News> = ({
           setIsSettingModal={setIsSettingModal}
         />
       )}
-      {!!avatarColor && (
-        <CardHeader
-          avatar={
-            <Avatar
-              sx={{ bgcolor: avatarColor }}
-              aria-label="recipe"
-              alt={username}
-              src={avatarImg}
+      <CardHeader
+        avatar={
+          <Avatar
+            sx={{ bgcolor: avatarColor }}
+            aria-label="recipe"
+            alt={username}
+            src={avatarImg}
+          >
+            {username[0]}
+          </Avatar>
+        }
+        action={
+          isProfilePage ? (
+            <IconButton
+              aria-label="settings"
+              onClick={() => setIsSettingModal((prev) => !prev)}
             >
-              {username[0]}
-            </Avatar>
-          }
-          action={
-            isProfilePage ? (
-              <IconButton
-                aria-label="settings"
-                onClick={() => setIsSettingModal((prev) => !prev)}
-              >
-                <MoreVertIcon />
-              </IconButton>
-            ) : null
-          }
-          title={username}
-          subheader={createdAt}
-        />
-      )}
+              <MoreVertIcon />
+            </IconButton>
+          ) : null
+        }
+        title={username}
+        subheader={createdAt}
+      />
       {!!image && (
         <CardMedia
           component="img"
@@ -130,52 +126,41 @@ const NewsCard: FC<News> = ({
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
-      {!avatarColor && <CardHeader title={username} subheader={createdAt} />}
       <CardContent>
         <Typography
-          className={avatarColor ? styles.content : null}
+          className={styles.content}
           variant="body2"
           color="text.secondary"
-          height={!avatarColor ? 100 : null}
         >
           {content}
         </Typography>
-        {!!url && !moreContent && (
-          <a target="_blank" rel="noreferrer" href={url}>
-            Click to read more 🢅
-          </a>
-        )}
       </CardContent>
-      {!!avatarColor && (
-        <>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            {!!moreContent && (
-              <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </ExpandMore>
-            )}
-          </CardActions>
-          <Comment />
-        </>
-      )}
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        {!!moreContent && (
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        )}
+      </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography
             paragraph
-            className={avatarColor ? styles.moreContent : null}
+            className={styles.moreContent}
           >
             {moreContent}
           </Typography>
         </CardContent>
       </Collapse>
+      <Comment />
     </Card>
   )
 }
