@@ -1,52 +1,56 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Avatar from '@mui/material/Avatar'
 import { Card } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
+import moment from 'moment'
 
 import { friends } from '../../pages/NewsPage/NewsPageComponents/userNews'
 import Button from '../Button'
 import { getRandomInt, sortBirthday } from '../../constants/constants'
+import { getAllUsers, User } from '../../api'
 
 import styles from './RandomFriend.module.scss'
 
 interface RandomFriend {
-  username: string
-  title: string
-  avatarColor: string
-  avatarImg?: string
-  profession?: string
-  birthday?: string
+  user: User
   isBirthday?: boolean
+  title: string
 }
 
 const RandomFriend: FC = () => {
-  const index = getRandomInt(0, friends.length - 1)
-  const friend = friends[index]
-  const bdFriend = friends.sort((a, b) =>
-    sortBirthday(a.birthday, b.birthday),
-  )[0]
+  const [allUsers, setAllUsers] = useState<User[]>([])
+  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+
+  useEffect(() => {
+    getAllUsers().then((res) =>
+      setAllUsers(res.users.filter((user) => user.id !== userId)),
+    )
+  }, [])
+
+  const index = getRandomInt(0, allUsers?.length)
+
+  const randomUser = allUsers[index]
+
+  // const sortBirthday = (a, b) => {
+  //   const currentYear = moment(moment(), 'YYYY/MM/DD').format('YYYY')
+  //   const currentTime = moment()
+  // }
 
   return (
     <div className={styles.friends}>
-      <Friend {...friend} title="mightLike" />
-      <Friend {...bdFriend} title="birthday" isBirthday={true} />
+      <Friend user={randomUser} title="mightLike" />
+      <Friend user={randomUser} title="birthday" isBirthday={true} />
     </div>
   )
 }
 
-const Friend: FC<RandomFriend> = ({
-  username,
-  avatarColor,
-  avatarImg,
-  profession,
-  title,
-  birthday,
-  isBirthday,
-}) => {
+const Friend: FC<RandomFriend> = ({ user, isBirthday, title }) => {
   const { t } = useTranslation()
+
+  const bdDate = moment.unix(user?.date).format('DD.MM')
 
   return (
     <Card className={styles.friend}>
@@ -54,17 +58,16 @@ const Friend: FC<RandomFriend> = ({
       <div className={styles.wrapperContent}>
         <div className={styles.cardHeader}>
           <Avatar
-            sx={{ bgcolor: avatarColor }}
             aria-label="recipe"
-            alt={username}
-            src={avatarImg}
+            alt={user?.name}
+            src={user?.avatar}
             className={styles.avatar}
           />
 
           <div>
-            <div className={styles.title}>{username}</div>
+            <div className={styles.title}>{user?.name}</div>
             <div className={styles.subTitle}>
-              {isBirthday ? t(title) + ' ' + birthday : profession}
+              {isBirthday ? t(title) + ' ' + bdDate : user?.bio}
             </div>
           </div>
         </div>

@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField'
 import Avatar from '@mui/material/Avatar'
 import PhotoIcon from '@mui/icons-material/InsertPhotoOutlined'
 import MoodIcon from '@mui/icons-material/MoodOutlined'
-import { useSelector } from 'react-redux'
 
 import Button from '../Button'
 import { changePost, createPost } from '../../api/requests'
@@ -17,10 +16,10 @@ import { ModalContent } from './ModalContent'
 
 import styles from './NewsCreator.module.scss'
 
-
 interface NewsCreatorProps {
   name: string
   avatarImg?: string
+  avatarColor?: string
   content?: string
   image?: string
   id?: string
@@ -65,41 +64,41 @@ const NewsCreator: FC<NewsCreatorProps> = ({
 
   return (
     <div className={styles.create}>
-      <Modal
-        open={isOpenImg}
-        onClose={() => setIsOpenImg(false)}
-        onConfirm={() => setIsOpenImg(false)}
-        title={t('addPostImg')}
-        className={isChange ? styles.photo : null}
-        isDialogActions={false}
-        content={
-          <ModalContent currentImg={currentImg} setCurrentImg={setCurrentImg} />
-        }
-      />
-      <Modal
-        open={isOpenFeeling}
-        onClose={() => setIsOpenFeeling(false)}
-        onConfirm={() => setIsOpenFeeling(false)}
-        isDialogActions={false}
-        className={isChange ? styles.feeling : null}
-        content={
-          <Picker
-            theme="light"
-            data={data}
-            onEmojiSelect={(e) => onEmojiSelect(e)}
-          />
-        }
-      />
+<Modal
+  open={isOpenImg}
+  onClose={() => setIsOpenImg(false)}
+  onConfirm={() => setIsOpenImg(false)}
+  title={t('addPostImg')}
+  className={isChange ? styles.photo : null}
+  isDialogActions={false}
+  content={
+    <ModalContent currentImg={currentImg} setCurrentImg={setCurrentImg} />
+  }
+/>
+<Modal
+  open={isOpenFeeling}
+  onClose={() => setIsOpenFeeling(false)}
+  onConfirm={() => setIsOpenFeeling(false)}
+  isDialogActions={false}
+  className={isChange ? styles.feeling : null}
+  content={
+    <Picker
+      theme="light"
+      data={data}
+      onEmojiSelect={(e) => onEmojiSelect(e)}
+    />
+  }
+/>
 
       <div className={styles.createHeader}>
-        {/* <Avatar
+        <Avatar
           sx={{ bgcolor: '#377dff' }}
           aria-label="recipe"
           src={avatarImg}
           className={styles.avatar}
         >
-          {name[0]}
-        </Avatar> */}
+          {name}
+        </Avatar>
         <ContentInput
           value={contentInput}
           onChange={(event) => setContentInput(event.target.value)}

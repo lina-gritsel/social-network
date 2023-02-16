@@ -6,6 +6,7 @@ import {
   CreatePostParams,
   DeleteUserStatus,
   ChangePostParams,
+  UsersInfo,
 } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
@@ -48,6 +49,13 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
 export const getUser = async (id: string): Promise<RegistrationData> => {
   try {
     return await (await fetch(`${USERS_URL}/${id}`)).json()
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+export const getAllUsers = async (): Promise<UsersInfo> => {
+  try {
+    return await (await fetch(`${USERS_URL}`)).json()
   } catch (error) {
     throw new Error(`${error}`)
   }

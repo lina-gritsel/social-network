@@ -24,6 +24,11 @@ export interface RegistrationData {
   }
   status: string
 }
+export interface UsersInfo {
+  users: User[]
+  status: string
+  results: number
+}
 
 export interface LoginUser {
   name: string

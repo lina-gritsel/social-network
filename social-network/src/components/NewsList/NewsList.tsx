@@ -1,10 +1,14 @@
 import { FC, useState, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 import NewsCard, { News } from '../NewsCard/NewsCard'
-import { getAllPosts } from '../../api/requests'
+import { getAllPosts, getUser } from '../../api/requests'
 import { sortNews, dateConversion } from '../../constants/constants'
 import { setAvatarColor } from '../../pages/NewsPage/NewsPage'
+import { useAppDispatch } from '../../store'
+import { fetchUser } from '../../store/actions'
+import { getUserInfoSelector } from '../../store/selectors'
 
 import styles from './NewsList.module.scss'
 
@@ -25,6 +29,9 @@ const NewsList: FC<NewsListProps> = ({
 }) => {
   const [allPosts, setAllPosts] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [username, setUsername] = useState<string>('')
+
+  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   useEffect(() => {
     const getAllExistPosts = async () => {
@@ -40,14 +47,19 @@ const NewsList: FC<NewsListProps> = ({
             post.moreContent = content.slice(101)
           }
         })
-      const filterPost = filter
-      ? posts.filter((post) => post.username === name)
-      : posts
-      setAllPosts(setAvatarColor(filterPost))
+      if (filter) {
+        getUser(userId).then((response) => setUsername(response.data.user.name))
+        setAllPosts(
+          setAvatarColor(posts.filter((post) => post.username === username)),
+        )
+      } else {
+        setAllPosts(setAvatarColor(posts))
+      }
+
       setIsLoading(false)
     }
     getAllExistPosts()
-  }, [isAllPosts])
+  }, [isAllPosts, filter, userId, username])
 
   if (isLoading)
     return (
