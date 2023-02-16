@@ -1,7 +1,8 @@
-import { createComment } from '../../api'
+import { ChangeComment, createComment } from '../../api'
 
-export const addComment = async (comment) => {
-  const result = await createComment(comment)
+export const addComment = async (comment: ChangeComment) => {
 
-  return result
+    const result = await createComment(comment)
+    console.log(result.comments)
+    return result
 }

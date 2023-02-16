@@ -15,7 +15,7 @@ const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
 const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
-const COMMETS_URL = `${BASE_URL}/comments`
+const COMMETS_URL = `${POSTS_URL}/comments`
 
 export const createUser = async (user: User): Promise<RegistrationData> => {
   try {

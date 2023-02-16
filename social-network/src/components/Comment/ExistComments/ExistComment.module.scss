@@ -1,0 +1,29 @@
+.wrapperExistComment {
+  display: flex;
+  gap: 18px;
+}
+
+.container {
+  background-color: var(--white-color);
+  border-radius: 20px;
+}
+
+.name {
+  color: var(--dark-gray-color);
+  font: var(--font-text-5);
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.time {
+  color: var(--dark-gray-color);
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.content {
+  color: var(--dark-gray-color);
+  font: var(--font-text-5);
+  line-height: 22px;
+  padding-top: 14px;
+}
