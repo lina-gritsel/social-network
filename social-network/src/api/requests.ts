@@ -1,9 +1,10 @@
 import {
-  CreatePostParams,
-  RegistrationSuccess,
-  LoginStatus,
-  RegistrationUser,
+  User,
   LoginUser,
+  LoginStatus,
+  RegistrationData,
+  CreatePostParams,
+  DeleteUserStatus,
 } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
@@ -12,9 +13,7 @@ const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
 
-export const createUser = async (
-  user: RegistrationUser,
-): Promise<RegistrationSuccess> => {
+export const createUser = async (user: User): Promise<RegistrationData> => {
   try {
     const data = await fetch(USERS_URL, {
       method: 'POST',
@@ -23,7 +22,8 @@ export const createUser = async (
       },
       body: JSON.stringify(user),
     })
-    return data.status !== 201 ? { success: false } : { success: true }
+    const result = await data.json()
+    return result
   } catch (error) {
     throw new Error(`${error}`)
   }
@@ -44,9 +44,37 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
   }
 }
 
-export const getUser = async (id: string): Promise<RegistrationUser> => {
+export const getUser = async (id: string): Promise<RegistrationData> => {
   try {
-    return await (await fetch(`${BASE_URL}/${id}`)).json()
+    return await (await fetch(`${USERS_URL}/${id}`)).json()
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+
+export const updateUser = async (user: User): Promise<User> => {
+  try {
+    const data = await fetch(`${USERS_URL}/${user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+    const result = await data.json()
+    return result
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+
+export const deleteUser = async (id: string): Promise<DeleteUserStatus> => {
+  try {
+    const data = await fetch(`${USERS_URL}/${id}`, {
+      method: 'DELETE',
+    })
+
+    return { status: data.status }
   } catch (error) {
     throw new Error(`${error}`)
   }

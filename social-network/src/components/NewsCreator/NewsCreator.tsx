@@ -19,6 +19,11 @@ interface NewsCreatorProps {
   setIsAllPosts?: (boolean) => void
 }
 
+interface ContentInputProps {
+  onChange: any
+  value: string
+}
+
 const NewsCreator: FC<NewsCreatorProps> = ({
   name,
   avatarColor,
@@ -30,7 +35,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   const [contentInput, setContentInput] = useState('')
 
   const createNewPost = async () => {
-    await createPost({ content: contentInput, username: 'Ula' })
+    await createPost({ content: contentInput, username: name })
     setContentInput('')
     setIsAllPosts(true)
   }
@@ -44,7 +49,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
           src={avatarImg}
           className={styles.avatar}
         >
-          {name[0]}
+          {name}
         </Avatar>
         <ContentInput
           value={contentInput}
@@ -57,11 +62,6 @@ const NewsCreator: FC<NewsCreatorProps> = ({
       </div>
     </div>
   )
-}
-
-interface ContentInputProps {
-  onChange: any
-  value: string
 }
 
 const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
