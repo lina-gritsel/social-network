@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 
@@ -7,6 +8,17 @@ import { BG_IMAGES } from './constants'
 
 export const useProfilePage = () => {
   const userInfo = useSelector(getUserInfoSelector)
+
+  const profileInfoArr = [
+    userInfo?.gender,
+    moment.unix(userInfo?.date).format('DD/MM/YYYY'),
+    userInfo?.location,
+    userInfo?.facebook,
+    userInfo?.twitter,
+    userInfo?.instagram,
+    userInfo?.followers,
+    userInfo?.following,
+  ]
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
@@ -37,6 +49,7 @@ export const useProfilePage = () => {
     userInfo,
     bgImageArr,
     isErrorImg,
+    profileInfoArr,
     errorImg,
     setIsOpen,
     setBgImage,

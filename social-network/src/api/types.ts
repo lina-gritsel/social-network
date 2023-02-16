@@ -14,6 +14,8 @@ export interface User {
   twitter: string
   createdAt: string
   updatedAt: string
+  followers: string | null
+  following: string | null
 }
 
 export interface RegistrationData {

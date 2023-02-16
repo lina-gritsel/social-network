@@ -24,6 +24,7 @@ const ProfilePage: FC = () => {
     userInfo,
     bgImageArr,
     isErrorImg,
+    profileInfoArr,
     errorImg,
     setIsOpen,
     setBgImage,
@@ -69,14 +70,14 @@ const ProfilePage: FC = () => {
             </Button>
           </div>
           <Avatar
-            alt="Remy Sharp"
-            src={userNews[4].avatarImg}
+            alt="avatar"
+            src={userInfo?.avatar}
             className={styles.profileAvatar}
           />
           <div className={styles.wrapperInfoUser}>
             <div className={styles.userInfo}>
-              <div className={styles.nameUser}>{userNews[4].name}</div>
-              <div className={styles.workUser}>UI Designer</div>
+              <div className={styles.nameUser}>{userInfo?.name}</div>
+              <div className={styles.workUser}>{userInfo?.bio}</div>
             </div>
             <NavLink to={PATHS.SETTINGS}>
               <Button className={styles.editInfo}>{t('settings')}</Button>
@@ -90,13 +91,14 @@ const ProfilePage: FC = () => {
               <div key={index} className={styles.intoItem}>
                 {icon}
                 <div>{t(label)}</div>
+                <div className={styles.profileInfo}>{profileInfoArr[index]}</div>
               </div>
             ))}
           </div>
           <div className={styles.content}>
             <NewsCreator
-              name={userNews[4].name}
-              avatarImg={userNews[4].avatarImg}
+              name={userInfo?.name}
+              avatarImg={userInfo?.avatar}
               avatarColor={userNews[4].avatarColor}
             />
           </div>
