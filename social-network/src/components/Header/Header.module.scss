@@ -1,7 +1,7 @@
 .content {
   align-items: center;
   display: flex;
-  gap:10px;
+  gap: 10px;
   justify-content: flex-end;
   width: 100%;
 }
@@ -19,4 +19,10 @@
   color: var(--gray-color);
   font: var(--font-text-3);
   font-weight: 700;
+}
+
+.avatar {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
 }
