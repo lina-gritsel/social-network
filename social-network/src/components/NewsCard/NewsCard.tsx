@@ -12,6 +12,9 @@ import Typography from '@mui/material/Typography'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import ChangesIcon from '@mui/icons-material/PublishedWithChanges'
+import DeleteIcon from '@mui/icons-material/DeleteForever'
+import { useSelector } from 'react-redux'
 
 import classNames from 'classnames'
 import { deletePost, getPost } from '../../api/requests'
@@ -19,11 +22,11 @@ import { useTranslation } from 'react-i18next'
 import NewsCreator from '../NewsCreator'
 import { userNews } from '../../pages/NewsPage/NewsPageComponents/userNews'
 import Modal from '../Modal'
+import { getUserInfoSelector } from '../../store/selectors'
 
 import { useOnClickOutside } from './hooks'
 
 import styles from './NewsCard.module.scss'
-
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -83,7 +86,11 @@ const NewsCard: FC<News> = ({
   return (
     <Card className={classNames(styles.card, className)}>
       {isSettingModal && (
-        <SettingsModal id={id} setIsAllPosts={setIsAllPosts} setIsSettingModal={setIsSettingModal}/>
+        <SettingsModal
+          id={id}
+          setIsAllPosts={setIsAllPosts}
+          setIsSettingModal={setIsSettingModal}
+        />
       )}
       {!!avatarColor && (
         <CardHeader
@@ -174,14 +181,20 @@ export interface SettingsModalProps {
   setIsSettingModal?: (boolean) => void
 }
 
-const SettingsModal: FC<SettingsModalProps> = ({ id, setIsAllPosts, setIsSettingModal }) => {
+const SettingsModal: FC<SettingsModalProps> = ({
+  id,
+  setIsAllPosts,
+  setIsSettingModal,
+}) => {
   const [isChange, setIsChange] = useState(false)
   const [content, setContent] = useState('')
   const [image, setImage] = useState('')
-  const modalRef = useRef();
+  const modalRef = useRef()
   const { t } = useTranslation()
 
-  useOnClickOutside(modalRef, isChange, () => setIsSettingModal(false));
+  const userInfo = useSelector(getUserInfoSelector)
+
+  useOnClickOutside(modalRef, isChange, () => setIsSettingModal(false))
 
   const onclickDelete = () => {
     deletePost(id).then(() => setIsAllPosts((prev) => !prev))
@@ -204,8 +217,8 @@ const SettingsModal: FC<SettingsModalProps> = ({ id, setIsAllPosts, setIsSetting
         isDialogActions={false}
         content={
           <NewsCreator
-            name={userNews[4].username}
-            avatarImg={userNews[4].avatarImg}
+            name={userInfo?.name}
+            avatarImg={userInfo?.avatar}
             content={content}
             id={id}
             setIsAllPosts={setIsAllPosts}
@@ -214,8 +227,14 @@ const SettingsModal: FC<SettingsModalProps> = ({ id, setIsAllPosts, setIsSetting
           />
         }
       />
-      <div onClick={() => onclickChange()}>{t('change')}</div>
-      <div onClick={() => onclickDelete()}>{t('delete')}</div>
+      <div onClick={() => onclickChange()}>
+        <ChangesIcon />
+        {t('change')}
+      </div>
+      <div onClick={() => onclickDelete()}>
+        <DeleteIcon />
+        {t('delete')}
+      </div>
     </div>
   )
 }

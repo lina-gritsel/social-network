@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, MutableRefObject } from 'react'
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import { TextField } from '@mui/material'
 
@@ -13,6 +13,7 @@ interface InputProps {
   }
   name: string
   control: Control<any>
+  inputRef?: MutableRefObject<HTMLInputElement>
   errors?: FieldErrors<FormValues>
 }
 
@@ -23,6 +24,7 @@ const Input: FC<InputProps> = ({
   name,
   control,
   errors,
+  inputRef,
 }) => {
   return (
     <Controller
@@ -30,6 +32,7 @@ const Input: FC<InputProps> = ({
       control={control}
       render={({ field: { onChange, value } }) => (
         <TextField
+          inputRef={inputRef}
           onChange={onChange}
           value={value ?? ''}
           fullWidth

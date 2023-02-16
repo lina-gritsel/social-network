@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 import classNames from 'classnames'
 
 import styles from './Button.module.scss'
@@ -9,6 +9,7 @@ interface ButtonProps {
   isDisabled?: boolean
   outlined?: boolean
   onClick?: any
+  type?: 'submit'
 }
 
 const Button: FC<ButtonProps> = ({
@@ -17,9 +18,11 @@ const Button: FC<ButtonProps> = ({
   outlined,
   isDisabled = false,
   onClick,
+  type,
 }) => {
   return (
     <button
+      type={type}
       className={classNames(
         styles.primaryButton,
         { [styles.outlined]: outlined },

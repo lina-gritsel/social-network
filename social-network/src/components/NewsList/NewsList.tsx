@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Box, CircularProgress } from '@mui/material'
 
 import NewsCard, { News } from '../NewsCard/NewsCard'
@@ -26,8 +25,6 @@ const NewsList: FC<NewsListProps> = ({
 }) => {
   const [allPosts, setAllPosts] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const { t } = useTranslation()
 
   useEffect(() => {
     const getAllExistPosts = async () => {

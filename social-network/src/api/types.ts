@@ -14,6 +14,8 @@ export interface User {
   twitter: string
   createdAt: string
   updatedAt: string
+  followers: string | null
+  following: string | null
 }
 
 export interface RegistrationData {
@@ -29,6 +31,10 @@ export interface LoginUser {
 }
 
 export interface LoginStatus {
+  status: number
+}
+
+export interface DeleteUserStatus {
   status: number
 }
 

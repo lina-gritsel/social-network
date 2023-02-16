@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react'
+import { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import Layout from '../../components/Layout'
@@ -10,7 +10,6 @@ import { getUserInfoSelector } from '../../store/selectors'
 import {
   getRandomColor,
 } from '../../constants/constants'
-import { userNews } from './NewsPageComponents/userNews'
 import { News } from '../../components/NewsCard/NewsCard'
 
 import styles from './NewsPage.module.scss'
@@ -23,12 +22,9 @@ export const setAvatarColor = (arr: News[]) => {
 }
 
 const NewsPage: FC = () => {
-  const owner = userNews[4]
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
   
   const userInfo = useSelector(getUserInfoSelector)
-
-  // const userId = JSON.parse(localStorage.getItem('userId')) as string
 
   return (
     <Layout>
@@ -37,8 +33,8 @@ const NewsPage: FC = () => {
           <div className={styles.news}>
             <NewsCreator
               setIsAllPosts={setIsAllPosts}
-              name={userInfo.name}
-              avatarImg={userInfo.avatar}
+              name={userInfo?.name}
+              avatarImg={userInfo?.avatar}
             />
             <NewsList isAllPosts={isAllPosts} />
           </div>

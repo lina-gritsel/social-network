@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux'
 
 import Button from '../Button'
 import { changePost, createPost } from '../../api/requests'
-import { getUserInfoSelector } from '../../store/selectors'
 import Modal from '../Modal'
 
 import { ModalContent } from './ModalContent'
@@ -29,6 +28,11 @@ interface NewsCreatorProps {
   setIsAllPosts?: (boolean) => void
 }
 
+interface ContentInputProps {
+  onChange: any
+  value: string
+}
+
 const NewsCreator: FC<NewsCreatorProps> = ({
   name,
   avatarImg,
@@ -38,7 +42,6 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   isChange,
   id,
 }) => {
-  const userInfo = useSelector(getUserInfoSelector)
 
   const { t } = useTranslation()
 
@@ -50,7 +53,7 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   const createNewPost = async () => {
     isChange
       ? await changePost({ content: contentInput, image: currentImg }, id)
-      : await createPost({ content: contentInput, username: userInfo.name, image: currentImg })
+      : await createPost({ content: contentInput, username: name, image: currentImg })
     setContentInput('')
     setCurrentImg('')
     setIsAllPosts((prev) => !prev)
@@ -92,10 +95,10 @@ const NewsCreator: FC<NewsCreatorProps> = ({
         {/* <Avatar
           sx={{ bgcolor: '#377dff' }}
           aria-label="recipe"
-          src={userInfo.avatar}
+          src={avatarImg}
           className={styles.avatar}
         >
-          {userInfo.name[0]}
+          {name[0]}
         </Avatar> */}
         <ContentInput
           value={contentInput}
@@ -114,11 +117,6 @@ const NewsCreator: FC<NewsCreatorProps> = ({
       </div>
     </div>
   )
-}
-
-interface ContentInputProps {
-  onChange: any
-  value: string
 }
 
 const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {

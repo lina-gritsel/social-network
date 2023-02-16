@@ -1,10 +1,11 @@
 import {
-  CreatePostParams,
-  RegistrationData,
-  LoginStatus,
-  LoginUser,
-  ChangePostParams,
   User,
+  LoginUser,
+  LoginStatus,
+  RegistrationData,
+  CreatePostParams,
+  DeleteUserStatus,
+  ChangePostParams,
 } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
@@ -63,6 +64,18 @@ export const updateUser = async (user: User): Promise<User> => {
     })
     const result = await data.json()
     return result
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+
+export const deleteUser = async (id: string): Promise<DeleteUserStatus> => {
+  try {
+    const data = await fetch(`${USERS_URL}/${id}`, {
+      method: 'DELETE',
+    })
+
+    return { status: data.status }
   } catch (error) {
     throw new Error(`${error}`)
   }

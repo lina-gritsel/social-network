@@ -8,7 +8,7 @@ import { routes } from './routes'
 export const Router: FC = () => {
   const dispatch = useAppDispatch()
 
-  const userId = JSON.parse(localStorage.getItem('userId')) as string
+  const userId = JSON.parse(localStorage.getItem('userId')) as string || ''
 
   useEffect(() => {
     dispatch(fetchUser(userId))
@@ -17,7 +17,7 @@ export const Router: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate replace to="/news" />} />
+        <Route path="/" element={<Navigate replace to="/registration" />} />
         {routes.map(({ path, component: Component }, index) => (
           <Route key={index} path={path} element={<Component />} />
         ))}

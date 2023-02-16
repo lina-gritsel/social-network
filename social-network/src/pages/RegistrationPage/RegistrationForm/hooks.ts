@@ -30,7 +30,7 @@ export const useRegistrationForm = () => {
       name: '',
       password: '',
       date: '',
-      gender: 'male',
+      gender: 'Male',
       instagram: '',
       twitter: '',
       facebook: '',
