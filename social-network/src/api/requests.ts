@@ -151,11 +151,11 @@ export const deletePost = async (id: string) => {
   }
 }
 
-export const createComment = async (comment: ChangeComment, id: string) => {
+export const createComment = async (content: ChangeComment) => {
   try {
-    const response = await fetch(`${COMMETS_URL}/${id}`, {
+    const response = await fetch(`${COMMETS_URL}/${content.postId}`, {
       method: 'PATCH',
-      body: JSON.stringify(comment),
+      body: JSON.stringify(content),
       headers: {
         'Content-Type': 'application/json',
       },

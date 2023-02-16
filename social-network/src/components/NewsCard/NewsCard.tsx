@@ -1,33 +1,38 @@
-import { FC, useState, useRef } from 'react'
-import { styled } from '@mui/material/styles'
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
-import CardMedia from '@mui/material/CardMedia'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Collapse from '@mui/material/Collapse'
-import Avatar from '@mui/material/Avatar'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import ChangesIcon from '@mui/icons-material/PublishedWithChanges'
-import DeleteIcon from '@mui/icons-material/DeleteForever'
-import { useSelector } from 'react-redux'
-
-import Comment from '../../components/Comment'
-
-import classNames from 'classnames'
-import { deletePost, getPost } from '../../api/requests'
 import { useTranslation } from 'react-i18next'
-import NewsCreator from '../NewsCreator'
-import { userNews } from '../../pages/NewsPage/NewsPageComponents/userNews'
-import Modal from '../Modal'
+import { styled } from '@mui/material/styles'
+import { FC, useState, useRef } from 'react'
+import { useSelector } from 'react-redux'
+import classNames from 'classnames'
+
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Collapse,
+  Avatar,
+  Typography,
+} from '@mui/material'
+
+import {
+  FavoriteBorder,
+  MoreVert,
+  PublishedWithChanges,
+  DeleteForever,
+} from '@mui/icons-material'
+
+import IconButton, { IconButtonProps } from '@mui/material/IconButton'
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
 import { getUserInfoSelector } from '../../store/selectors'
+import { deletePost, getPost } from '../../api/requests'
+import Comment from '../../components/Comment'
+import NewsCreator from '../NewsCreator'
+import Modal from '../Modal'
 
 import { useOnClickOutside } from './hooks'
-
 import styles from './NewsCard.module.scss'
 
 export const DEFAULT_IMG =
@@ -112,7 +117,7 @@ const NewsCard: FC<News> = ({
                 aria-label="settings"
                 onClick={() => setIsSettingModal((prev) => !prev)}
               >
-                <MoreVertIcon />
+                <MoreVert />
               </IconButton>
             ) : null
           }
@@ -150,7 +155,7 @@ const NewsCard: FC<News> = ({
         <div className={styles.footerPost}>
           <CardActions disableSpacing className={styles.cardActions}>
             <IconButton aria-label="add to favorites">
-              <FavoriteBorderIcon />
+              <FavoriteBorder />
               <div className={styles.like}>{'Like'}</div>
             </IconButton>
             {!!moreContent && (
@@ -164,7 +169,7 @@ const NewsCard: FC<News> = ({
               </ExpandMore>
             )}
           </CardActions>
-          <Comment />
+          <Comment postId={id} />
         </div>
       )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -234,11 +239,11 @@ const SettingsModal: FC<SettingsModalProps> = ({
         }
       />
       <div onClick={() => onclickChange()}>
-        <ChangesIcon />
+        <PublishedWithChanges />
         {t('change')}
       </div>
       <div onClick={() => onclickDelete()}>
-        <DeleteIcon />
+        <DeleteForever />
         {t('delete')}
       </div>
     </div>

@@ -5,12 +5,15 @@ import SendIcon from '@mui/icons-material/Send'
 
 import styles from './Comment.module.scss'
 
+import { addComment } from './hooks'
+
 interface CommentProps {
-  avatarColor?: string
   avatarImg?: string
+  avatarColor?: string
+  postId: string
 }
 
-const Comment: FC<CommentProps> = ({ avatarColor, avatarImg }) => {
+const Comment: FC<CommentProps> = ({ postId, avatarImg, avatarColor }) => {
   const { t } = useTranslation()
 
   const [comment, setComment] = useState<string>('')
@@ -30,9 +33,7 @@ const Comment: FC<CommentProps> = ({ avatarColor, avatarImg }) => {
       <input
         placeholder={t('comment')}
         className={styles.input}
-        onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
-          changeComment(event)
-        }
+        onChange={changeComment}
       />
       <button className={styles.sendComment}>
         <SendIcon />
