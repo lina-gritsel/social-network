@@ -99,6 +99,7 @@ const ProfilePage: FC = () => {
           <div className={styles.content}>
             <NewsCreator
               name={userInfo?.name}
+              userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
               setIsAllPosts={setIsAllPosts}
             />

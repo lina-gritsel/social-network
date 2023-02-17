@@ -21,28 +21,33 @@ interface RandomUser {
   user: User
   isBirthday?: boolean
   title: string
+  isLoading: boolean
 }
 
-const RandomFriend: FC<RandomFriend> = ({allUsers, isLoading}) => {
+const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
   const index = getRandomInt(0, allUsers?.length)
   const randomUser = allUsers[index]
 
   return (
     <div className={styles.friends}>
-      {isLoading && <div>Loading...</div>}
-      <Friend user={randomUser} title="mightLike" />
-      <Friend user={randomUser} title="birthday" isBirthday={true} />
+      <Friend user={randomUser} isLoading={isLoading} title="mightLike" />
+      <Friend
+        user={randomUser}
+        isLoading={isLoading}
+        title="birthday"
+        isBirthday={true}
+      />
     </div>
   )
 }
 
-const Friend: FC<RandomUser> = ({ user, isBirthday, title }) => {
+const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
   const { t } = useTranslation()
 
   const bdDate = moment.unix(user?.date).format('DD/MM')
 
   return (
-    <Card className={styles.friend}>
+    <Card>
       <div className={styles.mightLike}>{t(title)}</div>
       <div className={styles.wrapperContent}>
         <div className={styles.cardHeader}>
@@ -54,16 +59,28 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title }) => {
           />
 
           <div>
-            <div className={styles.title}>{user?.name}</div>
+            <div className={styles.title}>
+              {isLoading ? t('loading') : user?.name}
+            </div>
             <div className={styles.subTitle}>
-              {isBirthday ? t(title) + ' ' + bdDate : user?.bio}
+              {isLoading
+                ? t('loading')
+                : isBirthday
+                ? t(title) + ' ' + bdDate
+                : user?.bio}
             </div>
           </div>
         </div>
         {!isBirthday ? (
           <>
             <div className={styles.icons}>
-              <InstagramIcon />
+              <a
+                href="http://www.instagram.com/prosto_a.lin.a"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <InstagramIcon />
+              </a>
               <FacebookIcon />
               <TwitterIcon />
             </div>

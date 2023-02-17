@@ -2,9 +2,8 @@ import { FC, useState, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
 import NewsCard, { News } from '../NewsCard/NewsCard'
-import { getAllPosts, getUser } from '../../api/requests'
+import { getAllPosts } from '../../api/requests'
 import { sortNews, dateConversion } from '../../utils/utils'
-import { setAvatarColor } from '../../pages/NewsPage/NewsPage'
 
 import styles from './NewsList.module.scss'
 
@@ -24,7 +23,6 @@ const NewsList: FC<NewsListProps> = ({
 }) => {
   const [allPosts, setAllPosts] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [username, setUsername] = useState<string>('')
 
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
@@ -38,22 +36,21 @@ const NewsList: FC<NewsListProps> = ({
           post.createdAt = dateConversion(post.createdAt)
           const content = post.content
           if (content.length > 100) {
-            post.content = content.slice(0, 100) + '...'
-            post.moreContent = content.slice(101)
+            post.content = content.slice(0, 150) + '...'
+            post.moreContent = content.slice(151)
           }
         })
       if (filter) {
-        getUser(userId).then((response) => setUsername(response.data.user.name))
         setAllPosts(
-          setAvatarColor(sortedPosts.filter((post) => post.username === username)),
+          sortedPosts.filter((post) => post.username === userId),
         )
       } else {
-        setAllPosts(setAvatarColor(sortedPosts))
+        setAllPosts(sortedPosts)
       }
       setIsLoading(false)
     }
     getAllExistPosts()
-  }, [isAllPosts, filter, userId, username])
+  }, [isAllPosts, filter, userId])
 
   if (isLoading)
     return (

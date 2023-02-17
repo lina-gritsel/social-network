@@ -7,18 +7,10 @@ import NewsCreator from '../../components/NewsCreator'
 import RandomFriend from '../../components/RandomFriend'
 import FriendsOnline from '../../components/FriendsOnline'
 import { getUserInfoSelector } from '../../store/selectors'
-import { getRandomColor } from '../../utils/utils'
 import { getAllUsers, User } from '../../api'
-import { News } from '../../components/NewsCard/NewsCard'
 
 import styles from './NewsPage.module.scss'
 import NewsList from '../../components/NewsList'
-
-export const setAvatarColor = (arr: News[]) => {
-  return arr.map((news) =>
-    Object.assign(news, { avatarColor: getRandomColor() }),
-  )
-}
 
 const NewsPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
@@ -46,6 +38,7 @@ const NewsPage: FC = () => {
             <NewsCreator
               setIsAllPosts={setIsAllPosts}
               name={userInfo?.name}
+              userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
             />
             <NewsList isAllPosts={isAllPosts} />

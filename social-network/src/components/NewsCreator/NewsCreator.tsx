@@ -2,7 +2,6 @@ import { FC, useState, SetStateAction, Dispatch } from 'react'
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import { useTranslation } from 'react-i18next'
-import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Avatar from '@mui/material/Avatar'
 import PhotoIcon from '@mui/icons-material/InsertPhotoOutlined'
@@ -18,8 +17,8 @@ import styles from './NewsCreator.module.scss'
 
 interface NewsCreatorProps {
   name: string
+  userId: string
   avatarImg?: string
-  avatarColor?: string
   content?: string
   image?: string
   id?: string
@@ -34,6 +33,7 @@ interface ContentInputProps {
 
 const NewsCreator: FC<NewsCreatorProps> = ({
   name,
+  userId,
   avatarImg,
   content,
   image,
@@ -41,7 +41,6 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   isChange,
   id,
 }) => {
-
   const { t } = useTranslation()
 
   const [contentInput, setContentInput] = useState(content || '')
@@ -52,7 +51,11 @@ const NewsCreator: FC<NewsCreatorProps> = ({
   const createNewPost = async () => {
     isChange
       ? await changePost({ content: contentInput, image: currentImg }, id)
-      : await createPost({ content: contentInput, username: name, image: currentImg })
+      : await createPost({
+          content: contentInput,
+          username: userId,
+          image: currentImg,
+        })
     setContentInput('')
     setCurrentImg('')
     setIsAllPosts((prev) => !prev)
@@ -64,35 +67,34 @@ const NewsCreator: FC<NewsCreatorProps> = ({
 
   return (
     <div className={styles.create}>
-<Modal
-  open={isOpenImg}
-  onClose={() => setIsOpenImg(false)}
-  onConfirm={() => setIsOpenImg(false)}
-  title={t('addPostImg')}
-  className={isChange ? styles.photo : null}
-  isDialogActions={false}
-  content={
-    <ModalContent currentImg={currentImg} setCurrentImg={setCurrentImg} />
-  }
-/>
-<Modal
-  open={isOpenFeeling}
-  onClose={() => setIsOpenFeeling(false)}
-  onConfirm={() => setIsOpenFeeling(false)}
-  isDialogActions={false}
-  className={isChange ? styles.feeling : null}
-  content={
-    <Picker
-      theme="light"
-      data={data}
-      onEmojiSelect={(e) => onEmojiSelect(e)}
-    />
-  }
-/>
+      <Modal
+        open={isOpenImg}
+        onClose={() => setIsOpenImg(false)}
+        onConfirm={() => setIsOpenImg(false)}
+        title={t('addPostImg')}
+        className={isChange ? styles.photo : null}
+        isDialogActions={false}
+        content={
+          <ModalContent currentImg={currentImg} setCurrentImg={setCurrentImg} />
+        }
+      />
+      <Modal
+        open={isOpenFeeling}
+        onClose={() => setIsOpenFeeling(false)}
+        onConfirm={() => setIsOpenFeeling(false)}
+        isDialogActions={false}
+        className={isChange ? styles.feeling : null}
+        content={
+          <Picker
+            theme="light"
+            data={data}
+            onEmojiSelect={(e) => onEmojiSelect(e)}
+          />
+        }
+      />
 
       <div className={styles.createHeader}>
         <Avatar
-          sx={{ bgcolor: '#377dff' }}
           aria-label="recipe"
           src={avatarImg}
           className={styles.avatar}
@@ -112,7 +114,12 @@ const NewsCreator: FC<NewsCreatorProps> = ({
           setIsOpenImg={setIsOpenImg}
           setIsOpenFeeling={setIsOpenFeeling}
         />
-        <Button isDisabled={!contentInput && !currentImg} onClick={createNewPost}>{t('post')}</Button>
+        <Button
+          isDisabled={!contentInput && !currentImg}
+          onClick={createNewPost}
+        >
+          {t('post')}
+        </Button>
       </div>
     </div>
   )
@@ -122,7 +129,7 @@ const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
   const { t } = useTranslation()
 
   return (
-    <div className={styles.contentInput}> 
+    <div className={styles.contentInput}>
       <TextField
         className={styles.textField}
         id="outlined-basic"

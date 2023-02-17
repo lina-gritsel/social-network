@@ -1,4 +1,11 @@
-import { FC, useState, useRef, SetStateAction, Dispatch } from 'react'
+import {
+  FC,
+  useState,
+  useRef,
+  SetStateAction,
+  Dispatch,
+  useEffect,
+} from 'react'
 import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -20,10 +27,11 @@ import { useTranslation } from 'react-i18next'
 import Comment from '../../components/Comment'
 
 import classNames from 'classnames'
-import { deletePost, getPost } from '../../api/requests'
+import { deletePost, getPost, getUser } from '../../api/requests'
 import NewsCreator from '../NewsCreator'
 import Modal from '../Modal'
 import { getUserInfoSelector } from '../../store/selectors'
+import { User } from '../../api'
 
 import { useOnClickOutside } from './hooks'
 
@@ -69,7 +77,6 @@ const NewsCard: FC<News> = ({
   content,
   moreContent,
   avatarColor,
-  avatarImg,
   className,
   id,
   setIsAllPosts,
@@ -77,6 +84,15 @@ const NewsCard: FC<News> = ({
 }) => {
   const [expanded, setExpanded] = useState(false)
   const [isSettingModal, setIsSettingModal] = useState(false)
+  const [author, setAuthor] = useState<User>()
+
+  useEffect(() => {
+    const getAuthor = async () => {
+      const user = (await getUser(username)).data.user
+      setAuthor(user)
+    }
+    getAuthor()
+  }, [])
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
@@ -96,10 +112,10 @@ const NewsCard: FC<News> = ({
           <Avatar
             sx={{ bgcolor: avatarColor }}
             aria-label="recipe"
-            alt={username}
-            src={avatarImg}
+            alt={author?.name}
+            src={author?.avatar}
           >
-            {username[0]}
+            {author?.name[0]}
           </Avatar>
         }
         action={
@@ -112,7 +128,7 @@ const NewsCard: FC<News> = ({
             </IconButton>
           ) : null
         }
-        title={username}
+        title={author?.name}
         subheader={createdAt}
       />
       {!!image && (
@@ -120,7 +136,7 @@ const NewsCard: FC<News> = ({
           component="img"
           height="300"
           image={image}
-          alt={username}
+          alt={author?.name}
           className={styles.image}
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
@@ -204,6 +220,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
         content={
           <NewsCreator
             name={userInfo?.name}
+            userId={userInfo?.id}
             avatarImg={userInfo?.avatar}
             content={content}
             id={id}
