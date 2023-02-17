@@ -51,3 +51,5 @@ export const ExploreNewsCard: FC<ExploreNews> = ({
     </Card>
   )
 }
+
+
