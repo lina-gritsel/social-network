@@ -23,7 +23,7 @@ interface RandomUser {
   title: string
 }
 
-const RandomFriend: FC<RandomFriend> = ({allUsers, isLoading}) => {
+const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
   const index = getRandomInt(0, allUsers?.length)
   const randomUser = allUsers[index]
 
@@ -60,7 +60,7 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title }) => {
             </div>
           </div>
         </div>
-        {!isBirthday ? (
+        {!isBirthday && (
           <>
             <div className={styles.icons}>
               <InstagramIcon />
@@ -74,7 +74,7 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title }) => {
               <Button>{t('follow')}</Button>
             </div>
           </>
-        ) : null}
+        )}
       </div>
     </Card>
   )
