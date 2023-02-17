@@ -1,9 +1,6 @@
-import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
-import { FC, useState, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { FC, useState } from 'react'
 import classNames from 'classnames'
-
 import {
   Card,
   CardHeader,
@@ -14,27 +11,18 @@ import {
   Avatar,
   Typography,
 } from '@mui/material'
-
 import {
   FavoriteBorder,
   MoreVert,
-  PublishedWithChanges,
-  DeleteForever,
   ChatBubbleOutline,
 } from '@mui/icons-material'
-
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-import { getUserInfoSelector } from '../../store/selectors'
-import { deletePost, getPost } from '../../api/requests'
 import Comment from '../../components/Comment'
-import NewsCreator from '../NewsCreator'
-import Modal from '../Modal'
 
-import { useOnClickOutside } from './hooks'
 import styles from './NewsCard.module.scss'
+import SettingsModal from './SettingsModal'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -192,70 +180,6 @@ const NewsCard: FC<News> = ({
         </CardContent>
       </Collapse>
     </Card>
-  )
-}
-
-export interface SettingsModalProps {
-  id: string
-  setIsAllPosts?: (boolean) => void
-  setIsSettingModal?: (boolean) => void
-}
-
-const SettingsModal: FC<SettingsModalProps> = ({
-  id,
-  setIsAllPosts,
-  setIsSettingModal,
-}) => {
-  const [isChange, setIsChange] = useState(false)
-  const [content, setContent] = useState('')
-  const [image, setImage] = useState('')
-  const modalRef = useRef()
-  const { t } = useTranslation()
-
-  const userInfo = useSelector(getUserInfoSelector)
-
-  useOnClickOutside(modalRef, isChange, () => setIsSettingModal(false))
-
-  const onclickDelete = () => {
-    deletePost(id).then(() => setIsAllPosts((prev) => !prev))
-  }
-  const onclickChange = () => {
-    getPost(id).then((response) => {
-      setContent(response.data.post.content)
-      setImage(response.data.post.image)
-      setIsChange(true)
-    })
-  }
-
-  return (
-    <div className={styles.settingsModal} ref={modalRef}>
-      <Modal
-        className={styles.modal}
-        open={isChange}
-        onClose={() => setIsChange(false)}
-        onConfirm={() => setIsChange(false)}
-        isDialogActions={false}
-        content={
-          <NewsCreator
-            name={userInfo?.name}
-            avatarImg={userInfo?.avatar}
-            content={content}
-            id={id}
-            setIsAllPosts={setIsAllPosts}
-            isChange={true}
-            image={image}
-          />
-        }
-      />
-      <div onClick={() => onclickChange()}>
-        <PublishedWithChanges />
-        {t('change')}
-      </div>
-      <div onClick={() => onclickDelete()}>
-        <DeleteForever />
-        {t('delete')}
-      </div>
-    </div>
   )
 }
 

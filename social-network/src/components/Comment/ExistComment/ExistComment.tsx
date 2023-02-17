@@ -9,7 +9,6 @@ interface ExistCommentProps {
 }
 
 const ExistComment: FC<ExistCommentProps> = ({ comment, userName }) => {
-  console.log(comment, userName)
   return (
     <div className={styles.wrapperExistComment}>
       <Avatar className={styles.avatar} />
