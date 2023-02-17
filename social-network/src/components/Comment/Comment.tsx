@@ -1,44 +1,39 @@
 import { Avatar } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { FC, KeyboardEvent, useState } from 'react'
+import { FC, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 
 import styles from './Comment.module.scss'
 
-import { addComment } from './hooks'
-import ExistComment from './ExistComments'
+import { addComment, createListComments } from './hooks'
+import ExistComment from './ExistComment'
 
 interface CommentProps {
   avatarImg?: string
   avatarColor?: string
   postId: string
+  userName: string
 }
 
-const Comment: FC<CommentProps> = ({ postId, avatarImg, avatarColor }) => {
+const Comment: FC<CommentProps> = ({
+  postId,
+  userName,
+  avatarImg,
+  avatarColor,
+}) => {
   const { t } = useTranslation()
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   const [comment, setComment] = useState<string>('')
-  const [postComments, setPostComments] = useState([])
 
   const changeComment = (event) => {
     setComment(event.target.value)
   }
 
   const createComment = async (userId, comment, postId) => {
-    const result = await addComment({ userId, comment, postId })
-    console.log(result.comments)
+    const postComments = await addComment({ userId, comment, postId })
 
-    const allComments = result.comments
-    setPostComments(allComments)
-  }
-
-  const commentsList = (postComments) => {
-    if (postComments) {
-      postComments.map((comment, index) => {
-        return <ExistComment key={index} comment={comment.comment} />
-      })
-    }
+    const author = await createListComments(postComments)
   }
 
   return (
@@ -62,9 +57,6 @@ const Comment: FC<CommentProps> = ({ postId, avatarImg, avatarColor }) => {
           <SendIcon />
         </button>
       </div>
-      {postComments.map((comment, index) => {
-        return <ExistComment key={index} comment={comment.comment} />
-      })}
     </>
   )
 }

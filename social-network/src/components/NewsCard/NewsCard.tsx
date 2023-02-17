@@ -169,7 +169,7 @@ const NewsCard: FC<News> = ({
               </ExpandMore>
             )}
           </CardActions>
-          <Comment postId={id} />
+          <Comment postId={id} userName={username}/>
         </div>
       )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
