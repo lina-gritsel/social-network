@@ -1,5 +1,4 @@
 import { FC, useState } from 'react'
-import { Avatar } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -7,15 +6,16 @@ import Modal from '../../components/Modal'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 
-import { PATHS } from '../../router/paths'
+import CreatePost from '../../components/CreatePost'
 import NewsList from '../../components/NewsList'
+import { PATHS } from '../../router/paths'
 
 import { useProfilePage } from './hooks'
 import { FIELD_INTO } from './constants'
 import ModalContent from './ModalContent'
 
 import styles from './Profile.module.scss'
-import CreatePost from '../../components/CreatePost'
+import Avatar from '../../components/Avatar'
 
 const ProfilePage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
@@ -72,8 +72,7 @@ const ProfilePage: FC = () => {
             </Button>
           </div>
           <Avatar
-            alt="avatar"
-            src={userInfo?.avatar}
+            imageUrl={userInfo?.avatar}
             className={styles.profileAvatar}
           />
           <div className={styles.wrapperInfoUser}>

@@ -6,7 +6,6 @@ import CardMedia from '@mui/material/CardMedia'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import Collapse from '@mui/material/Collapse'
-import Avatar from '@mui/material/Avatar'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -27,6 +26,7 @@ import { getUserInfoSelector } from '../../store/selectors'
 import styles from './NewsCard.module.scss'
 import { useOnClickOutside } from '../../hooks'
 import CreatePost from '../CreatePost'
+import Avatar from '../Avatar'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -91,16 +91,7 @@ const NewsCard: FC<News> = ({
         />
       )}
       <CardHeader
-        avatar={
-          <Avatar
-            sx={{ bgcolor: avatarColor }}
-            aria-label="recipe"
-            alt={username}
-            src={avatarImg}
-          >
-            {username[0]}
-          </Avatar>
-        }
+        avatar={<Avatar imageUrl={avatarImg} />}
         action={
           isProfilePage ? (
             <IconButton
@@ -185,6 +176,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
     await deletePost(id)
     setIsAllPosts((prev) => !prev)
   }
+
   const editPost = async () => {
     const response = await getPost(id)
     setContent(response.data.post.content)

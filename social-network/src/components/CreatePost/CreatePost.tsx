@@ -1,7 +1,6 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import Picker from '@emoji-mart/react'
-import { Avatar } from '@mui/material'
 
 import data from '@emoji-mart/data'
 
@@ -12,6 +11,7 @@ import FooterPanel from './components/FooterPanel'
 import styles from './CreatePost.module.scss'
 import Button from '../Button'
 import Modal from '../Modal'
+import Avatar from '../Avatar'
 
 interface CreatePostProps {
   name: string
@@ -82,14 +82,7 @@ const CreatePost: FC<CreatePostProps> = ({
       />
 
       <div className={styles.createHeader}>
-        <Avatar
-          sx={{ bgcolor: '#377dff' }}
-          aria-label="recipe"
-          src={avatarImg}
-          className={styles.avatar}
-        >
-          {name}
-        </Avatar>
+        <Avatar imageUrl={avatarImg} className={styles.avatar} />
         <CreatePostInput
           value={contentInput}
           onChange={(event) => setContentInput(event.target.value)}

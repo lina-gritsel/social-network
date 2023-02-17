@@ -4,7 +4,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 
 import Modal from '../../../components/Modal'
 
-import DeleteAccModal from './DeleteAccModal'
+import DeleteAccountModal from './DeleteAccountModal'
 import { useSecureForm } from './hooks'
 
 import styles from './SecureForm.module.scss'
@@ -19,7 +19,13 @@ const SecureForm = () => {
       <Modal
         open={open}
         onClose={handleClose}
-        content={<DeleteAccModal userId={userId} deleteAccount={deleteAccount} handleClose={handleClose} />}
+        content={
+          <DeleteAccountModal
+            userId={userId}
+            onSubmit={deleteAccount}
+            handleClose={handleClose}
+          />
+        }
         isDialogActions={false}
       />
       <div className={styles.secureBlock} onClick={handleOpen}>

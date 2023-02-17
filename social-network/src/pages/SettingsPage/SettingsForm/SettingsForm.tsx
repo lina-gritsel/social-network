@@ -8,13 +8,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined'
-import {
-  FormLabel,
-  InputAdornment,
-  Avatar,
-  Box,
-  CircularProgress,
-} from '@mui/material'
+import { FormLabel, InputAdornment, Box, CircularProgress } from '@mui/material'
 
 import Modal from '../../../components/Modal'
 import Input from '../../../components/Input'
@@ -26,6 +20,7 @@ import { useSettingsForm } from './hooks'
 import AddAvatarModal from './AddAvatarModal'
 
 import styles from './SettingsForm.module.scss'
+import Avatar from '../../../components/Avatar'
 
 const SettingsForm: FC = () => {
   const { t } = useTranslation()
@@ -72,12 +67,9 @@ const SettingsForm: FC = () => {
       />
       <div className={styles.avatarBlock}>
         <Avatar
-          alt="avatar"
-          src={img || userInfo?.avatar}
+          imageUrl={img || userInfo?.avatar}
           className={styles.profileAvatar}
-        >
-          {userInfo?.name?.charAt(0)}
-        </Avatar>
+        />
         <div className={styles.editAvatar} onClick={handleOpen}>
           <CloudDownloadOutlinedIcon />
         </div>

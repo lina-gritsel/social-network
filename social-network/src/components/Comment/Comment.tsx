@@ -1,7 +1,7 @@
-import { Avatar } from '@mui/material'
 import { FC } from 'react'
+import Avatar from '../Avatar'
 
-import styles from './ExistComment.module.scss'
+import styles from './Comment.module.scss'
 
 interface ExistCommentProps {
   comment: string
@@ -11,7 +11,7 @@ interface ExistCommentProps {
 const ExistComment: FC<ExistCommentProps> = ({ comment, userName }) => {
   return (
     <div className={styles.wrapperExistComment}>
-      <Avatar className={styles.avatar} />
+      <Avatar imageUrl="" />
       <div className={styles.container}>
         <div className={styles.name}>{userName}</div>
         <div className={styles.time}>{'time'}</div>

@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import { Avatar } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { PATHS } from '../../router/paths'
 import { getUserInfoSelector } from '../../store/selectors'
+import Avatar from '../Avatar'
 
 import styles from './Header.module.scss'
 
@@ -16,7 +16,7 @@ const Header: FC = () => {
     <div className={styles.content}>
       <div className={styles.userName}>{userInfo?.name}</div>
       <Avatar
-        src={userInfo?.avatar}
+        imageUrl={userInfo?.avatar}
         className={styles.avatar}
         onClick={() => navigate(PATHS.PROFILE)}
       />

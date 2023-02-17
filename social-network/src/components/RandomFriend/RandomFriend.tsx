@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import Avatar from '@mui/material/Avatar'
 import { Card } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
@@ -12,6 +11,7 @@ import { getRandomInt } from '../../utils/utils'
 import { User } from '../../api'
 
 import styles from './RandomFriend.module.scss'
+import Avatar from '../Avatar'
 
 interface RandomFriend {
   allUsers: User[]
@@ -46,12 +46,7 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title }) => {
       <div className={styles.mightLike}>{t(title)}</div>
       <div className={styles.wrapperContent}>
         <div className={styles.cardHeader}>
-          <Avatar
-            aria-label="recipe"
-            alt={user?.name}
-            src={user?.avatar}
-            className={styles.avatar}
-          />
+          <Avatar imageUrl={user?.avatar} className={styles.avatar} />
 
           <div>
             <div className={styles.title}>{user?.name}</div>
