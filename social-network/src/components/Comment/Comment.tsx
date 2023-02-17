@@ -20,7 +20,7 @@ interface CommentProps {
 const Comment: FC<CommentProps> = ({ postId, avatarImg, avatarColor }) => {
   const { t } = useTranslation()
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
-
+  // const userInfo = useSelector(getUserInfoSelector)
   const [comment, setComment] = useState<string>('')
   const [allComment, setAllComment] = useState([])
   const [authorsPosts, setAuthorsPosts] = useState([])

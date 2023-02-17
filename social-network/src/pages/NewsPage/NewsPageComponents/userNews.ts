@@ -1,5 +1,5 @@
 import { News } from '../../../components/NewsCard/NewsCard'
-import { getRandomColor } from '../../../constants/constants'
+import { getRandomColor } from '../../../utils/utils'
 
 
 export const userNews = [

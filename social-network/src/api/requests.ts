@@ -38,7 +38,7 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
     const data = await fetch(LOGIN_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(user),
     })
@@ -57,7 +57,7 @@ export const getUser = async (id: string): Promise<RegistrationData> => {
 }
 export const getAllUsers = async (): Promise<UsersInfo> => {
   try {
-    return await (await fetch(`${USERS_URL}`)).json()
+    return await (await fetch(USERS_URL)).json()
   } catch (error) {
     throw new Error(`${error}`)
   }

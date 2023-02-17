@@ -10,7 +10,7 @@ const useDebounce = (value: string, delay = 1000) => {
     return () => {
       clearTimeout(handler)
     }
-  }, [value])
+  }, [value, delay])
 
   return debounceValue
 }
