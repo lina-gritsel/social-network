@@ -1,22 +1,25 @@
 import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Avatar from '@mui/material/Avatar'
+import { Box, CircularProgress } from '@mui/material'
 
-import { friends } from '../../pages/NewsPage/NewsPageComponents/userNews'
+import { User } from '../../api'
 
 import InputSearch from '../InputSearch'
 import useDebounce from './hooks'
 
 import styles from './FriendsOnline.module.scss'
 
-interface FriendsOnline {
+interface Friends {
   name: string
-  avatarColor: string
-  avatarImg?: string
-  isOnline: boolean
+  avatar?: string
+}
+interface FriendsOnlineProps {
+  allUsers: User[]
+  isLoading: boolean
 }
 
-const FriendsOnline: FC = () => {
+const FriendsOnline: FC<FriendsOnlineProps> = ({ allUsers, isLoading }) => {
   const { t } = useTranslation()
   const [search, setSearch] = useState<string>('')
 
@@ -28,8 +31,14 @@ const FriendsOnline: FC = () => {
         placeholder={t('searchFriends')}
         onChange={(e) => setSearch(e.target.value.trim().toLocaleLowerCase())}
       />
+      {isLoading && (
+        <Box className={styles.loading}>
+          <CircularProgress />
+        </Box>
+      )}
+
       <div className={styles.friends}>
-        {friends
+        {allUsers
           .filter(({ name }) =>
             name.toLocaleLowerCase().includes(searchDebounced),
           )
@@ -41,31 +50,15 @@ const FriendsOnline: FC = () => {
   )
 }
 
-const Friend: FC<FriendsOnline> = ({
-  name,
-  avatarColor,
-  avatarImg,
-  isOnline,
-}) => {
-  const { t } = useTranslation()
-
+const Friend: FC<Friends> = ({ name, avatar }) => {
   return (
     <div className={styles.friend}>
       <div className={styles.name}>
-        <Avatar
-          sx={{ bgcolor: avatarColor }}
-          aria-label="recipe"
-          src={avatarImg}
-        >
+        <Avatar aria-label="recipe" src={avatar}>
           {name[0]}
         </Avatar>
         <p>{name}</p>
       </div>
-      {isOnline ? (
-        <span className={styles.online}></span>
-      ) : (
-        <span className={styles.offline}>{t('offline')}</span>
-      )}
     </div>
   )
 }

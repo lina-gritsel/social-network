@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { FC, useEffect, useState } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
-import NewsCard from '../../components/NewsCard'
+import { ExploreNewsCard } from '../../components/NewsCard/ExploreCard'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import { DEFAULT_IMG } from '../../components/NewsCard/NewsCard'
@@ -11,6 +11,7 @@ import { DEFAULT_IMG } from '../../components/NewsCard/NewsCard'
 import { getAPI, newsOptions } from './constants'
 
 import styles from './ExplorePage.module.scss'
+import { dateConversion } from '../../utils/utils'
 
 interface Source {
   id: string | null
@@ -92,11 +93,11 @@ const NewsList: FC<NewsList> = ({ articles }) => {
           index: number,
         ) =>
           !!description || !!content || !!urlToImage ? (
-            <NewsCard
+            <ExploreNewsCard
               key={index}
-              name={author?.split(',')[0] || source.name}
-              createdAt={publishedAt.split('T').join(' / ').slice(0, -4)}
-              img={urlToImage || DEFAULT_IMG}
+              username={author?.split(',')[0].split('//')[1]?.split('/')[0] || source.name}
+              createdAt={dateConversion(publishedAt)}
+              image={urlToImage || DEFAULT_IMG}
               content={(content?.slice(0, 150) || description) + '...'}
               className={styles.card}
               url={url}

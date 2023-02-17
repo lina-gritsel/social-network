@@ -73,5 +73,11 @@
   "langSubtitle": "Show app in that language.",
   "warning": "The data will be deleted from this service. This action cannot be undone. Are you sure?",
   "addAvatar": "Add a link to an image",
-  "changeAvatar": "Change your avatar"
+  "changeAvatar": "Change your avatar",
+  "mightLike": "You might like",
+  "addPostImg": "Insert a link to your image",
+  "addPostImgLabel": "Your link",
+  "addMessage": "Your image has been added!",
+  "change": "Change",
+  "delete": "Delete"
 }

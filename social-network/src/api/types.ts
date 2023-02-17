@@ -24,6 +24,11 @@ export interface RegistrationData {
   }
   status: string
 }
+export interface UsersInfo {
+  users: User[]
+  status: string
+  results: number
+}
 
 export interface LoginUser {
   name: string
@@ -41,4 +46,10 @@ export interface DeleteUserStatus {
 export interface CreatePostParams {
   content: string
   username: string
+  image: string
+}
+
+export interface ChangePostParams {
+  content: string
+  image: string
 }

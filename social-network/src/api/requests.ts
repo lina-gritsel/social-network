@@ -5,6 +5,8 @@ import {
   RegistrationData,
   CreatePostParams,
   DeleteUserStatus,
+  ChangePostParams,
+  UsersInfo,
 } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
@@ -34,7 +36,7 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
     const data = await fetch(LOGIN_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(user),
     })
@@ -47,6 +49,13 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
 export const getUser = async (id: string): Promise<RegistrationData> => {
   try {
     return await (await fetch(`${USERS_URL}/${id}`)).json()
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+export const getAllUsers = async (): Promise<UsersInfo> => {
+  try {
+    return await (await fetch(USERS_URL)).json()
   } catch (error) {
     throw new Error(`${error}`)
   }
@@ -105,3 +114,36 @@ export const getAllPosts = async () => {
     throw new Error(`${error}`)
   }
 }
+
+export const changePost = async (content: ChangePostParams, id: string) => {
+  try {
+    await fetch(`${POSTS_URL}/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(content),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getPost = async (id: string) => {
+  try {
+    const response = await fetch(`${POSTS_URL}/${id}`)
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const deletePost = async (id: string) => {
+  try {
+    await fetch(`${POSTS_URL}/${id}`, { method: 'DELETE' })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
