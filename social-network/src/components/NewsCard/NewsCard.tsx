@@ -25,7 +25,7 @@ import NewsCreator from '../NewsCreator'
 import Modal from '../Modal'
 import { getUserInfoSelector } from '../../store/selectors'
 
-import { useOnClickOutside } from './hooks'
+import { useOnClickOutside } from '../../hooks'
 
 import styles from './NewsCard.module.scss'
 
