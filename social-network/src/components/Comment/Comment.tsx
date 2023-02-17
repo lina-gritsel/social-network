@@ -7,9 +7,6 @@ import { getUserInfoSelector } from '../../store/selectors'
 
 import styles from './Comment.module.scss'
 
-// interface CommentProps {
-// }
-
 const Comment: FC = () => {
 
   const userInfo = useSelector(getUserInfoSelector)

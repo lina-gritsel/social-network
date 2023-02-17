@@ -1,22 +1,25 @@
 import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Avatar from '@mui/material/Avatar'
+import { Box, CircularProgress } from '@mui/material'
 
-import { friends } from '../../pages/NewsPage/NewsPageComponents/userNews'
+import { User } from '../../api'
 
 import InputSearch from '../InputSearch'
 import useDebounce from './hooks'
 
 import styles from './FriendsOnline.module.scss'
 
-interface FriendsOnline {
-  username: string
-  avatarColor: string
-  avatarImg?: string
-  isOnline: boolean
+interface Friends {
+  name: string
+  avatar?: string
+}
+interface FriendsOnlineProps {
+  allUsers: User[]
+  isLoading: boolean
 }
 
-const FriendsOnline: FC = () => {
+const FriendsOnline: FC<FriendsOnlineProps> = ({ allUsers, isLoading }) => {
   const { t } = useTranslation()
   const [search, setSearch] = useState<string>('')
 
@@ -28,48 +31,34 @@ const FriendsOnline: FC = () => {
         placeholder={t('searchFriends')}
         onChange={(e) => setSearch(e.target.value.trim().toLocaleLowerCase())}
       />
+      {isLoading && (
+        <Box className={styles.loading}>
+          <CircularProgress />
+        </Box>
+      )}
+
       <div className={styles.friends}>
-        {friends
-          .filter(({ username }) =>
-            username.toLocaleLowerCase().includes(searchDebounced),
+        {allUsers
+          .filter(({ name }) =>
+            name.toLocaleLowerCase().includes(searchDebounced),
           )
-          .map((friend, index, friends) =>
-            friends.length === 0 ? (
-              <div key={index}>Никого нет</div>
-            ) : (
-              <Friend key={index} {...friend} />
-            ),
-          )}
+          .map((friend, index) => (
+            <Friend key={index} {...friend} />
+          ))}
       </div>
     </div>
   )
 }
 
-const Friend: FC<FriendsOnline> = ({
-  username,
-  avatarColor,
-  avatarImg,
-  isOnline,
-}) => {
-  const { t } = useTranslation()
-
+const Friend: FC<Friends> = ({ name, avatar }) => {
   return (
     <div className={styles.friend}>
       <div className={styles.name}>
-        <Avatar
-          sx={{ bgcolor: avatarColor }}
-          aria-label="recipe"
-          src={avatarImg}
-        >
-          {username[0]}
+        <Avatar aria-label="recipe" src={avatar}>
+          {name[0]}
         </Avatar>
-        <p>{username}</p>
+        <p>{name}</p>
       </div>
-      {isOnline ? (
-        <span className={styles.online}></span>
-      ) : (
-        <span className={styles.offline}>{t('offline')}</span>
-      )}
     </div>
   )
 }

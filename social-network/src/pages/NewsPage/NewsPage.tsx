@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import Layout from '../../components/Layout'
@@ -7,9 +7,8 @@ import NewsCreator from '../../components/NewsCreator'
 import RandomFriend from '../../components/RandomFriend'
 import FriendsOnline from '../../components/FriendsOnline'
 import { getUserInfoSelector } from '../../store/selectors'
-import {
-  getRandomColor,
-} from '../../constants/constants'
+import { getRandomColor } from '../../utils/utils'
+import { getAllUsers, User } from '../../api'
 import { News } from '../../components/NewsCard/NewsCard'
 
 import styles from './NewsPage.module.scss'
@@ -23,8 +22,21 @@ export const setAvatarColor = (arr: News[]) => {
 
 const NewsPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
-  
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [allUsers, setAllUsers] = useState<User[]>([])
+
   const userInfo = useSelector(getUserInfoSelector)
+  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+
+  useEffect(() => {
+    const getUsers = async () => {
+      setIsLoading(true)
+      const res = await getAllUsers()
+      setAllUsers(res.users.filter((user) => user.id !== userId))
+      setIsLoading(false)
+    }
+    getUsers()
+  }, [userId])
 
   return (
     <Layout>
@@ -39,11 +51,11 @@ const NewsPage: FC = () => {
             <NewsList isAllPosts={isAllPosts} />
           </div>
           <div className={styles.friendAndWeather}>
-            <RandomFriend />
+            <RandomFriend allUsers={allUsers} isLoading={isLoading}/>
             <Weather />
           </div>
         </div>
-        <FriendsOnline />
+        <FriendsOnline allUsers={allUsers} isLoading={isLoading}/>
       </div>
     </Layout>
   )

@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { FC, useEffect, useState } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
-import NewsCard from '../../components/NewsCard'
 import { ExploreNewsCard } from '../../components/NewsCard/ExploreCard'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
@@ -12,7 +11,7 @@ import { DEFAULT_IMG } from '../../components/NewsCard/NewsCard'
 import { getAPI, newsOptions } from './constants'
 
 import styles from './ExplorePage.module.scss'
-import { dateConversion } from '../../constants/constants'
+import { dateConversion } from '../../utils/utils'
 
 interface Source {
   id: string | null

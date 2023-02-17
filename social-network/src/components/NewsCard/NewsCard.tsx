@@ -1,4 +1,4 @@
-import { FC, useState, useRef } from 'react'
+import { FC, useState, useRef, SetStateAction, Dispatch } from 'react'
 import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -15,14 +15,13 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ChangesIcon from '@mui/icons-material/PublishedWithChanges'
 import DeleteIcon from '@mui/icons-material/DeleteForever'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import Comment from '../../components/Comment'
 
 import classNames from 'classnames'
 import { deletePost, getPost } from '../../api/requests'
-import { useTranslation } from 'react-i18next'
 import NewsCreator from '../NewsCreator'
-import { userNews } from '../../pages/NewsPage/NewsPageComponents/userNews'
 import Modal from '../Modal'
 import { getUserInfoSelector } from '../../store/selectors'
 
@@ -59,7 +58,7 @@ export interface News {
   avatarImg?: string
   className?: string
   id?: string
-  setIsAllPosts?: (boolean) => void
+  setIsAllPosts?: (value: boolean) => void
   isProfilePage?: boolean
 }
 
@@ -152,10 +151,7 @@ const NewsCard: FC<News> = ({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography
-            paragraph
-            className={styles.moreContent}
-          >
+          <Typography paragraph className={styles.moreContent}>
             {moreContent}
           </Typography>
         </CardContent>
@@ -167,8 +163,8 @@ const NewsCard: FC<News> = ({
 
 export interface SettingsModalProps {
   id: string
-  setIsAllPosts?: (boolean) => void
-  setIsSettingModal?: (boolean) => void
+  setIsAllPosts?: Dispatch<SetStateAction<boolean>>
+  setIsSettingModal?: Dispatch<SetStateAction<boolean>>
 }
 
 const SettingsModal: FC<SettingsModalProps> = ({
@@ -186,15 +182,15 @@ const SettingsModal: FC<SettingsModalProps> = ({
 
   useOnClickOutside(modalRef, isChange, () => setIsSettingModal(false))
 
-  const onclickDelete = () => {
-    deletePost(id).then(() => setIsAllPosts((prev) => !prev))
+  const onclickDelete = async () => {
+    await deletePost(id)
+    setIsAllPosts((prev) => !prev)
   }
-  const onclickChange = () => {
-    getPost(id).then((response) => {
-      setContent(response.data.post.content)
-      setImage(response.data.post.image)
-      setIsChange(true)
-    })
+  const onclickChange = async () => {
+    const response = await getPost(id)
+    setContent(response.data.post.content)
+    setImage(response.data.post.image)
+    setIsChange(true)
   }
 
   return (

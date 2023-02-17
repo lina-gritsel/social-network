@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, SetStateAction, Dispatch } from 'react'
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import { useTranslation } from 'react-i18next'
@@ -24,7 +24,7 @@ interface NewsCreatorProps {
   image?: string
   id?: string
   isChange?: boolean
-  setIsAllPosts?: (boolean) => void
+  setIsAllPosts?: Dispatch<SetStateAction<boolean>>
 }
 
 interface ContentInputProps {
@@ -122,12 +122,7 @@ const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
   const { t } = useTranslation()
 
   return (
-    <Box
-      component="form"
-      className={styles.contentInput}
-      noValidate
-      autoComplete="off"
-    >
+    <div className={styles.contentInput}> 
       <TextField
         className={styles.textField}
         id="outlined-basic"
@@ -139,7 +134,7 @@ const ContentInput: FC<ContentInputProps> = ({ onChange, value }) => {
         onChange={onChange}
         label={t('question')}
       />
-    </Box>
+    </div>
   )
 }
 

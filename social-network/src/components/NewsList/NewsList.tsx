@@ -3,7 +3,7 @@ import { Box, CircularProgress } from '@mui/material'
 
 import NewsCard, { News } from '../NewsCard/NewsCard'
 import { getAllPosts, getUser } from '../../api/requests'
-import { sortNews, dateConversion } from '../../constants/constants'
+import { sortNews, dateConversion } from '../../utils/utils'
 import { setAvatarColor } from '../../pages/NewsPage/NewsPage'
 
 import styles from './NewsList.module.scss'
@@ -19,7 +19,6 @@ interface NewsListProps {
 const NewsList: FC<NewsListProps> = ({
   isAllPosts,
   filter,
-  name,
   isProfilePage,
   setIsAllPosts,
 }) => {
@@ -33,8 +32,8 @@ const NewsList: FC<NewsListProps> = ({
     const getAllExistPosts = async () => {
       setIsLoading(true)
       const posts: News[] = (await getAllPosts()).posts
-      posts
-        .sort((a, b) => sortNews(a.createdAt, b.createdAt))
+      const sortedPosts = posts.sort((a, b) => sortNews(a.createdAt, b.createdAt))
+      sortedPosts
         .map((post) => {
           post.createdAt = dateConversion(post.createdAt)
           const content = post.content
@@ -46,10 +45,10 @@ const NewsList: FC<NewsListProps> = ({
       if (filter) {
         getUser(userId).then((response) => setUsername(response.data.user.name))
         setAllPosts(
-          setAvatarColor(posts.filter((post) => post.username === username)),
+          setAvatarColor(sortedPosts.filter((post) => post.username === username)),
         )
       } else {
-        setAllPosts(setAvatarColor(posts))
+        setAllPosts(setAvatarColor(sortedPosts))
       }
       setIsLoading(false)
     }
