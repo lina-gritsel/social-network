@@ -21,13 +21,12 @@ import Comment from '../../components/Comment'
 
 import classNames from 'classnames'
 import { deletePost, getPost } from '../../api/requests'
-import NewsCreator from '../NewsCreator'
 import Modal from '../Modal'
 import { getUserInfoSelector } from '../../store/selectors'
 
-import { useOnClickOutside } from '../../hooks'
-
 import styles from './NewsCard.module.scss'
+import { useOnClickOutside } from '../../hooks'
+import CreatePost from '../CreatePost'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -180,13 +179,13 @@ const SettingsModal: FC<SettingsModalProps> = ({
 
   const userInfo = useSelector(getUserInfoSelector)
 
-  useOnClickOutside(modalRef, isChange, () => setIsSettingModal(false))
+  useOnClickOutside(modalRef, () => setIsSettingModal(false))
 
-  const onclickDelete = async () => {
+  const onDeletePost = async () => {
     await deletePost(id)
     setIsAllPosts((prev) => !prev)
   }
-  const onclickChange = async () => {
+  const editPost = async () => {
     const response = await getPost(id)
     setContent(response.data.post.content)
     setImage(response.data.post.image)
@@ -202,22 +201,22 @@ const SettingsModal: FC<SettingsModalProps> = ({
         onConfirm={() => setIsChange(false)}
         isDialogActions={false}
         content={
-          <NewsCreator
+          <CreatePost
             name={userInfo?.name}
             avatarImg={userInfo?.avatar}
             content={content}
             id={id}
             setIsAllPosts={setIsAllPosts}
-            isChange={true}
             image={image}
+            editMode
           />
         }
       />
-      <div onClick={() => onclickChange()}>
+      <div onClick={editPost}>
         <ChangesIcon />
         {t('change')}
       </div>
-      <div onClick={() => onclickDelete()}>
+      <div onClick={onDeletePost}>
         <DeleteIcon />
         {t('delete')}
       </div>
