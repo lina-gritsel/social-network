@@ -17,7 +17,7 @@ import DeleteIcon from '@mui/icons-material/DeleteForever'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
-import Comment from '../../components/Comment'
+import Comment from '../CreateComment'
 
 import classNames from 'classnames'
 import { deletePost, getPost } from '../../api/requests'
