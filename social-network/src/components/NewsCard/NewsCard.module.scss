@@ -2,11 +2,19 @@
   width: 100%;
   border-radius: 20px !important;
   position: relative;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 
   & a {
     color: var(--blue-color);
     font-weight: 800;
   }
+}
+
+.cardHeader {
+  padding: 0 !important;
 }
 
 .content {
@@ -27,12 +35,8 @@
   margin: 0 auto;
 }
 
-.footerPost {
-  padding: 10px;
-}
-
 .cardActions {
-  padding: 0 !important;
+  padding: 10px 0 !important;
   border-bottom: 1px solid var(--medium-gray-color);
   border-top: 1px solid var(--medium-gray-color);
 }
@@ -46,6 +50,10 @@
 
 .icon {
   color: var(--dark-gray-color);
+}
+
+.expandMore {
+  padding: 0 !important;
 }
 
 .settingsModal {

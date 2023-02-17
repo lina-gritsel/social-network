@@ -1,15 +1,14 @@
-import { Avatar } from '@mui/material'
-import { useTranslation } from 'react-i18next'
-import { FC, useEffect, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
+import { FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Avatar } from '@mui/material'
 
-import styles from './Comment.module.scss'
+import { getUser } from '../../api'
 
 import { addComment } from './hooks'
-// import CommentsList from './CommentsList'
-import { getUser } from '../../api'
 import ExistComment from './ExistComment'
 
+import styles from './Comment.module.scss'
 interface CommentProps {
   avatarImg?: string
   avatarColor?: string
@@ -43,7 +42,7 @@ const Comment: FC<CommentProps> = ({ postId, avatarImg, avatarColor }) => {
   }, [allComment])
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <div className={styles.container}>
         <Avatar
           sx={{ bgcolor: avatarColor }}
@@ -64,14 +63,16 @@ const Comment: FC<CommentProps> = ({ postId, avatarImg, avatarColor }) => {
           <SendIcon />
         </button>
       </div>
-      {allComment.map((comment) => {
-        authorsPosts.map((author, index) => {
-          return (
-            <ExistComment key={index} userName={author} comment={comment} />
-          )
-        })
-      })}
-    </>
+      <div>
+        {allComment.map((comment): any => {
+          authorsPosts.map((author, index) => {
+            return (
+              <ExistComment key={index} userName={author} comment={comment} />
+            )
+          })
+        })}
+      </div>
+    </div>
   )
 }
 

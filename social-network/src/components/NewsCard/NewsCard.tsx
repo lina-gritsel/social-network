@@ -124,6 +124,7 @@ const NewsCard: FC<News> = ({
           }
           title={username}
           subheader={createdAt}
+          className={styles.cardHeader}
         />
       )}
       {!!image && (
@@ -137,7 +138,7 @@ const NewsCard: FC<News> = ({
         />
       )}
       {!avatarColor && <CardHeader title={username} subheader={createdAt} />}
-      <CardContent>
+      <CardContent className={styles.content}>
         <Typography
           className={styles.content}
           variant="body2"
@@ -171,6 +172,7 @@ const NewsCard: FC<News> = ({
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
                 aria-label="show more"
+                className={styles.expandMore}
               >
                 <ExpandMoreIcon />
               </ExpandMore>
