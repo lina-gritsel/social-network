@@ -10,12 +10,11 @@
 }
 
 .content {
-  padding: 15px;
   font: var(--font-text-3) !important;
   line-height: 1.5 !important;
+  padding: 0 !important;
 }
 .moreContent {
-  padding: 0 15px;
   font: var(--font-text-4) !important;
   line-height: 1.5 !important;
 }
@@ -39,8 +38,16 @@
 }
 
 .like {
-  font: var(--font-text-4);
+  color: var(--dark-gray-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
 }
+
+.icon {
+  color: var(--dark-gray-color);
+}
+
 .settingsModal {
   position: absolute;
   right: 32px;
@@ -74,6 +81,19 @@
 
 .modal {
   min-width: 500px !important;
+}
+
+.actionOnPost {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.addToPost {
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 @keyframes ani {

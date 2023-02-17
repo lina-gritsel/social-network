@@ -20,6 +20,7 @@ import {
   MoreVert,
   PublishedWithChanges,
   DeleteForever,
+  ChatBubbleOutline,
 } from '@mui/icons-material'
 
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
@@ -138,7 +139,7 @@ const NewsCard: FC<News> = ({
       {!avatarColor && <CardHeader title={username} subheader={createdAt} />}
       <CardContent>
         <Typography
-          className={avatarColor ? styles.content : null}
+          className={styles.content}
           variant="body2"
           color="text.secondary"
           height={!avatarColor ? 100 : null}
@@ -154,10 +155,16 @@ const NewsCard: FC<News> = ({
       {!!avatarColor && (
         <div className={styles.footerPost}>
           <CardActions disableSpacing className={styles.cardActions}>
-            <IconButton aria-label="add to favorites">
-              <FavoriteBorder />
-              <div className={styles.like}>{'Like'}</div>
-            </IconButton>
+            <div className={styles.addToPost}>
+              <div className={styles.actionOnPost}>
+                <FavoriteBorder className={styles.icon} />
+                <div className={styles.like}>{'Like'}</div>
+              </div>
+              <div className={styles.actionOnPost}>
+                <ChatBubbleOutline className={styles.icon} />
+                <div className={styles.like}>{'Comments'}</div>
+              </div>
+            </div>
             {!!moreContent && (
               <ExpandMore
                 expand={expanded}
@@ -169,7 +176,7 @@ const NewsCard: FC<News> = ({
               </ExpandMore>
             )}
           </CardActions>
-          <Comment postId={id} userName={username}/>
+          <Comment postId={id} userName={username} />
         </div>
       )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
