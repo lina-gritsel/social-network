@@ -40,7 +40,8 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
       },
       body: JSON.stringify(user),
     })
-    return { status: data.status }
+    const result = await data.json()
+    return { status: data.status, id: result.id }
   } catch (error) {
     throw new Error(`${error}`)
   }

@@ -11,6 +11,8 @@ import Button from '../Button'
 import { getRandomInt } from '../../utils/utils'
 import { User } from '../../api'
 
+import { LINKS } from './constants'
+
 import styles from './RandomFriend.module.scss'
 
 interface RandomFriend {
@@ -25,14 +27,14 @@ interface RandomUser {
 }
 
 const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
-  const index = getRandomInt(0, allUsers?.length)
-  const randomUser = allUsers[index]
+  const indexArr = [getRandomInt(0, allUsers?.length), getRandomInt(0, allUsers?.length)]
+  const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
 
   return (
     <div className={styles.friends}>
-      <Friend user={randomUser} isLoading={isLoading} title="mightLike" />
+      <Friend user={randomUsers[0]} isLoading={isLoading} title="mightLike" />
       <Friend
-        user={randomUser}
+        user={randomUsers[1]}
         isLoading={isLoading}
         title="birthday"
         isBirthday={true}
@@ -63,26 +65,34 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
               {isLoading ? t('loading') : user?.name}
             </div>
             <div className={styles.subTitle}>
-              {isLoading
-                ? t('loading')
-                : isBirthday
-                ? t(title) + ' ' + bdDate
-                : user?.bio}
+              {isBirthday ? t(title) + ' ' + bdDate : user?.bio}
             </div>
           </div>
         </div>
-        {!isBirthday ? (
+        {!isBirthday && (
           <>
             <div className={styles.icons}>
               <a
-                href="http://www.instagram.com/prosto_a.lin.a"
+                href={LINKS.instagram + ('' || user?.instagram)}
                 target="_blank"
                 rel="noreferrer"
               >
                 <InstagramIcon />
               </a>
-              <FacebookIcon />
-              <TwitterIcon />
+              <a
+                href={LINKS.twitter + ('' || user?.twitter)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <TwitterIcon />
+              </a>
+              <a
+                href={LINKS.facebook + ('' || user?.facebook)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FacebookIcon />
+              </a>
             </div>
             <div className={styles.btnWrapper}>
               <Button className={styles.ignorFriends} outlined>
@@ -91,9 +101,10 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
               <Button>{t('follow')}</Button>
             </div>
           </>
-        ) : null}
+        )}
       </div>
     </Card>
   )
 }
+
 export default RandomFriend
