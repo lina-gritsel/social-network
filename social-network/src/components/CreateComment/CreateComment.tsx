@@ -1,31 +1,45 @@
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FC, KeyboardEvent } from 'react'
-import { useSelector } from 'react-redux'
+import SendIcon from '@mui/icons-material/Send'
 
-import { getUserInfoSelector } from '../../store/selectors'
 import Avatar from '../Avatar'
+import Comment from '../Comment'
 
 import styles from './CreateComment.module.scss'
+import { useCreateComment } from './hooks'
 
-const Comment: FC = () => {
-  const userInfo = useSelector(getUserInfoSelector)
+interface CommentProps {
+  avatarImg?: string
+  postId: string
+}
 
+const CreateComment: FC<CommentProps> = ({ postId, avatarImg }) => {
   const { t } = useTranslation()
-
-  const changeComment = (event) => {}
+  const { comment, onChangeComment, onSubmit, allComments } =
+    useCreateComment(postId)
+    console.log(allComments)
 
   return (
-    <div className={styles.container}>
-      <Avatar imageUrl={userInfo?.avatar} />
-      <input
-        placeholder={t('comment')}
-        className={styles.input}
-        onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
-          changeComment(event)
-        }
-      />
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <Avatar imageUrl={avatarImg} className={styles.avatar} />
+        <input
+          placeholder={t('comment')}
+          className={styles.input}
+          onChange={onChangeComment}
+          value={comment}
+        />
+        <button className={styles.sendComment} onClick={onSubmit}>
+          <SendIcon />
+        </button>
+      </div>
+      <div>
+        {/* {allComments.map(({comment}, index): any => {
+          return <Comment key={index} userName="lkj" comment={comment} />
+        })} */}
+      </div>
     </div>
   )
 }
 
-export default Comment
+export default CreateComment

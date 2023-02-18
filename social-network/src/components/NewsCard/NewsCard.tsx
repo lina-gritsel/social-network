@@ -1,32 +1,39 @@
 import { FC, useState, useRef, SetStateAction, Dispatch } from 'react'
 import { styled } from '@mui/material/styles'
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
-import CardMedia from '@mui/material/CardMedia'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Collapse from '@mui/material/Collapse'
+
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Collapse,
+  Typography,
+} from '@mui/material'
+import {
+  FavoriteBorder,
+  MoreVert,
+  DeleteIcon,
+  PublishedWithChanges,
+  DeleteForever,
+} from '@mui/icons-material'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import FavoriteIcon from '@mui/icons-material/Favorite'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import ChangesIcon from '@mui/icons-material/PublishedWithChanges'
-import DeleteIcon from '@mui/icons-material/DeleteForever'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-
-import Comment from '../CreateComment'
-
 import classNames from 'classnames'
-import { deletePost, getPost } from '../../api/requests'
-import Modal from '../Modal'
-import { getUserInfoSelector } from '../../store/selectors'
 
-import styles from './NewsCard.module.scss'
+import { getUserInfoSelector } from '../../store/selectors'
+import { deletePost, getPost } from '../../api/requests'
 import { useOnClickOutside } from '../../hooks'
+
+import CreateComment from '../CreateComment'
 import CreatePost from '../CreatePost'
 import Avatar from '../Avatar'
+import Modal from '../Modal'
+
+import styles from './NewsCard.module.scss'
+import FooterPanelPost from '../FooterPanelPost'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -67,7 +74,6 @@ const NewsCard: FC<News> = ({
   image,
   content,
   moreContent,
-  avatarColor,
   avatarImg,
   className,
   id,
@@ -98,7 +104,7 @@ const NewsCard: FC<News> = ({
               aria-label="settings"
               onClick={() => setIsSettingModal((prev) => !prev)}
             >
-              <MoreVertIcon />
+              <MoreVert />
             </IconButton>
           ) : null
         }
@@ -125,9 +131,10 @@ const NewsCard: FC<News> = ({
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
+      <FooterPanelPost/>
+        {/* <IconButton aria-label="add to favorites">
+          <FavoriteBorder />
+        </IconButton> */}
         {!!moreContent && (
           <ExpandMore
             expand={expanded}
@@ -146,7 +153,7 @@ const NewsCard: FC<News> = ({
           </Typography>
         </CardContent>
       </Collapse>
-      <Comment />
+      <CreateComment postId={id} />
     </Card>
   )
 }
@@ -185,13 +192,14 @@ const SettingsModal: FC<SettingsModalProps> = ({
   }
 
   return (
-    <div className={styles.settingsModal} ref={modalRef}>
+    <div className={styles.settingsModal}>
       <Modal
         className={styles.modal}
         open={isChange}
         onClose={() => setIsChange(false)}
         onConfirm={() => setIsChange(false)}
         isDialogActions={false}
+        ref={modalRef}
         content={
           <CreatePost
             name={userInfo?.name}
@@ -205,11 +213,11 @@ const SettingsModal: FC<SettingsModalProps> = ({
         }
       />
       <div onClick={editPost}>
-        <ChangesIcon />
+        <PublishedWithChanges />
         {t('change')}
       </div>
       <div onClick={onDeletePost}>
-        <DeleteIcon />
+        <DeleteForever />
         {t('delete')}
       </div>
     </div>

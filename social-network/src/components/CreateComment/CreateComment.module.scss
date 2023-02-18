@@ -1,9 +1,11 @@
+.wrapper {
+  margin-top: 14px;
+}
+
 .container {
   display: flex;
   gap: 15px;
-  width: 95%;
-  margin: 0 auto;
-  padding-bottom: 15px;
+  width: 100%;
 }
 
 .input {
@@ -13,4 +15,20 @@
   outline: 0;
   width: 100%;
   padding-left: 15px;
+}
+
+.sendComment {
+  background-color: var(--light-gray-color);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--blue-color);
+  padding: 10px;
+  padding-bottom: 5px;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.sendComment:hover {
+  box-shadow: inset 100px 0 0 0 #54b3d6;
+  color: white;
 }

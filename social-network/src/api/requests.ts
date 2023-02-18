@@ -7,6 +7,7 @@ import {
   DeleteUserStatus,
   ChangePostParams,
   UsersInfo,
+  ChangeComment,
 } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
@@ -14,6 +15,7 @@ const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
 const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
+const COMMETS_URL = `${POSTS_URL}/comments`
 
 export const createUser = async (user: User): Promise<RegistrationData> => {
   try {
@@ -36,7 +38,7 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
     const data = await fetch(LOGIN_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(user),
     })
@@ -147,3 +149,18 @@ export const deletePost = async (id: string) => {
   }
 }
 
+export const createComment = async ({ userId, comment, postId }) => {
+  try {
+    const response = await fetch(`${COMMETS_URL}/${postId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ userId, comment, postId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}

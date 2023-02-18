@@ -1,0 +1,26 @@
+.addToPost {
+  align-items: center;
+  display: flex;
+  gap:150px;
+  width: 100%;
+  border-top: 1px solid var(--medium-gray-color);
+  border-bottom: 1px solid var(--medium-gray-color);
+  padding: 10px 0 !important;
+}
+
+.like {
+  color: var(--dark-gray-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.icon {
+  color: var(--dark-gray-color);
+}
+
+.actionOnPost {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
