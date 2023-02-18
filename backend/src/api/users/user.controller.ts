@@ -13,8 +13,13 @@ export const createUserController = async (
   res: Response,
 ) => {
   try {
-    const { name, email, gender, password, instagramm, twitter, facebook } =
-      req.body
+    const {
+      name,
+      email,
+      date,
+      gender,
+      password,
+    } = req.body
 
     const salt = await bcrypt.genSalt(10)
     const hashedPass = await bcrypt.hash(password, salt)
@@ -41,10 +46,8 @@ export const createUserController = async (
         name,
         email,
         gender,
+        date,
         password: hashedPass,
-        instagramm,
-        twitter,
-        facebook,
       })
 
       res.status(201).json({

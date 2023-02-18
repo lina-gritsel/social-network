@@ -1,17 +1,17 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import Picker from '@emoji-mart/react'
-
 import data from '@emoji-mart/data'
 
 import { ModalContent } from '../NewsCreator/ModalContent'
 import CreatePostInput from './components/CreatePostInput'
 import { useCreatePost, useEmojiModal } from './hooks'
 import FooterPanel from './components/FooterPanel'
+
 import styles from './CreatePost.module.scss'
+import Avatar from '../Avatar'
 import Button from '../Button'
 import Modal from '../Modal'
-import Avatar from '../Avatar'
 
 interface CreatePostProps {
   name: string
@@ -19,6 +19,7 @@ interface CreatePostProps {
   content?: string
   image?: string
   id?: string
+  userId?: string
   editMode?: boolean
   setIsAllPosts?: Dispatch<SetStateAction<boolean>>
 }
@@ -31,6 +32,7 @@ const CreatePost: FC<CreatePostProps> = ({
   setIsAllPosts,
   editMode,
   id,
+  userId,
 }) => {
   const { t } = useTranslation()
 
@@ -41,7 +43,7 @@ const CreatePost: FC<CreatePostProps> = ({
     contentInput,
     setContentInput,
     onEmojiSelect,
-  } = useCreatePost({ content, image, editMode, id, name, setIsAllPosts })
+  } = useCreatePost({ content, image, editMode, id, setIsAllPosts, userId })
 
   const {
     isVisible: isEmojiModalVisible,

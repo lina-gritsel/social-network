@@ -1,4 +1,11 @@
-import { FC, useState, useRef, SetStateAction, Dispatch } from 'react'
+import {
+  FC,
+  useState,
+  useRef,
+  SetStateAction,
+  Dispatch,
+  useEffect,
+} from 'react'
 import { styled } from '@mui/material/styles'
 
 import {
@@ -24,16 +31,18 @@ import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 
 import { getUserInfoSelector } from '../../store/selectors'
-import { deletePost, getPost } from '../../api/requests'
+import { deletePost, getPost,getUser } from '../../api/requests'
 import { useOnClickOutside } from '../../hooks'
 
 import CreateComment from '../CreateComment'
+import FooterPanelPost from '../FooterPanelPost'
 import CreatePost from '../CreatePost'
 import Avatar from '../Avatar'
 import Modal from '../Modal'
 
+import { User } from '../../api'
+
 import styles from './NewsCard.module.scss'
-import FooterPanelPost from '../FooterPanelPost'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -82,6 +91,15 @@ const NewsCard: FC<News> = ({
 }) => {
   const [expanded, setExpanded] = useState(false)
   const [isSettingModal, setIsSettingModal] = useState(false)
+  const [author, setAuthor] = useState<User>()
+
+  useEffect(() => {
+    const getAuthor = async () => {
+      const user = (await getUser(username)).data.user
+      setAuthor(user)
+    }
+    getAuthor()
+  }, [username])
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
@@ -108,7 +126,7 @@ const NewsCard: FC<News> = ({
             </IconButton>
           ) : null
         }
-        title={username}
+        title={author?.name}
         subheader={createdAt}
       />
       {!!image && (
@@ -116,7 +134,7 @@ const NewsCard: FC<News> = ({
           component="img"
           height="300"
           image={image}
-          alt={username}
+          alt={author?.name}
           className={styles.image}
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
@@ -174,7 +192,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
 
   const userInfo = useSelector(getUserInfoSelector)
 
-  useOnClickOutside(modalRef, () => setIsSettingModal(false))
+  useOnClickOutside(modalRef, () => setIsSettingModal(false), isChange)
 
   const onDeletePost = async () => {
     await deletePost(id)
@@ -189,7 +207,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
   }
 
   return (
-    <div className={styles.settingsModal}>
+    <>
       <Modal
         className={styles.modal}
         open={isChange}
@@ -200,6 +218,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
         content={
           <CreatePost
             name={userInfo?.name}
+            userId={userInfo?.id}
             avatarImg={userInfo?.avatar}
             content={content}
             id={id}
@@ -209,15 +228,17 @@ const SettingsModal: FC<SettingsModalProps> = ({
           />
         }
       />
-      <div onClick={editPost}>
-        <PublishedWithChanges />
-        {t('change')}
+      <div className={styles.settingsModal} ref={modalRef}>
+        <div onClick={editPost}>
+          <PublishedWithChanges />
+          {t('change')}
+        </div>
+        <div onClick={onDeletePost}>
+          <DeleteIcon />
+          {t('delete')}
+        </div>
       </div>
-      <div onClick={onDeletePost}>
-        <DeleteForever />
-        {t('delete')}
-      </div>
-    </div>
+    </>
   )
 }
 

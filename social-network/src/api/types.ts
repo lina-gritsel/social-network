@@ -37,6 +37,7 @@ export interface LoginUser {
 
 export interface LoginStatus {
   status: number
+  id: string
 }
 
 export interface DeleteUserStatus {

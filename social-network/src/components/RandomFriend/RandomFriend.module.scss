@@ -48,11 +48,16 @@
   justify-content: center;
   gap: 20px;
   color: var(--gray-color);
+  padding: 5px 0;
   cursor: pointer;
 
   svg {
     width: 20px;
     height: 20px;
+    &:hover {
+      transform: scale(1.2);
+      color: var(--blue-color);
+    }
   }
 }
 
@@ -78,3 +83,8 @@
   width: 48px !important;
   height: 48px !important;
 }
+
+.loading {
+  color: var(--dark-gray-color);
+  font-size: var(--font-text-3);
+  font-weight: 600;}

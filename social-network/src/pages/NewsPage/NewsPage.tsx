@@ -3,22 +3,17 @@ import { useSelector } from 'react-redux'
 
 import { getUserInfoSelector } from '../../store/selectors'
 import FriendsOnline from '../../components/FriendsOnline'
-import { News } from '../../components/NewsCard/NewsCard'
 import RandomFriend from '../../components/RandomFriend'
-import { getRandomColor } from '../../utils/utils'
+import CreatePost from '../../components/CreatePost'
 import NewsList from '../../components/NewsList'
 import Weather from '../../components/Weather'
 import Layout from '../../components/Layout'
 
-import styles from './NewsPage.module.scss'
-import CreatePost from '../../components/CreatePost'
 import { useFetchAllUsers } from './hooks'
 
-export const setAvatarColor = (arr: News[]) => {
-  return arr.map((news) =>
-    Object.assign(news, { avatarColor: getRandomColor() }),
-  )
-}
+import styles from './NewsPage.module.scss'
+
+
 
 const NewsPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
@@ -33,6 +28,7 @@ const NewsPage: FC = () => {
             <CreatePost
               setIsAllPosts={setIsAllPosts}
               name={userInfo?.name}
+              userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
             />
             <NewsList isAllPosts={isAllPosts} />

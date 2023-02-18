@@ -27,6 +27,7 @@ const Modal: FC<ModalProps> = ({
   content,
   onConfirm,
   className,
+  ref,
   isDialogActions = true,
   ref
 }) => {

@@ -101,6 +101,7 @@ const ProfilePage: FC = () => {
           <div className={styles.content}>
             <CreatePost
               name={userInfo?.name}
+              userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
               setIsAllPosts={setIsAllPosts}
             />

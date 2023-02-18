@@ -10,6 +10,10 @@ const PostModel = sequelize.define('post', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -23,6 +27,14 @@ const PostModel = sequelize.define('post', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
     allowNull: false,
+  },
+  comments: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  likes: {
+    type: DataTypes.JSON,
+    allowNull: true,
   },
 })
 
