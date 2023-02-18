@@ -17,7 +17,6 @@ const CreateComment: FC<CommentProps> = ({ postId, avatarImg }) => {
   const { t } = useTranslation()
   const { comment, onChangeComment, onSubmit, allComments } =
     useCreateComment(postId)
-    console.log(allComments)
 
   return (
     <div className={styles.wrapper}>
@@ -26,10 +25,12 @@ const CreateComment: FC<CommentProps> = ({ postId, avatarImg }) => {
         <input
           placeholder={t('comment')}
           className={styles.input}
-          onChange={onChangeComment}
-          value={comment}
+          // onChange={onChangeComment}
+          // value={comment}
         />
-        <button className={styles.sendComment} onClick={onSubmit}>
+        <button className={styles.sendComment}
+         onClick={onSubmit}
+         >
           <SendIcon />
         </button>
       </div>

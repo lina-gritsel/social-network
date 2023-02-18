@@ -132,9 +132,6 @@ const NewsCard: FC<News> = ({
       </CardContent>
       <CardActions disableSpacing>
       <FooterPanelPost/>
-        {/* <IconButton aria-label="add to favorites">
-          <FavoriteBorder />
-        </IconButton> */}
         {!!moreContent && (
           <ExpandMore
             expand={expanded}

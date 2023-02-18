@@ -4,6 +4,7 @@ import { FavoriteBorder, ChatBubbleOutline } from '@mui/icons-material'
 import styles from './FooterPanelPost.module.scss'
 
 const FooterPanelPost: FC = () => {
+
   return (
     <div className={styles.addToPost}>
       <div className={styles.actionOnPost}>

@@ -9,9 +9,7 @@ export const useCreateComment = (postId: string) => {
 
   const { allComments, setAllComments, isLoading } =
     useFetchCertainsComments(postId)
-
   const [comment, setComment] = useState<string>('')
-  const [authorsPosts, setAuthorsPosts] = useState([])
 
   const onChangeComment = (event) => {
     setComment(event.target.value)
@@ -38,7 +36,7 @@ export const useCreateComment = (postId: string) => {
 export const useFetchCertainsComments = (postId: string) => {
   const [allComments, setAllComments] = useState([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  console.log(allComments)
+  const [commentsWithAllInfo, setCommentsWithAllInfo] = useState<any>([])
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -50,17 +48,40 @@ export const useFetchCertainsComments = (postId: string) => {
     setIsLoading(false)
   }, [postId])
 
-  const commentsWithUserInfo = allComments.map(async (comment) => {
+  const commentsWithUserInfo = async (comment) => {
     const userId = comment.userId
+    const promises = []
 
-    const { data } = await getUser(userId)
+    promises.push(getUser(userId))
 
-    return {
-      ...comment,
-      avatar: data?.user?.avatar,
-      name: data?.user?.name,
-    }
-  })
+    const infoCreaterPost = await Promise.all(promises)
+    const infoAuthorComment = infoCreaterPost[0].data.user
 
-  return { allComments: commentsWithUserInfo, isLoading, setAllComments }
+    console.log({
+      comment: comment.comment,
+      name: infoAuthorComment.name,
+      avatar: infoAuthorComment.avatar,
+    })
+
+    // setCommentsWithAllInfo((prev) => [
+    //   ...prev,
+    //   {
+    //     comment: comment.comment,
+    //     name: infoAuthorComment.name,
+    //     avatar: infoAuthorComment.avatar,
+    //   },
+    // ])
+  }
+  // useEffect(() => {
+  //   console.log(allComments)
+  //   allComments.map((comment) => {
+  //     commentsWithUserInfo(comment)
+  //   })
+  // }, [])
+
+  return {
+    allComments: commentsWithUserInfo,
+    isLoading,
+    setAllComments,
+  }
 }
