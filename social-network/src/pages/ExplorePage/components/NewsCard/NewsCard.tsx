@@ -1,18 +1,19 @@
 import { FC } from 'react'
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
-import CardMedia from '@mui/material/CardMedia'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-
 import classNames from 'classnames'
+import {
+  CardHeader,
+  CardMedia,
+  Card,
+  CardContent,
+  Typography,
+} from '@mui/material'
 
 import styles from './NewsCard.module.scss'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
 
-export interface ExploreNews {
+export interface NewsCardProps {
   username: string
   createdAt: string
   image?: string
@@ -21,7 +22,7 @@ export interface ExploreNews {
   url?: string
 }
 
-export const ExploreNewsCard: FC<ExploreNews> = ({
+export const NewsCard: FC<NewsCardProps> = ({
   username,
   createdAt,
   image,
@@ -33,8 +34,8 @@ export const ExploreNewsCard: FC<ExploreNews> = ({
     <Card className={classNames(styles.card, className)}>
       <CardMedia
         component="img"
-        height="300"
-        image={image}
+        height={300}
+        image={image || DEFAULT_IMG}
         alt={username}
         className={styles.image}
         onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
@@ -51,3 +52,5 @@ export const ExploreNewsCard: FC<ExploreNews> = ({
     </Card>
   )
 }
+
+export default NewsCard

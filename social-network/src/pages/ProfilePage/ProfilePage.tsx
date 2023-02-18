@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Modal from '../../components/Modal'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
-import NewsCreator from '../../components/NewsCreator'
+
 import { PATHS } from '../../router/paths'
 import NewsList from '../../components/NewsList'
 
@@ -15,6 +15,7 @@ import { FIELD_INTO } from './constants'
 import ModalContent from './ModalContent'
 
 import styles from './Profile.module.scss'
+import CreatePost from '../../components/CreatePost'
 
 const ProfilePage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
@@ -92,12 +93,14 @@ const ProfilePage: FC = () => {
               <div key={index} className={styles.intoItem}>
                 {icon}
                 <div>{t(label)}</div>
-                <div className={styles.profileInfo}>{profileInfoArr[index]}</div>
+                <div className={styles.profileInfo}>
+                  {profileInfoArr[index]}
+                </div>
               </div>
             ))}
           </div>
           <div className={styles.content}>
-            <NewsCreator
+            <CreatePost
               name={userInfo?.name}
               userId={userInfo?.id}
               avatarImg={userInfo?.avatar}

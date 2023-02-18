@@ -1,0 +1,14 @@
+.input {
+    width: 100% !important;
+  
+    & > :not(style) {
+      background-color: var(--light-gray-color);
+      margin: 1;
+    }
+  }
+  
+  .field {
+    border-radius: 10px;
+    border: none !important;
+    width: 100%;
+  }

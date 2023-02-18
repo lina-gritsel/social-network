@@ -6,57 +6,10 @@
   gap: 30px;
   width: 100%;
 }
-.news {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.card {
-  width: 350px;
-  height: 100% !important;
-  border-radius: 20px !important;
-}
-
-.options {
-  display: flex;
-  gap: 35px;
-  padding: 15px 0;
-  position: sticky;
-  top: 64px;
-  background-color: var(--white-color);
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
 
 .loading {
   align-items: center;
   display: flex;
   justify-content: center;
   padding-top: 30px;
-}
-
-@media (max-width: 1120px) {
-  .options {
-    gap: 15px;
-    & > button {
-      font: var(--font-text-5);
-    }
-  }
-}
-
-@media (max-width: 1060px) {
-  .card {
-    width: 300px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 80%;
-  }
 }

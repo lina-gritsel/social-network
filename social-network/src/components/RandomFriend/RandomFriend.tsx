@@ -27,7 +27,10 @@ interface RandomUser {
 }
 
 const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
-  const indexArr = [getRandomInt(0, allUsers?.length), getRandomInt(0, allUsers?.length)]
+  const indexArr = [
+    getRandomInt(0, allUsers?.length),
+    getRandomInt(0, allUsers?.length),
+  ]
   const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
 
   return (
@@ -59,15 +62,16 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
             src={user?.avatar}
             className={styles.avatar}
           />
-
-          <div>
-            <div className={styles.title}>
-              {isLoading ? t('loading') : user?.name}
+          {isLoading ? (
+            <div className={styles.loading}>{t('loading')}</div>
+          ) : (
+            <div>
+              <div className={styles.title}>{user?.name}</div>
+              <div className={styles.subTitle}>
+                {isBirthday ? t(title) + ' ' + bdDate : user?.bio}
+              </div>
             </div>
-            <div className={styles.subTitle}>
-              {isBirthday ? t(title) + ' ' + bdDate : user?.bio}
-            </div>
-          </div>
+          )}
         </div>
         {!isBirthday && (
           <>

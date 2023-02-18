@@ -37,7 +37,7 @@ const NewsList: FC<NewsListProps> = ({
           const content = post.content
           if (content.length > 100) {
             post.content = content.slice(0, 150) + '...'
-            post.moreContent = content.slice(151)
+            post.moreContent = content.slice(150)
           }
         })
       if (filter) {

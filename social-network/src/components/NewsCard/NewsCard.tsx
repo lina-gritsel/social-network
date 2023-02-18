@@ -23,17 +23,15 @@ import ChangesIcon from '@mui/icons-material/PublishedWithChanges'
 import DeleteIcon from '@mui/icons-material/DeleteForever'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
 
 import Comment from '../../components/Comment'
-
-import classNames from 'classnames'
+import { useOnClickOutside } from '../../hooks'
+import CreatePost from '../CreatePost'
 import { deletePost, getPost, getUser } from '../../api/requests'
-import NewsCreator from '../NewsCreator'
 import Modal from '../Modal'
 import { getUserInfoSelector } from '../../store/selectors'
 import { User } from '../../api'
-
-import { useOnClickOutside } from './hooks'
 
 import styles from './NewsCard.module.scss'
 
@@ -92,7 +90,7 @@ const NewsCard: FC<News> = ({
       setAuthor(user)
     }
     getAuthor()
-  }, [])
+  }, [username])
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
@@ -196,13 +194,13 @@ const SettingsModal: FC<SettingsModalProps> = ({
 
   const userInfo = useSelector(getUserInfoSelector)
 
-  useOnClickOutside(modalRef, isChange, () => setIsSettingModal(false))
+  useOnClickOutside(modalRef, () => setIsSettingModal(false), isChange)
 
-  const onclickDelete = async () => {
+  const onDeletePost = async () => {
     await deletePost(id)
     setIsAllPosts((prev) => !prev)
   }
-  const onclickChange = async () => {
+  const editPost = async () => {
     const response = await getPost(id)
     setContent(response.data.post.content)
     setImage(response.data.post.image)
@@ -210,7 +208,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
   }
 
   return (
-    <div className={styles.settingsModal} ref={modalRef}>
+    <>
       <Modal
         className={styles.modal}
         open={isChange}
@@ -218,27 +216,29 @@ const SettingsModal: FC<SettingsModalProps> = ({
         onConfirm={() => setIsChange(false)}
         isDialogActions={false}
         content={
-          <NewsCreator
+          <CreatePost
             name={userInfo?.name}
             userId={userInfo?.id}
             avatarImg={userInfo?.avatar}
             content={content}
             id={id}
             setIsAllPosts={setIsAllPosts}
-            isChange={true}
             image={image}
+            editMode
           />
         }
       />
-      <div onClick={() => onclickChange()}>
-        <ChangesIcon />
-        {t('change')}
+      <div className={styles.settingsModal} ref={modalRef}>
+        <div onClick={editPost}>
+          <ChangesIcon />
+          {t('change')}
+        </div>
+        <div onClick={onDeletePost}>
+          <DeleteIcon />
+          {t('delete')}
+        </div>
       </div>
-      <div onClick={() => onclickDelete()}>
-        <DeleteIcon />
-        {t('delete')}
-      </div>
-    </div>
+    </>
   )
 }
 

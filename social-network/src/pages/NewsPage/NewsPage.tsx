@@ -1,41 +1,31 @@
-import { FC, useState, useEffect } from 'react'
+import { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import Layout from '../../components/Layout'
-import Weather from '../../components/Weather'
-import NewsCreator from '../../components/NewsCreator'
-import RandomFriend from '../../components/RandomFriend'
-import FriendsOnline from '../../components/FriendsOnline'
 import { getUserInfoSelector } from '../../store/selectors'
-import { getAllUsers, User } from '../../api'
+import FriendsOnline from '../../components/FriendsOnline'
+import RandomFriend from '../../components/RandomFriend'
+import CreatePost from '../../components/CreatePost'
+import NewsList from '../../components/NewsList'
+import Weather from '../../components/Weather'
+import Layout from '../../components/Layout'
+
+import { useFetchAllUsers } from './hooks'
 
 import styles from './NewsPage.module.scss'
-import NewsList from '../../components/NewsList'
+
+
 
 const NewsPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [allUsers, setAllUsers] = useState<User[]>([])
-
+  const { isLoading, users } = useFetchAllUsers()
   const userInfo = useSelector(getUserInfoSelector)
-  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
-
-  useEffect(() => {
-    const getUsers = async () => {
-      setIsLoading(true)
-      const res = await getAllUsers()
-      setAllUsers(res.users.filter((user) => user.id !== userId))
-      setIsLoading(false)
-    }
-    getUsers()
-  }, [userId])
 
   return (
     <Layout>
       <div className={styles.containerWrapper}>
         <div className={styles.container}>
           <div className={styles.news}>
-            <NewsCreator
+            <CreatePost
               setIsAllPosts={setIsAllPosts}
               name={userInfo?.name}
               userId={userInfo?.id}
@@ -44,11 +34,11 @@ const NewsPage: FC = () => {
             <NewsList isAllPosts={isAllPosts} />
           </div>
           <div className={styles.friendAndWeather}>
-            <RandomFriend allUsers={allUsers} isLoading={isLoading}/>
+            <RandomFriend allUsers={users} isLoading={isLoading} />
             <Weather />
           </div>
         </div>
-        <FriendsOnline allUsers={allUsers} isLoading={isLoading}/>
+        <FriendsOnline allUsers={users} isLoading={isLoading} />
       </div>
     </Layout>
   )
