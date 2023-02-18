@@ -20,6 +20,7 @@ interface CreatePostProps {
   avatarImg?: string
   content?: string
   image?: string
+  className?: string
   id?: string
   userId?: string
   editMode?: boolean
@@ -35,6 +36,7 @@ const CreatePost: FC<CreatePostProps> = ({
   editMode,
   id,
   userId,
+  className,
 }) => {
   const { t } = useTranslation()
 
@@ -97,6 +99,7 @@ const CreatePost: FC<CreatePostProps> = ({
         <CreatePostInput
           value={contentInput}
           onChange={(event) => setContentInput(event.target.value)}
+          className={className}
         />
       </div>
       {currentImg && <img className={styles.createImg} src={currentImg} />}

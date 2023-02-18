@@ -37,7 +37,6 @@ export const useProfilePage = () => {
       const setWallpapers = async () => {
         setIsLoading(true)
         const wallpapers = await getWallpapers()
-        console.log(wallpapers)
         setBgImageArr(wallpapers)
         setIsLoading(false)
       }

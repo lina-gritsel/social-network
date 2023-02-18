@@ -32,7 +32,7 @@ const Modal: FC<ModalProps> = ({
 }) => {
   return (
     <Dialog ref={ref} className={className} open={open} onClose={onClose}>
-      <DialogTitle className={styles.title}>{title}</DialogTitle>
+      {title && <DialogTitle className={styles.title}>{title}</DialogTitle>}
       <DialogContent>{content}</DialogContent>
       {isDialogActions && (
         <DialogActions>
