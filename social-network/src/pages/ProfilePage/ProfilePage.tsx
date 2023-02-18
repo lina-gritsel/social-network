@@ -22,6 +22,7 @@ const ProfilePage: FC = () => {
   const { t } = useTranslation()
   const {
     isOpen,
+    isLoading,
     bgImage,
     userInfo,
     bgImageArr,
@@ -49,6 +50,7 @@ const ProfilePage: FC = () => {
             setIsErrorImg={setIsErrorImg}
             bgImageArr={bgImageArr}
             setBgImageArr={setBgImageArr}
+            isLoading={isLoading}
           />
         }
       />
