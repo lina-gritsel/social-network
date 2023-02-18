@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { createComment, getPost } from '../../api'
 
 import { getUserInfoSelector } from '../../store/selectors'
-import { getUser, createComment, getPost } from '../../api'
 
 export const useCreateComment = (postId: string) => {
   const userInfo = useSelector(getUserInfoSelector)
 
   const { allComments, setAllComments, isLoading } =
     useFetchCertainsComments(postId)
+
   const [comment, setComment] = useState<string>('')
 
   const onChangeComment = (event) => {
@@ -36,7 +37,6 @@ export const useCreateComment = (postId: string) => {
 export const useFetchCertainsComments = (postId: string) => {
   const [allComments, setAllComments] = useState([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [commentsWithAllInfo, setCommentsWithAllInfo] = useState<any>([])
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -48,39 +48,8 @@ export const useFetchCertainsComments = (postId: string) => {
     setIsLoading(false)
   }, [postId])
 
-  const commentsWithUserInfo = async (comment) => {
-    const userId = comment.userId
-    const promises = []
-
-    promises.push(getUser(userId))
-
-    const infoCreaterPost = await Promise.all(promises)
-    const infoAuthorComment = infoCreaterPost[0].data.user
-
-    console.log({
-      comment: comment.comment,
-      name: infoAuthorComment.name,
-      avatar: infoAuthorComment.avatar,
-    })
-
-    // setCommentsWithAllInfo((prev) => [
-    //   ...prev,
-    //   {
-    //     comment: comment.comment,
-    //     name: infoAuthorComment.name,
-    //     avatar: infoAuthorComment.avatar,
-    //   },
-    // ])
-  }
-  // useEffect(() => {
-  //   console.log(allComments)
-  //   allComments.map((comment) => {
-  //     commentsWithUserInfo(comment)
-  //   })
-  // }, [])
-
   return {
-    allComments: commentsWithUserInfo,
+    allComments,
     isLoading,
     setAllComments,
   }

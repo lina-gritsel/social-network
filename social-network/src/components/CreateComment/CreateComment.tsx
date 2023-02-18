@@ -25,19 +25,17 @@ const CreateComment: FC<CommentProps> = ({ postId, avatarImg }) => {
         <input
           placeholder={t('comment')}
           className={styles.input}
-          // onChange={onChangeComment}
-          // value={comment}
+          onChange={onChangeComment}
+          value={comment}
         />
-        <button className={styles.sendComment}
-         onClick={onSubmit}
-         >
+        <button className={styles.sendComment} onClick={onSubmit}>
           <SendIcon />
         </button>
       </div>
       <div>
-        {/* {allComments.map(({comment}, index): any => {
-          return <Comment key={index} userName="lkj" comment={comment} />
-        })} */}
+        {allComments.map(({ comment, user }, index): any => {
+          return <Comment key={index} userName={user.name} comment={comment} />
+        })}
       </div>
     </div>
   )
