@@ -18,7 +18,6 @@ import {
   Typography,
 } from '@mui/material'
 import {
-  FavoriteBorder,
   MoreVert,
   DeleteIcon,
   PublishedWithChanges,
@@ -29,9 +28,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import moment from 'moment'
 
 import { getUserInfoSelector } from '../../store/selectors'
-import { deletePost, getPost,getUser } from '../../api/requests'
+import { deletePost, getPost, getUser } from '../../api/requests'
 import { useOnClickOutside } from '../../hooks'
 
 import CreateComment from '../CreateComment'
@@ -92,6 +92,8 @@ const NewsCard: FC<News> = ({
   const [expanded, setExpanded] = useState(false)
   const [isSettingModal, setIsSettingModal] = useState(false)
   const [author, setAuthor] = useState<User>()
+  const [showMore, setShowMore] = useState(true)
+  console.log(showMore)
 
   useEffect(() => {
     const getAuthor = async () => {
@@ -105,6 +107,8 @@ const NewsCard: FC<News> = ({
     setExpanded(!expanded)
   }
 
+  const createdPostTime = moment(createdAt).fromNow()
+
   return (
     <Card className={classNames(styles.card, className)}>
       {isSettingModal && (
@@ -114,21 +118,24 @@ const NewsCard: FC<News> = ({
           setIsSettingModal={setIsSettingModal}
         />
       )}
-      <CardHeader
-        avatar={<Avatar imageUrl={avatarImg} />}
-        action={
-          isProfilePage ? (
-            <IconButton
-              aria-label="settings"
-              onClick={() => setIsSettingModal((prev) => !prev)}
-            >
-              <MoreVert />
-            </IconButton>
-          ) : null
-        }
-        title={author?.name}
-        subheader={createdAt}
-      />
+      <div className={styles.wrapperCardHeader}>
+        <div className={styles.wrapperCard}>
+          <Avatar className={styles.cardAvatar} imageUrl={avatarImg} />
+          <div>
+            <div className={styles.author}>{author?.name}</div>
+            <div className={styles.createAt}>{createdPostTime}</div>
+          </div>
+        </div>
+        {isProfilePage && (
+          <IconButton
+            aria-label="settings"
+            onClick={() => setIsSettingModal((prev) => !prev)}
+            className={styles.editPostIcon}
+          >
+            <MoreVert />
+          </IconButton>
+        )}
+      </div>
       {!!image && (
         <CardMedia
           component="img"
@@ -139,17 +146,25 @@ const NewsCard: FC<News> = ({
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
       )}
-      <CardContent>
+      <CardContent className={styles.cardContent}>
         <Typography
           className={styles.content}
           variant="body2"
           color="text.secondary"
         >
-          {content}
+          <div
+            className={classNames(
+              styles.contentText,
+              showMore && styles.textTruncate,
+            )}
+            onClick={() => setShowMore((currentValue) => !currentValue)}
+          >
+            {content}
+          </div>
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-      <FooterPanelPost/>
+      <CardActions disableSpacing className={styles.cardActions}>
+        <FooterPanelPost />
         {!!moreContent && (
           <ExpandMore
             expand={expanded}
@@ -234,7 +249,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
           {t('change')}
         </div>
         <div onClick={onDeletePost}>
-          <DeleteIcon />
+          <DeleteForever />
           {t('delete')}
         </div>
       </div>

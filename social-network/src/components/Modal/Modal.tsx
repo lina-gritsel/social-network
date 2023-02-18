@@ -29,7 +29,6 @@ const Modal: FC<ModalProps> = ({
   className,
   ref,
   isDialogActions = true,
-  ref
 }) => {
   return (
     <Dialog ref={ref} className={className} open={open} onClose={onClose}>

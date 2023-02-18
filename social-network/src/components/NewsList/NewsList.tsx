@@ -33,12 +33,11 @@ const NewsList: FC<NewsListProps> = ({
       const sortedPosts = posts.sort((a, b) => sortNews(a.createdAt, b.createdAt))
       sortedPosts
         .map((post) => {
-          post.createdAt = dateConversion(post.createdAt)
           const content = post.content
-          if (content.length > 100) {
-            post.content = content.slice(0, 150) + '...'
-            post.moreContent = content.slice(150)
-          }
+          // if (content.length > 100) {
+          //   post.content = content.slice(0, 150) + '...'
+          //   post.moreContent = content.slice(150)
+          // }
         })
       if (filter) {
         setAllPosts(

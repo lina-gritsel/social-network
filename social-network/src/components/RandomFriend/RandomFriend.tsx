@@ -51,7 +51,7 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
   const bdDate = moment.unix(user?.date).format('DD/MM')
 
   return (
-    <Card>
+    <Card className={styles.friendCard}>
       <div className={styles.mightLike}>{t(title)}</div>
       <div className={styles.wrapperContent}>
         <div className={styles.cardHeader}>

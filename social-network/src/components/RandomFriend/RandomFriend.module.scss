@@ -5,9 +5,14 @@
   font-weight: 700;
   flex-direction: column;
   gap: 15px;
+
   & > * {
     border-radius: 20px !important;
   }
+}
+
+.friendCard {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02) !important;
 }
 
 .mightLike {
@@ -87,4 +92,5 @@
 .loading {
   color: var(--dark-gray-color);
   font-size: var(--font-text-3);
-  font-weight: 600;}
+  font-weight: 600;
+}
