@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import UserModel from '../users/model'
 import PostModel from './model'
 import {
   AddComment,
@@ -140,21 +141,28 @@ export const updatePost = async (
   }
 }
 
-export const addComment = async (
-  req: Request<AddComment['params'], {}, AddComment['body']>,
-  res: Response,
-) => {
+export const addComment = async (req: Request, res: Response) => {
   try {
-    await PostModel.findByPk(req.params.postId).then((post) => {
-      const commentExist = post?.dataValues?.comments
-      const comments = commentExist ? [...post?.dataValues?.comments] : []
+    const post = await PostModel.findByPk(req.params.postId)
+    const commentExist = post?.dataValues?.comments
+    const comments = commentExist ? [...post?.dataValues?.comments] : []
 
-      comments.push(req.body)
+    const user = await UserModel.findByPk(req.body.userId)
 
-      post
-        ?.update({ comments }, { where: { id: req.params.postId } })
-        .then((post: any) => res.json(post))
+    comments.push({
+      postId: req.body.postId,
+      comment: req.body.comment,
+      createAt: Date.now(),
+      user: {
+        id: req.body.userId,
+        name: user?.dataValues.name,
+        avatar: user?.dataValues.avatar,
+      },
     })
+
+    post
+      ?.update({ comments }, { where: { id: req.params.postId } })
+      .then((post: any) => res.json(post))
   } catch (error: any) {
     res.status(500).json({
       status: 'error',
