@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 
-import Button from '../../../components/Button'
+import Button from '../../../../components/Button'
 
 import styles from './SecureForm.module.scss'
 
-const DeleteAccModal = ({ userId, handleClose, deleteAccount }) => {
+const DeleteAccountModal = ({ userId, handleClose, deleteAccount }) => {
   const { t } = useTranslation()
 
   return (
@@ -28,4 +28,4 @@ const DeleteAccModal = ({ userId, handleClose, deleteAccount }) => {
   )
 }
 
-export default DeleteAccModal
+export default DeleteAccountModal

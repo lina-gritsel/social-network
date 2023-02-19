@@ -1,21 +1,18 @@
 import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined'
-import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 
-import Layout from '../../components/Layout'
 import InputLanguages from '../../components/InputLanguages'
+import Layout from '../../components/Layout'
 
-import SecureForm from './SecureForm'
-import SettingsForm from './SettingsForm'
-
+import EditProfile from './components/EditProfile'
+import SecureForm from './components/SecureForm'
 import styles from './SettingsPage.module.scss'
+import Sidebar from './components/Sidebar'
 
-enum SettingsTab {
+export enum SettingsTab {
   EDIT = 'edit',
-  LANGUAGES = 'languages',
   SECURE = 'secure',
+  LANGUAGES = 'languages',
 }
 
 const SettingsPage: FC = () => {
@@ -25,62 +22,25 @@ const SettingsPage: FC = () => {
 
   return (
     <Layout>
-      <div className={styles.settingsWrapper}>
-        <div className={styles.sidebar}>
-          <div
-            onClick={() => setSettingsTab(SettingsTab.EDIT)}
-            className={
-              settingsTab === SettingsTab.EDIT
-                ? styles.menuListActive
-                : styles.menuList
-            }
-          >
-            <PersonOutlineOutlinedIcon />
-            {t('settingsTitle')}
+      <div className={styles.layout}>
+        <div className={styles.settingsWrapper}>
+          <Sidebar settingsTab={settingsTab} setSettingsTab={setSettingsTab} />
+          <div className={styles.wrapper}>
+            {settingsTab === SettingsTab.EDIT && <EditProfile />}
+            {settingsTab === SettingsTab.LANGUAGES && (
+              <>
+                <h2 className={styles.title}>{t('languages')}</h2>
+                <p className={styles.subtitle}>{t('langSubtitle')}</p>
+                <InputLanguages />
+              </>
+            )}
+            {settingsTab === SettingsTab.SECURE && (
+              <>
+                <h2 className={styles.title}>{t('secure')}</h2>
+                <SecureForm />
+              </>
+            )}
           </div>
-          <div
-            onClick={() => setSettingsTab(SettingsTab.LANGUAGES)}
-            className={
-              settingsTab === SettingsTab.LANGUAGES
-                ? styles.menuListActive
-                : styles.menuList
-            }
-          >
-            <TranslateOutlinedIcon />
-            {t('languages')}
-          </div>
-          <div
-            onClick={() => setSettingsTab(SettingsTab.SECURE)}
-            className={
-              settingsTab === SettingsTab.SECURE
-                ? styles.menuListActive
-                : styles.menuList
-            }
-          >
-            <ShieldOutlinedIcon />
-            {t('secure')}
-          </div>
-        </div>
-        <div className={styles.wrapper}>
-          {settingsTab === SettingsTab.EDIT && (
-            <>
-              <h2 className={styles.title}>{t('settingsTitle')}</h2>
-              <SettingsForm />
-            </>
-          )}
-          {settingsTab === SettingsTab.LANGUAGES && (
-            <>
-              <h2 className={styles.title}>{t('languages')}</h2>
-              <p className={styles.subtitle}>{t('langSubtitle')}</p>
-              <InputLanguages />
-            </>
-          )}
-          {settingsTab === SettingsTab.SECURE && (
-            <>
-              <h2 className={styles.title}>{t('secure')}</h2>
-              <SecureForm />
-            </>
-          )}
         </div>
       </div>
     </Layout>

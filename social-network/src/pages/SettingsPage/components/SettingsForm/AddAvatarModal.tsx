@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { InputAdornment } from '@mui/material'
 import AddLinkOutlinedIcon from '@mui/icons-material/AddLinkOutlined'
 
-import Button from '../../../components/Button'
-import Input from '../../../components/Input'
+import Button from '../../../../components/Button'
+import Input from '../../../../components/Input'
 
 import styles from './SettingsForm.module.scss'
 

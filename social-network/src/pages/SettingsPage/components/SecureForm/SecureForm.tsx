@@ -2,10 +2,10 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
-import Modal from '../../../components/Modal'
+import Modal from '../../../../components/Modal'
 
-import DeleteAccModal from './DeleteAccModal'
 import { useSecureForm } from './hooks'
+import DeleteAccountModal from './DeleteAccountModal'
 
 import styles from './SecureForm.module.scss'
 
@@ -19,7 +19,13 @@ const SecureForm = () => {
       <Modal
         open={open}
         onClose={handleClose}
-        content={<DeleteAccModal userId={userId} deleteAccount={deleteAccount} handleClose={handleClose} />}
+        content={
+          <DeleteAccountModal
+            userId={userId}
+            deleteAccount={deleteAccount}
+            handleClose={handleClose}
+          />
+        }
         isDialogActions={false}
       />
       <div className={styles.secureBlock} onClick={handleOpen}>

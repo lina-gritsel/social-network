@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { deleteUser } from '../../../api'
-import { PATHS } from '../../../router/paths'
+import { deleteUser } from '../../../../api'
+import { PATHS } from '../../../../router/paths'
 
 export const useSecureForm = () => {
   const navigate = useNavigate()
