@@ -33,11 +33,11 @@ export const useLoginForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   const onSubmit = async (data) => {
-    const { result, status } = await loginUser(data)
+    const { status, id } = await loginUser(data)
 
     if (status === 200) {
+      localStorage.setItem('userId', JSON.stringify(id))
       navigate(PATHS.NEWS)
-      localStorage.setItem('userId', JSON.stringify(result.id))
       return
     }
 

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import TextField from '@mui/material/TextField'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
 
-import Button from '../Button'
+import Button from '../../../Button'
 
 import styles from './NewsCreator.module.scss'
 
@@ -12,7 +12,7 @@ interface ModalContentProps {
   currentImg: string
 }
 
-export const ModalContent: FC<ModalContentProps> = ({
+const ModalContent: FC<ModalContentProps> = ({
   currentImg,
   setCurrentImg,
 }) => {
@@ -74,3 +74,5 @@ export const ModalContent: FC<ModalContentProps> = ({
     </div>
   )
 }
+
+export default ModalContent

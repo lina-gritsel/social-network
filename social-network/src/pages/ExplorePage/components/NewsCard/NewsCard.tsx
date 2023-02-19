@@ -25,7 +25,7 @@ export interface NewsCardProps {
 export const NewsCard: FC<NewsCardProps> = ({
   username,
   createdAt,
-  image = DEFAULT_IMG,
+  image,
   content,
   className,
   url,
@@ -35,7 +35,7 @@ export const NewsCard: FC<NewsCardProps> = ({
       <CardMedia
         component="img"
         height={300}
-        image={image}
+        image={image || DEFAULT_IMG}
         alt={username}
         className={styles.image}
         onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}

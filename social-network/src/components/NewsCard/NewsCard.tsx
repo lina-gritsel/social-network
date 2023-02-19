@@ -1,31 +1,25 @@
-import classNames from 'classnames'
-import Card from '@mui/material/Card'
-import Avatar from '@mui/material/Avatar'
-import { useSelector } from 'react-redux'
+import { FC, useState, useEffect } from 'react'
 import { styled } from '@mui/material/styles'
-import Collapse from '@mui/material/Collapse'
-import { useTranslation } from 'react-i18next'
-import CardMedia from '@mui/material/CardMedia'
+import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import DeleteIcon from '@mui/icons-material/DeleteForever'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import ChangesIcon from '@mui/icons-material/PublishedWithChanges'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import { FC, useState, useRef, SetStateAction, Dispatch } from 'react'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import classNames from 'classnames'
 
 import Comment from '../../components/Comment'
+import { getUser } from '../../api/requests'
+import { User } from '../../api'
 
-import { useOnClickOutside } from '../../hooks'
-import { deletePost, getPost } from '../../api/requests'
-import { getUserInfoSelector } from '../../store/selectors'
+import SettingsModal from './SettingsModal'
 
 import Modal from '../Modal'
 import CreatePost from '../CreatePost'
+=======
+import SettingsModal from './SettingsModal'
 
 import styles from './NewsCard.module.scss'
 
@@ -69,7 +63,6 @@ const NewsCard: FC<News> = ({
   content,
   moreContent,
   avatarColor,
-  avatarImg,
   className,
   id,
   setIsAllPosts,
@@ -77,6 +70,15 @@ const NewsCard: FC<News> = ({
 }) => {
   const [expanded, setExpanded] = useState(false)
   const [isSettingModal, setIsSettingModal] = useState(false)
+  const [author, setAuthor] = useState<User>()
+
+  useEffect(() => {
+    const getAuthor = async () => {
+      const user = (await getUser(username)).data.user
+      setAuthor(user)
+    }
+    getAuthor()
+  }, [username])
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
@@ -96,10 +98,10 @@ const NewsCard: FC<News> = ({
           <Avatar
             sx={{ bgcolor: avatarColor }}
             aria-label="recipe"
-            alt={username}
-            src={avatarImg}
+            alt={author?.name}
+            src={author?.avatar}
           >
-            {username[0]}
+            {author?.name[0]}
           </Avatar>
         }
         action={
@@ -112,7 +114,7 @@ const NewsCard: FC<News> = ({
             </IconButton>
           ) : null
         }
-        title={username}
+        title={author?.name}
         subheader={createdAt}
       />
       {!!image && (
@@ -120,7 +122,7 @@ const NewsCard: FC<News> = ({
           component="img"
           height="300"
           image={image}
-          alt={username}
+          alt={author?.name}
           className={styles.image}
           onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
         />
@@ -158,70 +160,6 @@ const NewsCard: FC<News> = ({
       </Collapse>
       <Comment />
     </Card>
-  )
-}
-
-export interface SettingsModalProps {
-  id: string
-  setIsAllPosts?: Dispatch<SetStateAction<boolean>>
-  setIsSettingModal?: Dispatch<SetStateAction<boolean>>
-}
-
-const SettingsModal: FC<SettingsModalProps> = ({
-  id,
-  setIsAllPosts,
-  setIsSettingModal,
-}) => {
-  const [isChange, setIsChange] = useState(false)
-  const [content, setContent] = useState('')
-  const [image, setImage] = useState('')
-  const modalRef = useRef()
-  const { t } = useTranslation()
-
-  const userInfo = useSelector(getUserInfoSelector)
-
-  useOnClickOutside(modalRef, () => setIsSettingModal(false))
-
-  const onDeletePost = async () => {
-    await deletePost(id)
-    setIsAllPosts((prev) => !prev)
-  }
-  const editPost = async () => {
-    const response = await getPost(id)
-    setContent(response.data.post.content)
-    setImage(response.data.post.image)
-    setIsChange(true)
-  }
-
-  return (
-    <div className={styles.settingsModal} ref={modalRef}>
-      <Modal
-        className={styles.modal}
-        open={isChange}
-        onClose={() => setIsChange(false)}
-        onConfirm={() => setIsChange(false)}
-        isDialogActions={false}
-        content={
-          <CreatePost
-            name={userInfo?.name}
-            avatarImg={userInfo?.avatar}
-            content={content}
-            id={id}
-            setIsAllPosts={setIsAllPosts}
-            image={image}
-            editMode
-          />
-        }
-      />
-      <div onClick={editPost}>
-        <ChangesIcon />
-        {t('change')}
-      </div>
-      <div onClick={onDeletePost}>
-        <DeleteIcon />
-        {t('delete')}
-      </div>
-    </div>
   )
 }
 

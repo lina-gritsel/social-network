@@ -24,11 +24,6 @@ export interface RegistrationData {
   }
   status: string
 }
-
-export interface LoginData {
-  result: User
-  status: number
-}
 export interface UsersInfo {
   users: User[]
   status: string
@@ -38,6 +33,11 @@ export interface UsersInfo {
 export interface LoginUser {
   name: string
   password: string
+}
+
+export interface LoginStatus {
+  status: number
+  id: string
 }
 
 export interface DeleteUserStatus {

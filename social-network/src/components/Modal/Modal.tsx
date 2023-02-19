@@ -17,6 +17,7 @@ interface ModalProps {
   onConfirm?: () => void
   className?: string
   isDialogActions?: boolean
+  ref?: any
 }
 
 const Modal: FC<ModalProps> = ({
@@ -26,11 +27,12 @@ const Modal: FC<ModalProps> = ({
   content,
   onConfirm,
   className,
+  ref,
   isDialogActions = true,
 }) => {
   return (
-    <Dialog className={className} open={open} onClose={onClose}>
-      <DialogTitle className={styles.title}>{title}</DialogTitle>
+    <Dialog ref={ref} className={className} open={open} onClose={onClose}>
+      {title && <DialogTitle className={styles.title}>{title}</DialogTitle>}
       <DialogContent>{content}</DialogContent>
       {isDialogActions && (
         <DialogActions>

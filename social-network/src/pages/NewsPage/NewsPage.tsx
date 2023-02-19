@@ -3,26 +3,21 @@ import { useSelector } from 'react-redux'
 
 import { getUserInfoSelector } from '../../store/selectors'
 import FriendsOnline from '../../components/FriendsOnline'
-import { News } from '../../components/NewsCard/NewsCard'
 import RandomFriend from '../../components/RandomFriend'
-import { getRandomColor } from '../../utils/utils'
+import CreatePost from '../../components/CreatePost'
 import NewsList from '../../components/NewsList'
 import Weather from '../../components/Weather'
 import Layout from '../../components/Layout'
 
-import styles from './NewsPage.module.scss'
-import CreatePost from '../../components/CreatePost'
-import { useFetchAllUsers } from './hooks'
+import { useNewsPage } from './hooks'
 
-export const setAvatarColor = (arr: News[]) => {
-  return arr.map((news) =>
-    Object.assign(news, { avatarColor: getRandomColor() }),
-  )
-}
+import styles from './NewsPage.module.scss'
+
+
 
 const NewsPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
-  const { isLoading, users } = useFetchAllUsers()
+  const { isLoading, userswWithoutMe } = useNewsPage()
   const userInfo = useSelector(getUserInfoSelector)
 
   return (
@@ -33,16 +28,17 @@ const NewsPage: FC = () => {
             <CreatePost
               setIsAllPosts={setIsAllPosts}
               name={userInfo?.name}
+              userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
             />
             <NewsList isAllPosts={isAllPosts} />
           </div>
           <div className={styles.friendAndWeather}>
-            <RandomFriend allUsers={users} isLoading={isLoading} />
+            <RandomFriend allUsers={userswWithoutMe} isLoading={isLoading} />
             <Weather />
           </div>
         </div>
-        <FriendsOnline allUsers={users} isLoading={isLoading} />
+        <FriendsOnline allUsers={userswWithoutMe} isLoading={isLoading} />
       </div>
     </Layout>
   )
