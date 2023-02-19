@@ -38,7 +38,6 @@ export const useLoginForm = () => {
     if (status === 200) {
       localStorage.setItem('userId', JSON.stringify(id))
       navigate(PATHS.NEWS)
-      window.location.reload()
     }
 
     if (status === 400) {

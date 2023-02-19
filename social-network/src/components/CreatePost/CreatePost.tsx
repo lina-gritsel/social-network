@@ -3,21 +3,23 @@ import { useTranslation } from 'react-i18next'
 import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
-import { ModalContent } from '../NewsCreator/ModalContent'
+import ModalContent from './components/ModalContent'
 import CreatePostInput from './components/CreatePostInput'
 import { useAddImageModal, useCreatePost, useEmojiModal } from './hooks'
 import FooterPanel from './components/FooterPanel'
 
-import styles from './CreatePost.module.scss'
 import Avatar from '../Avatar'
 import Button from '../Button'
 import Modal from '../Modal'
+
+import styles from './CreatePost.module.scss'
 
 interface CreatePostProps {
   name: string
   avatarImg?: string
   content?: string
   image?: string
+  className?: string
   id?: string
   userId?: string
   editMode?: boolean
@@ -33,6 +35,7 @@ const CreatePost: FC<CreatePostProps> = ({
   editMode,
   id,
   userId,
+  className,
 }) => {
   const { t } = useTranslation()
 
@@ -88,6 +91,7 @@ const CreatePost: FC<CreatePostProps> = ({
         <CreatePostInput
           value={contentInput}
           onChange={(event) => setContentInput(event.target.value)}
+          className={className}
         />
       </div>
       {currentImg && <img className={styles.createImg} src={currentImg} />}

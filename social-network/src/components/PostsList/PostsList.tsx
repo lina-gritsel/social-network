@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
-import NewsCard, { News } from '../PostCard/PostCard'
+import PostCard, { News } from '../PostCard/PostCard'
 import { getAllPosts } from '../../api/requests'
 import { sortNews } from '../../utils/utils'
 
@@ -9,7 +9,7 @@ import styles from './PostsList.module.scss'
 
 interface PostsListProps {
   isAllPosts: boolean
-  filter?: boolean
+  filterPostsForProfilePage?: boolean
   name?: string
   isProfilePage?: boolean
   setIsAllPosts?: (boolean) => void
@@ -17,7 +17,7 @@ interface PostsListProps {
 
 const PostsList: FC<PostsListProps> = ({
   isAllPosts,
-  filter,
+  filterPostsForProfilePage,
   isProfilePage,
   setIsAllPosts,
 }) => {
@@ -33,7 +33,7 @@ const PostsList: FC<PostsListProps> = ({
         sortNews(a.createdAt, b.createdAt),
       )
 
-      if (filter) {
+      if (filterPostsForProfilePage) {
         setAllPosts(sortedPosts.filter((post) => post.userId))
       } else {
         setAllPosts(sortedPosts)
@@ -41,7 +41,7 @@ const PostsList: FC<PostsListProps> = ({
       setIsLoading(false)
     }
     getAllExistPosts()
-  }, [isAllPosts, filter, userId])
+  }, [isAllPosts, filterPostsForProfilePage, userId])
 
   if (isLoading)
     return (
@@ -53,7 +53,7 @@ const PostsList: FC<PostsListProps> = ({
   return (
     <>
       {allPosts.map((post, index) => (
-        <NewsCard
+        <PostCard
           key={index}
           {...post}
           isProfilePage={isProfilePage}

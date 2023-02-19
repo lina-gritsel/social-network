@@ -174,3 +174,10 @@
   font: var(--font-text-5);
   width: 50%;
 }
+
+.loader {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}

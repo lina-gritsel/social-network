@@ -9,13 +9,13 @@ import PostsList from '../../components/PostsList'
 import Weather from '../../components/Weather'
 import Layout from '../../components/Layout'
 
-import { useFetchAllUsers } from './hooks'
+import { useNewsPage } from './hooks'
 
 import styles from './PostsPage.module.scss'
 
 const PostsPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
-  const { isLoading, users } = useFetchAllUsers()
+  const { isLoading, userswWithoutMe } = useNewsPage()
   const userInfo = useSelector(getUserInfoSelector)
 
   return (
@@ -32,11 +32,11 @@ const PostsPage: FC = () => {
             <PostsList isAllPosts={isAllPosts} />
           </div>
           <div className={styles.friendAndWeather}>
-            <RandomFriend allUsers={users} isLoading={isLoading} />
+            <RandomFriend allUsers={userswWithoutMe} isLoading={isLoading} />
             <Weather />
           </div>
         </div>
-        <FriendsOnline allUsers={users} isLoading={isLoading} />
+        <FriendsOnline allUsers={userswWithoutMe} isLoading={isLoading} />
       </div>
     </Layout>
   )

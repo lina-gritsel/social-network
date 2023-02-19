@@ -16,6 +16,7 @@ const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
 const COMMETS_URL = `${POSTS_URL}/comments`
+const WALLPAPER_URL = `${BASE_URL}/wallpaper`
 
 export const createUser = async (user: User): Promise<RegistrationData> => {
   try {
@@ -161,6 +162,15 @@ export const createComment = async ({ userId, comment, postId }) => {
     })
 
     return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getWallpapers = async (): Promise<string[]> => {
+  try {
+    const response = await (await fetch(WALLPAPER_URL)).json()
+    return response.data
   } catch (error) {
     console.log(error)
   }

@@ -8,20 +8,26 @@ import Button from '../../components/Button'
 
 import CreatePost from '../../components/CreatePost'
 import NewsList from '../../components/PostsList'
+import Avatar from '../../components/Avatar'
 import { PATHS } from '../../router/paths'
 
 import { useProfilePage } from './hooks'
-import { FIELD_INTO } from './constants'
+import {
+  FIELD_INTO,
+  FIRST_LINKS_INDEX,
+  LAST_LINKS_INDEX,
+  LINKS,
+} from './constants'
 import ModalContent from './ModalContent'
 
 import styles from './Profile.module.scss'
-import Avatar from '../../components/Avatar'
 
 const ProfilePage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
   const { t } = useTranslation()
   const {
     isOpen,
+    isLoading,
     bgImage,
     userInfo,
     bgImageArr,
@@ -49,6 +55,7 @@ const ProfilePage: FC = () => {
             setIsErrorImg={setIsErrorImg}
             bgImageArr={bgImageArr}
             setBgImageArr={setBgImageArr}
+            isLoading={isLoading}
           />
         }
       />
@@ -88,15 +95,32 @@ const ProfilePage: FC = () => {
         <div className={styles.wrapperContent}>
           <div className={styles.intro}>
             <div className={styles.title}>{t('intro')}</div>
-            {FIELD_INTO.map(({ icon, label }, index) => (
-              <div key={index} className={styles.intoItem}>
-                {icon}
-                <div>{t(label)}</div>
-                <div className={styles.profileInfo}>
-                  {profileInfoArr[index]}
+            {FIELD_INTO.map(({ icon, label }, index) =>
+              index >= FIRST_LINKS_INDEX && index <= LAST_LINKS_INDEX ? (
+                <a
+                  key={index}
+                  href={LINKS[label] + (profileInfoArr[index] || '')}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div className={styles.intoItem}>
+                    <Field
+                      icon={icon}
+                      label={label}
+                      profileInfo={profileInfoArr[index]}
+                    />
+                  </div>
+                </a>
+              ) : (
+                <div key={index} className={styles.intoItem}>
+                  <Field
+                    icon={icon}
+                    label={label}
+                    profileInfo={profileInfoArr[index]}
+                  />
                 </div>
-              </div>
-            ))}
+              ),
+            )}
           </div>
           <div className={styles.content}>
             <CreatePost
@@ -107,7 +131,7 @@ const ProfilePage: FC = () => {
             />
             <NewsList
               isAllPosts={isAllPosts}
-              filter={true}
+              filterPostsForProfilePage
               name={userInfo?.name}
               isProfilePage={true}
               setIsAllPosts={setIsAllPosts}
@@ -116,6 +140,24 @@ const ProfilePage: FC = () => {
         </div>
       </div>
     </Layout>
+  )
+}
+
+interface FieldProps {
+  icon: JSX.Element
+  label: string
+  profileInfo: string | string[]
+}
+
+const Field: FC<FieldProps> = ({ icon, label, profileInfo }) => {
+  const { t } = useTranslation()
+
+  return (
+    <>
+      {icon}
+      <div>{t(label)}</div>
+      <div className={styles.profileInfo}>{profileInfo}</div>
+    </>
   )
 }
 

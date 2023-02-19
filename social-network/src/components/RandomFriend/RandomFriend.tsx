@@ -1,9 +1,6 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Card } from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import InstagramIcon from '@mui/icons-material/Instagram'
 import moment from 'moment'
 
 import { getRandomInt } from '../../utils/utils'
@@ -12,7 +9,7 @@ import Avatar from '../Avatar'
 import Button from '../Button'
 
 import styles from './RandomFriend.module.scss'
-import { LINKS } from './constants'
+import { FIELD } from './constants'
 
 interface RandomFriend {
   allUsers: User[]
@@ -48,7 +45,9 @@ const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
 const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
   const { t } = useTranslation()
 
-  const bdDate = moment.unix(user?.date).format('DD/MM')
+  const formattedBirthdayDate = moment.unix(user?.date).format('DD/MM')
+
+  const userLink = [user?.instagram, user?.twitter, user?.facebook]
 
   return (
     <Card className={styles.friendCard}>
@@ -62,7 +61,9 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
             <div>
               <div className={styles.title}>{user?.name}</div>
               <div className={styles.subTitle}>
-                {isBirthday ? t(title) + ' ' + bdDate : user?.bio}
+                {isBirthday
+                  ? t(title) + ' ' + formattedBirthdayDate
+                  : user?.bio}
               </div>
             </div>
           )}
@@ -70,27 +71,16 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
         {!isBirthday && (
           <>
             <div className={styles.icons}>
-              <a
-                href={LINKS.instagram + ('' || user?.instagram)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                href={LINKS.twitter + ('' || user?.twitter)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <TwitterIcon />
-              </a>
-              <a
-                href={LINKS.facebook + ('' || user?.facebook)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <FacebookIcon />
-              </a>
+              {FIELD.map(({ icon, path }, index) => (
+                <a
+                  key={index}
+                  href={path + (userLink[index] || '')}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {icon}
+                </a>
+              ))}
             </div>
             <div className={styles.btnWrapper}>
               <Button className={styles.ignorFriends} outlined>
