@@ -34,13 +34,13 @@ const SettingsForm: FC = () => {
     userInfo,
     inputRef,
     isLoading,
+    visibleAvatarModal,
     onSubmit,
     onCancel,
     handleSubmit,
-    handleClickAddBtn,
-    closeAvatarModal,
     openAvatarModal,
-    visibleAvatarModal,
+    closeAvatarModal,
+    handleClickAddBtn,
   } = useSettingsForm()
 
   if (isLoading || !userInfo) return <Loader className={styles.loading} />

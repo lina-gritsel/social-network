@@ -4,7 +4,10 @@ import Button from '../../../../components/Button'
 
 import styles from './SecureForm.module.scss'
 
-const DeleteAccountModal = ({ userId, handleClose, deleteAccount }) => {
+const DeleteAccountModal = ({
+  deleteAccount,
+  closeDeleteAccountModal,
+}) => {
   const { t } = useTranslation()
 
   return (
@@ -16,11 +19,15 @@ const DeleteAccountModal = ({ userId, handleClose, deleteAccount }) => {
       <div className={styles.btnBlock}>
         <Button
           className={styles.deleteBtn}
-          onClick={() => deleteAccount(userId)}
+          onClick={() => deleteAccount()}
         >
           {t('deleteAcc')}
         </Button>
-        <Button outlined className={styles.cancelBtn} onClick={handleClose}>
+        <Button
+          outlined
+          className={styles.cancelBtn}
+          onClick={closeDeleteAccountModal}
+        >
           {t('cancel')}
         </Button>
       </div>

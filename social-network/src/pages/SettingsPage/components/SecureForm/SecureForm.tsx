@@ -11,24 +11,27 @@ import styles from './SecureForm.module.scss'
 
 const SecureForm = () => {
   const { t } = useTranslation()
-  const { open, userId, handleOpen, handleClose, deleteAccount } =
-    useSecureForm()
+  const {
+    visibleDeleteAccountModal,
+    deleteAccount,
+    openDeleteAccountModal,
+    closeDeleteAccountModal,
+  } = useSecureForm()
 
   return (
     <div>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={visibleDeleteAccountModal}
+        onClose={closeDeleteAccountModal}
         content={
           <DeleteAccountModal
-            userId={userId}
             deleteAccount={deleteAccount}
-            handleClose={handleClose}
+            closeDeleteAccountModal={closeDeleteAccountModal}
           />
         }
         isDialogActions={false}
       />
-      <div className={styles.secureBlock} onClick={handleOpen}>
+      <div className={styles.secureBlock} onClick={openDeleteAccountModal}>
         <DeleteOutlineOutlinedIcon />
         <div className={styles.titleBlock}>
           <p className={styles.title}>{t('deleteAcc')}</p>
