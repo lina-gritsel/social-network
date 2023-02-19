@@ -2,14 +2,13 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import Avatar from '@mui/material/Avatar'
 import { Card } from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import InstagramIcon from '@mui/icons-material/Instagram'
 import moment from 'moment'
 
 import Button from '../Button'
 import { getRandomInt } from '../../utils/utils'
 import { User } from '../../api'
+
+import { FIELD } from './constants'
 
 import styles from './RandomFriend.module.scss'
 
@@ -21,28 +20,38 @@ interface RandomUser {
   user: User
   isBirthday?: boolean
   title: string
+  isLoading: boolean
 }
 
 const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
-  const index = getRandomInt(0, allUsers?.length)
-  const randomUser = allUsers[index]
+  const indexArr = [
+    getRandomInt(0, allUsers?.length),
+    getRandomInt(0, allUsers?.length),
+  ]
+  const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
 
   return (
     <div className={styles.friends}>
-      {isLoading && <div>Loading...</div>}
-      <Friend user={randomUser} title="mightLike" />
-      <Friend user={randomUser} title="birthday" isBirthday={true} />
+      <Friend user={randomUsers[0]} isLoading={isLoading} title="mightLike" />
+      <Friend
+        user={randomUsers[1]}
+        isLoading={isLoading}
+        title="birthday"
+        isBirthday={true}
+      />
     </div>
   )
 }
 
-const Friend: FC<RandomUser> = ({ user, isBirthday, title }) => {
+const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
   const { t } = useTranslation()
 
-  const bdDate = moment.unix(user?.date).format('DD/MM')
+  const formattedBirthdayDate = moment.unix(user?.date).format('DD/MM')
+
+  const userLink = [user?.instagram, user?.twitter, user?.facebook]
 
   return (
-    <Card className={styles.friend}>
+    <Card>
       <div className={styles.mightLike}>{t(title)}</div>
       <div className={styles.wrapperContent}>
         <div className={styles.cardHeader}>
@@ -52,20 +61,30 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title }) => {
             src={user?.avatar}
             className={styles.avatar}
           />
-
-          <div>
-            <div className={styles.title}>{user?.name}</div>
-            <div className={styles.subTitle}>
-              {isBirthday ? t(title) + ' ' + bdDate : user?.bio}
+          {isLoading ? (
+            <div className={styles.loading}>{t('loading')}</div>
+          ) : (
+            <div>
+              <div className={styles.title}>{user?.name}</div>
+              <div className={styles.subTitle}>
+                {isBirthday ? t(title) + ' ' + formattedBirthdayDate : user?.bio}
+              </div>
             </div>
-          </div>
+          )}
         </div>
         {!isBirthday && (
           <>
             <div className={styles.icons}>
-              <InstagramIcon />
-              <FacebookIcon />
-              <TwitterIcon />
+              {FIELD.map(({ icon, path }, index) => (
+                <a
+                  key={index}
+                  href={path + (userLink[index] || '')}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {icon}
+                </a>
+              ))}
             </div>
             <div className={styles.btnWrapper}>
               <Button className={styles.ignorFriends} outlined>
@@ -79,4 +98,5 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title }) => {
     </Card>
   )
 }
+
 export default RandomFriend

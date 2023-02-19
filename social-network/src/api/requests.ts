@@ -14,6 +14,7 @@ const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
 const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
+const WALLPAPER_URL = `${BASE_URL}/wallpaper`
 
 export const createUser = async (user: User): Promise<RegistrationData> => {
   try {
@@ -40,7 +41,8 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
       },
       body: JSON.stringify(user),
     })
-    return { status: data.status }
+    const result = await data.json()
+    return { status: data.status, id: result.id }
   } catch (error) {
     throw new Error(`${error}`)
   }
@@ -146,4 +148,14 @@ export const deletePost = async (id: string) => {
     console.log(error)
   }
 }
+
+export const getWallpapers = async (): Promise<string[]> => {
+  try {
+    const response = await (await fetch(WALLPAPER_URL)).json()
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 

@@ -4,7 +4,8 @@ import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 
 import { getUserInfoSelector } from '../../store/selectors'
 
-import { BG_IMAGES } from './constants'
+import { DEFAULT_WALLPAPER } from './constants'
+import { getWallpapers } from '../../api'
 
 export const useProfilePage = () => {
   const userInfo = useSelector(getUserInfoSelector)
@@ -22,13 +23,27 @@ export const useProfilePage = () => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
-  const [bgImageArr, setBgImageArr] = useState<string[]>(BG_IMAGES)
-  const [bgImage, setBgImage] = useState<string>(bgImageArr[0])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [bgImageArr, setBgImageArr] = useState<string[]>([])
+  const [bgImage, setBgImage] = useState<string>(DEFAULT_WALLPAPER)
 
   useEffect(() => {
-    setBgImage(JSON.parse(window.localStorage.getItem('bgImage')))
-    setBgImageArr(JSON.parse(window.localStorage.getItem('bgImageArr')))
+    if ('bgImage' in localStorage) {
+      setBgImage(JSON.parse(window.localStorage.getItem('bgImage')))
+    }
+    if ('bgImageArr' in localStorage) {
+      setBgImageArr(JSON.parse(window.localStorage.getItem('bgImageArr')))
+    } else {
+      const setWallpapers = async () => {
+        setIsLoading(true)
+        const wallpapers = await getWallpapers()
+        setBgImageArr(wallpapers)
+        setIsLoading(false)
+      }
+      setWallpapers()
+    }
   }, [])
+
   useEffect(() => {
     window.localStorage.setItem('bgImage', JSON.stringify(bgImage))
     window.localStorage.setItem('bgImageArr', JSON.stringify(bgImageArr))
@@ -39,12 +54,13 @@ export const useProfilePage = () => {
     setIsErrorImg(true)
     const img = e.target as HTMLImageElement
     img.onerror = null
-    setBgImage(BG_IMAGES[0])
+    setBgImage(DEFAULT_WALLPAPER)
     img.src = bgImage
   }
 
   return {
     isOpen,
+    isLoading,
     bgImage,
     userInfo,
     bgImageArr,

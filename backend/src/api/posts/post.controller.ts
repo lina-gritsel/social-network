@@ -1,17 +1,24 @@
 import { Request, Response } from 'express'
 import PostModel from './model'
-import { CreatePost, FilterQuery, Params, UpdatePost } from './post.schema'
+import {
+  AddComment,
+  CreatePost,
+  FilterQuery,
+  Params,
+  UpdatePost,
+} from './post.schema'
 
 export const createPost = async (
   req: Request<{}, CreatePost>,
   res: Response,
 ) => {
   try {
-    const { username, content } = req.body
+    const { username, content, image } = req.body
 
     const post = await PostModel.create({
       username,
       content,
+      image,
     })
 
     res.status(201).json({
@@ -57,10 +64,11 @@ export const findAllPosts = async (
 ) => {
   try {
     const page = req.query.page || 1
-    const limit = req.query.limit || 10
+    const limit = req.query.limit || 1000
     const skip = (page - 1) * limit
 
     const posts = await PostModel.findAll({ limit, offset: skip })
+
     res.status(200).json({
       status: 'success',
       results: posts.length,
@@ -87,7 +95,7 @@ export const deletePost = async (req: Request<Params>, res: Response) => {
         message: 'Note with that ID not found',
       })
     }
-    
+
     res.status(204).json()
   } catch (error: any) {
     res.status(500).json({
@@ -124,6 +132,79 @@ export const updatePost = async (
       status: 'success',
       data: { post },
     })
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+    })
+  }
+}
+
+export const addComment = async (
+  req: Request<AddComment['params'], {}, AddComment['body']>,
+  res: Response,
+) => {
+  try {
+    await PostModel.findByPk(req.params.postId).then((post) => {
+      const commentExist = post?.dataValues?.comments
+      const comments = commentExist ? [...post?.dataValues?.comments] : []
+
+      comments.push(req.body)
+
+      post
+        ?.update({ comments }, { where: { id: req.params.postId } })
+        .then((post: any) => res.json(post))
+    })
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+    })
+  }
+}
+
+export const changeLikes = async (req: Request<any>, res: Response) => {
+  try {
+    const post = await PostModel.findByPk(req.params.postId)
+    const userExist = !!post?.dataValues.likes.find(
+      (item: any) => item?.userId === req.body.userId,
+    )
+
+    const likes = post?.dataValues.likes ? [...post?.dataValues.likes] : []
+
+    if (userExist) {
+      const lists = likes.filter(({ userId }) => userId !== req.body.userId)
+
+      post?.update(
+        { likes: lists },
+        {
+          where: {
+            id: req.params.postId,
+          },
+        },
+      )
+
+      res.status(200).json({
+        status: 'success',
+        data: { post },
+      })
+    } else {
+      likes.push(req.body)
+
+      post?.update(
+        { likes },
+        {
+          where: {
+            id: req.params.postId,
+          },
+        },
+      )
+
+      res.status(200).json({
+        status: 'success',
+        data: { post },
+      })
+    }
   } catch (error: any) {
     res.status(500).json({
       status: 'error',

@@ -26,11 +26,6 @@ const UserModel = sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  isFriend: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-    allowNull: false,
-  },
   createdAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -53,7 +48,7 @@ const UserModel = sequelize.define('user', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  instagramm: {
+  instagram: {
     type: DataTypes.STRING,
     allowNull: true,
   },
@@ -62,6 +57,14 @@ const UserModel = sequelize.define('user', {
     allowNull: true,
   },
   facebook: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  date: {
+    type: DataTypes.NUMBER,
+    allowNull: true,
+  },
+  bio: {
     type: DataTypes.STRING,
     allowNull: true,
   },

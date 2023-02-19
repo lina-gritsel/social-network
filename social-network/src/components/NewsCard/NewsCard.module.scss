@@ -61,6 +61,11 @@
 
 .modal {
   min-width: 500px !important;
+  padding: 0 !important;
+}
+
+.editInput {
+  height: 200px !important;
 }
 
 @keyframes ani {
@@ -71,4 +76,3 @@
     opacity: 1;
   }
 }
-

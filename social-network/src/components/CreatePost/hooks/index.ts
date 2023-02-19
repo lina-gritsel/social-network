@@ -7,14 +7,14 @@ type UseCreatePost = ({
   image,
   editMode,
   id,
-  name,
+  userId,
   setIsAllPosts,
 }: {
   content: string
   image: string
   editMode: boolean
   id: string
-  name: string
+  userId: string
   setIsAllPosts: Dispatch<SetStateAction<boolean>>
 }) => {
   onSubmit: () => Promise<void>
@@ -30,7 +30,7 @@ export const useCreatePost: UseCreatePost = ({
   image,
   editMode,
   id,
-  name,
+  userId,
   setIsAllPosts,
 }) => {
   const [contentInput, setContentInput] = useState<string>(content || '')
@@ -45,7 +45,7 @@ export const useCreatePost: UseCreatePost = ({
     if (editMode) {
       await changePost({ ...params }, id)
     } else {
-      await createPost({ ...params, username: name })
+      await createPost({ ...params, username: userId })
     }
 
     setContentInput('')

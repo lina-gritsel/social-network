@@ -2,23 +2,27 @@ import { Dispatch, FC, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import Picker from '@emoji-mart/react'
 import { Avatar } from '@mui/material'
-
 import data from '@emoji-mart/data'
 
-import { ModalContent } from '../NewsCreator/ModalContent'
+import Button from '../Button'
+import Modal from '../Modal'
+
+import ModalContent from './components/ModalContent'
 import CreatePostInput from './components/CreatePostInput'
 import { useCreatePost, useEmojiModal } from './hooks'
 import FooterPanel from './components/FooterPanel'
+
 import styles from './CreatePost.module.scss'
-import Button from '../Button'
-import Modal from '../Modal'
+
 
 interface CreatePostProps {
   name: string
   avatarImg?: string
   content?: string
   image?: string
+  className?: string
   id?: string
+  userId?: string
   editMode?: boolean
   setIsAllPosts?: Dispatch<SetStateAction<boolean>>
 }
@@ -31,6 +35,8 @@ const CreatePost: FC<CreatePostProps> = ({
   setIsAllPosts,
   editMode,
   id,
+  userId,
+  className,
 }) => {
   const { t } = useTranslation()
 
@@ -41,7 +47,7 @@ const CreatePost: FC<CreatePostProps> = ({
     contentInput,
     setContentInput,
     onEmojiSelect,
-  } = useCreatePost({ content, image, editMode, id, name, setIsAllPosts })
+  } = useCreatePost({ content, image, editMode, id, setIsAllPosts, userId })
 
   const {
     isVisible: isEmojiModalVisible,
@@ -93,6 +99,7 @@ const CreatePost: FC<CreatePostProps> = ({
         <CreatePostInput
           value={contentInput}
           onChange={(event) => setContentInput(event.target.value)}
+          className={className}
         />
       </div>
       {currentImg && <img className={styles.createImg} src={currentImg} />}
