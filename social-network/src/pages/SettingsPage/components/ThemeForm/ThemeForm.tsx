@@ -1,11 +1,12 @@
 import { FC } from 'react'
 import Switch from '@mui/material/Switch'
 import { styled } from '@mui/material/styles'
-import { FormControlLabel, FormGroup } from '@mui/material'
 
-import styles from './ThemeForm.module.scss'
+import { useThemeForm } from './hooks'
 
 const ThemeForm: FC = () => {
+  const { checked, handleThemeChange } = useThemeForm()
+
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -54,11 +55,7 @@ const ThemeForm: FC = () => {
     },
   }))
 
-  return (
-    <FormGroup>
-      <FormControlLabel control={<MaterialUISwitch />} label="" />
-    </FormGroup>
-  )
+  return <MaterialUISwitch checked={checked} onChange={handleThemeChange} />
 }
 
 export default ThemeForm

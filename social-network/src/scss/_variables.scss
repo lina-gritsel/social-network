@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-:root {
+:root[data-theme='light'] {
   --white-color: #fff;
   --light-gray-color: #f9fafb;
   --medium-gray-color: #b8bec9;
@@ -8,6 +8,36 @@
   --dark-gray-color: #4e5d78;
   --shadow-dark-color: rgba(0, 0, 0, 0.2);
   --black-color: #000;
+  --red-color: #ff5630;
+  --yellow-color: #ffab00;
+  --green-color: #38cb89;
+  --blue-color: #377dff;
+
+  --border-primary: 1px solid #c4c4c4;
+
+  --font-family-roboto: 'Roboto', sans-serif;
+
+  --font-h1: 600 64px var(--font-family-roboto);
+  --font-h2: 600 52px var(--font-family-roboto);
+  --font-h3: 600 36px var(--font-family-roboto);
+
+  --font-text-1: 600 32px var(--font-family-roboto);
+  --font-text-2: 400 24px var(--font-family-roboto);
+  --font-text-3: 400 18px var(--font-family-roboto);
+  --font-text-4: 400 16px var(--font-family-roboto);
+  --font-text-5: 400 14px var(--font-family-roboto);
+
+  --font-subtitle: 700 18px var(--font-family-roboto);
+}
+
+:root[data-theme='dark'] {
+  --white-color: #191c21;
+  --light-gray-color: #212833;
+  --medium-gray-color: #b8bec9;
+  --gray-color: #fff;
+  --dark-gray-color: #4e5d78;
+  --shadow-dark-color: rgba(0, 0, 0, 0.2);
+  --black-color: #fff;
   --red-color: #ff5630;
   --yellow-color: #ffab00;
   --green-color: #38cb89;
