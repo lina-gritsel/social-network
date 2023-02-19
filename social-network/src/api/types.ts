@@ -46,7 +46,7 @@ export interface DeleteUserStatus {
 
 export interface CreatePostParams {
   content: string
-  username: string
+  userId: string
   image: string
 }
 

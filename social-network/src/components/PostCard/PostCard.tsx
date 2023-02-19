@@ -7,44 +7,32 @@ import {
   useEffect,
 } from 'react'
 import { styled } from '@mui/material/styles'
-
-import {
-  Card,
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Collapse,
-  Typography,
-} from '@mui/material'
+import { Card, CardMedia, CardContent, Typography } from '@mui/material'
 import {
   MoreVert,
-  DeleteIcon,
   PublishedWithChanges,
   DeleteForever,
 } from '@mui/icons-material'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import moment from 'moment'
 
-import { getUserInfoSelector } from '../../store/selectors'
 import { deletePost, getPost, getUser } from '../../api/requests'
+import { getUserInfoSelector } from '../../store/selectors'
 import { useOnClickOutside } from '../../hooks'
+import { User } from '../../api'
 
+import { useCreateComment } from '../CreateComment/hooks'
 import CreateComment from '../CreateComment'
 import FooterPanelPost from '../FooterPanelPost'
+import CommentsList from '../CommentsList'
 import CreatePost from '../CreatePost'
 import Avatar from '../Avatar'
 import Modal from '../Modal'
 
-import { User } from '../../api'
-
-import styles from './NewsCard.module.scss'
-import CommentsList from '../CommentsList'
-import { useCreateComment } from '../CreateComment/hooks'
+import styles from './PostCard.module.scss'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -65,14 +53,14 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }))
 
 export interface News {
-  username: string
+  userId: string
   createdAt: string
   updatedAt?: string
   image?: string
   content: string
   moreContent?: string
   avatarColor?: string
-  avatarImg?: string
+  avatar?: string
   className?: string
   id?: string
   setIsAllPosts?: (value: boolean) => void
@@ -80,11 +68,11 @@ export interface News {
 }
 
 const NewsCard: FC<News> = ({
-  username,
+  userId,
   createdAt,
   image,
   content,
-  avatarImg,
+  avatar,
   className,
   id,
   setIsAllPosts,
@@ -95,19 +83,21 @@ const NewsCard: FC<News> = ({
   const [showMore, setShowMore] = useState(true)
   const [showComments, setSchowComments] = useState(true)
 
+  console.log(avatar)
+
   useEffect(() => {
     const getAuthor = async () => {
-      const user = await getUser(username)
+      const user = await getUser(userId)
       const authorPost = user.data?.user
       setAuthor(authorPost)
     }
     getAuthor()
-  }, [username])
+  }, [id])
 
   const createdPostTime = moment(createdAt).fromNow()
 
   const { isLoading, allComments, onSubmit, onChangeComment, comment } =
-    useCreateComment(id)
+    useCreateComment({ postId: id, setSchowComments })
 
   return (
     <>
@@ -121,7 +111,7 @@ const NewsCard: FC<News> = ({
         )}
         <div className={styles.wrapperCardHeader}>
           <div className={styles.wrapperCard}>
-            <Avatar className={styles.cardAvatar} imageUrl={avatarImg} />
+            <Avatar className={styles.cardAvatar} imageUrl={avatar} />
             <div>
               <div className={styles.author}>{author?.name}</div>
               <div className={styles.createAt}>{createdPostTime}</div>
@@ -166,7 +156,7 @@ const NewsCard: FC<News> = ({
         </CardContent>
         <FooterPanelPost setSchowComments={setSchowComments} />
         <CreateComment
-          avatarImg={avatarImg}
+          avatarImg={avatar}
           onSubmit={onSubmit}
           onChangeComment={onChangeComment}
           comment={comment}

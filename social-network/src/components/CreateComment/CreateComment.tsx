@@ -8,9 +8,9 @@ import styles from './CreateComment.module.scss'
 
 interface CommentProps {
   avatarImg?: string
-  onSubmit: any
-  onChangeComment
-  comment
+  onSubmit: () => void
+  onChangeComment: (event) => void
+  comment: string
 }
 
 const CreateComment: FC<CommentProps> = ({

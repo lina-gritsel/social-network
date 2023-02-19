@@ -5,17 +5,15 @@ import { getUserInfoSelector } from '../../store/selectors'
 import FriendsOnline from '../../components/FriendsOnline'
 import RandomFriend from '../../components/RandomFriend'
 import CreatePost from '../../components/CreatePost'
-import NewsList from '../../components/PostsList'
+import PostsList from '../../components/PostsList'
 import Weather from '../../components/Weather'
 import Layout from '../../components/Layout'
 
 import { useFetchAllUsers } from './hooks'
 
-import styles from './NewsPage.module.scss'
+import styles from './PostsPage.module.scss'
 
-
-
-const NewsPage: FC = () => {
+const PostsPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
   const { isLoading, users } = useFetchAllUsers()
   const userInfo = useSelector(getUserInfoSelector)
@@ -31,7 +29,7 @@ const NewsPage: FC = () => {
               userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
             />
-            <NewsList isAllPosts={isAllPosts} />
+            <PostsList isAllPosts={isAllPosts} />
           </div>
           <div className={styles.friendAndWeather}>
             <RandomFriend allUsers={users} isLoading={isLoading} />
@@ -44,4 +42,4 @@ const NewsPage: FC = () => {
   )
 }
 
-export default NewsPage
+export default PostsPage

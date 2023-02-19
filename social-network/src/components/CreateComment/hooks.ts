@@ -4,7 +4,15 @@ import { createComment, getPost } from '../../api'
 
 import { getUserInfoSelector } from '../../store/selectors'
 
-export const useCreateComment = (postId: string) => {
+interface UseCreateCommentProps {
+  postId: string
+  setSchowComments: (value: boolean) => void
+}
+
+export const useCreateComment = ({
+  postId,
+  setSchowComments,
+}: UseCreateCommentProps) => {
   const userInfo = useSelector(getUserInfoSelector)
 
   const { data, isLoading } = useFetchCertainsComments(postId)
@@ -28,6 +36,7 @@ export const useCreateComment = (postId: string) => {
       comment,
       postId,
     })
+    setSchowComments(false)
     setAllComments(comments)
     setComment('')
   }

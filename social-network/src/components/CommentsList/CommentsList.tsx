@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { useCreateComment } from '../CreateComment/hooks'
 import Comment from '../Comment'
 
 import styles from './CommentsList.module.scss'

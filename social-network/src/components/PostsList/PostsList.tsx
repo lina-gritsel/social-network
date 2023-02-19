@@ -1,13 +1,13 @@
 import { FC, useState, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
-import NewsCard, { News } from '../NewsCard/NewsCard'
+import NewsCard, { News } from '../PostCard/PostCard'
 import { getAllPosts } from '../../api/requests'
 import { sortNews } from '../../utils/utils'
 
 import styles from './PostsList.module.scss'
 
-interface NewsListProps {
+interface PostsListProps {
   isAllPosts: boolean
   filter?: boolean
   name?: string
@@ -15,7 +15,7 @@ interface NewsListProps {
   setIsAllPosts?: (boolean) => void
 }
 
-const NewsList: FC<NewsListProps> = ({
+const PostsList: FC<PostsListProps> = ({
   isAllPosts,
   filter,
   isProfilePage,
@@ -23,19 +23,18 @@ const NewsList: FC<NewsListProps> = ({
 }) => {
   const [allPosts, setAllPosts] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   useEffect(() => {
     const getAllExistPosts = async () => {
       setIsLoading(true)
       const posts: News[] = (await getAllPosts()).posts
-      const sortedPosts = posts.sort((a, b) => sortNews(a.createdAt, b.createdAt))
-     
+      const sortedPosts = posts.sort((a, b) =>
+        sortNews(a.createdAt, b.createdAt),
+      )
+
       if (filter) {
-        setAllPosts(
-          sortedPosts.filter((post) => post.username === userId),
-        )
+        setAllPosts(sortedPosts.filter((post) => post.userId))
       } else {
         setAllPosts(sortedPosts)
       }
@@ -65,4 +64,4 @@ const NewsList: FC<NewsListProps> = ({
   )
 }
 
-export default NewsList
+export default PostsList
