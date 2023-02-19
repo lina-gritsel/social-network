@@ -49,7 +49,6 @@ export const useRegistrationForm = () => {
     if (result.status === 'success') {
       localStorage.setItem('userId', JSON.stringify(result.data.user.id))
       navigate(PATHS.NEWS)
-      window.location.reload()
     } else {
       setIsRegistrError(true)
     }

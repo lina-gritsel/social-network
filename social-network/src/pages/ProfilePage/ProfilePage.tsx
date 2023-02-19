@@ -11,7 +11,12 @@ import CreatePost from '../../components/CreatePost'
 import NewsList from '../../components/NewsList'
 
 import { useProfilePage } from './hooks'
-import { FIELD_INTO, LINKS } from './constants'
+import {
+  FIELD_INTO,
+  FIRST_LINKS_INDEX,
+  LAST_LINKS_INDEX,
+  LINKS,
+} from './constants'
 import ModalContent from './ModalContent'
 
 import styles from './Profile.module.scss'
@@ -91,7 +96,7 @@ const ProfilePage: FC = () => {
           <div className={styles.intro}>
             <div className={styles.title}>{t('intro')}</div>
             {FIELD_INTO.map(({ icon, label }, index) =>
-              index >= 3 && index <= 5 ? (
+              index >= FIRST_LINKS_INDEX && index <= LAST_LINKS_INDEX ? (
                 <a
                   key={index}
                   href={LINKS[label] + (profileInfoArr[index] || '')}
@@ -126,7 +131,7 @@ const ProfilePage: FC = () => {
             />
             <NewsList
               isAllPosts={isAllPosts}
-              filter={true}
+              filterPostsForProfilePage
               name={userInfo?.name}
               isProfilePage={true}
               setIsAllPosts={setIsAllPosts}

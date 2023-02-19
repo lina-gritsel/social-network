@@ -46,7 +46,7 @@ const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
 const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
   const { t } = useTranslation()
 
-  const bdDate = moment.unix(user?.date).format('DD/MM')
+  const formattedBirthdayDate = moment.unix(user?.date).format('DD/MM')
 
   const userLink = [user?.instagram, user?.twitter, user?.facebook]
 
@@ -67,7 +67,7 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
             <div>
               <div className={styles.title}>{user?.name}</div>
               <div className={styles.subTitle}>
-                {isBirthday ? t(title) + ' ' + bdDate : user?.bio}
+                {isBirthday ? t(title) + ' ' + formattedBirthdayDate : user?.bio}
               </div>
             </div>
           )}

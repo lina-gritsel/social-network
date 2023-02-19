@@ -1,6 +1,6 @@
 import { FC, useState, useRef, SetStateAction, Dispatch } from 'react'
-import ChangesIcon from '@mui/icons-material/PublishedWithChanges'
-import DeleteIcon from '@mui/icons-material/DeleteForever'
+import { Delete, PublishedWithChanges as Changes } from '@mui/icons-material'
+
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
@@ -68,11 +68,11 @@ const SettingsModal: FC<SettingsModalProps> = ({
       />
       <div className={styles.settingsModal} ref={modalRef}>
         <div onClick={editPost}>
-          <ChangesIcon />
+          <Changes />
           {t('change')}
         </div>
         <div onClick={onDeletePost}>
-          <DeleteIcon />
+          <Delete />
           {t('delete')}
         </div>
       </div>

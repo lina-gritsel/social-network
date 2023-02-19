@@ -9,15 +9,28 @@ import styles from './NewsList.module.scss'
 
 interface NewsListProps {
   isAllPosts: boolean
-  filter?: boolean
+  filterPostsForProfilePage?: boolean
   name?: string
   isProfilePage?: boolean
   setIsAllPosts?: (boolean) => void
 }
 
+const postsTransform = (arr: News[]) => {
+  const readyArr = arr.map((post) => {
+    post.createdAt = dateConversion(post.createdAt)
+    const content = post.content
+    if (content.length > 100) {
+      post.content = content.slice(0, 150) + '...'
+      post.moreContent = content.slice(150)
+    }
+    return post
+  })
+  return readyArr
+}
+
 const NewsList: FC<NewsListProps> = ({
   isAllPosts,
-  filter,
+  filterPostsForProfilePage,
   isProfilePage,
   setIsAllPosts,
 }) => {
@@ -29,28 +42,21 @@ const NewsList: FC<NewsListProps> = ({
   useEffect(() => {
     const getAllExistPosts = async () => {
       setIsLoading(true)
-      const posts: News[] = (await getAllPosts()).posts
-      const sortedPosts = posts.sort((a, b) => sortNews(a.createdAt, b.createdAt))
-      sortedPosts
-        .map((post) => {
-          post.createdAt = dateConversion(post.createdAt)
-          const content = post.content
-          if (content.length > 100) {
-            post.content = content.slice(0, 150) + '...'
-            post.moreContent = content.slice(150)
-          }
-        })
-      if (filter) {
-        setAllPosts(
-          sortedPosts.filter((post) => post.username === userId),
-        )
+      const posts = (await getAllPosts()).posts
+      const sortedPosts = posts.sort((a, b) =>
+        sortNews(a.createdAt, b.createdAt),
+      )
+      const readyPosts = postsTransform(sortedPosts)
+
+      if (filterPostsForProfilePage) {
+        setAllPosts(readyPosts.filter((post) => post.username === userId))
       } else {
-        setAllPosts(sortedPosts)
+        setAllPosts(readyPosts)
       }
       setIsLoading(false)
     }
     getAllExistPosts()
-  }, [isAllPosts, filter, userId])
+  }, [isAllPosts, filterPostsForProfilePage, userId])
 
   if (isLoading)
     return (

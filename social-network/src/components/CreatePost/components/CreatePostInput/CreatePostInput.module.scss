@@ -7,12 +7,6 @@
   }
 }
 
-.field {
-  border-radius: 10px;
-  border: none !important;
-  width: 100%;
-}
-
 .textfield {
   font: var(--font-text-4);
   color: var(--dark-gray-color) !important;
@@ -25,7 +19,9 @@
   border-radius: 10px;
   padding: 5px 15px;
   line-height: 25px;
-  height: 70px;
+  min-height: 50px;
+  max-height: 250px;
+  resize: vertical;
 
   &:focus {
     border: 2px solid var(--blue-color);

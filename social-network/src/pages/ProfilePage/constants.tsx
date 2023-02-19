@@ -42,6 +42,9 @@ export const FIELD_INTO = [
   },
 ]
 
+export const FIRST_LINKS_INDEX = 3
+export const LAST_LINKS_INDEX = 5
+
 export enum LINKS {
   twitter = 'http://www.twitter.com/',
   instagram = 'http://www.instagram.com/',

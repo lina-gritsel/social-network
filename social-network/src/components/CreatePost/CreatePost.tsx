@@ -7,7 +7,7 @@ import data from '@emoji-mart/data'
 import Button from '../Button'
 import Modal from '../Modal'
 
-import { ModalContent } from '../NewsCreator/ModalContent'
+import ModalContent from './components/ModalContent'
 import CreatePostInput from './components/CreatePostInput'
 import { useCreatePost, useEmojiModal } from './hooks'
 import FooterPanel from './components/FooterPanel'
