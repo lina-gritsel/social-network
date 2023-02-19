@@ -2,10 +2,10 @@ import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 
+import { getWallpapers } from '../../api'
 import { getUserInfoSelector } from '../../store/selectors'
 
 import { DEFAULT_WALLPAPER } from './constants'
-import { getWallpapers } from '../../api'
 
 export const useProfilePage = () => {
   const userInfo = useSelector(getUserInfoSelector)

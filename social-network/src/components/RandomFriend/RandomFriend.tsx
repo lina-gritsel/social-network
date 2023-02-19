@@ -1,13 +1,13 @@
 import { FC } from 'react'
-import { useTranslation } from 'react-i18next'
-import Avatar from '@mui/material/Avatar'
-import { Card } from '@mui/material'
 import moment from 'moment'
+import { Card } from '@mui/material'
+import Avatar from '@mui/material/Avatar'
+import { useTranslation } from 'react-i18next'
+
+import { User } from '../../api'
+import { getRandomInt } from '../../utils/utils'
 
 import Button from '../Button'
-import { getRandomInt } from '../../utils/utils'
-import { User } from '../../api'
-
 import { FIELD } from './constants'
 
 import styles from './RandomFriend.module.scss'

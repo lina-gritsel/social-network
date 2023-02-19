@@ -35,7 +35,7 @@ export interface LoginUser {
   password: string
 }
 
-export interface LoginStatus {
+export interface LoginData {
   status: number
   id: string
 }

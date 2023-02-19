@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import Modal from '../../components/Modal'
+import { PATHS } from '../../router/paths'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
-import { PATHS } from '../../router/paths'
-import CreatePost from '../../components/CreatePost'
 import NewsList from '../../components/NewsList'
+import CreatePost from '../../components/CreatePost'
 
 import { useProfilePage } from './hooks'
 import {

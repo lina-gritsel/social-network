@@ -1,14 +1,14 @@
+import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { FC, useState, useRef, SetStateAction, Dispatch } from 'react'
 import { Delete, PublishedWithChanges as Changes } from '@mui/icons-material'
 
-import { useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
-
 import { useOnClickOutside } from '../../hooks'
-import CreatePost from '../CreatePost'
 import { deletePost, getPost } from '../../api/requests'
-import Modal from '../Modal'
 import { getUserInfoSelector } from '../../store/selectors'
+
+import Modal from '../Modal'
+import CreatePost from '../CreatePost'
 
 import styles from './NewsCard.module.scss'
 

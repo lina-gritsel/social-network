@@ -1,8 +1,8 @@
 import {
   User,
-  LoginData,
   UsersInfo,
   LoginUser,
+  LoginData,
   RegistrationData,
   CreatePostParams,
   DeleteUserStatus,
