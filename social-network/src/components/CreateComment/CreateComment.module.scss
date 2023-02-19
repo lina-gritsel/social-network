@@ -30,5 +30,8 @@
   color: var(--blue-color);
   padding: 11px;
   padding-bottom: 5px;
-  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.sendComment:hover {
+  background: var(--white-color);
 }

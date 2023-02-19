@@ -148,7 +148,7 @@ const PostCard: FC<News> = ({
             </span>
           </Typography>
         </CardContent>
-        <FooterPanelPost setSchowComments={setSchowComments} />
+        <FooterPanelPost setSchowComments={setSchowComments} allComments={allComments}/>
         <CreateComment
           avatarImg={avatar}
           onSubmit={onSubmit}

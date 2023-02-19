@@ -25,3 +25,13 @@
   display: flex;
   gap: 10px;
 }
+
+.allComments {
+  color: var(--dark-gray-color);
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+  justify-content: flex-end;
+  line-height: 22px;
+  opacity: 0.6;
+}
