@@ -8,18 +8,20 @@ interface ExistCommentProps {
   comment: string
   userName: string
   createdAt: number
+  avatarAuthorComment: string
 }
 
 const ExistComment: FC<ExistCommentProps> = ({
   comment,
   userName,
   createdAt,
+  avatarAuthorComment,
 }) => {
   const createdCommentTime = moment(createdAt).fromNow()
 
   return (
     <div className={styles.wrapperExistComment}>
-      <Avatar imageUrl="" />
+      <Avatar imageUrl={avatarAuthorComment} />
       <div className={styles.container}>
         <div className={styles.commentHeader}>
           <div className={styles.name}>{userName}</div>

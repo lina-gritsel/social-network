@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
 interface LoaderProps {
-  className: string
+  className?: string
 }
 
 const Loader: FC<LoaderProps> = ({ className }) => {

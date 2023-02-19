@@ -20,7 +20,7 @@ const CommentsList: FC<CommentsListProps> = ({
   return (
     <div className={classNames(styles.list, { [styles.show]: showComments })}>
       {isLoading ? (
-        <Loader className="" />
+        <Loader />
       ) : (
         allComments.map(({ comment, user, createdAt }, index) => {
           return (
@@ -29,6 +29,7 @@ const CommentsList: FC<CommentsListProps> = ({
               userName={user.name}
               comment={comment}
               createdAt={createdAt}
+              avatarAuthorComment={user.avatar}
             />
           )
         })

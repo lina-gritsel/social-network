@@ -83,8 +83,6 @@ const NewsCard: FC<News> = ({
   const [showMore, setShowMore] = useState(true)
   const [showComments, setSchowComments] = useState(true)
 
-  console.log(avatar)
-
   useEffect(() => {
     const getAuthor = async () => {
       const user = await getUser(userId)
@@ -139,11 +137,12 @@ const NewsCard: FC<News> = ({
         )}
         <CardContent className={styles.cardContent}>
           <Typography
+            component={'span'}
             className={styles.content}
             variant="body2"
             color="text.secondary"
           >
-            <div
+            <span
               className={classNames(
                 styles.contentText,
                 showMore && styles.textTruncate,
@@ -151,7 +150,7 @@ const NewsCard: FC<News> = ({
               onClick={() => setShowMore((currentValue) => !currentValue)}
             >
               {content}
-            </div>
+            </span>
           </Typography>
         </CardContent>
         <FooterPanelPost setSchowComments={setSchowComments} />
