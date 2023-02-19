@@ -81,5 +81,7 @@
   "changeAvatar": "更改頭像",
   "comment": "写一个评论...",
   "like":"喜欢",
-  "comments":"评论"
+  "comments":"评论",
+  "theme": "主題",
+  "themeSubtitle": "看看不同主題的應用程序."
 }

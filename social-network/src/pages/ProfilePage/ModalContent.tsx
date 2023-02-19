@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
 import { FC, Dispatch, SetStateAction, MouseEvent } from 'react'
 
+import Loader from '../../components/Loader'
 import Button from '../../components/Button'
 
 import { useModalContent } from './hooks'
 
 import styles from './Profile.module.scss'
-import Loader from '../../components/Loader'
 
 interface IModalContent {
   setBgImage: Dispatch<SetStateAction<string>>

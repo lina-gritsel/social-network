@@ -1,20 +1,18 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Button from '../../../components/Button'
+import Button from '../../../../components/Button'
 
 import styles from './SecureForm.module.scss'
 
 interface DeleteAccountModalProps {
-  userId: string
-  handleClose: () => void
-  onSubmit: (id: string) => void
+  deleteAccount: () => Promise<void>
+  closeDeleteAccountModal: () => void
 }
 
 const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
-  userId,
-  handleClose,
-  onSubmit,
+  deleteAccount,
+  closeDeleteAccountModal,
 }) => {
   const { t } = useTranslation()
 
@@ -25,10 +23,14 @@ const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
         <p className={styles.subtitle}>{t('warning')}</p>
       </div>
       <div className={styles.btnBlock}>
-        <Button className={styles.deleteBtn} onClick={() => onSubmit(userId)}>
+        <Button className={styles.deleteBtn} onClick={() => deleteAccount()}>
           {t('deleteAcc')}
         </Button>
-        <Button outlined className={styles.cancelBtn} onClick={handleClose}>
+        <Button
+          outlined
+          className={styles.cancelBtn}
+          onClick={closeDeleteAccountModal}
+        >
           {t('cancel')}
         </Button>
       </div>
