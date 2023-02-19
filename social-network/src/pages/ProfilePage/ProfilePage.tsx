@@ -6,16 +6,15 @@ import { useTranslation } from 'react-i18next'
 import Modal from '../../components/Modal'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
-
 import { PATHS } from '../../router/paths'
+import CreatePost from '../../components/CreatePost'
 import NewsList from '../../components/NewsList'
 
 import { useProfilePage } from './hooks'
-import { FIELD_INTO } from './constants'
+import { FIELD_INTO, LINKS } from './constants'
 import ModalContent from './ModalContent'
 
 import styles from './Profile.module.scss'
-import CreatePost from '../../components/CreatePost'
 
 const ProfilePage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
@@ -91,15 +90,32 @@ const ProfilePage: FC = () => {
         <div className={styles.wrapperContent}>
           <div className={styles.intro}>
             <div className={styles.title}>{t('intro')}</div>
-            {FIELD_INTO.map(({ icon, label }, index) => (
-              <div key={index} className={styles.intoItem}>
-                {icon}
-                <div>{t(label)}</div>
-                <div className={styles.profileInfo}>
-                  {profileInfoArr[index]}
+            {FIELD_INTO.map(({ icon, label }, index) =>
+              index >= 3 && index <= 5 ? (
+                <a
+                  key={index}
+                  href={LINKS[label] + (profileInfoArr[index] || '')}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div className={styles.intoItem}>
+                    <Field
+                      icon={icon}
+                      label={label}
+                      profileInfo={profileInfoArr[index]}
+                    />
+                  </div>
+                </a>
+              ) : (
+                <div key={index} className={styles.intoItem}>
+                  <Field
+                    icon={icon}
+                    label={label}
+                    profileInfo={profileInfoArr[index]}
+                  />
                 </div>
-              </div>
-            ))}
+              ),
+            )}
           </div>
           <div className={styles.content}>
             <CreatePost
@@ -119,6 +135,24 @@ const ProfilePage: FC = () => {
         </div>
       </div>
     </Layout>
+  )
+}
+
+interface FieldProps {
+  icon: JSX.Element
+  label: string
+  profileInfo: string | string[]
+}
+
+const Field: FC<FieldProps> = ({ icon, label, profileInfo }) => {
+  const { t } = useTranslation()
+
+  return (
+    <>
+      {icon}
+      <div>{t(label)}</div>
+      <div className={styles.profileInfo}>{profileInfo}</div>
+    </>
   )
 }
 

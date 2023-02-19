@@ -2,16 +2,13 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import Avatar from '@mui/material/Avatar'
 import { Card } from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import InstagramIcon from '@mui/icons-material/Instagram'
 import moment from 'moment'
 
 import Button from '../Button'
 import { getRandomInt } from '../../utils/utils'
 import { User } from '../../api'
 
-import { LINKS } from './constants'
+import { FIELD } from './constants'
 
 import styles from './RandomFriend.module.scss'
 
@@ -51,6 +48,8 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
 
   const bdDate = moment.unix(user?.date).format('DD/MM')
 
+  const userLink = [user?.instagram, user?.twitter, user?.facebook]
+
   return (
     <Card>
       <div className={styles.mightLike}>{t(title)}</div>
@@ -76,27 +75,16 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
         {!isBirthday && (
           <>
             <div className={styles.icons}>
-              <a
-                href={LINKS.instagram + ('' || user?.instagram)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                href={LINKS.twitter + ('' || user?.twitter)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <TwitterIcon />
-              </a>
-              <a
-                href={LINKS.facebook + ('' || user?.facebook)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <FacebookIcon />
-              </a>
+              {FIELD.map(({ icon, path }, index) => (
+                <a
+                  key={index}
+                  href={path + (userLink[index] || '')}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {icon}
+                </a>
+              ))}
             </div>
             <div className={styles.btnWrapper}>
               <Button className={styles.ignorFriends} outlined>
