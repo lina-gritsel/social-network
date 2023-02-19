@@ -1,6 +1,6 @@
 export const PATHS = {
   PAGE_404: '*',
-  NEWS: '/news',
+  FEED: '/feed',
   ABOUT: '/about',
   LOGIN: '/login',
   PROFILE: '/profile',

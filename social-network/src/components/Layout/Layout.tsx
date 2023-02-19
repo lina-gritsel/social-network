@@ -58,7 +58,7 @@ const Layout: FC<LayotProps> = (props) => {
         anchor="left"
         className={styles.mainMenu}
       >
-        <Link to={PATHS.NEWS} className={styles.mainMenuItem}>
+        <Link to={PATHS.FEED} className={styles.mainMenuItem}>
           <ForumRounded color="primary" className={styles.forum} />
           OurNetwork
         </Link>

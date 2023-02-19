@@ -10,7 +10,7 @@ import { deletePost, getPost } from '../../api/requests'
 import Modal from '../Modal'
 import { getUserInfoSelector } from '../../store/selectors'
 
-import styles from './NewsCard.module.scss'
+import styles from './PostCard.module.scss'
 
 export interface SettingsModalProps {
   id: string

@@ -5,17 +5,15 @@ import { getUserInfoSelector } from '../../store/selectors'
 import FriendsOnline from '../../components/FriendsOnline'
 import RandomFriend from '../../components/RandomFriend'
 import CreatePost from '../../components/CreatePost'
-import NewsList from '../../components/NewsList'
+import PostsList from '../../components/PostsList'
 import Weather from '../../components/Weather'
 import Layout from '../../components/Layout'
 
 import { useNewsPage } from './hooks'
 
-import styles from './NewsPage.module.scss'
+import styles from './FeedPage.module.scss'
 
-
-
-const NewsPage: FC = () => {
+const FeedPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
   const { isLoading, userswWithoutMe } = useNewsPage()
   const userInfo = useSelector(getUserInfoSelector)
@@ -31,7 +29,7 @@ const NewsPage: FC = () => {
               userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
             />
-            <NewsList isAllPosts={isAllPosts} />
+            <PostsList isAllPosts={isAllPosts} />
           </div>
           <div className={styles.friendAndWeather}>
             <RandomFriend allUsers={userswWithoutMe} isLoading={isLoading} />
@@ -44,4 +42,4 @@ const NewsPage: FC = () => {
   )
 }
 
-export default NewsPage
+export default FeedPage

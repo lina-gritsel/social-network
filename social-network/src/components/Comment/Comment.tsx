@@ -1,36 +1,36 @@
-import { Avatar } from '@mui/material'
-import { useTranslation } from 'react-i18next'
-import { FC, KeyboardEvent } from 'react'
-import { useSelector } from 'react-redux'
-
-import { getUserInfoSelector } from '../../store/selectors'
+import moment from 'moment'
+import { FC } from 'react'
+import Avatar from '../Avatar'
 
 import styles from './Comment.module.scss'
 
-const Comment: FC = () => {
+interface ExistCommentProps {
+  comment: string
+  userName: string
+  createdAt: number
+  avatarAuthorComment: string
+}
 
-  const userInfo = useSelector(getUserInfoSelector)
-
-  const { t } = useTranslation()
-
-  const changeComment = (event) => {}
+const ExistComment: FC<ExistCommentProps> = ({
+  comment,
+  userName,
+  createdAt,
+  avatarAuthorComment,
+}) => {
+  const createdCommentTime = moment(createdAt).fromNow()
 
   return (
-    <div className={styles.container}>
-      <Avatar
-        aria-label="recipe"
-        src={userInfo?.avatar}
-        className={styles.avatar}
-      />
-      <input
-        placeholder={t('comment')}
-        className={styles.input}
-        onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
-          changeComment(event)
-        }
-      />
+    <div className={styles.wrapperExistComment}>
+      <Avatar imageUrl={avatarAuthorComment} />
+      <div className={styles.container}>
+        <div className={styles.commentHeader}>
+          <div className={styles.name}>{userName}</div>
+          <div className={styles.time}>{createdCommentTime}</div>
+        </div>
+        <div className={styles.content}>{comment}</div>
+      </div>
     </div>
   )
 }
 
-export default Comment
+export default ExistComment

@@ -78,5 +78,8 @@
   "addPostImgLabel": "Su enlace",
   "addMessage": "¡Tu imagen ha sido añadida!",
   "change": "Cambio",
-  "delete": "Eliminar"
+  "delete": "Eliminar",
+  "comment": "Escribir un comentario...",
+  "like":"Como",
+  "comments":"Comentarios"
 }

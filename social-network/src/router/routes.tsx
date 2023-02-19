@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import RegistrationPage from '../pages/RegistrationPage'
 import ProfilePage from '../pages/ProfilePage'
-import NewsPage from '../pages/NewsPage'
+import FeedPage from '../pages/FeedPage'
 import LoginPage from '../pages/LoginPage'
 import SettingsPage from '../pages/SettingsPage'
 import Page404 from '../pages/404Page'
@@ -29,8 +29,8 @@ export const routes: Routes[] = [
     component: ProfilePage,
   },
   {
-    path: PATHS.NEWS,
-    component: NewsPage,
+    path: PATHS.FEED,
+    component: FeedPage,
   },
   {
     path: PATHS.SETTINGS,

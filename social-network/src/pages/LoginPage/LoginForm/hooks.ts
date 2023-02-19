@@ -37,7 +37,7 @@ export const useLoginForm = () => {
 
     if (status === 200) {
       localStorage.setItem('userId', JSON.stringify(id))
-      navigate(PATHS.NEWS)
+      navigate(PATHS.FEED)
     }
 
     if (status === 400) {

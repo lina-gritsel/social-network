@@ -46,11 +46,17 @@ export interface DeleteUserStatus {
 
 export interface CreatePostParams {
   content: string
-  username: string
+  userId: string
   image: string
 }
 
 export interface ChangePostParams {
   content: string
   image: string
+}
+
+export interface ChangeComment {
+  postId: string
+  comment: string
+  userId: string
 }

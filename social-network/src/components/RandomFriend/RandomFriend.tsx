@@ -1,16 +1,15 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import Avatar from '@mui/material/Avatar'
 import { Card } from '@mui/material'
 import moment from 'moment'
 
-import Button from '../Button'
 import { getRandomInt } from '../../utils/utils'
 import { User } from '../../api'
-
-import { FIELD } from './constants'
+import Avatar from '../Avatar'
+import Button from '../Button'
 
 import styles from './RandomFriend.module.scss'
+import { FIELD } from './constants'
 
 interface RandomFriend {
   allUsers: User[]
@@ -51,23 +50,20 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
   const userLink = [user?.instagram, user?.twitter, user?.facebook]
 
   return (
-    <Card>
+    <Card className={styles.friendCard}>
       <div className={styles.mightLike}>{t(title)}</div>
       <div className={styles.wrapperContent}>
         <div className={styles.cardHeader}>
-          <Avatar
-            aria-label="recipe"
-            alt={user?.name}
-            src={user?.avatar}
-            className={styles.avatar}
-          />
+          <Avatar imageUrl={user?.avatar} className={styles.avatar} />
           {isLoading ? (
             <div className={styles.loading}>{t('loading')}</div>
           ) : (
             <div>
               <div className={styles.title}>{user?.name}</div>
               <div className={styles.subTitle}>
-                {isBirthday ? t(title) + ' ' + formattedBirthdayDate : user?.bio}
+                {isBirthday
+                  ? t(title) + ' ' + formattedBirthdayDate
+                  : user?.bio}
               </div>
             </div>
           )}
@@ -98,5 +94,4 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
     </Card>
   )
 }
-
 export default RandomFriend

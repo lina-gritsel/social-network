@@ -1,16 +1,37 @@
-.container {
+.wrapperExistComment {
   display: flex;
-  gap: 15px;
-  width: 95%;
-  margin: 0 auto;
-  padding-bottom: 15px;
+  gap: 18px;
 }
 
-.input {
-  background-color: var(--light-gray-color);
-  border: 0;
-  border-radius: 10px;
-  outline: 0;
+.container {
+  background-color: var(--white-color);
+  border-radius: 20px;
+  gap: 14px;
+  padding: 14px;
   width: 100%;
-  padding-left: 15px;
+}
+
+.name {
+  color: var(--dark-gray-color);
+  font: var(--font-text-5);
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.time {
+  color: var(--dark-gray-color);
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.content {
+  color: var(--dark-gray-color);
+  font: var(--font-text-5);
+  line-height: 22px;
+  padding-top: 14px;
+}
+
+.commentHeader {
+  display: flex;
+  flex-direction: column;
 }

@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import Avatar from '@mui/material/Avatar'
 import { Box, CircularProgress } from '@mui/material'
 
 import { User } from '../../api'
@@ -9,6 +8,7 @@ import InputSearch from '../InputSearch'
 import useDebounce from './hooks'
 
 import styles from './FriendsOnline.module.scss'
+import Avatar from '../Avatar'
 
 interface Friends {
   name: string
@@ -54,9 +54,7 @@ const Friend: FC<Friends> = ({ name, avatar }) => {
   return (
     <div className={styles.friend}>
       <div className={styles.name}>
-        <Avatar aria-label="recipe" src={avatar}>
-          {name[0]}
-        </Avatar>
+        <Avatar imageUrl={avatar} />
         <p>{name}</p>
       </div>
     </div>

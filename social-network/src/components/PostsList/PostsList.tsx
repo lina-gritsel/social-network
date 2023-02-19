@@ -1,13 +1,13 @@
 import { FC, useState, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
-import NewsCard, { News } from '../NewsCard/NewsCard'
+import PostCard, { News } from '../PostCard/PostCard'
 import { getAllPosts } from '../../api/requests'
-import { sortNews, dateConversion } from '../../utils/utils'
+import { sortNews } from '../../utils/utils'
 
-import styles from './NewsList.module.scss'
+import styles from './PostsList.module.scss'
 
-interface NewsListProps {
+interface PostsListProps {
   isAllPosts: boolean
   filterPostsForProfilePage?: boolean
   name?: string
@@ -15,20 +15,7 @@ interface NewsListProps {
   setIsAllPosts?: (boolean) => void
 }
 
-const postsTransform = (arr: News[]) => {
-  const readyArr = arr.map((post) => {
-    post.createdAt = dateConversion(post.createdAt)
-    const content = post.content
-    if (content.length > 100) {
-      post.content = content.slice(0, 150) + '...'
-      post.moreContent = content.slice(150)
-    }
-    return post
-  })
-  return readyArr
-}
-
-const NewsList: FC<NewsListProps> = ({
+const PostsList: FC<PostsListProps> = ({
   isAllPosts,
   filterPostsForProfilePage,
   isProfilePage,
@@ -36,22 +23,20 @@ const NewsList: FC<NewsListProps> = ({
 }) => {
   const [allPosts, setAllPosts] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   useEffect(() => {
     const getAllExistPosts = async () => {
       setIsLoading(true)
-      const posts = (await getAllPosts()).posts
+      const posts: News[] = (await getAllPosts()).posts
       const sortedPosts = posts.sort((a, b) =>
         sortNews(a.createdAt, b.createdAt),
       )
-      const readyPosts = postsTransform(sortedPosts)
 
       if (filterPostsForProfilePage) {
-        setAllPosts(readyPosts.filter((post) => post.username === userId))
+        setAllPosts(sortedPosts.filter((post) => post.userId))
       } else {
-        setAllPosts(readyPosts)
+        setAllPosts(sortedPosts)
       }
       setIsLoading(false)
     }
@@ -68,7 +53,7 @@ const NewsList: FC<NewsListProps> = ({
   return (
     <>
       {allPosts.map((post, index) => (
-        <NewsCard
+        <PostCard
           key={index}
           {...post}
           isProfilePage={isProfilePage}
@@ -79,4 +64,4 @@ const NewsList: FC<NewsListProps> = ({
   )
 }
 
-export default NewsList
+export default PostsList

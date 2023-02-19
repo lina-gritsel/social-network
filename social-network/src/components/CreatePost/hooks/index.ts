@@ -45,7 +45,7 @@ export const useCreatePost: UseCreatePost = ({
     if (editMode) {
       await changePost({ ...params }, id)
     } else {
-      await createPost({ ...params, username: userId })
+      await createPost({ ...params, userId })
     }
 
     setContentInput('')
