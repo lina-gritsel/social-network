@@ -85,7 +85,7 @@ const PostCard: FC<News> = ({
       setAuthor(authorPost)
     }
     getAuthor()
-  }, [id])
+  }, [id, userId])
 
   const createdPostTime = moment(createdAt).fromNow()
 

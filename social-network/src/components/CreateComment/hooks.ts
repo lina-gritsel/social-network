@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { createComment, getPost } from '../../api'
 
 import { getUserInfoSelector } from '../../store/selectors'
+import { sortNews } from '../../utils/utils'
 
 interface UseCreateCommentProps {
   postId: string
@@ -19,6 +20,10 @@ export const useCreateComment = ({
   const [comment, setComment] = useState<string>('')
 
   const [allComments, setAllComments] = useState([])
+
+  const sortedComments = allComments.sort((a, b) =>
+    sortNews(a.createdAt, b.createdAt),
+  )
 
   useEffect(() => {
     if (!isLoading) {
@@ -45,7 +50,7 @@ export const useCreateComment = ({
     onSubmit,
     comment,
     onChangeComment,
-    allComments,
+    allComments: sortedComments,
     isLoading,
   }
 }
