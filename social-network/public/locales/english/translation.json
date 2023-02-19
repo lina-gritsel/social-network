@@ -78,5 +78,6 @@
   "addPostImgLabel": "Your link",
   "addMessage": "Your image has been added!",
   "change": "Edit",
-  "delete": "Delete"
+  "delete": "Delete",
+  "comment": "Write a comment..."
 }

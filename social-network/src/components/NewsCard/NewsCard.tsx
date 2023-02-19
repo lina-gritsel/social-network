@@ -43,6 +43,7 @@ import Modal from '../Modal'
 import { User } from '../../api'
 
 import styles from './NewsCard.module.scss'
+import CommentsList from '../CommentsList'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -93,7 +94,7 @@ const NewsCard: FC<News> = ({
   const [isSettingModal, setIsSettingModal] = useState(false)
   const [author, setAuthor] = useState<User>()
   const [showMore, setShowMore] = useState(true)
-  console.log(showMore)
+  const [showComments, setSchowComments] = useState(true)
 
   useEffect(() => {
     const getAuthor = async () => {
@@ -103,88 +104,68 @@ const NewsCard: FC<News> = ({
     getAuthor()
   }, [username])
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
-  }
-
   const createdPostTime = moment(createdAt).fromNow()
 
   return (
-    <Card className={classNames(styles.card, className)}>
-      {isSettingModal && (
-        <SettingsModal
-          id={id}
-          setIsAllPosts={setIsAllPosts}
-          setIsSettingModal={setIsSettingModal}
-        />
-      )}
-      <div className={styles.wrapperCardHeader}>
-        <div className={styles.wrapperCard}>
-          <Avatar className={styles.cardAvatar} imageUrl={avatarImg} />
-          <div>
-            <div className={styles.author}>{author?.name}</div>
-            <div className={styles.createAt}>{createdPostTime}</div>
+    <>
+      <Card className={classNames(styles.card, className)}>
+        {isSettingModal && (
+          <SettingsModal
+            id={id}
+            setIsAllPosts={setIsAllPosts}
+            setIsSettingModal={setIsSettingModal}
+          />
+        )}
+        <div className={styles.wrapperCardHeader}>
+          <div className={styles.wrapperCard}>
+            <Avatar className={styles.cardAvatar} imageUrl={avatarImg} />
+            <div>
+              <div className={styles.author}>{author?.name}</div>
+              <div className={styles.createAt}>{createdPostTime}</div>
+            </div>
           </div>
+          {isProfilePage && (
+            <IconButton
+              aria-label="settings"
+              onClick={() => setIsSettingModal((prev) => !prev)}
+              className={styles.editPostIcon}
+            >
+              <MoreVert />
+            </IconButton>
+          )}
         </div>
-        {isProfilePage && (
-          <IconButton
-            aria-label="settings"
-            onClick={() => setIsSettingModal((prev) => !prev)}
-            className={styles.editPostIcon}
-          >
-            <MoreVert />
-          </IconButton>
+        {!!image && (
+          <CardMedia
+            component="img"
+            height="300"
+            image={image}
+            alt={author?.name}
+            className={styles.image}
+            onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
+          />
         )}
-      </div>
-      {!!image && (
-        <CardMedia
-          component="img"
-          height="300"
-          image={image}
-          alt={author?.name}
-          className={styles.image}
-          onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
-        />
-      )}
-      <CardContent className={styles.cardContent}>
-        <Typography
-          className={styles.content}
-          variant="body2"
-          color="text.secondary"
-        >
-          <div
-            className={classNames(
-              styles.contentText,
-              showMore && styles.textTruncate,
-            )}
-            onClick={() => setShowMore((currentValue) => !currentValue)}
+        <CardContent className={styles.cardContent}>
+          <Typography
+            className={styles.content}
+            variant="body2"
+            color="text.secondary"
           >
-            {content}
-          </div>
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing className={styles.cardActions}>
-        <FooterPanelPost />
-        {!!moreContent && (
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        )}
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph className={styles.moreContent}>
-            {moreContent}
+            <div
+              className={classNames(
+                styles.contentText,
+                showMore && styles.textTruncate,
+              )}
+              onClick={() => setShowMore((currentValue) => !currentValue)}
+            >
+              {content}
+            </div>
           </Typography>
         </CardContent>
-      </Collapse>
-      <CreateComment postId={id} />
-    </Card>
+        <FooterPanelPost setSchowComments={setSchowComments} />
+        <CreateComment postId={id} />
+      </Card>
+      <CommentsList postId={id} showComments={showComments}/>
+    </>
   )
 }
 

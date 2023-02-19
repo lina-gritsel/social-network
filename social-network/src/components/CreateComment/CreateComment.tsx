@@ -2,8 +2,8 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import SendIcon from '@mui/icons-material/Send'
 
+import send from '../../assets/icons/send.svg'
 import Avatar from '../Avatar'
-import Comment from '../Comment'
 
 import styles from './CreateComment.module.scss'
 import { useCreateComment } from './hooks'
@@ -29,13 +29,8 @@ const CreateComment: FC<CommentProps> = ({ postId, avatarImg }) => {
           value={comment}
         />
         <button className={styles.sendComment} onClick={onSubmit}>
-          <SendIcon />
+          <img src={send}/>
         </button>
-      </div>
-      <div>
-        {allComments.map(({ comment, user }, index): any => {
-          return <Comment key={index} userName={user.name} comment={comment} />
-        })}
       </div>
     </div>
   )
