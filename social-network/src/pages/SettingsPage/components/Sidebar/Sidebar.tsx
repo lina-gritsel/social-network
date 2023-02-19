@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import {
   ShieldOutlined,
   TranslateOutlined,
@@ -40,6 +41,16 @@ const Sidebar: FC<SidebarProps> = ({ settingsTab, setSettingsTab }) => {
       >
         <TranslateOutlined />
         {t('languages')}
+      </div>
+      <div
+        onClick={() => setSettingsTab(SettingsTab.THEME)}
+        className={classNames(
+          { [styles.menuListActive]: settingsTab === SettingsTab.THEME },
+          styles.menuList,
+        )}
+      >
+        <DarkModeOutlinedIcon />
+        {t('theme')}
       </div>
       <div
         onClick={() => setSettingsTab(SettingsTab.SECURE)}

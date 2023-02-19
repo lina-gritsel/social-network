@@ -5,6 +5,7 @@ import Layout from '../../components/Layout'
 import InputLanguages from '../../components/InputLanguages'
 
 import Sidebar from './components/Sidebar'
+import ThemeForm from './components/ThemeForm'
 import SecureForm from './components/SecureForm'
 import EditProfile from './components/EditProfile'
 
@@ -14,6 +15,7 @@ export enum SettingsTab {
   EDIT = 'edit',
   SECURE = 'secure',
   LANGUAGES = 'languages',
+  THEME = 'theme',
 }
 
 const SettingsPage: FC = () => {
@@ -33,6 +35,13 @@ const SettingsPage: FC = () => {
                 <h2 className={styles.title}>{t('languages')}</h2>
                 <p className={styles.subtitle}>{t('langSubtitle')}</p>
                 <InputLanguages />
+              </>
+            )}
+            {settingsTab === SettingsTab.THEME && (
+              <>
+                <h2 className={styles.title}>{t('theme')}</h2>
+                <p className={styles.subtitle}>{t('themeSubtitle')}</p>
+                <ThemeForm />
               </>
             )}
             {settingsTab === SettingsTab.SECURE && (

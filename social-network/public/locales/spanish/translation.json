@@ -78,5 +78,7 @@
   "addPostImgLabel": "Su enlace",
   "addMessage": "¡Tu imagen ha sido añadida!",
   "change": "Cambio",
-  "delete": "Eliminar"
+  "delete": "Eliminar",
+  "theme": "Tema",
+  "themeSubtitle": "Echa un vistazo a la aplicación con un tema diferente."
 }
