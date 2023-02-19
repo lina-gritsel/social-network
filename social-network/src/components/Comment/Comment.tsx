@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { FC } from 'react'
 import Avatar from '../Avatar'
 
@@ -6,15 +7,24 @@ import styles from './Comment.module.scss'
 interface ExistCommentProps {
   comment: string
   userName: string
+  createdAt: number
 }
 
-const ExistComment: FC<ExistCommentProps> = ({ comment, userName }) => {
+const ExistComment: FC<ExistCommentProps> = ({
+  comment,
+  userName,
+  createdAt,
+}) => {
+  const createdCommentTime = moment(createdAt).fromNow()
+
   return (
     <div className={styles.wrapperExistComment}>
       <Avatar imageUrl="" />
       <div className={styles.container}>
-        <div className={styles.name}>{userName}</div>
-        <div className={styles.time}>{'time'}</div>
+        <div className={styles.commentHeader}>
+          <div className={styles.name}>{userName}</div>
+          <div className={styles.time}>{createdCommentTime}</div>
+        </div>
         <div className={styles.content}>{comment}</div>
       </div>
     </div>

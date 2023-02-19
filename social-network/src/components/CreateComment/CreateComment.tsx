@@ -1,22 +1,25 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import SendIcon from '@mui/icons-material/Send'
 
-import send from '../../assets/icons/send.svg'
+import sendIcon from '../../assets/icons/send.svg'
 import Avatar from '../Avatar'
 
 import styles from './CreateComment.module.scss'
-import { useCreateComment } from './hooks'
 
 interface CommentProps {
   avatarImg?: string
-  postId: string
+  onSubmit: any
+  onChangeComment
+  comment
 }
 
-const CreateComment: FC<CommentProps> = ({ postId, avatarImg }) => {
+const CreateComment: FC<CommentProps> = ({
+  avatarImg,
+  onSubmit,
+  onChangeComment,
+  comment,
+}) => {
   const { t } = useTranslation()
-  const { comment, onChangeComment, onSubmit, allComments } =
-    useCreateComment(postId)
 
   return (
     <div className={styles.wrapper}>
@@ -29,7 +32,7 @@ const CreateComment: FC<CommentProps> = ({ postId, avatarImg }) => {
           value={comment}
         />
         <button className={styles.sendComment} onClick={onSubmit}>
-          <img src={send}/>
+          <img src={sendIcon} />
         </button>
       </div>
     </div>

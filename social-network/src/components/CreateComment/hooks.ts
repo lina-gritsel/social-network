@@ -7,10 +7,16 @@ import { getUserInfoSelector } from '../../store/selectors'
 export const useCreateComment = (postId: string) => {
   const userInfo = useSelector(getUserInfoSelector)
 
-  const { allComments, setAllComments, isLoading } =
-    useFetchCertainsComments(postId)
-
+  const { data, isLoading } = useFetchCertainsComments(postId)
   const [comment, setComment] = useState<string>('')
+
+  const [allComments, setAllComments] = useState([])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setAllComments(data)
+    }
+  }, [data, isLoading])
 
   const onChangeComment = (event) => {
     setComment(event.target.value)
@@ -31,17 +37,18 @@ export const useCreateComment = (postId: string) => {
     comment,
     onChangeComment,
     allComments,
+    isLoading,
   }
 }
 
 export const useFetchCertainsComments = (postId: string) => {
-  const [allComments, setAllComments] = useState([])
+  const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchComments = async () => {
       const { data } = await getPost(postId)
-      setAllComments(data?.post.comments || [])
+      setData(data?.post.comments || [])
     }
     fetchComments()
 
@@ -49,8 +56,7 @@ export const useFetchCertainsComments = (postId: string) => {
   }, [postId])
 
   return {
-    allComments,
+    data,
     isLoading,
-    setAllComments,
   }
 }

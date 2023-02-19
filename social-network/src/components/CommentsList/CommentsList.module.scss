@@ -1,6 +1,9 @@
-.show {
-  display: none;
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.list {
+.show {
+  display: none;
 }

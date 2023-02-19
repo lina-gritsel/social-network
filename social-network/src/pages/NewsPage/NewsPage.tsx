@@ -5,7 +5,7 @@ import { getUserInfoSelector } from '../../store/selectors'
 import FriendsOnline from '../../components/FriendsOnline'
 import RandomFriend from '../../components/RandomFriend'
 import CreatePost from '../../components/CreatePost'
-import NewsList from '../../components/NewsList'
+import NewsList from '../../components/PostsList'
 import Weather from '../../components/Weather'
 import Layout from '../../components/Layout'
 

@@ -7,7 +7,7 @@ import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 
 import CreatePost from '../../components/CreatePost'
-import NewsList from '../../components/NewsList'
+import NewsList from '../../components/PostsList'
 import { PATHS } from '../../router/paths'
 
 import { useProfilePage } from './hooks'

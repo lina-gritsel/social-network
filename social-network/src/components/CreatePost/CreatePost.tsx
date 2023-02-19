@@ -5,7 +5,7 @@ import data from '@emoji-mart/data'
 
 import { ModalContent } from '../NewsCreator/ModalContent'
 import CreatePostInput from './components/CreatePostInput'
-import { useCreatePost, useEmojiModal } from './hooks'
+import { useAddImageModal, useCreatePost, useEmojiModal } from './hooks'
 import FooterPanel from './components/FooterPanel'
 
 import styles from './CreatePost.module.scss'
@@ -55,7 +55,7 @@ const CreatePost: FC<CreatePostProps> = ({
     isVisible: isAddImageModalVisible,
     close: closeAddImageModal,
     open: openAddImageModal,
-  } = useEmojiModal()
+  } = useAddImageModal()
 
   return (
     <div className={styles.create}>

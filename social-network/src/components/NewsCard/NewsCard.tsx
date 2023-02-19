@@ -44,6 +44,7 @@ import { User } from '../../api'
 
 import styles from './NewsCard.module.scss'
 import CommentsList from '../CommentsList'
+import { useCreateComment } from '../CreateComment/hooks'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
@@ -83,14 +84,12 @@ const NewsCard: FC<News> = ({
   createdAt,
   image,
   content,
-  moreContent,
   avatarImg,
   className,
   id,
   setIsAllPosts,
   isProfilePage,
 }) => {
-  const [expanded, setExpanded] = useState(false)
   const [isSettingModal, setIsSettingModal] = useState(false)
   const [author, setAuthor] = useState<User>()
   const [showMore, setShowMore] = useState(true)
@@ -98,13 +97,17 @@ const NewsCard: FC<News> = ({
 
   useEffect(() => {
     const getAuthor = async () => {
-      const user = (await getUser(username)).data.user
-      setAuthor(user)
+      const user = await getUser(username)
+      const authorPost = user.data?.user
+      setAuthor(authorPost)
     }
     getAuthor()
   }, [username])
 
   const createdPostTime = moment(createdAt).fromNow()
+
+  const { isLoading, allComments, onSubmit, onChangeComment, comment } =
+    useCreateComment(id)
 
   return (
     <>
@@ -162,9 +165,18 @@ const NewsCard: FC<News> = ({
           </Typography>
         </CardContent>
         <FooterPanelPost setSchowComments={setSchowComments} />
-        <CreateComment postId={id} />
+        <CreateComment
+          avatarImg={avatarImg}
+          onSubmit={onSubmit}
+          onChangeComment={onChangeComment}
+          comment={comment}
+        />
       </Card>
-      <CommentsList postId={id} showComments={showComments}/>
+      <CommentsList
+        isLoading={isLoading}
+        allComments={allComments}
+        showComments={showComments}
+      />
     </>
   )
 }

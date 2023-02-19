@@ -5,20 +5,35 @@ import Comment from '../Comment'
 
 import styles from './CommentsList.module.scss'
 import classNames from 'classnames'
+import Loader from '../Loader'
 
 interface CommentsListProps {
-  postId: string
   showComments: boolean
+  allComments: any
+  isLoading: boolean
 }
 
-const CommentsList: FC<CommentsListProps> = ({ postId, showComments }) => {
-  const { allComments } = useCreateComment(postId)
-
+const CommentsList: FC<CommentsListProps> = ({
+  allComments,
+  showComments,
+  isLoading,
+}) => {
   return (
-    <div className={classNames(styles.list, showComments && styles.show)}>
-      {allComments.map(({ comment, user }, index): any => {
-        return <Comment key={index} userName={user.name} comment={comment} />
-      })}
+    <div className={classNames(styles.list, { [styles.show]: showComments })}>
+      {isLoading ? (
+        <Loader className="" />
+      ) : (
+        allComments.map(({ comment, user, createdAt }, index) => {
+          return (
+            <Comment
+              key={index}
+              userName={user.name}
+              comment={comment}
+              createdAt={createdAt}
+            />
+          )
+        })
+      )}
     </div>
   )
 }
