@@ -78,5 +78,8 @@
   "addPostImgLabel": "आपका लिंक",
   "addMessage": "आपकी छवि जोड़ दी गई है!",
   "change": "परिवर्तन",
-  "delete": "हटाएं"
+  "delete": "हटाएं",
+  "comment": "एक टिप्पणी लिखें...",
+  "like":"पसंद",
+  "comments":"comments"
 }

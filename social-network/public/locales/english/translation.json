@@ -79,5 +79,7 @@
   "addMessage": "Your image has been added!",
   "change": "Edit",
   "delete": "Delete",
-  "comment": "Write a comment..."
+  "comment": "Write a comment...",
+  "like":"Like",
+  "comments":"Comments"
 }
