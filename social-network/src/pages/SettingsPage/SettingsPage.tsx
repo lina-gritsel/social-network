@@ -1,13 +1,14 @@
 import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import InputLanguages from '../../components/InputLanguages'
 import Layout from '../../components/Layout'
+import InputLanguages from '../../components/InputLanguages'
 
-import EditProfile from './components/EditProfile'
-import SecureForm from './components/SecureForm'
-import styles from './SettingsPage.module.scss'
 import Sidebar from './components/Sidebar'
+import SecureForm from './components/SecureForm'
+import EditProfile from './components/EditProfile'
+
+import styles from './SettingsPage.module.scss'
 
 export enum SettingsTab {
   EDIT = 'edit',
