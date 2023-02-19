@@ -6,7 +6,7 @@
 
 .settingsWrapper {
   display: flex;
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 20px;
 }
 
@@ -25,7 +25,7 @@
 
 .subtitle {
   color: var(--gray-color);
-  font: var(--font-text-3);
+  font: var(--font-text-4);
 }
 
 @media (max-width: 620px) {

@@ -56,7 +56,7 @@ const ThemeForm: FC = () => {
 
   return (
     <FormGroup>
-      <FormControlLabel control={<MaterialUISwitch className={styles.switcher} />} label="" />
+      <FormControlLabel control={<MaterialUISwitch />} label="" />
     </FormGroup>
   )
 }

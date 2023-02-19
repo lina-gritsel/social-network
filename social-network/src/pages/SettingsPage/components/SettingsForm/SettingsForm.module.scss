@@ -52,12 +52,13 @@
 
 .label {
   color: var(--gray-color) !important;
+  font: var(--font-text-4) !important;
   font-weight: 700 !important;
 }
 
 .title {
   color: var(--gray-color);
-  font: var(--font-text-2);
+  font: var(--font-subtitle);
   font-weight: 700;
   text-align: start;
   width: 100%;
