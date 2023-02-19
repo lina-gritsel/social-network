@@ -12,9 +12,10 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
   setSchowComments,
   allComments,
 }) => {
+  const amountComments = allComments.length
   return (
     <>
-      <div className={styles.allComments}>{`${allComments.length} Comments`}</div>
+      <div className={styles.allComments}>{`${amountComments} Comments`}</div>
       <div className={styles.addToPost}>
         <div className={styles.actionOnPost}>
           <FavoriteBorder className={styles.icon} />
@@ -22,7 +23,7 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
         </div>
         <div
           className={styles.actionOnPost}
-          onClick={() => setSchowComments((currentValue) => !currentValue)}
+          onClick={() => amountComments && setSchowComments((currentValue) => !currentValue)}
         >
           <ChatBubbleOutline className={styles.icon} />
           <div className={styles.like}>{'Comments'}</div>

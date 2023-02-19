@@ -48,7 +48,7 @@ export const useRegistrationForm = () => {
 
     if (result.status === 'success') {
       localStorage.setItem('userId', JSON.stringify(result.data.user.id))
-      navigate(PATHS.NEWS)
+      navigate(PATHS.FEED)
     } else {
       setIsRegistrError(true)
     }

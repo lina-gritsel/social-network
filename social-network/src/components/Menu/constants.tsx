@@ -1,9 +1,9 @@
 import {
   PersonOutline,
-  NewspaperOutlined,
   ExploreOutlined,
   PeopleOutline,
   SettingsOutlined,
+  GridView
 } from '@mui/icons-material'
 
 import { PATHS } from '../../router/paths'
@@ -15,9 +15,9 @@ export const NAVIGATION_MENU = [
     icon: <PersonOutline />,
   },
   {
-    to: PATHS.NEWS,
-    label: 'news',
-    icon: <NewspaperOutlined />,
+    to: PATHS.FEED,
+    label: 'feed',
+    icon: <GridView />,
   },
   {
     to: PATHS.EXPLORE,

@@ -11,9 +11,9 @@ import Layout from '../../components/Layout'
 
 import { useNewsPage } from './hooks'
 
-import styles from './PostsPage.module.scss'
+import styles from './FeedPage.module.scss'
 
-const PostsPage: FC = () => {
+const FeedPage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
   const { isLoading, userswWithoutMe } = useNewsPage()
   const userInfo = useSelector(getUserInfoSelector)
@@ -42,4 +42,4 @@ const PostsPage: FC = () => {
   )
 }
 
-export default PostsPage
+export default FeedPage
