@@ -174,7 +174,7 @@ const SettingsForm: FC = () => {
 
 export default SettingsForm
 
-const adornmentInputProps = ({
+export const adornmentInputProps = ({
   position = 'start',
   icon,
 }: {

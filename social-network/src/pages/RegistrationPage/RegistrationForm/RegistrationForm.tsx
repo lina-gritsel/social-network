@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { IconButton, InputAdornment } from '@mui/material'
@@ -14,6 +14,7 @@ import Button from '../../../components/Button'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
 import InputPassword from '../../../components/InputPassword'
+import { adornmentInputProps } from '../../SettingsPage/components/SettingsForm/SettingsForm'
 
 import { useRegistrationForm } from './hooks'
 
@@ -109,15 +110,3 @@ const RegistrationForm: FC = () => {
 }
 
 export default RegistrationForm
-
-const adornmentInputProps = ({
-  position = 'start',
-  icon,
-}: {
-  position?: 'start' | 'end'
-  icon: ReactNode
-}) => {
-  return {
-    startAdornment: <InputAdornment position={position}>{icon}</InputAdornment>,
-  }
-}

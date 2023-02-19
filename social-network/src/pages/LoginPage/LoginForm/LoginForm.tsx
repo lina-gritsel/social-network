@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IconButton, InputAdornment } from '@mui/material'
 import { AccountCircleOutlined } from '@mui/icons-material'
@@ -9,6 +9,7 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import InputPassword from '../../../components/InputPassword'
+import { adornmentInputProps } from '../../SettingsPage/components/SettingsForm/SettingsForm'
 
 import { useLoginForm } from './hooks'
 
@@ -77,15 +78,3 @@ const LoginForm: FC = () => {
   )
 }
 export default LoginForm
-
-const adornmentInputProps = ({
-  position = 'start',
-  icon,
-}: {
-  position?: 'start' | 'end'
-  icon: ReactNode
-}) => {
-  return {
-    startAdornment: <InputAdornment position={position}>{icon}</InputAdornment>,
-  }
-}
