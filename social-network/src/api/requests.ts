@@ -1,12 +1,12 @@
 import {
   User,
+  LoginData,
+  UsersInfo,
   LoginUser,
-  LoginStatus,
   RegistrationData,
   CreatePostParams,
   DeleteUserStatus,
   ChangePostParams,
-  UsersInfo,
 } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
@@ -31,16 +31,17 @@ export const createUser = async (user: User): Promise<RegistrationData> => {
   }
 }
 
-export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
+export const loginUser = async (user: LoginUser): Promise<LoginData> => {
   try {
     const data = await fetch(LOGIN_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(user),
     })
-    return { status: data.status }
+    const result = await data.json()
+    return {result: result, status: data.status }
   } catch (error) {
     throw new Error(`${error}`)
   }
@@ -125,7 +126,7 @@ export const changePost = async (content: ChangePostParams, id: string) => {
       },
     })
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
 
@@ -135,7 +136,7 @@ export const getPost = async (id: string) => {
 
     return response.json()
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
 
@@ -143,7 +144,6 @@ export const deletePost = async (id: string) => {
   try {
     await fetch(`${POSTS_URL}/${id}`, { method: 'DELETE' })
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
-
