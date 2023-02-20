@@ -14,10 +14,6 @@ const PostModel = sequelize.define('post', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   updatedAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,

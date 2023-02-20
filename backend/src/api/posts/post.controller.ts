@@ -14,10 +14,10 @@ export const createPost = async (
   res: Response,
 ) => {
   try {
-    const { username, content, image } = req.body
+    const { userId, content, image } = req.body
 
     const post = await PostModel.create({
-      username,
+      userId,
       content,
       image,
     })
@@ -174,11 +174,13 @@ export const addComment = async (req: Request, res: Response) => {
 export const changeLikes = async (req: Request<any>, res: Response) => {
   try {
     const post = await PostModel.findByPk(req.params.postId)
-    const userExist = !!post?.dataValues.likes.find(
+    const likesExist = post?.dataValues?.likes
+
+    const likes = likesExist ? [...post?.dataValues.likes] : []
+
+    const userExist = !!likes.find(
       (item: any) => item?.userId === req.body.userId,
     )
-
-    const likes = post?.dataValues.likes ? [...post?.dataValues.likes] : []
 
     if (userExist) {
       const lists = likes.filter(({ userId }) => userId !== req.body.userId)
