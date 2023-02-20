@@ -19,7 +19,7 @@ interface IModalContent {
   setBgImageArr: Dispatch<SetStateAction<string[]>>
 }
 
-const DEFAULT_ARR_LENGHT = 9
+const DEFAULT_ARR_LENGTH = 9
 
 const ModalContent: FC<IModalContent> = ({
   setBgImage,
@@ -68,7 +68,7 @@ const ModalContent: FC<IModalContent> = ({
         ) : (
           bgImageArr?.map((img, index) => (
             <div className={styles.imgItem} key={index}>
-              {index > DEFAULT_ARR_LENGHT && (
+              {index > DEFAULT_ARR_LENGTH && (
                 <CancelIcon
                   className={styles.cancel}
                   id={index.toString()}

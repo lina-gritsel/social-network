@@ -34,7 +34,7 @@ const PostsList: FC<PostsListProps> = ({
       )
 
       if (filterPostsForProfilePage) {
-        setAllPosts(sortedPosts.filter((post) => post.userId))
+        setAllPosts(sortedPosts.filter((post) => post.userId === userId))
       } else {
         setAllPosts(sortedPosts)
       }
