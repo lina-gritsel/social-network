@@ -127,7 +127,7 @@ const PostCard: FC<News> = ({
           allComments={allComments}
         />
         <CreateComment
-          onSubmit={onSubmit}
+          onSubmit={() => comment && onSubmit()}
           onChangeComment={onChangeComment}
           comment={comment}
         />
