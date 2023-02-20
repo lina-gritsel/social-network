@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
-import { FavoriteBorder, ChatBubbleOutline } from '@mui/icons-material'
+import React, { FC, useState } from 'react'
+import { Favorite, ChatBubbleOutline } from '@mui/icons-material'
+import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
 
 import styles from './FooterPanelPost.module.scss'
-import { useTranslation } from 'react-i18next'
 
 interface FooterPanelPostProps {
   setSchowComments: (value) => void
@@ -13,6 +14,11 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
   setSchowComments,
   allComments,
 }) => {
+  const [isLike, setIsLike] = useState(false)
+
+  const likeOnclick = () => {
+    setIsLike((like) => !like)
+  }
   const { t } = useTranslation()
 
   const amountComments = allComments.length
@@ -27,8 +33,10 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
         </div>
       </div>
       <div className={styles.addToPost}>
-        <div className={styles.actionOnPost}>
-          <FavoriteBorder className={styles.icon} />
+        <div className={styles.actionOnPost} onClick={likeOnclick}>
+          <Favorite
+            className={classNames(styles.icon, isLike && styles.isLike)}
+          />
           <div className={styles.like}>{t('like')}</div>
         </div>
         <div
