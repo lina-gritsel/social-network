@@ -17,6 +17,7 @@ const CommentsList: FC<CommentsListProps> = ({
   showComments,
   isLoading,
 }) => {
+  console.log(allComments)
   return (
     <div className={classNames(styles.list, { [styles.show]: showComments })}>
       {isLoading ? (
@@ -26,14 +27,14 @@ const CommentsList: FC<CommentsListProps> = ({
           return (
             <Comment
               key={index}
-              userName={user.name}
+              userName={user?.name}
               comment={comment}
               createdAt={createdAt}
-              avatarAuthorComment={user.avatar}
+              avatarAuthorComment={user?.avatar}
             />
           )
         })
-      )}
+              )}
     </div>
   )
 }
