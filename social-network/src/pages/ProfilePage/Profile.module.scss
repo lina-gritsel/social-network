@@ -54,11 +54,15 @@
 }
 
 .editInfo {
-  background-color: rgb(241, 241, 241);
+  background-color: var(--light-gray-color);
   color: var(--gray-color);
   font: var(--font-text-4);
   padding: 10px;
   width: 140px;
+}
+
+.postInput {
+  color: var(--gray-color) !important;
 }
 
 .editCoverPhoto {

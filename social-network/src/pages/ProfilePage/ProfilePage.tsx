@@ -128,6 +128,7 @@ const ProfilePage: FC = () => {
               userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
               setIsAllPosts={setIsAllPosts}
+              className={styles.postInput}
             />
             <NewsList
               isAllPosts={isAllPosts}

@@ -3,14 +3,13 @@ import { useTranslation } from 'react-i18next'
 import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
-import ModalContent from './components/ModalContent'
-import CreatePostInput from './components/CreatePostInput'
-import { useAddImageModal, useCreatePost, useEmojiModal } from './hooks'
-import FooterPanel from './components/FooterPanel'
-
+import Modal from '../Modal'
 import Avatar from '../Avatar'
 import Button from '../Button'
-import Modal from '../Modal'
+import ModalContent from './components/ModalContent'
+import FooterPanel from './components/FooterPanel'
+import CreatePostInput from './components/CreatePostInput'
+import { useAddImageModal, useCreatePost, useEmojiModal } from './hooks'
 
 import styles from './CreatePost.module.scss'
 
@@ -100,7 +99,7 @@ const CreatePost: FC<CreatePostProps> = ({
           openAddImageModal={openAddImageModal}
           openEmojiModal={openEmojiModal}
         />
-        <Button isDisabled={!contentInput && !currentImg} onClick={onSubmit}>
+        <Button className={styles.createPost} isDisabled={!contentInput && !currentImg} onClick={onSubmit}>
           {t('post')}
         </Button>
       </div>

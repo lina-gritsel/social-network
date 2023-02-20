@@ -65,6 +65,7 @@
 }
 
 .createPost {
+  color: var(--gray-color) !important;
   height: 35px;
   font: var(--font-text-4);
 }
@@ -100,6 +101,7 @@
   left: 40% !important;
   top: 25% !important;
 }
+
 .photo {
   right: 40% !important;
   top: 30% !important;
