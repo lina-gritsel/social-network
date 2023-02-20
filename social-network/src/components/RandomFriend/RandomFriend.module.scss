@@ -12,11 +12,12 @@
 }
 
 .friendCard {
+  background-color: var(--white-color) !important;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02) !important;
 }
 
 .mightLike {
-  color: var(--dark-gray-color);
+  color: var(--gray-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +39,7 @@
 }
 
 .title {
-  color: var(--dark-gray-color);
+  color: var(--gray-color);
   font-size: var(--font-text-3);
   font-weight: 600;
 }
@@ -80,9 +81,13 @@
 }
 
 .ignorFriends {
-  border: 2px solid var(--medium-gray-color);
-  color: var(--dark-gray-color);
+  border: 2px solid var(--light-gray-color);
+  color: var(--gray-color);
   opacity: 0.6;
+}
+
+.followFriends {
+  color: var(--gray-color);
 }
 
 .avatar {

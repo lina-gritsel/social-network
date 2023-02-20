@@ -87,7 +87,7 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
               <Button className={styles.ignorFriends} outlined>
                 {t('ignore')}
               </Button>
-              <Button>{t('follow')}</Button>
+              <Button className={styles.followFriends}>{t('follow')}</Button>
             </div>
           </>
         )}

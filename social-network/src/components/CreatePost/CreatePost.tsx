@@ -65,7 +65,7 @@ const CreatePost: FC<CreatePostProps> = ({
         open={isAddImageModalVisible}
         onClose={closeAddImageModal}
         title={t('addPostImg')}
-        className={editMode ? styles.photo : ''}
+        className={styles.photo}
         isDialogActions={false}
         content={
           <ModalContent currentImg={currentImg} setCurrentImg={setCurrentImg} />

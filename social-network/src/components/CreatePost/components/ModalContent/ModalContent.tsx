@@ -5,17 +5,14 @@ import CancelIcon from '@mui/icons-material/CancelOutlined'
 
 import Button from '../../../Button'
 
-import styles from './NewsCreator.module.scss'
+import styles from './ModalContent.module.scss'
 
 interface ModalContentProps {
   setCurrentImg: any
   currentImg: string
 }
 
-const ModalContent: FC<ModalContentProps> = ({
-  currentImg,
-  setCurrentImg,
-}) => {
+const ModalContent: FC<ModalContentProps> = ({ currentImg, setCurrentImg }) => {
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [isAddImg, setIsAddImg] = useState<boolean>(false)
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
@@ -60,13 +57,16 @@ const ModalContent: FC<ModalContentProps> = ({
       ) : null}
       <TextField
         id="outlined-basic"
-        label={t('addPostImgLabel')}
-        variant="standard"
+        placeholder={t('addPostImgLabel')}
         className={styles.imgInput}
         inputRef={inputRef}
         onChange={() => onChangeInput()}
       />
-      <Button onClick={handleClickBtn} isDisabled={isDisabled}>
+      <Button
+        className={isDisabled ? styles.addImgBtn : styles.addImgActiveBtn}
+        onClick={handleClickBtn}
+        isDisabled={isDisabled}
+      >
         {t('addImg').toLocaleUpperCase()}
       </Button>
       {isErrorImg && <div className={styles.errMessage}>{t('errMessage')}</div>}

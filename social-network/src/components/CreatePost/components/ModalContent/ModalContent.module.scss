@@ -110,6 +110,8 @@
 }
 
 .imgInput {
+  color: var(--gray-color) !important;
+  margin-top: 15px !important;
   width: 90%;
 }
 
@@ -126,7 +128,12 @@
   left: 40% !important;
   top: 25% !important;
 }
+
 .photo {
   right: 40% !important;
   top: 30% !important;
+}
+
+.addImgActiveBtn {
+  color: var(--light-color);
 }
