@@ -78,6 +78,8 @@ const PostCard: FC<News> = ({
   const [showMore, setShowMore] = useState(true)
   const [showComments, setSchowComments] = useState(true)
 
+  const userInfo = useSelector(getUserInfoSelector)
+
   useEffect(() => {
     const getAuthor = async () => {
       const user = await getUser(userId)
@@ -104,7 +106,7 @@ const PostCard: FC<News> = ({
         )}
         <div className={styles.wrapperCardHeader}>
           <div className={styles.wrapperCard}>
-            <Avatar className={styles.cardAvatar} imageUrl={avatar} />
+            <Avatar className={styles.cardAvatar} imageUrl={author?.avatar} />
             <div>
               <div className={styles.author}>{author?.name}</div>
               <div className={styles.createAt}>{createdPostTime}</div>
@@ -150,7 +152,7 @@ const PostCard: FC<News> = ({
         </CardContent>
         <FooterPanelPost setSchowComments={setSchowComments} allComments={allComments}/>
         <CreateComment
-          avatarImg={avatar}
+          avatarImg={userInfo?.avatar}
           onSubmit={onSubmit}
           onChangeComment={onChangeComment}
           comment={comment}

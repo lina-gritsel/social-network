@@ -18,7 +18,14 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
   const amountComments = allComments.length
   return (
     <>
-      <div className={styles.allComments}>{amountComments} {t('comments')}</div>
+      <div className={styles.actionAmount}>
+        <div className={styles.allComments}>
+          {amountComments} {t('like')}
+        </div>
+        <div className={styles.allComments}>
+          {amountComments} {t('comments')}
+        </div>
+      </div>
       <div className={styles.addToPost}>
         <div className={styles.actionOnPost}>
           <FavoriteBorder className={styles.icon} />
@@ -26,7 +33,9 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
         </div>
         <div
           className={styles.actionOnPost}
-          onClick={() => amountComments && setSchowComments((currentValue) => !currentValue)}
+          onClick={() =>
+            amountComments && setSchowComments((currentValue) => !currentValue)
+          }
         >
           <ChatBubbleOutline className={styles.icon} />
           <div className={styles.like}>{t('comments')}</div>

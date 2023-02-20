@@ -31,7 +31,11 @@
   display: flex;
   font-weight: 500;
   font-size: 14px;
-  justify-content: flex-end;
   line-height: 22px;
   opacity: 0.6;
+}
+
+.actionAmount {
+  display: flex;
+  justify-content: space-between;
 }
