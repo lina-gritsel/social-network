@@ -1,7 +1,10 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
+
+import { selectTheme } from '../../store/selectors'
 
 import Modal from '../Modal'
 import Avatar from '../Avatar'
@@ -37,6 +40,7 @@ const CreatePost: FC<CreatePostProps> = ({
   className,
 }) => {
   const { t } = useTranslation()
+  const theme = useSelector(selectTheme)
 
   const {
     onSubmit,
@@ -75,10 +79,10 @@ const CreatePost: FC<CreatePostProps> = ({
         open={isEmojiModalVisible}
         onClose={closeEmojiModal}
         isDialogActions={false}
-        className={editMode ? styles.feeling : ''}
+        className={styles.feeling}
         content={
           <Picker
-            theme="light"
+            theme={theme}
             data={data}
             onEmojiSelect={(e) => onEmojiSelect(e)}
           />
