@@ -1,20 +1,24 @@
 import {
-  CreatePostParams,
-  RegistrationSuccess,
-  LoginStatus,
-  RegistrationUser,
+  User,
   LoginUser,
+  LoginStatus,
+  RegistrationData,
+  CreatePostParams,
+  DeleteUserStatus,
+  ChangePostParams,
+  UsersInfo,
+  ChangeComment,
 } from './types'
 
-const BASE_URL = 'http://localhost:8000/api'
+const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
 
 const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
+const COMMETS_URL = `${POSTS_URL}/comments`
+const WALLPAPER_URL = `${BASE_URL}/wallpaper`
 
-export const createUser = async (
-  user: RegistrationUser,
-): Promise<RegistrationSuccess> => {
+export const createUser = async (user: User): Promise<RegistrationData> => {
   try {
     const data = await fetch(USERS_URL, {
       method: 'POST',
@@ -23,7 +27,8 @@ export const createUser = async (
       },
       body: JSON.stringify(user),
     })
-    return data.status !== 201 ? { success: false } : { success: true }
+    const result = await data.json()
+    return result
   } catch (error) {
     throw new Error(`${error}`)
   }
@@ -38,15 +43,51 @@ export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
       },
       body: JSON.stringify(user),
     })
-    return { status: data.status }
+    const result = await data.json()
+    return { status: data.status, id: result.id }
   } catch (error) {
     throw new Error(`${error}`)
   }
 }
 
-export const getUser = async (id: string): Promise<RegistrationUser> => {
+export const getUser = async (id: string): Promise<RegistrationData> => {
   try {
-    return await (await fetch(`${BASE_URL}/${id}`)).json()
+    return await (await fetch(`${USERS_URL}/${id}`)).json()
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+export const getAllUsers = async (): Promise<UsersInfo> => {
+  try {
+    return await (await fetch(USERS_URL)).json()
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+
+export const updateUser = async (user: User): Promise<User> => {
+  try {
+    const data = await fetch(`${USERS_URL}/${user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+    const result = await data.json()
+    return result
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+
+export const deleteUser = async (id: string): Promise<DeleteUserStatus> => {
+  try {
+    const data = await fetch(`${USERS_URL}/${id}`, {
+      method: 'DELETE',
+    })
+
+    return { status: data.status }
   } catch (error) {
     throw new Error(`${error}`)
   }
@@ -75,5 +116,62 @@ export const getAllPosts = async () => {
     return response.json()
   } catch (error) {
     throw new Error(`${error}`)
+  }
+}
+
+export const changePost = async (content: ChangePostParams, id: string) => {
+  try {
+    await fetch(`${POSTS_URL}/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(content),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getPost = async (id: string) => {
+  try {
+    const response = await fetch(`${POSTS_URL}/${id}`)
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const deletePost = async (id: string) => {
+  try {
+    await fetch(`${POSTS_URL}/${id}`, { method: 'DELETE' })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const createComment = async ({ userId, comment, postId }) => {
+  try {
+    const response = await fetch(`${COMMETS_URL}/${postId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ userId, comment, postId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getWallpapers = async (): Promise<string[]> => {
+  try {
+    const response = await (await fetch(WALLPAPER_URL)).json()
+    return response.data
+  } catch (error) {
+    console.log(error)
   }
 }

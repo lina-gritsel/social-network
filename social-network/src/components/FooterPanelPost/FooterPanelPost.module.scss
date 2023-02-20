@@ -1,0 +1,37 @@
+.addToPost {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 1px solid var(--medium-gray-color);
+  border-bottom: 1px solid var(--medium-gray-color);
+  padding: 10px 0 !important;
+}
+
+.like {
+  color: var(--dark-gray-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.icon {
+  color: var(--dark-gray-color);
+}
+
+.actionOnPost {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.allComments {
+  color: var(--dark-gray-color);
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+  justify-content: flex-end;
+  line-height: 22px;
+  opacity: 0.6;
+}

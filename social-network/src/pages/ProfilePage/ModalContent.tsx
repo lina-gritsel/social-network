@@ -1,38 +1,36 @@
-import {
-  FC,
-  useState,
-  useRef,
-  Dispatch,
-  SetStateAction,
-  MouseEvent,
-} from 'react'
-import { useTranslation } from 'react-i18next'
 import { TextField } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
+import { FC, Dispatch, SetStateAction, MouseEvent } from 'react'
 
 import Button from '../../components/Button'
 
+import { useModalContent } from './hooks'
+
 import styles from './Profile.module.scss'
+import Loader from '../../components/Loader'
 
 interface IModalContent {
   setBgImage: Dispatch<SetStateAction<string>>
   isErrorImg: boolean
+  isLoading: boolean
   setIsErrorImg: Dispatch<SetStateAction<boolean>>
   bgImageArr: string[]
   setBgImageArr: Dispatch<SetStateAction<string[]>>
 }
 
+const DEFAULT_ARR_LENGHT = 9
+
 const ModalContent: FC<IModalContent> = ({
   setBgImage,
   isErrorImg,
+  isLoading,
   setIsErrorImg,
   bgImageArr,
   setBgImageArr,
 }) => {
-  const [isDisabled, setIsDisabled] = useState<boolean>(true)
-
-  const inputRef = useRef<HTMLInputElement>()
   const { t } = useTranslation()
+  const { inputRef, isDisabled, setIsDisabled } = useModalContent()
 
   const handleClickImg = (e: MouseEvent) => {
     setBgImage((e.target as HTMLImageElement).src)
@@ -54,28 +52,38 @@ const ModalContent: FC<IModalContent> = ({
   }
 
   const deleteImg = (e: MouseEvent) => {
-    const index = (e.currentTarget as HTMLSpanElement).id
+    const index = (e.currentTarget as HTMLElement).id
     const indexNumber = parseFloat(index)
-    setBgImageArr((prev) => [...prev.slice(0, indexNumber), ...prev.slice(indexNumber + 1)])
+    setBgImageArr((prev) => [
+      ...prev.slice(0, indexNumber),
+      ...prev.slice(indexNumber + 1),
+    ])
   }
 
   return (
     <div className={styles.modal}>
       <div className={styles.imgContainer}>
-        {bgImageArr.map((img, index) => (
-          <div className={styles.imgItem} key={index}>
-            {index > 9 && (
-              <span id={`${index}`} onClick={(e) => deleteImg(e)}>
-                <CancelIcon className={styles.cancel} fontSize="small" />
-              </span>
-            )}
-            <img
-              src={img}
-              className={styles.img}
-              onClick={(e) => handleClickImg(e)}
-            ></img>
-          </div>
-        ))}
+        {isLoading ? (
+          <Loader className={styles.loader} />
+        ) : (
+          bgImageArr?.map((img, index) => (
+            <div className={styles.imgItem} key={index}>
+              {index > DEFAULT_ARR_LENGHT && (
+                <CancelIcon
+                  className={styles.cancel}
+                  id={index.toString()}
+                  fontSize="small"
+                  onClick={(e) => deleteImg(e)}
+                />
+              )}
+              <img
+                src={img}
+                className={styles.img}
+                onClick={(e) => handleClickImg(e)}
+              ></img>
+            </div>
+          ))
+        )}
       </div>
       <div className={styles.addingImg}>
         <TextField

@@ -1,0 +1,63 @@
+.secureBlock {
+  align-items: center;
+  border-radius: 10px;
+  color: var(--gray-color);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  max-width: 350px;
+  padding: 15px;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--light-gray-color);
+  }
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.title {
+  font: var(--font-text-3);
+  font-weight: 700;
+}
+
+.subtitle {
+  font: var(--font-text-5);
+  max-width: 350px;
+  width: 100%;
+}
+
+.modal {
+  align-items: center;
+  color: var(--gray-color);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.btnBlock {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.deleteBtn {
+  background-color: var(--red-color);
+  font: var(--font-text-5);
+  height: 30px;
+}
+
+.cancelBtn {
+  cursor: pointer;
+  font: var(--font-text-5);
+  height: 30px;
+}

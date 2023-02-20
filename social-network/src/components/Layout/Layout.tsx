@@ -1,18 +1,16 @@
-import { FC, ReactNode } from 'react'
-import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
+import { FC, ReactNode } from 'react'
+import List from '@mui/material/List'
 import Drawer from '@mui/material/Drawer'
-import CssBaseline from '@mui/material/CssBaseline'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import List from '@mui/material/List'
-import Divider from '@mui/material/Divider'
 import { ForumRounded } from '@mui/icons-material'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { PATHS } from '../../router/paths'
 
-import Header from '../Header'
 import Menu from '../Menu'
+import Header from '../Header'
 
 import styles from './Layout.module.scss'
 
@@ -23,6 +21,14 @@ type LayotProps = {
 }
 
 const Layout: FC<LayotProps> = (props) => {
+  const navigate = useNavigate()
+
+  const userId = JSON.parse(localStorage.getItem('userId')) as string
+
+  if (!userId) {
+    navigate(PATHS.REGISTRATION)
+  }
+
   return (
     <Box className={styles.layout}>
       <AppBar
@@ -52,7 +58,7 @@ const Layout: FC<LayotProps> = (props) => {
         anchor="left"
         className={styles.mainMenu}
       >
-        <Link to={PATHS.NEWS} className={styles.mainMenuItem}>
+        <Link to={PATHS.FEED} className={styles.mainMenuItem}>
           <ForumRounded color="primary" className={styles.forum} />
           OurNetwork
         </Link>

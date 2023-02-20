@@ -1,31 +1,79 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, FormLabel, InputAdornment } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
-import AutoStoriesIcon from '@mui/icons-material/AutoStories'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
+import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import AutoStoriesIcon from '@mui/icons-material/AutoStories'
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
+import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined'
+import { FormLabel, InputAdornment, Box, CircularProgress } from '@mui/material'
 
+import Modal from '../../../components/Modal'
 import Input from '../../../components/Input'
+import Button from '../../../components/Button'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
-import InputLanguages from '../../../components/InputLanguages'
 
 import { useSettingsForm } from './hooks'
+import AddAvatarModal from './AddAvatarModal'
 
 import styles from './SettingsForm.module.scss'
+import Avatar from '../../../components/Avatar'
 
 const SettingsForm: FC = () => {
   const { t } = useTranslation()
 
-  const { control, handleSubmit, onCancel, onSubmit, errors } =
-    useSettingsForm()
+  const {
+    img,
+    open,
+    errors,
+    control,
+    userInfo,
+    inputRef,
+    isLoading,
+    onSubmit,
+    onCancel,
+    handleOpen,
+    handleClose,
+    handleSubmit,
+    handleClickAddBtn,
+  } = useSettingsForm()
+
+  if (isLoading || !userInfo) {
+    return (
+      <Box className={styles.loading}>
+        <CircularProgress />
+      </Box>
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        title={t('changeAvatar')}
+        content={
+          <AddAvatarModal
+            errors={errors}
+            control={control}
+            inputRef={inputRef}
+            handleClickAddBtn={handleClickAddBtn}
+          />
+        }
+        isDialogActions={false}
+      />
+      <div className={styles.avatarBlock}>
+        <Avatar
+          imageUrl={img || userInfo?.avatar}
+          className={styles.profileAvatar}
+        />
+        <div className={styles.editAvatar} onClick={handleOpen}>
+          <CloudDownloadOutlinedIcon />
+        </div>
+      </div>
       <div className={styles.block}>
         <div className={styles.labelBlock}>
           <FormLabel className={styles.label}>{t('nickname')}</FormLabel>
@@ -166,15 +214,11 @@ const SettingsForm: FC = () => {
           />
         </div>
       </div>
-      <h2 className={styles.title}>{t('languages')}</h2>
-      <InputLanguages name="language" control={control} />
       <div className={styles.btnBlock}>
-        <Button variant="outlined" onClick={onCancel}>
+        <Button className={styles.cancelBtn} outlined onClick={onCancel}>
           {t('cancel')}
         </Button>
-        <Button variant="contained" type="submit">
-          {t('save')}
-        </Button>
+        <Button type="submit">{t('save')}</Button>
       </div>
     </form>
   )
