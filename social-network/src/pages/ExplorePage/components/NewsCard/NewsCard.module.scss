@@ -7,12 +7,21 @@
 }
 
 .card {
-  width: 100%;
+  background-color: var(--white-color) !important;
   border-radius: 20px !important;
   position: relative;
+  width: 100%;
 
   & a {
     color: var(--blue-color);
     font-weight: 800;
   }
+}
+
+.username span {
+  color: var(--gray-color) !important;
+}
+
+.content {
+  color: var(--gray-color) !important;
 }
