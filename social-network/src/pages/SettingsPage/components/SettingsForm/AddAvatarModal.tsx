@@ -42,7 +42,7 @@ const AddAvatarModal: FC<AddAvatarModalProps> = ({
         }}
         errors={errors}
       />
-      <Button onClick={handleClickAddBtn}>
+      <Button className={styles.addBtn} onClick={handleClickAddBtn}>
         {t('addImg').toLocaleUpperCase()}
       </Button>
     </div>

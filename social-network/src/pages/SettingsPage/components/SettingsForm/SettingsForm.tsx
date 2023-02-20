@@ -51,6 +51,7 @@ const SettingsForm: FC = () => {
         open={visibleAvatarModal}
         onClose={closeAvatarModal}
         title={t('changeAvatar')}
+        className={styles.dialogContent}
         content={
           <AddAvatarModal
             errors={errors}
@@ -166,7 +167,7 @@ const SettingsForm: FC = () => {
         <Button className={styles.cancelBtn} outlined onClick={onCancel}>
           {t('cancel')}
         </Button>
-        <Button type="submit">{t('save')}</Button>
+        <Button className={styles.saveBtn} type="submit">{t('save')}</Button>
       </div>
     </form>
   )

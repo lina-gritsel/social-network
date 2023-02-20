@@ -2,7 +2,9 @@
 
 :root[data-theme='light'] {
   --white-color: #fff;
+  --light-color: #fff;
   --light-gray-color: #f9fafb;
+  --light-bone-color: #f9fafb;
   --medium-gray-color: #b8bec9;
   --gray-color: #606d85;
   --dark-gray-color: #4e5d78;
@@ -37,21 +39,29 @@
 }
 
 :root[data-theme='dark'] {
-  --white-color: #191c21;
-  --light-gray-color: #212833;
-  --medium-gray-color: #b8bec9;
   --gray-color: #fff;
-  --dark-gray-color: #4e5d78;
-  --shadow-dark-color: rgba(0, 0, 0, 0.2);
+  --light-color: #fff;
   --black-color: #fff;
+  --medium-gray-color: #1d222a;
+  --dark-gray-color: #4e5d78;
+  --light-bone-color: #4e5d78;
+  --shadow-dark-color: rgba(0, 0, 0, 0.2);
+  --light-gray-color: #212833;
+  --white-color: #191c21;
   --red-color: #ff5630;
   --yellow-color: #ffab00;
   --green-color: #38cb89;
   --blue-color: #377dff;
+  --gradient-blue-color: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8)
+    ),
+    #377dff;
 
   --border-primary: 1px solid #c4c4c4;
 
-  --font-family-roboto: 'Roboto', sans-serif;
+  --font-family-roboto: 'Roboto', normal;
 
   --font-h1: 600 64px var(--font-family-roboto);
   --font-h2: 600 52px var(--font-family-roboto);

@@ -20,11 +20,5 @@
 }
 
 .menuListActive {
-  font-weight: 700;
-
-  &::after {
-    // content: '›';
-    font-size: 32px;
-    height: 55px;
-  }
+  font-weight: 800;
 }

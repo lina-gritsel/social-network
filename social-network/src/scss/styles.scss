@@ -17,6 +17,10 @@
   }
 }
 
+body {
+  background-color: var(--white-color);
+}
+
 a {
   color: var(--dark-gray-color);
   text-decoration: none;
@@ -25,7 +29,7 @@ a {
 .active {
   background-color: var(--dark-gray-color);
   border-radius: 10px;
-  color: var(--white-color);
+  color: var(--light-color);
 }
 
 .activeBtn {
@@ -36,4 +40,13 @@ a {
 
 fieldset {
   border-radius: 10px !important;
+  border: var(--border-primary) !important;
+}
+
+svg {
+  color: var(--gray-color) !important;
+}
+
+input {
+  color: var(--gray-color) !important;
 }

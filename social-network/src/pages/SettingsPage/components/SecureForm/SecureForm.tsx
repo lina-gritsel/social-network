@@ -23,6 +23,7 @@ const SecureForm = () => {
       <Modal
         open={visibleDeleteAccountModal}
         onClose={closeDeleteAccountModal}
+        className={styles.dialogContent}
         content={
           <DeleteAccountModal
             deleteAccount={deleteAccount}

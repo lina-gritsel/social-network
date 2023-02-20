@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { PATHS } from '../../router/paths'
 import { getUserInfoSelector } from '../../store/selectors'
+
 import Avatar from '../Avatar'
 
 import styles from './Header.module.scss'

@@ -31,9 +31,16 @@ const Modal: FC<ModalProps> = ({
   isDialogActions = true,
 }) => {
   return (
-    <Dialog ref={ref} className={className} open={open} onClose={onClose}>
+    <Dialog
+      PaperProps={{
+        style: { borderRadius: 0 },
+      }}
+      ref={ref}
+      open={open}
+      onClose={onClose}
+    >
       {title && <DialogTitle className={styles.title}>{title}</DialogTitle>}
-      <DialogContent>{content}</DialogContent>
+      <DialogContent className={className}>{content}</DialogContent>
       {isDialogActions && (
         <DialogActions>
           <Button onClick={onConfirm} color="primary">
