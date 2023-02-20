@@ -78,7 +78,7 @@ const PostCard: FC<News> = ({
         )}
         <div className={styles.wrapperCardHeader}>
           <div className={styles.wrapperCard}>
-            <Avatar className={styles.cardAvatar} imageUrl={avatar} />
+            <Avatar className={styles.cardAvatar} imageUrl={author?.avatar} />
             <div>
               <div className={styles.author}>{author?.name}</div>
               <div className={styles.createAt}>{createdPostTime}</div>
