@@ -48,6 +48,7 @@ const ProfilePage: FC = () => {
         onConfirm={() => setIsOpen(false)}
         title={t('backgroundTitle')}
         isDialogActions={false}
+        className={styles.dialogContent}
         content={
           <ModalContent
             setBgImage={setBgImage}

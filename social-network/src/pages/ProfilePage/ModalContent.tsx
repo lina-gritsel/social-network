@@ -87,14 +87,12 @@ const ModalContent: FC<IModalContent> = ({
       </div>
       <div className={styles.addingImg}>
         <TextField
-          id="outlined-basic"
-          label={t('addImgLabel')}
-          variant="standard"
+          placeholder={t('addImgLabel')}
           className={styles.imgInput}
           inputRef={inputRef}
           onChange={() => onChangeInput()}
         />
-        <Button onClick={handleClickBtn} isDisabled={isDisabled}>
+        <Button className={isDisabled ? styles.addImgBtn : styles.addImgActiveBtn} onClick={handleClickBtn} isDisabled={isDisabled}>
           {t('addImg').toLocaleUpperCase()}
         </Button>
       </div>

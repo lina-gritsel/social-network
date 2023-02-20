@@ -65,7 +65,12 @@
 }
 
 .createPost {
-  color: var(--gray-color) !important;
+  height: 35px;
+  font: var(--font-text-4);
+}
+
+.createPostActive {
+  color: var(--light-color);
   height: 35px;
   font: var(--font-text-4);
 }

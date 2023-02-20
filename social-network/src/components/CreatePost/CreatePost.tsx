@@ -99,7 +99,15 @@ const CreatePost: FC<CreatePostProps> = ({
           openAddImageModal={openAddImageModal}
           openEmojiModal={openEmojiModal}
         />
-        <Button className={styles.createPost} isDisabled={!contentInput && !currentImg} onClick={onSubmit}>
+        <Button
+          className={
+            !contentInput && !currentImg
+              ? styles.createPost
+              : styles.createPostActive
+          }
+          isDisabled={!contentInput && !currentImg}
+          onClick={onSubmit}
+        >
           {t('post')}
         </Button>
       </div>
