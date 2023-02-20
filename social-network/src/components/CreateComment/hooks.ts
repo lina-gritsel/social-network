@@ -18,7 +18,6 @@ export const useCreateComment = ({
 
   const { data, isLoading } = useFetchCertainsComments(postId)
   const [comment, setComment] = useState<string>('')
-
   const [allComments, setAllComments] = useState([])
 
   const sortedComments = allComments.sort((a, b) =>

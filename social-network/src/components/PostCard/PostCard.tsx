@@ -1,29 +1,18 @@
 import { FC, useState, useEffect } from 'react'
-import { styled } from '@mui/material/styles'
 import { Card, CardMedia, CardContent, Typography } from '@mui/material'
-import {
-  MoreVert,
-  PublishedWithChanges,
-  DeleteForever,
-} from '@mui/icons-material'
-import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import { useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
+import { MoreVert } from '@mui/icons-material'
+import IconButton from '@mui/material/IconButton'
 import classNames from 'classnames'
 import moment from 'moment'
 
-import { deletePost, getPost, getUser } from '../../api/requests'
-import { getUserInfoSelector } from '../../store/selectors'
-import { useOnClickOutside } from '../../hooks'
+import { getUser } from '../../api/requests'
 import { User } from '../../api'
 
 import { useCreateComment } from '../CreateComment/hooks'
-import CreateComment from '../CreateComment'
 import FooterPanelPost from '../FooterPanelPost'
+import CreateComment from '../CreateComment'
 import CommentsList from '../CommentsList'
-import CreatePost from '../CreatePost'
 import Avatar from '../Avatar'
-import Modal from '../Modal'
 
 import SettingsModal from './SettingsModal'
 
@@ -31,21 +20,6 @@ import styles from './PostCard.module.scss'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props
-  return <IconButton {...other} />
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}))
 
 export interface News {
   userId: string
@@ -148,9 +122,11 @@ const PostCard: FC<News> = ({
             </span>
           </Typography>
         </CardContent>
-        <FooterPanelPost setSchowComments={setSchowComments} allComments={allComments}/>
+        <FooterPanelPost
+          setSchowComments={setSchowComments}
+          allComments={allComments}
+        />
         <CreateComment
-          avatarImg={avatar}
           onSubmit={onSubmit}
           onChangeComment={onChangeComment}
           comment={comment}

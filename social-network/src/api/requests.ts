@@ -7,7 +7,7 @@ import {
   DeleteUserStatus,
   ChangePostParams,
   UsersInfo,
-  ChangeComment,
+  CreateComment,
 } from './types'
 
 const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
@@ -151,7 +151,11 @@ export const deletePost = async (id: string) => {
   }
 }
 
-export const createComment = async ({ userId, comment, postId }) => {
+export const createComment = async ({
+  userId,
+  comment,
+  postId,
+}: CreateComment) => {
   try {
     const response = await fetch(`${COMMETS_URL}/${postId}`, {
       method: 'PATCH',

@@ -55,7 +55,7 @@ export interface ChangePostParams {
   image: string
 }
 
-export interface ChangeComment {
+export interface CreateComment {
   postId: string
   comment: string
   userId: string

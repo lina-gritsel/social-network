@@ -1,9 +1,18 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { useAppDispatch } from '../store'
+import { fetchUser } from '../store/actions'
 
 import { routes } from './routes'
 
 export const Router: FC = () => {
+  const dispatch = useAppDispatch()
+
+  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+
+  useEffect(() => {
+    dispatch(fetchUser(userId))
+  }, [dispatch, userId])
 
   return (
     <BrowserRouter>
