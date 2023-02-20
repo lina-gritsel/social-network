@@ -83,5 +83,6 @@
   "like":"喜欢",
   "comments":"评论",
   "theme": "主題",
-  "themeSubtitle": "看看不同主題的應用程序."
+  "themeSubtitle": "看看不同主題的應用程序.",
+  "noAccount": "你沒有賬號？"
 }

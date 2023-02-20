@@ -43,6 +43,7 @@
 }
 
 .account {
+  color: var(--gray-color);
   text-align: center;
 }
 
@@ -53,6 +54,7 @@
 .inputGender {
   border: var(--border-primary);
   border-radius: 10px;
+  color: var(--gray-color);
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -80,6 +82,7 @@ input[type='date'] {
 }
 
 .singInBtn {
+  color: var(--light-color);
   width: 100%;
 }
 

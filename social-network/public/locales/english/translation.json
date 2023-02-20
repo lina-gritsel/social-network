@@ -83,5 +83,6 @@
   "themeSubtitle": "Take a look at the app with a different theme.",
   "comment": "Write a comment...",
   "like":"Like",
-  "comments":"Comments"
+  "comments":"Comments",
+  "noAccount": "You haven't any account?"
 }
