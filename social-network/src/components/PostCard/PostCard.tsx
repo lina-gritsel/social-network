@@ -1,11 +1,7 @@
 import { FC, useState, useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import { Card, CardMedia, CardContent, Typography } from '@mui/material'
-import {
-  MoreVert,
-  PublishedWithChanges,
-  DeleteForever,
-} from '@mui/icons-material'
+import { MoreVert } from '@mui/icons-material'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -150,7 +146,10 @@ const PostCard: FC<News> = ({
             </span>
           </Typography>
         </CardContent>
-        <FooterPanelPost setSchowComments={setSchowComments} allComments={allComments}/>
+        <FooterPanelPost
+          setSchowComments={setSchowComments}
+          allComments={allComments}
+        />
         <CreateComment
           avatarImg={userInfo?.avatar}
           onSubmit={onSubmit}

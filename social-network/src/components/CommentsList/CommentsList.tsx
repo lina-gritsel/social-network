@@ -1,10 +1,10 @@
 import { FC } from 'react'
+import classNames from 'classnames'
 
 import Comment from '../Comment'
+import Loader from '../Loader'
 
 import styles from './CommentsList.module.scss'
-import classNames from 'classnames'
-import Loader from '../Loader'
 
 interface CommentsListProps {
   showComments: boolean
