@@ -7,16 +7,16 @@ import styles from './Comment.module.scss'
 
 interface ExistCommentProps {
   comment: string
-  createdAt: number
+  createAt: number
   author: any
 }
 
 const ExistComment: FC<ExistCommentProps> = ({
   comment,
-  createdAt,
+  createAt,
   author,
 }) => {
-  const createdCommentTime = moment(createdAt).fromNow()
+  const createdCommentTime = moment(createAt).fromNow()
   const [authorComment, setAuthorComment] = useState(null)
 
   useEffect(() => {

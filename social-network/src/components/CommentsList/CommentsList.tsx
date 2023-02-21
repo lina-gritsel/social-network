@@ -22,13 +22,13 @@ const CommentsList: FC<CommentsListProps> = ({
       {isLoading ? (
         <Loader />
       ) : (
-        allComments.map(({ comment, user, createdAt }, index) => {
+        allComments.map(({ comment, user, createAt }, index) => {
           return (
             <Comment
               key={index}
               author={user}
               comment={comment}
-              createdAt={createdAt}
+              createAt={createAt}
             />
           )
         })
