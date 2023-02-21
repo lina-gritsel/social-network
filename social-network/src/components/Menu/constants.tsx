@@ -1,9 +1,10 @@
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import {
-  PersonOutline,
-  ExploreOutlined,
-  PeopleOutline,
-  SettingsOutlined,
   GridView,
+  PersonOutline,
+  PeopleOutline,
+  ExploreOutlined,
+  SettingsOutlined,
 } from '@mui/icons-material'
 
 import { PATHS } from '../../router/paths'
@@ -33,5 +34,10 @@ export const NAVIGATION_MENU = [
     to: PATHS.ABOUT,
     label: 'about',
     icon: <PeopleOutline />,
+  },
+  {
+    to: PATHS.LOGOUT,
+    label: 'logout',
+    icon: <LogoutOutlinedIcon />,
   },
 ]

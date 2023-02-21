@@ -1,14 +1,15 @@
 import { FC } from 'react'
 
-import RegistrationPage from '../pages/RegistrationPage'
-import ProfilePage from '../pages/ProfilePage'
-import FeedPage from '../pages/FeedPage'
-import LoginPage from '../pages/LoginPage'
-import SettingsPage from '../pages/SettingsPage'
+import { PATHS } from './paths'
 import Page404 from '../pages/404Page'
 import About from '../pages/AboutPage'
+import FeedPage from '../pages/FeedPage'
+import LoginPage from '../pages/LoginPage'
+import LogoutPage from '../pages/LogoutPage'
+import ProfilePage from '../pages/ProfilePage'
 import ExplorePage from '../pages/ExplorePage'
-import { PATHS } from './paths'
+import SettingsPage from '../pages/SettingsPage'
+import RegistrationPage from '../pages/RegistrationPage'
 
 interface Routes {
   path: string
@@ -23,6 +24,10 @@ export const routes: Routes[] = [
   {
     path: PATHS.LOGIN,
     component: LoginPage,
+  },
+  {
+    path: PATHS.LOGOUT,
+    component: LogoutPage,
   },
   {
     path: `${PATHS.PROFILE}/:id`,
