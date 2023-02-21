@@ -17,6 +17,7 @@ const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
 const COMMETS_URL = `${POSTS_URL}/comments`
+const LIKES_URL = `${POSTS_URL}/likes`
 const WALLPAPER_URL = `${BASE_URL}/wallpaper`
 
 export const createUser = async (user: User): Promise<RegistrationData> => {
@@ -157,6 +158,21 @@ export const createComment = async ({ userId, comment, postId }) => {
     const response = await fetch(`${COMMETS_URL}/${postId}`, {
       method: 'PATCH',
       body: JSON.stringify({ userId, comment, postId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const changeLike = async (postId, userId) => {
+  try {
+    const response = await fetch(`${LIKES_URL}/${postId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ userId }),
       headers: {
         'Content-Type': 'application/json',
       },
