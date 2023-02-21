@@ -5,12 +5,13 @@ import classNames from 'classnames'
 import styles from './Avatar.module.scss'
 
 interface AvatarProps {
-  imageUrl: string
+  imageUrl?: string
   className?: string
   onClick?: () => void
+  title?: string
 }
 
-const Avatar: FC<AvatarProps> = ({ imageUrl, className, onClick }) => {
+const Avatar: FC<AvatarProps> = ({ imageUrl, className, onClick, title }) => {
   return (
     <AvatarMui
       src={imageUrl}
@@ -18,7 +19,9 @@ const Avatar: FC<AvatarProps> = ({ imageUrl, className, onClick }) => {
       aria-label="recipe"
       className={classNames(styles.root, className)}
       alt="avatar"
-    />
+    >
+      {title}
+    </AvatarMui>
   )
 }
 

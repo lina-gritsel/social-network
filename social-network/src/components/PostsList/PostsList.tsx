@@ -3,7 +3,7 @@ import { Box, CircularProgress } from '@mui/material'
 
 import PostCard, { News } from '../PostCard/PostCard'
 import { getAllPosts } from '../../api/requests'
-import { sortNews } from '../../utils/utils'
+import { sortNews } from '../../utils'
 
 import styles from './PostsList.module.scss'
 

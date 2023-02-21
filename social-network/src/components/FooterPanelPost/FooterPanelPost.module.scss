@@ -43,3 +43,28 @@
   display: flex;
   justify-content: space-between;
 }
+
+.avatarWrapper {
+  display: flex;
+}
+
+.likeAvatar {
+  width: 25px !important;
+  height: 25px !important;
+
+  &:nth-child(2) {
+    position: relative;
+    right: 5px;
+  }
+
+  &:nth-child(3) {
+    position: relative;
+    right: 10px;
+  }
+
+  &:nth-child(4) {
+    position: relative;
+    right: 15px;
+    font-size: 16px;
+  }
+}

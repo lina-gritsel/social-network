@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import { useChangeLike } from './hooks'
 
 import styles from './FooterPanelPost.module.scss'
+import Avatar from '../Avatar'
 
 interface FooterPanelPostProps {
   postId: string
@@ -18,15 +19,30 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
   setSchowComments,
   allComments,
 }) => {
-  const { isLike, amountLikes, likeOnclick } = useChangeLike({ postId })
+  const { isLike, likeOnclick, avatarArr, amountMoreLikes } =
+    useChangeLike({
+      postId,
+    })
   const { t } = useTranslation()
   const amountComments = allComments.length
 
   return (
     <>
       <div className={styles.actionAmount}>
-        <div className={styles.allComments}>
-          {amountLikes} {t('like')}
+        <div className={styles.avatarWrapper}>
+          {avatarArr.map((avatar, index) => (
+            <Avatar
+              key={index}
+              className={styles.likeAvatar}
+              imageUrl={avatar}
+            />
+          ))}
+          {amountMoreLikes && (
+            <Avatar
+              className={styles.likeAvatar}
+              title={`+${amountMoreLikes}`}
+            />
+          )}
         </div>
         <div className={styles.allComments}>
           {amountComments} {t('comments')}
@@ -34,7 +50,9 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
       </div>
       <div className={styles.addToPost}>
         <div className={styles.actionOnPost} onClick={likeOnclick}>
-          <Favorite className={classNames(styles.icon, isLike && styles.isLike)} />
+          <Favorite
+            className={classNames(styles.icon, isLike && styles.isLike)}
+          />
           <div className={classNames(styles.like, isLike && styles.isLike)}>
             {t('like')}
           </div>

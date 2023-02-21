@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Card } from '@mui/material'
 import moment from 'moment'
 
-import { getRandomInt } from '../../utils/utils'
+import { getRandomInt } from '../../utils'
 import { User } from '../../api'
 
 import { FIELD } from './constants'
