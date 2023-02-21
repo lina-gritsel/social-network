@@ -2,7 +2,6 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Button from '../../components/Button'
-import Layout from '../../components/Layout'
 
 import { useLogoutPage } from './hooks'
 
@@ -13,7 +12,6 @@ const LogoutPage: FC = () => {
   const { onLogout, onCancel } = useLogoutPage()
 
   return (
-    <Layout>
       <div className={styles.wrapper}>
         <div className={styles.layout}>
           <p className={styles.title}>{t('logoutTitle')}</p>
@@ -27,7 +25,6 @@ const LogoutPage: FC = () => {
           </div>
         </div>
       </div>
-    </Layout>
   )
 }
 
