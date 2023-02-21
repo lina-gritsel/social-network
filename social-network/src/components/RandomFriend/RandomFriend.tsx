@@ -5,11 +5,12 @@ import moment from 'moment'
 
 import { getRandomInt } from '../../utils/utils'
 import { User } from '../../api'
+
+import { FIELD } from './constants'
 import Avatar from '../Avatar'
 import Button from '../Button'
 
 import styles from './RandomFriend.module.scss'
-import { FIELD } from './constants'
 
 interface RandomFriend {
   allUsers: User[]
@@ -86,7 +87,7 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
               <Button className={styles.ignorFriends} outlined>
                 {t('ignore')}
               </Button>
-              <Button>{t('follow')}</Button>
+              <Button className={styles.followFriends}>{t('follow')}</Button>
             </div>
           </>
         )}

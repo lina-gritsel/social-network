@@ -26,10 +26,10 @@ const CommentsList: FC<CommentsListProps> = ({
           return (
             <Comment
               key={index}
-              userName={user.name}
+              userName={user?.name}
               comment={comment}
               createdAt={createdAt}
-              avatarAuthorComment={user.avatar}
+              avatarAuthorComment={user?.avatar}
             />
           )
         })
