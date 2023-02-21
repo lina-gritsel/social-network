@@ -1,12 +1,12 @@
 import {
   User,
+  UsersInfo,
   LoginUser,
-  LoginStatus,
+  LoginData,
   RegistrationData,
   CreatePostParams,
   DeleteUserStatus,
   ChangePostParams,
-  UsersInfo,
   CreateComment,
 } from './types'
 
@@ -34,7 +34,7 @@ export const createUser = async (user: User): Promise<RegistrationData> => {
   }
 }
 
-export const loginUser = async (user: LoginUser): Promise<LoginStatus> => {
+export const loginUser = async (user: LoginUser): Promise<LoginData> => {
   try {
     const data = await fetch(LOGIN_URL, {
       method: 'POST',
@@ -129,7 +129,7 @@ export const changePost = async (content: ChangePostParams, id: string) => {
       },
     })
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
 
@@ -139,7 +139,7 @@ export const getPost = async (id: string) => {
 
     return response.json()
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
 
@@ -147,7 +147,7 @@ export const deletePost = async (id: string) => {
   try {
     await fetch(`${POSTS_URL}/${id}`, { method: 'DELETE' })
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
 
@@ -167,7 +167,7 @@ export const createComment = async ({
 
     return response.json()
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }
 
@@ -176,6 +176,6 @@ export const getWallpapers = async (): Promise<string[]> => {
     const response = await (await fetch(WALLPAPER_URL)).json()
     return response.data
   } catch (error) {
-    console.log(error)
+    throw new Error(`${error}`)
   }
 }

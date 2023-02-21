@@ -1,14 +1,17 @@
 import { FC } from 'react'
+import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { IconButton, InputAdornment } from '@mui/material'
 import { AccountCircleOutlined } from '@mui/icons-material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { IconButton, InputAdornment } from '@mui/material'
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 
+import { PATHS } from '../../../router/paths'
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import InputPassword from '../../../components/InputPassword'
+import { adornmentInputProps } from '../../SettingsPage/components/SettingsForm/SettingsForm'
 
 import { useLoginForm } from './hooks'
 
@@ -35,13 +38,7 @@ const LoginForm: FC = () => {
         name="name"
         control={control}
         placeholder={t('nickname')}
-        inputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <AccountCircleOutlined />
-            </InputAdornment>
-          ),
-        }}
+        inputProps={adornmentInputProps({ icon: <AccountCircleOutlined /> })}
         errors={errors}
       />
       <InputPassword
@@ -79,6 +76,12 @@ const LoginForm: FC = () => {
       <Button className={styles.logInBtn} type="submit">
         {t('logIn')}
       </Button>
+      <div className={styles.block}>
+        <p className={styles.account}>{t('noAccount')}</p>
+        <NavLink to={PATHS.REGISTRATION}>
+          <div className={styles.link}>{t('signUp')}</div>
+        </NavLink>
+      </div>
     </form>
   )
 }

@@ -15,6 +15,7 @@ interface InputProps {
   control: Control<any>
   inputRef?: MutableRefObject<HTMLInputElement>
   errors?: FieldErrors<FormValues>
+  className?: string
 }
 
 const Input: FC<InputProps> = ({
@@ -25,6 +26,7 @@ const Input: FC<InputProps> = ({
   control,
   errors,
   inputRef,
+  className,
 }) => {
   return (
     <Controller
@@ -32,6 +34,7 @@ const Input: FC<InputProps> = ({
       control={control}
       render={({ field: { onChange, value } }) => (
         <TextField
+          className={className}
           inputRef={inputRef}
           onChange={onChange}
           value={value ?? ''}

@@ -10,14 +10,10 @@
 }
 
 .like {
-  color: var(--dark-gray-color);
+  color: var(--gray-color);
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
-}
-
-.icon {
-  color: var(--dark-gray-color);
 }
 
 .actionOnPost {
@@ -27,7 +23,7 @@
 }
 
 .allComments {
-  color: var(--dark-gray-color);
+  color: var(--gray-color);
   display: flex;
   font-weight: 500;
   font-size: 14px;

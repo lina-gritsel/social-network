@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FavoriteBorder, ChatBubbleOutline } from '@mui/icons-material'
 
 import styles from './FooterPanelPost.module.scss'
-import { useTranslation } from 'react-i18next'
 
 interface FooterPanelPostProps {
   setSchowComments: (value) => void
@@ -14,8 +14,8 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
   allComments,
 }) => {
   const { t } = useTranslation()
-
   const amountComments = allComments.length
+
   return (
     <>
       <div className={styles.allComments}>{amountComments} {t('comments')}</div>

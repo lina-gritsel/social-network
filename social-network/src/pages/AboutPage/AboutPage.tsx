@@ -18,15 +18,15 @@ const AboutPage: FC = () => {
       <div className={styles.container}>
         <div className={styles.authors}>
           {t('authors')}
-          <Link to={GITHUB_LINKS.PASHA} target="_blank">
+          <Link className={styles.link} to={GITHUB_LINKS.PASHA} target="_blank">
             Pavel Shchuka
           </Link>
           <div className={styles.line}></div>
-          <Link to={GITHUB_LINKS.LINA} target="_blank">
+          <Link className={styles.link} to={GITHUB_LINKS.LINA} target="_blank">
             Anhelina Gritsel
           </Link>
           <div className={styles.line}></div>
-          <Link to={GITHUB_LINKS.ALINA} target="_blank">
+          <Link className={styles.link} to={GITHUB_LINKS.ALINA} target="_blank">
             Alina Maksimovich
           </Link>
         </div>

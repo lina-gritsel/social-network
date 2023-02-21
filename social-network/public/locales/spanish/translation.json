@@ -79,7 +79,10 @@
   "addMessage": "¡Tu imagen ha sido añadida!",
   "change": "Cambio",
   "delete": "Eliminar",
+  "theme": "Tema",
+  "themeSubtitle": "Echa un vistazo a la aplicación con un tema diferente.",
   "comment": "Escribir un comentario...",
   "like":"Como",
-  "comments":"Comentarios"
+  "comments":"Comentarios",
+  "noAccount": "No tienes ninguna cuenta?"
 }

@@ -28,6 +28,7 @@ const FeedPage: FC = () => {
               name={userInfo?.name}
               userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
+              className={styles.postInput}
             />
             <PostsList isAllPosts={isAllPosts} />
           </div>

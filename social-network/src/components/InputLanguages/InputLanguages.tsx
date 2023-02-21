@@ -17,7 +17,7 @@ const InputLanguages: FC = () => {
   return (
     <Box className={styles.box}>
       <FormControl fullWidth>
-        <Select value={actualLanguage}>
+        <Select className={styles.select} value={actualLanguage}>
           {Object.keys(languages).map((lng) => (
             <MenuItem value={lng} key={lng} onClick={() => changeLanguage(lng)}>
               {languages[lng].nativeName}

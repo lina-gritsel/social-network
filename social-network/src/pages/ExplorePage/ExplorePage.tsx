@@ -14,13 +14,15 @@ const ExplorePage: FC = () => {
 
   return (
     <Layout>
-      <div className={styles.container}>
-        <TabsCategories category={category} onChange={onChangeCategory} />
-        {isLoading ? (
-          <Loader className={styles.loading} />
-        ) : (
-          <NewsList articles={articles} />
-        )}
+      <div className={styles.layout}>
+        <div className={styles.container}>
+          <TabsCategories category={category} onChange={onChangeCategory} />
+          {isLoading ? (
+            <Loader className={styles.loading} />
+          ) : (
+            <NewsList articles={articles} />
+          )}
+        </div>
       </div>
     </Layout>
   )

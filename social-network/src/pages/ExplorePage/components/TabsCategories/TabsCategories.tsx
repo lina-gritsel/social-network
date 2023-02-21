@@ -1,11 +1,12 @@
 import { FC } from 'react'
-import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
 
 import Button from '../../../../components/Button'
 
-import styles from './TabsCategories.module.scss'
 import { categories } from './constants'
+
+import styles from './TabsCategories.module.scss'
 
 interface TabsCategoriesProps {
   onChange: (value: string) => void
