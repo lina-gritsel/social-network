@@ -22,7 +22,7 @@ export const useCreateComment = ({
   const [allComments, setAllComments] = useState([])
 
   const sortedComments = allComments.sort((a, b) =>
-    sortNews(a.createdAt, b.createdAt),
+    sortNews(a.createAt, b.createAt),
   )
 
   useEffect(() => {
