@@ -48,6 +48,7 @@ const ProfilePage: FC = () => {
         onConfirm={() => setIsOpen(false)}
         title={t('backgroundTitle')}
         isDialogActions={false}
+        className={styles.dialogContent}
         content={
           <ModalContent
             setBgImage={setBgImage}
@@ -128,6 +129,7 @@ const ProfilePage: FC = () => {
               userId={userInfo?.id}
               avatarImg={userInfo?.avatar}
               setIsAllPosts={setIsAllPosts}
+              className={styles.postInput}
             />
             <NewsList
               isAllPosts={isAllPosts}

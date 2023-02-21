@@ -80,6 +80,9 @@
   "change": "परिवर्तन",
   "delete": "हटाएं",
   "comment": "एक टिप्पणी लिखें...",
-  "like":"पसंद",
-  "comments":"comments"
+  "like": "पसंद",
+  "comments": "comments",
+  "theme": "थीम",
+  "themeSubtitle": "ऐप को एक अलग थीम के साथ देखें.",
+  "noAccount": "आपका कोई खाता नहीं है?"
 }

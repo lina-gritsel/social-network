@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { fetchUser } from '../../../store/actions'
-import { useAppDispatch } from '../../../store'
 
+import { useAppDispatch } from '../../../store'
 import { getAllUsers, User } from '../../../api'
+import { fetchUser } from '../../../store/actions'
 
 type UseFetchAllUsers = () => {
   isLoading: boolean

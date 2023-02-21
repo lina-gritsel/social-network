@@ -1,9 +1,8 @@
 export const categories = [
-    'general',
-    'sport',
-    'health',
-    'business',
-    'science',
-    'technology',
-  ]
-  
+  'sport',
+  'health',
+  'general',
+  'science',
+  'business',
+  'technology',
+]

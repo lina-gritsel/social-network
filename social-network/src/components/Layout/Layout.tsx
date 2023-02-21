@@ -52,6 +52,7 @@ const Layout: FC<LayotProps> = (props) => {
           },
           '& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
             borderRight: 0,
+            backgroundColor: 'var(--white-color)',
           },
         }}
         variant="permanent"
@@ -59,7 +60,7 @@ const Layout: FC<LayotProps> = (props) => {
         className={styles.mainMenu}
       >
         <Link to={PATHS.FEED} className={styles.mainMenuItem}>
-          <ForumRounded color="primary" className={styles.forum} />
+          <ForumRounded className={styles.forum} />
           OurNetwork
         </Link>
         <List>

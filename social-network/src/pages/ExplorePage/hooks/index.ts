@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import { fetchNewsByCategory, NewsInfo } from '../../../requests/news'
 
 type UseFetchNews = (category: string) => {

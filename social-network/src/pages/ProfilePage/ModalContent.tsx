@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
 import { FC, Dispatch, SetStateAction, MouseEvent } from 'react'
 
+import Loader from '../../components/Loader'
 import Button from '../../components/Button'
 
 import { useModalContent } from './hooks'
 
 import styles from './Profile.module.scss'
-import Loader from '../../components/Loader'
 
 interface IModalContent {
   setBgImage: Dispatch<SetStateAction<string>>
@@ -87,14 +87,12 @@ const ModalContent: FC<IModalContent> = ({
       </div>
       <div className={styles.addingImg}>
         <TextField
-          id="outlined-basic"
-          label={t('addImgLabel')}
-          variant="standard"
+          placeholder={t('addImgLabel')}
           className={styles.imgInput}
           inputRef={inputRef}
           onChange={() => onChangeInput()}
         />
-        <Button onClick={handleClickBtn} isDisabled={isDisabled}>
+        <Button className={isDisabled ? styles.addImgBtn : styles.addImgActiveBtn} onClick={handleClickBtn} isDisabled={isDisabled}>
           {t('addImg').toLocaleUpperCase()}
         </Button>
       </div>

@@ -1,16 +1,18 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
-import ModalContent from './components/ModalContent'
-import CreatePostInput from './components/CreatePostInput'
-import { useAddImageModal, useCreatePost, useEmojiModal } from './hooks'
-import FooterPanel from './components/FooterPanel'
+import { selectTheme } from '../../store/selectors'
 
+import Modal from '../Modal'
 import Avatar from '../Avatar'
 import Button from '../Button'
-import Modal from '../Modal'
+import ModalContent from './components/ModalContent'
+import FooterPanel from './components/FooterPanel'
+import CreatePostInput from './components/CreatePostInput'
+import { useAddImageModal, useCreatePost, useEmojiModal } from './hooks'
 
 import styles from './CreatePost.module.scss'
 
@@ -38,6 +40,7 @@ const CreatePost: FC<CreatePostProps> = ({
   className,
 }) => {
   const { t } = useTranslation()
+  const theme = useSelector(selectTheme)
 
   const {
     onSubmit,
@@ -66,7 +69,7 @@ const CreatePost: FC<CreatePostProps> = ({
         open={isAddImageModalVisible}
         onClose={closeAddImageModal}
         title={t('addPostImg')}
-        className={editMode ? styles.photo : ''}
+        className={styles.photo}
         isDialogActions={false}
         content={
           <ModalContent currentImg={currentImg} setCurrentImg={setCurrentImg} />
@@ -76,10 +79,10 @@ const CreatePost: FC<CreatePostProps> = ({
         open={isEmojiModalVisible}
         onClose={closeEmojiModal}
         isDialogActions={false}
-        className={editMode ? styles.feeling : ''}
+        className={styles.feeling}
         content={
           <Picker
-            theme="light"
+            theme={theme}
             data={data}
             onEmojiSelect={(e) => onEmojiSelect(e)}
           />
@@ -100,7 +103,15 @@ const CreatePost: FC<CreatePostProps> = ({
           openAddImageModal={openAddImageModal}
           openEmojiModal={openEmojiModal}
         />
-        <Button isDisabled={!contentInput && !currentImg} onClick={onSubmit}>
+        <Button
+          className={
+            !contentInput && !currentImg
+              ? styles.createPost
+              : styles.createPostActive
+          }
+          isDisabled={!contentInput && !currentImg}
+          onClick={onSubmit}
+        >
           {t('post')}
         </Button>
       </div>

@@ -1,5 +1,6 @@
 .form {
   align-items: center;
+  background: var(--light-gray-color);
   border: var(--border-primary);
   border-radius: 10px;
   display: flex;
@@ -19,11 +20,51 @@
 }
 
 .logInBtn {
+  color: var(--light-color);
   width: 100%;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.link {
+  color: var(--blue-color);
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+
+  &:before {
+    background-color: var(--blue-color);
+    bottom: -10%;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transition: width 0.5s;
+    width: 0;
+  }
+
+  &:hover:before {
+    width: 100%;
+  }
+}
+
+.account {
+  color: var(--gray-color);
+  text-align: center;
 }
 
 @media (max-width: 620px) {
   .form {
     max-width: 300px;
+  }
+
+  .block {
+    flex-direction: column;
   }
 }

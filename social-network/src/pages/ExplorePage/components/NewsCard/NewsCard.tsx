@@ -40,9 +40,9 @@ export const NewsCard: FC<NewsCardProps> = ({
         className={styles.image}
         onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMG)}
       />
-      <CardHeader title={username} subheader={createdAt} />
+      <CardHeader className={styles.username} title={username} subheader={createdAt} />
       <CardContent>
-        <Typography variant="body2" color="text.secondary" height={100}>
+        <Typography className={styles.content} variant="body2" color="text.secondary" height={100}>
           {content}
         </Typography>
         <a target="_blank" rel="noreferrer" href={url}>

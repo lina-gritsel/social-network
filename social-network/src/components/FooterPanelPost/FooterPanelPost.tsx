@@ -20,8 +20,8 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
 }) => {
   const { isLike, amountLikes, likeOnclick } = useChangeLike({ postId })
   const { t } = useTranslation()
-
   const amountComments = allComments.length
+
   return (
     <>
       <div className={styles.actionAmount}>
@@ -34,7 +34,7 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
       </div>
       <div className={styles.addToPost}>
         <div className={styles.actionOnPost} onClick={likeOnclick}>
-          <Favorite className={isLike ? styles.isLike : styles.icon} />
+          <Favorite className={classNames(styles.icon, isLike && styles.isLike)} />
           <div className={classNames(styles.like, isLike && styles.isLike)}>
             {t('like')}
           </div>

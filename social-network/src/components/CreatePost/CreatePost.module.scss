@@ -69,6 +69,12 @@
   font: var(--font-text-4);
 }
 
+.createPostActive {
+  color: var(--light-color);
+  height: 35px;
+  font: var(--font-text-4);
+}
+
 .modalContent {
   display: flex;
   flex-direction: column;
@@ -97,10 +103,13 @@
 }
 
 .feeling {
+  background-color: var(--white-color) !important;
   left: 40% !important;
   top: 25% !important;
 }
+
 .photo {
+  background-color: var(--white-color) !important;
   right: 40% !important;
   top: 30% !important;
 }

@@ -1,20 +1,27 @@
 import { User } from '../../api'
 
-import { GET_USER_INFO } from '../actions'
+import { GET_USER_INFO, SELECT_THEME } from '../actions'
 
 interface IgetUserInfo {
   type: typeof GET_USER_INFO
   payload: User
 }
 
-type AllActionTypes = IgetUserInfo
+interface ISelectTheme {
+  type: typeof SELECT_THEME
+  payload: string
+}
+
+type AllActionTypes = IgetUserInfo | ISelectTheme
 
 interface IinitialState {
   userInfo: User
+  theme: string
 }
 
 const initialState = {
   userInfo: {} as User,
+  theme: 'light',
 }
 
 const users = (
@@ -26,6 +33,12 @@ const users = (
       return {
         ...state,
         userInfo: action.payload,
+      }
+    }
+    case SELECT_THEME: {
+      return {
+        ...state,
+        theme: action.payload,
       }
     }
     default:

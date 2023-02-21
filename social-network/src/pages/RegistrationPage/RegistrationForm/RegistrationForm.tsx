@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { IconButton, InputAdornment } from '@mui/material'
 import { AccountCircleOutlined } from '@mui/icons-material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { IconButton, InputAdornment } from '@mui/material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
@@ -14,6 +14,7 @@ import Button from '../../../components/Button'
 import InputDate from '../../../components/InputDate'
 import InputGender from '../../../components/InputGender'
 import InputPassword from '../../../components/InputPassword'
+import { adornmentInputProps } from '../../SettingsPage/components/SettingsForm/SettingsForm'
 
 import { useRegistrationForm } from './hooks'
 
@@ -39,26 +40,14 @@ const RegistrationForm: FC = () => {
         control={control}
         placeholder={t('email')}
         type="email"
-        inputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <AlternateEmailIcon />
-            </InputAdornment>
-          ),
-        }}
+        inputProps={adornmentInputProps({ icon: <AlternateEmailIcon /> })}
         errors={errors}
       />
       <Input
         name="name"
         control={control}
         placeholder={t('nickname')}
-        inputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <AccountCircleOutlined />
-            </InputAdornment>
-          ),
-        }}
+        inputProps={adornmentInputProps({ icon: <AccountCircleOutlined /> })}
         errors={errors}
       />
       <InputPassword

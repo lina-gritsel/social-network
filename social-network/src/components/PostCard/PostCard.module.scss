@@ -1,12 +1,13 @@
 .card {
-  width: 100%;
+  background-color: var(--white-color) !important;
   border-radius: 16px !important;
-  position: relative;
-  padding: 18px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02) !important;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02) !important;
+  padding: 18px;
+  position: relative;
+  width: 100%;
 
   & a {
     color: var(--blue-color);
@@ -37,14 +38,14 @@
 }
 
 .author {
-  color: var(--dark-gray-color);
+  color: var(--gray-color);
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
 }
 
 .createAt {
-  color: var(--dark-gray-color);
+  color: var(--gray-color);
   opacity: 0.6;
   font-weight: 500;
   font-size: 13px;
@@ -61,7 +62,7 @@
 }
 
 .contentText {
-  color: var(--dark-gray-color);
+  color: var(--gray-color);
   font: var(--font-text-5);
   line-height: 22px;
 }
@@ -72,11 +73,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .moreContent {
+  color: var(--gray-color) !important;
   padding: 0 15px;
   font: var(--font-text-4) !important;
   line-height: 1.5 !important;
