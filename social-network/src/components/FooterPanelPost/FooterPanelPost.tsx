@@ -7,6 +7,7 @@ import { useChangeLike } from './hooks'
 
 import styles from './FooterPanelPost.module.scss'
 import Avatar from '../Avatar'
+import Loader from '../Loader'
 
 interface FooterPanelPostProps {
   postId: string
@@ -19,7 +20,7 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
   setSchowComments,
   allComments,
 }) => {
-  const { isLike, likeOnclick, avatarArr, amountMoreLikes } =
+  const { isLike, likeOnclick, avatarArr, amountMoreLikes, isLoading } =
     useChangeLike({
       postId,
     })
@@ -30,18 +31,24 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
     <>
       <div className={styles.actionAmount}>
         <div className={styles.avatarWrapper}>
-          {avatarArr.map((avatar, index) => (
-            <Avatar
-              key={index}
-              className={styles.likeAvatar}
-              imageUrl={avatar}
-            />
-          ))}
-          {amountMoreLikes && (
-            <Avatar
-              className={styles.likeAvatar}
-              title={`+${amountMoreLikes}`}
-            />
+          {isLoading ? (
+            <Loader className={styles.loading} />
+          ) : (
+            <>
+              {avatarArr.map((avatar, index) => (
+                <Avatar
+                  key={index}
+                  className={styles.likeAvatar}
+                  imageUrl={avatar}
+                />
+              ))}
+              {amountMoreLikes && (
+                <Avatar
+                  className={styles.likeAvatar}
+                  title={`+${amountMoreLikes}`}
+                />
+              )}
+            </>
           )}
         </div>
         <div className={styles.allComments}>

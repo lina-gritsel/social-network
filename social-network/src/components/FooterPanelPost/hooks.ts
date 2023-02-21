@@ -14,12 +14,26 @@ const getAvatarPromiseArr = (usersId: string[]) => {
   return promiseArr
 }
 
+const getRandomElemArr = () => {
+  let randElem: number
+  const newElements: number[] = []
+  for (let i = 0; i < NUMBER_OF_AVATARS; i++) {
+    randElem = getRandomInt(0, NUMBER_OF_AVATARS + 1)
+    while (newElements.indexOf(randElem) !== -1) {
+      randElem = getRandomInt(0, NUMBER_OF_AVATARS + 1)
+    }
+    newElements.push(randElem)
+  }
+  return newElements
+}
+
 interface UseChangeLikeProps {
   postId: string
 }
 
 export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
   const [isLike, setIsLike] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [amountMoreLikes, setAmountMoreLikes] = useState<number>()
   const [dataLikes, setDataLLikes] = useState([])
   const [avatarArr, setAvatarArr] = useState<string[]>([])
@@ -37,17 +51,23 @@ export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
 
   useEffect(() => {
     const getAvatarArr = async () => {
+      setIsLoading(true)
       let usersId: string[] = []
 
       if (dataLikes.length > NUMBER_OF_AVATARS) {
-        usersId = dataLikes.slice(0, 3).map(({ userId }) => userId)
+        const randomElemArr = getRandomElemArr()
+        const randomLikeUsers = randomElemArr.map((index) => dataLikes[index])
+        usersId = randomLikeUsers.map(({ userId }) => userId)
         setAmountMoreLikes(dataLikes.length - NUMBER_OF_AVATARS)
       } else {
         usersId = dataLikes.map(({ userId }) => userId)
         setAmountMoreLikes(null)
       }
+
       const avatarArr = await Promise.all(getAvatarPromiseArr(usersId))
       setAvatarArr(avatarArr)
+
+      setIsLoading(false)
     }
     getAvatarArr()
 
@@ -63,6 +83,7 @@ export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
 
   return {
     isLike,
+    isLoading,
     likeOnclick,
     avatarArr,
     amountMoreLikes,

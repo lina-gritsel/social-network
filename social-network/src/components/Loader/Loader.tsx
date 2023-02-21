@@ -8,7 +8,7 @@ interface LoaderProps {
 const Loader: FC<LoaderProps> = ({ className }) => {
   return (
     <Box className={className}>
-      <CircularProgress />
+      <CircularProgress className={className}/>
     </Box>
   )
 }
