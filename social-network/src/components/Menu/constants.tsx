@@ -3,14 +3,14 @@ import {
   ExploreOutlined,
   PeopleOutline,
   SettingsOutlined,
-  GridView
+  GridView,
 } from '@mui/icons-material'
 
 import { PATHS } from '../../router/paths'
 
 export const NAVIGATION_MENU = [
   {
-    to: PATHS.PROFILE,
+    to: `${PATHS.PROFILE}/me`,
     label: 'profile',
     icon: <PersonOutline />,
   },
