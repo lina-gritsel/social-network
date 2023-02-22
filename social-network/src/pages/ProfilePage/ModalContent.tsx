@@ -6,9 +6,11 @@ import { FC, Dispatch, SetStateAction, MouseEvent } from 'react'
 import Loader from '../../components/Loader'
 import Button from '../../components/Button'
 
+import { DEFAULT_ARR_LENGTH } from './constants'
 import { useModalContent } from './hooks'
 
 import styles from './Profile.module.scss'
+import { changeUser } from '../../api'
 
 interface IModalContent {
   setBgImage: Dispatch<SetStateAction<string>>
@@ -19,8 +21,6 @@ interface IModalContent {
   setBgImageArr: Dispatch<SetStateAction<string[]>>
 }
 
-const DEFAULT_ARR_LENGTH = 9
-
 const ModalContent: FC<IModalContent> = ({
   setBgImage,
   isErrorImg,
@@ -29,6 +29,7 @@ const ModalContent: FC<IModalContent> = ({
   bgImageArr,
   setBgImageArr,
 }) => {
+  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
   const { t } = useTranslation()
   const { inputRef, isDisabled, setIsDisabled } = useModalContent()
 
@@ -51,13 +52,15 @@ const ModalContent: FC<IModalContent> = ({
       : setIsDisabled(false)
   }
 
-  const deleteImg = (e: MouseEvent) => {
+  const deleteImg = async (e: MouseEvent) => {
     const index = (e.currentTarget as HTMLElement).id
     const indexNumber = parseFloat(index)
-    setBgImageArr((prev) => [
-      ...prev.slice(0, indexNumber),
-      ...prev.slice(indexNumber + 1),
-    ])
+    const newImageArr = bgImageArr.filter((img, index) => index !== indexNumber)
+    setBgImageArr(newImageArr)
+    const wallpapers = newImageArr.filter(
+      (el, index) => index >= DEFAULT_ARR_LENGTH,
+    )
+    await changeUser({ wallpapers: wallpapers }, userId)
   }
 
   return (
@@ -68,7 +71,7 @@ const ModalContent: FC<IModalContent> = ({
         ) : (
           bgImageArr?.map((img, index) => (
             <div className={styles.imgItem} key={index}>
-              {index > DEFAULT_ARR_LENGTH && (
+              {index >= DEFAULT_ARR_LENGTH && (
                 <CancelIcon
                   className={styles.cancel}
                   id={index.toString()}

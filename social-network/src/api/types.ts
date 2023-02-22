@@ -15,6 +15,7 @@ export interface User {
   createdAt: string
   updatedAt: string
   background?: string
+  wallpapers?: string[]
   followers?: string[]
   following?: string[]
 }
@@ -56,7 +57,8 @@ export interface ChangePostParams {
   image: string
 }
 export interface ChangeUserParams {
-  background: string
+  background?: string
+  wallpapers?: string[]
 }
 
 export interface CreateComment {

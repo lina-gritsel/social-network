@@ -5,7 +5,7 @@ import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { getWallpapers, changeUser } from '../../api'
 import { getUserInfoSelector } from '../../store/selectors'
 
-import { DEFAULT_WALLPAPER } from './constants'
+import { DEFAULT_WALLPAPER, DEFAULT_ARR_LENGTH } from './constants'
 
 export const useProfilePage = () => {
   const userInfo = useSelector(getUserInfoSelector)
@@ -27,24 +27,19 @@ export const useProfilePage = () => {
   const [bgImageArr, setBgImageArr] = useState<string[]>([])
   const [bgImage, setBgImage] = useState<string>(DEFAULT_WALLPAPER)
 
-  useEffect(() => {
-    setBgImage(userInfo?.background || DEFAULT_WALLPAPER)
-    if ('bgImageArr' in localStorage) {
-      setBgImageArr(JSON.parse(window.localStorage.getItem('bgImageArr')))
-    } else {
-      const setWallpapers = async () => {
-        setIsLoading(true)
-        const wallpapers = await getWallpapers()
-        setBgImageArr(wallpapers)
-        setIsLoading(false)
-      }
-      setWallpapers()
-    }
-  }, [userInfo?.background])
+  const userWallpapers = userInfo?.wallpapers || []
 
   useEffect(() => {
-    window.localStorage.setItem('bgImageArr', JSON.stringify(bgImageArr))
-  }, [bgImage, bgImageArr])
+    setBgImage(userInfo?.background || DEFAULT_WALLPAPER)
+
+    const setWallpapers = async () => {
+      setIsLoading(true)
+      const wallpapers = await getWallpapers()
+      setBgImageArr([...wallpapers, ...userWallpapers])
+      setIsLoading(false)
+    }
+    setWallpapers()
+  }, [userInfo])
 
   const errorImg = (e: SyntheticEvent) => {
     setBgImageArr((prev) => prev.slice(0, -1))
@@ -57,13 +52,17 @@ export const useProfilePage = () => {
 
   const onLoadImg = async (e: SyntheticEvent) => {
     const newImg = (e.target as HTMLImageElement).src
-    await changeUser(
-      {
-        background: newImg,
-      },
-      userInfo?.id,
-    )
-    console.log('Load!')
+
+    if (bgImageArr.indexOf(newImg) >= DEFAULT_ARR_LENGTH) {
+      userWallpapers.push(newImg)
+    }
+
+    const params = {
+      background: newImg,
+      wallpapers: userWallpapers,
+    }
+
+    await changeUser({ ...params }, userInfo?.id)
   }
 
   return {
@@ -73,6 +72,7 @@ export const useProfilePage = () => {
     userInfo,
     bgImageArr,
     isErrorImg,
+    userWallpapers,
     profileInfoArr,
     errorImg,
     onLoadImg,
