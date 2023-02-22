@@ -83,7 +83,7 @@ const PostCard: FC<News> = ({
               className={styles.profileLink}
               to={`${PATHS.PROFILE}/${author?.id}`}
             >
-              <Avatar className={styles.cardAvatar} imageUrl={avatar} />
+              <Avatar className={styles.cardAvatar} imageUrl={author?.avatar} />
             </NavLink>
             <div>
               <NavLink
