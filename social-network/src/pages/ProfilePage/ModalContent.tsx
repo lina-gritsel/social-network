@@ -92,7 +92,11 @@ const ModalContent: FC<IModalContent> = ({
           inputRef={inputRef}
           onChange={() => onChangeInput()}
         />
-        <Button className={isDisabled ? styles.addImgBtn : styles.addImgActiveBtn} onClick={handleClickBtn} isDisabled={isDisabled}>
+        <Button
+          className={isDisabled ? styles.addImgBtn : styles.addImgActiveBtn}
+          onClick={handleClickBtn}
+          isDisabled={isDisabled}
+        >
           {t('addImg').toLocaleUpperCase()}
         </Button>
       </div>

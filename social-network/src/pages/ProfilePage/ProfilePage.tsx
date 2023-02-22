@@ -33,6 +33,7 @@ const ProfilePage: FC = () => {
     bgImageArr,
     isErrorImg,
     profileInfoArr,
+    onLoadImg,
     errorImg,
     setIsOpen,
     setBgImage,
@@ -68,6 +69,7 @@ const ProfilePage: FC = () => {
               src={bgImage}
               alt="background"
               onError={(e) => errorImg(e)}
+              onLoad={(e) => onLoadImg(e)}
             />
             <Button
               className={styles.editCoverPhoto}

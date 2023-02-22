@@ -14,6 +14,7 @@ export interface User {
   twitter: string
   createdAt: string
   updatedAt: string
+  background?: string
   followers?: string[]
   following?: string[]
 }
@@ -53,6 +54,9 @@ export interface CreatePostParams {
 export interface ChangePostParams {
   content: string
   image: string
+}
+export interface ChangeUserParams {
+  background: string
 }
 
 export interface CreateComment {

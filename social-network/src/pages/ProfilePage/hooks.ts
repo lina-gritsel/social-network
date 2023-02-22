@@ -2,7 +2,7 @@ import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 
-import { getWallpapers } from '../../api'
+import { getWallpapers, changeUser } from '../../api'
 import { getUserInfoSelector } from '../../store/selectors'
 
 import { DEFAULT_WALLPAPER } from './constants'
@@ -28,9 +28,7 @@ export const useProfilePage = () => {
   const [bgImage, setBgImage] = useState<string>(DEFAULT_WALLPAPER)
 
   useEffect(() => {
-    if ('bgImage' in localStorage) {
-      setBgImage(JSON.parse(window.localStorage.getItem('bgImage')))
-    }
+    setBgImage(userInfo?.background || DEFAULT_WALLPAPER)
     if ('bgImageArr' in localStorage) {
       setBgImageArr(JSON.parse(window.localStorage.getItem('bgImageArr')))
     } else {
@@ -42,10 +40,9 @@ export const useProfilePage = () => {
       }
       setWallpapers()
     }
-  }, [])
+  }, [userInfo?.background])
 
   useEffect(() => {
-    window.localStorage.setItem('bgImage', JSON.stringify(bgImage))
     window.localStorage.setItem('bgImageArr', JSON.stringify(bgImageArr))
   }, [bgImage, bgImageArr])
 
@@ -58,6 +55,17 @@ export const useProfilePage = () => {
     img.src = bgImage
   }
 
+  const onLoadImg = async (e: SyntheticEvent) => {
+    const newImg = (e.target as HTMLImageElement).src
+    await changeUser(
+      {
+        background: newImg,
+      },
+      userInfo?.id,
+    )
+    console.log('Load!')
+  }
+
   return {
     isOpen,
     isLoading,
@@ -67,6 +75,7 @@ export const useProfilePage = () => {
     isErrorImg,
     profileInfoArr,
     errorImg,
+    onLoadImg,
     setIsOpen,
     setBgImage,
     setBgImageArr,

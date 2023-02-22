@@ -68,6 +68,10 @@ const UserModel = sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  background: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 })
 
 export default UserModel

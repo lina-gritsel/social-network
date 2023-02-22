@@ -7,6 +7,7 @@ import {
   CreatePostParams,
   DeleteUserStatus,
   ChangePostParams,
+  ChangeUserParams,
   CreateComment,
 } from './types'
 
@@ -67,7 +68,7 @@ export const getAllUsers = async (): Promise<UsersInfo> => {
   }
 }
 
-export const updateUser = async (user: User): Promise<User> => {
+export const updateUser = async (user): Promise<User> => {
   try {
     const data = await fetch(`${USERS_URL}/${user.id}`, {
       method: 'PATCH',
@@ -126,6 +127,20 @@ export const changePost = async (content: ChangePostParams, id: string) => {
     await fetch(`${POSTS_URL}/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(content),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+
+export const changeUser = async (params: ChangeUserParams, id: string) => {
+  try {
+    await fetch(`${USERS_URL}/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(params),
       headers: {
         'Content-Type': 'application/json',
       },

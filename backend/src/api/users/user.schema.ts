@@ -34,6 +34,7 @@ export const updateUserSchema = z.object({
       twitter: z.string(),
       facebook: z.string(),
       bio: z.string(),
+      background: z.string(),
     })
     .partial(),
 })
