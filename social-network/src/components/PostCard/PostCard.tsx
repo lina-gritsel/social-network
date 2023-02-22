@@ -1,5 +1,11 @@
 import { FC, useState, useEffect } from 'react'
-import { Card, CardMedia, CardContent, Typography, IconButton } from '@mui/material'
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  IconButton,
+} from '@mui/material'
 import { MoreVert } from '@mui/icons-material'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
@@ -51,7 +57,7 @@ const PostCard: FC<News> = ({
   const [isSettingModal, setIsSettingModal] = useState(false)
   const [author, setAuthor] = useState<User>()
   const [showMore, setShowMore] = useState(true)
-  const [showComments, setSchowComments] = useState(true)
+  const [showComments, setSchowComments] = useState(false)
 
   useEffect(() => {
     const getAuthor = async () => {
@@ -143,11 +149,12 @@ const PostCard: FC<News> = ({
           comment={comment}
         />
       </Card>
-      <CommentsList
-        isLoading={isLoading}
-        allComments={allComments}
-        showComments={showComments}
-      />
+      {showComments && (
+        <CommentsList
+          isLoading={isLoading}
+          allComments={allComments}
+        />
+      )}
     </>
   )
 }
