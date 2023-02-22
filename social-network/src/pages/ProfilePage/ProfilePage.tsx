@@ -1,38 +1,44 @@
 import { FC, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import Modal from '../../components/Modal'
+import { PATHS } from '../../router/paths'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
-
-import CreatePost from '../../components/CreatePost'
-import NewsList from '../../components/PostsList'
+import Loader from '../../components/Loader'
 import Avatar from '../../components/Avatar'
-import { PATHS } from '../../router/paths'
+import NewsList from '../../components/PostsList'
+import CreatePost from '../../components/CreatePost'
 
-import { useProfilePage } from './hooks'
+import { useFetchProfileInfo, useProfilePage } from './hooks'
+import ModalContent from './ModalContent'
 import {
   FIELD_INTO,
   FIRST_LINKS_INDEX,
   LAST_LINKS_INDEX,
   LINKS,
 } from './constants'
-import ModalContent from './ModalContent'
 
 import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
-  const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
   const { t } = useTranslation()
+
+  const { id: profileId } = useParams<{ id: string }>()
+  const {
+    user,
+    isLoading: isLoadingUserInfo,
+    userProfileInfoArr,
+  } = useFetchProfileInfo(profileId)
   const {
     isOpen,
     isLoading,
     bgImage,
-    userInfo,
+    userInfo: rawUserInfo,
     bgImageArr,
     isErrorImg,
-    profileInfoArr,
+    profileInfoArr: rawProfileInfoArr,
     onLoadImg,
     errorImg,
     setIsOpen,
@@ -40,6 +46,15 @@ const ProfilePage: FC = () => {
     setBgImageArr,
     setIsErrorImg,
   } = useProfilePage()
+
+  const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
+
+  const userInfo = profileId === 'me' ? rawUserInfo : user
+  const profileInfoArr =
+    profileId === 'me' ? rawProfileInfoArr : userProfileInfoArr
+
+  if (isLoadingUserInfo || !userInfo)
+    return <Loader className={styles.loading} />
 
   return (
     <Layout>

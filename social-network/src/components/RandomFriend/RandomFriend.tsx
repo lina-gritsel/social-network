@@ -1,9 +1,11 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { NavLink } from 'react-router-dom'
 import { Card } from '@mui/material'
 import moment from 'moment'
 
 import { getRandomInt } from '../../utils'
+import { PATHS } from '../../router/paths'
 import { User } from '../../api'
 
 import { FIELD } from './constants'
@@ -55,12 +57,16 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
       <div className={styles.mightLike}>{t(title)}</div>
       <div className={styles.wrapperContent}>
         <div className={styles.cardHeader}>
-          <Avatar imageUrl={user?.avatar} className={styles.avatar} />
+          <NavLink to={`${PATHS.PROFILE}/${user?.id}`}>
+            <Avatar imageUrl={user?.avatar} className={styles.avatar} />
+          </NavLink>
           {isLoading ? (
             <div className={styles.loading}>{t('loading')}</div>
           ) : (
             <div>
-              <div className={styles.title}>{user?.name}</div>
+              <NavLink to={`${PATHS.PROFILE}/${user?.id}`}>
+                <div className={styles.title}>{user?.name}</div>
+              </NavLink>
               <div className={styles.subTitle}>
                 {isBirthday
                   ? t(title) + ' ' + formattedBirthdayDate
