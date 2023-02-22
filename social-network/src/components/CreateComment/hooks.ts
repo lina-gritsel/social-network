@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { createComment, getPost } from '../../api'
+import { usePolling } from '../../hooks'
 
 import { getUserInfoSelector } from '../../store/selectors'
 import { sortNews } from '../../utils'
@@ -22,7 +23,7 @@ export const useCreateComment = ({
   const [allComments, setAllComments] = useState([])
 
   const sortedComments = allComments.sort((a, b) =>
-    sortNews(a.createdAt, b.createdAt),
+    sortNews(a.createAt, b.createAt),
   )
 
   useEffect(() => {
@@ -59,15 +60,18 @@ export const useFetchCertainsComments = (postId: string) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const fetchComments = async () => {
+    const { data } = await getPost(postId)
+    setData(data?.post.comments || [])
+  }
+
   useEffect(() => {
-    const fetchComments = async () => {
-      const { data } = await getPost(postId)
-      setData(data?.post.comments || [])
-    }
     fetchComments()
 
     setIsLoading(false)
   }, [postId])
+
+  // usePolling(fetchComments, 10000)
 
   return {
     data,

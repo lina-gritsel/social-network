@@ -55,8 +55,8 @@ export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
       let usersId: string[] = []
 
       if (dataLikes.length > NUMBER_OF_AVATARS) {
-        const randomElemArr = getRandomElemArr()
-        const randomLikeUsers = randomElemArr.map((index) => dataLikes[index])
+        const randomIndexArr = getRandomElemArr()
+        const randomLikeUsers = randomIndexArr.map((index) => dataLikes[index])
         usersId = randomLikeUsers.map(({ userId }) => userId)
         setAmountMoreLikes(dataLikes.length - NUMBER_OF_AVATARS)
       } else {

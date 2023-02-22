@@ -1,9 +1,10 @@
 import { FC, useState, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
-import PostCard, { News } from '../PostCard/PostCard'
 import { getAllPosts } from '../../api/requests'
 import { sortNews } from '../../utils'
+
+import PostCard, { News } from '../PostCard/PostCard'
 
 import styles from './PostsList.module.scss'
 

@@ -8,7 +8,7 @@ import styles from './CommentsList.module.scss'
 
 interface CommentsListProps {
   showComments: boolean
-  allComments: any
+  allComments: any[]
   isLoading: boolean
 }
 
@@ -22,14 +22,13 @@ const CommentsList: FC<CommentsListProps> = ({
       {isLoading ? (
         <Loader />
       ) : (
-        allComments.map(({ comment, user, createdAt }, index) => {
+        allComments.map(({ comment, user, createAt }, index) => {
           return (
             <Comment
               key={index}
-              userName={user?.name}
+              author={user}
               comment={comment}
-              createdAt={createdAt}
-              avatarAuthorComment={user?.avatar}
+              createAt={createAt}
             />
           )
         })

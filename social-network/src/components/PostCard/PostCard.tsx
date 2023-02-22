@@ -1,8 +1,9 @@
 import { FC, useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+
 import { Card, CardMedia, CardContent, Typography } from '@mui/material'
 import { MoreVert } from '@mui/icons-material'
 import IconButton from '@mui/material/IconButton'
-import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import moment from 'moment'
 
@@ -11,8 +12,8 @@ import { getUserInfoSelector } from '../../store/selectors'
 import { User } from '../../api'
 
 import { useCreateComment } from '../CreateComment/hooks'
-import CreateComment from '../CreateComment'
 import FooterPanelPost from '../FooterPanelPost'
+import CreateComment from '../CreateComment'
 import CommentsList from '../CommentsList'
 import Avatar from '../Avatar'
 
@@ -68,8 +69,13 @@ const PostCard: FC<News> = ({
 
   const createdPostTime = moment(createdAt).fromNow()
 
-  const { isLoading, allComments, onSubmit, onChangeComment, comment } =
-    useCreateComment({ postId: id, setSchowComments })
+  const {
+    isLoading,
+    allComments,
+    onSubmit,
+    onChangeComment,
+    comment,
+  } = useCreateComment({ postId: id, setSchowComments })
 
   return (
     <>
@@ -133,8 +139,7 @@ const PostCard: FC<News> = ({
           allComments={allComments}
         />
         <CreateComment
-          avatarImg={userInfo?.avatar}
-          onSubmit={onSubmit}
+          onSubmit={() => comment && onSubmit()}
           onChangeComment={onChangeComment}
           comment={comment}
         />
