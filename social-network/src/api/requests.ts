@@ -11,8 +11,8 @@ import {
   CreateComment,
 } from './types'
 
-// const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
-const BASE_URL = 'http://localhost:8000/api'
+const BASE_URL = 'https://panicky-cyan-tweed-jacket.cyclic.app/api'
+// const BASE_URL = 'http://localhost:8000/api'
 
 const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`

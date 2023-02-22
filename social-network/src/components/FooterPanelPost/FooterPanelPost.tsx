@@ -3,11 +3,14 @@ import { Favorite, ChatBubbleOutline } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 
+import Avatar from '../Avatar'
+import Loader from '../Loader'
+
 import { useChangeLike } from './hooks'
 
 import styles from './FooterPanelPost.module.scss'
-import Avatar from '../Avatar'
-import Loader from '../Loader'
+import { NavLink } from 'react-router-dom'
+import { PATHS } from '../../router/paths'
 
 interface FooterPanelPostProps {
   postId: string
@@ -20,10 +23,16 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
   setSchowComments,
   allComments,
 }) => {
-  const { isLike, likeOnclick, avatarArr, amountMoreLikes, isLoading } =
-    useChangeLike({
-      postId,
-    })
+  const {
+    isLike,
+    likeOnclick,
+    avatarArr,
+    amountMoreLikes,
+    isLoading,
+    likesUsersId,
+  } = useChangeLike({
+    postId,
+  })
   const { t } = useTranslation()
   const amountComments = allComments.length
 
@@ -36,11 +45,13 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
           ) : (
             <>
               {avatarArr.map((avatar, index) => (
-                <Avatar
+                <NavLink
                   key={index}
+                  to={`${PATHS.PROFILE}/${likesUsersId[index]}`}
                   className={styles.likeAvatar}
-                  imageUrl={avatar}
-                />
+                >
+                  <Avatar imageUrl={avatar} className={styles.likeAvatar} />
+                </NavLink>
               ))}
               {amountMoreLikes && (
                 <Avatar

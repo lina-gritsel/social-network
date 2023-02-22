@@ -7,9 +7,13 @@ const NUMBER_OF_AVATARS = 3
 
 const getAvatarPromiseArr = (usersId: string[]) => {
   const promiseArr = usersId.map(async (userId) => {
-    const user = await getUser(userId)
-    const avatar = user.data.user?.avatar
-    return avatar
+    try {
+      const user = await getUser(userId)
+      const avatar = user.data.user?.avatar
+      return avatar
+    } catch {
+      return ''
+    }
   })
   return promiseArr
 }
@@ -37,6 +41,7 @@ export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
   const [amountMoreLikes, setAmountMoreLikes] = useState<number>()
   const [dataLikes, setDataLLikes] = useState([])
   const [avatarArr, setAvatarArr] = useState<string[]>([])
+  const [likesUsersId, setLikesUsersId] = useState<string[]>([])
 
   const currentUserId =
     (JSON.parse(localStorage.getItem('userId')) as string) || ''
@@ -50,31 +55,29 @@ export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
   }, [postId])
 
   useEffect(() => {
-    const getAvatarArr = async () => {
-      setIsLoading(true)
-      let usersId: string[] = []
-
-      if (dataLikes.length > NUMBER_OF_AVATARS) {
-        const randomIndexArr = getRandomElemArr()
-        const randomLikeUsers = randomIndexArr.map((index) => dataLikes[index])
-        usersId = randomLikeUsers.map(({ userId }) => userId)
-        setAmountMoreLikes(dataLikes.length - NUMBER_OF_AVATARS)
-      } else {
-        usersId = dataLikes.map(({ userId }) => userId)
-        setAmountMoreLikes(null)
-      }
-
-      const avatarArr = await Promise.all(getAvatarPromiseArr(usersId))
-      setAvatarArr(avatarArr)
-
-      setIsLoading(false)
+    if (dataLikes.length > NUMBER_OF_AVATARS) {
+      const randomIndexArr = getRandomElemArr()
+      const randomLikeUsers = randomIndexArr.map((index) => dataLikes[index])
+      setLikesUsersId(randomLikeUsers.map(({ userId }) => userId))
+      setAmountMoreLikes(dataLikes.length - NUMBER_OF_AVATARS)
+    } else {
+      setLikesUsersId(dataLikes.map(({ userId }) => userId))
+      setAmountMoreLikes(null)
     }
-    getAvatarArr()
-
     const isLike =
       dataLikes.filter(({ userId }) => userId === currentUserId).length === 1
     setIsLike(isLike)
   }, [dataLikes, currentUserId])
+
+  useEffect(() => {
+    const getAvatarArr = async () => {
+      setIsLoading(true)
+      const avatarArr = await Promise.all(getAvatarPromiseArr(likesUsersId))
+      setAvatarArr(avatarArr)
+      setIsLoading(false)
+    }
+    getAvatarArr()
+  }, [likesUsersId])
 
   const likeOnclick = async () => {
     const post = (await changeLike(postId, currentUserId)).data.post
@@ -86,6 +89,7 @@ export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
     isLoading,
     likeOnclick,
     avatarArr,
+    likesUsersId,
     amountMoreLikes,
   }
 }
