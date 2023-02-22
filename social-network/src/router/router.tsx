@@ -1,9 +1,10 @@
 import { FC, useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
-import { routes } from './routes'
 import { useAppDispatch } from '../store'
 import { fetchUser, setTheme } from '../store/actions'
+
+import { routes } from './routes'
 
 export const Router: FC = () => {
   const dispatch = useAppDispatch()

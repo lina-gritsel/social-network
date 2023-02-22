@@ -19,10 +19,12 @@ export const useCreateComment = ({
   const { data, isLoading } = useFetchCertainsComments(postId)
   const [comment, setComment] = useState<string>('')
 
+  // usePolling(fetchComments, 10000)
+
   const [allComments, setAllComments] = useState([])
 
-  const sortedComments = allComments.sort((a, b) =>
-    sortNews(a.createdAt, b.createdAt),
+  const sortedComments = allComments.sort((currentComment, nextComment) =>
+    sortNews(currentComment.createAt, nextComment.createAt),
   )
 
   useEffect(() => {
@@ -59,11 +61,12 @@ export const useFetchCertainsComments = (postId: string) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const fetchComments = async () => {
+    const { data } = await getPost(postId)
+    setData(data?.post.comments || [])
+  }
+
   useEffect(() => {
-    const fetchComments = async () => {
-      const { data } = await getPost(postId)
-      setData(data?.post.comments || [])
-    }
     fetchComments()
 
     setIsLoading(false)

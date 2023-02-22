@@ -1,9 +1,10 @@
 import { FC, useState, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 
-import PostCard, { News } from '../PostCard/PostCard'
 import { getAllPosts } from '../../api/requests'
 import { sortNews } from '../../utils/utils'
+
+import PostCard, { News } from '../PostCard/PostCard'
 
 import styles from './PostsList.module.scss'
 
@@ -34,7 +35,7 @@ const PostsList: FC<PostsListProps> = ({
       )
 
       if (filterPostsForProfilePage) {
-        setAllPosts(sortedPosts.filter((post) => post.userId))
+        setAllPosts(sortedPosts.filter((post) => post.userId === userId))
       } else {
         setAllPosts(sortedPosts)
       }
