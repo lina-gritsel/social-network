@@ -1,11 +1,12 @@
 import { FC, useState, useEffect } from 'react'
-import { Card, CardMedia, CardContent, Typography } from '@mui/material'
+import { Card, CardMedia, CardContent, Typography, IconButton } from '@mui/material'
 import { MoreVert } from '@mui/icons-material'
-import IconButton from '@mui/material/IconButton'
+import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import moment from 'moment'
 
 import { getUser } from '../../api/requests'
+import { PATHS } from '../../router/paths'
 import { User } from '../../api'
 
 import { useCreateComment } from '../CreateComment/hooks'
@@ -63,13 +64,8 @@ const PostCard: FC<News> = ({
 
   const createdPostTime = moment(createdAt).fromNow()
 
-  const {
-    isLoading,
-    allComments,
-    onSubmit,
-    onChangeComment,
-    comment,
-  } = useCreateComment({ postId: id, setSchowComments })
+  const { isLoading, allComments, onSubmit, onChangeComment, comment } =
+    useCreateComment({ postId: id, setSchowComments })
 
   return (
     <>
@@ -83,9 +79,19 @@ const PostCard: FC<News> = ({
         )}
         <div className={styles.wrapperCardHeader}>
           <div className={styles.wrapperCard}>
-            <Avatar className={styles.cardAvatar} imageUrl={author?.avatar} />
+            <NavLink
+              className={styles.profileLink}
+              to={`${PATHS.PROFILE}/${author?.id}`}
+            >
+              <Avatar className={styles.cardAvatar} imageUrl={avatar} />
+            </NavLink>
             <div>
-              <div className={styles.author}>{author?.name}</div>
+              <NavLink
+                className={styles.profileLink}
+                to={`${PATHS.PROFILE}/${author?.id}`}
+              >
+                <div className={styles.author}>{author?.name}</div>
+              </NavLink>
               <div className={styles.createAt}>{createdPostTime}</div>
             </div>
           </div>

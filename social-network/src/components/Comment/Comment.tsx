@@ -1,6 +1,10 @@
-import moment from 'moment'
 import { FC, useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import moment from 'moment'
+
+import { PATHS } from '../../router/paths'
 import { getUser } from '../../api'
+
 import Avatar from '../Avatar'
 
 import styles from './Comment.module.scss'
@@ -29,7 +33,9 @@ const ExistComment: FC<ExistCommentProps> = ({
 
   return (
     <div className={styles.wrapperExistComment}>
-      <Avatar imageUrl={authorComment?.avatar} />
+      <NavLink to={`${PATHS.PROFILE}/${authorComment?.id}`}>
+        <Avatar imageUrl={authorComment?.avatar} />
+      </NavLink>
       <div className={styles.container}>
         <div className={styles.commentHeader}>
           <div className={styles.name}>{authorComment?.name} </div>

@@ -84,5 +84,7 @@
   "comment": "Write a comment...",
   "like":"Like",
   "comments":"Comments",
-  "noAccount": "You haven't any account?"
+  "noAccount": "You haven't any account?",
+  "logout": "Logout",
+  "logoutTitle": "Oh no! You are leaving... Are you sure?"
 }

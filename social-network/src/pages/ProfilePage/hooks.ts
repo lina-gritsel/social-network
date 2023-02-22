@@ -2,7 +2,7 @@ import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 
-import { getWallpapers } from '../../api'
+import { getUser, getWallpapers, User } from '../../api'
 import { getUserInfoSelector } from '../../store/selectors'
 
 import { DEFAULT_WALLPAPER } from './constants'
@@ -83,5 +83,40 @@ export const useModalContent = () => {
     inputRef,
     isDisabled,
     setIsDisabled,
+  }
+}
+
+export const useFetchProfileInfo = (id: string) => {
+  const [user, setUser] = useState<User>()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  useEffect(() => {
+    const fetchUserProfileInfo = async () => {
+      setIsLoading(true)
+
+      const { data } = await getUser(id)
+      setUser(data?.user)
+
+      setIsLoading(false)
+    }
+
+    fetchUserProfileInfo()
+  }, [id])
+
+  const userProfileInfoArr = [
+    user?.gender,
+    moment.unix(user?.date).format('DD/MM/YYYY'),
+    user?.location,
+    user?.facebook,
+    user?.twitter,
+    user?.instagram,
+    user?.followers,
+    user?.following,
+  ]
+
+  return {
+    user,
+    isLoading,
+    userProfileInfoArr,
   }
 }

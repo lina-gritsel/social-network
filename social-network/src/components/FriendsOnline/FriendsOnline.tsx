@@ -1,8 +1,10 @@
 import { FC, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Box, CircularProgress } from '@mui/material'
 
 import { User } from '../../api'
+import { PATHS } from '../../router/paths'
 
 import InputSearch from '../InputSearch'
 import useDebounce from './hooks'
@@ -11,6 +13,7 @@ import styles from './FriendsOnline.module.scss'
 import Avatar from '../Avatar'
 
 interface Friends {
+  id: string
   name: string
   avatar?: string
 }
@@ -50,13 +53,15 @@ const FriendsOnline: FC<FriendsOnlineProps> = ({ allUsers, isLoading }) => {
   )
 }
 
-const Friend: FC<Friends> = ({ name, avatar }) => {
+const Friend: FC<Friends> = ({ name, avatar, id }) => {
   return (
     <div className={styles.friend}>
-      <div className={styles.name}>
-        <Avatar imageUrl={avatar} />
-        <p>{name}</p>
-      </div>
+      <NavLink to={`${PATHS.PROFILE}/${id}`}>
+        <div className={styles.name}>
+          <Avatar imageUrl={avatar} />
+          <p>{name}</p>
+        </div>
+      </NavLink>
     </div>
   )
 }
