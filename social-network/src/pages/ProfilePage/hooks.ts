@@ -53,7 +53,10 @@ export const useProfilePage = () => {
   const onLoadImg = async (e: SyntheticEvent) => {
     const newImg = (e.target as HTMLImageElement).src
 
-    if (bgImageArr.indexOf(newImg) >= DEFAULT_ARR_LENGTH) {
+    if (
+      bgImageArr.indexOf(newImg) >= DEFAULT_ARR_LENGTH &&
+      !userWallpapers.includes(newImg)
+    ) {
       userWallpapers.push(newImg)
     }
 
