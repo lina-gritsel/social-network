@@ -34,6 +34,15 @@ app.get('/api/healthchecker', (req: Request, res: Response) => {
   })
 })
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 app.all('*', (req: Request, res: Response) => {
   res.status(404).json({
     status: 'fail',
