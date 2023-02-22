@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { createComment, getPost } from '../../api'
 
 import { getUserInfoSelector } from '../../store/selectors'
+import { createComment, getPost } from '../../api'
 import { sortNews } from '../../utils/utils'
 
 interface UseCreateCommentProps {

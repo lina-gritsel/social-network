@@ -7,14 +7,16 @@ import {
   DeleteForever,
 } from '@mui/icons-material'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import moment from 'moment'
 
 import { deletePost, getPost, getUser } from '../../api/requests'
 import { getUserInfoSelector } from '../../store/selectors'
 import { useOnClickOutside } from '../../hooks'
+import { PATHS } from '../../router/paths'
 import { User } from '../../api'
 
 import { useCreateComment } from '../CreateComment/hooks'
@@ -104,9 +106,19 @@ const PostCard: FC<News> = ({
         )}
         <div className={styles.wrapperCardHeader}>
           <div className={styles.wrapperCard}>
-            <Avatar className={styles.cardAvatar} imageUrl={avatar} />
+            <NavLink
+              className={styles.profileLink}
+              to={`${PATHS.PROFILE}/${author?.id}`}
+            >
+              <Avatar className={styles.cardAvatar} imageUrl={avatar} />
+            </NavLink>
             <div>
-              <div className={styles.author}>{author?.name}</div>
+              <NavLink
+                className={styles.profileLink}
+                to={`${PATHS.PROFILE}/${author?.id}`}
+              >
+                <div className={styles.author}>{author?.name}</div>
+              </NavLink>
               <div className={styles.createAt}>{createdPostTime}</div>
             </div>
           </div>
@@ -148,7 +160,10 @@ const PostCard: FC<News> = ({
             </span>
           </Typography>
         </CardContent>
-        <FooterPanelPost setSchowComments={setSchowComments} allComments={allComments}/>
+        <FooterPanelPost
+          setSchowComments={setSchowComments}
+          allComments={allComments}
+        />
         <CreateComment
           avatarImg={avatar}
           onSubmit={onSubmit}

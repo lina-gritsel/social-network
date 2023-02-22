@@ -26,6 +26,7 @@ const CommentsList: FC<CommentsListProps> = ({
           return (
             <Comment
               key={index}
+              authorId={user?.id}
               userName={user?.name}
               comment={comment}
               createdAt={createdAt}

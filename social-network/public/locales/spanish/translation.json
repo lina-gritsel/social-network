@@ -84,5 +84,7 @@
   "comment": "Escribir un comentario...",
   "like":"Como",
   "comments":"Comentarios",
-  "noAccount": "No tienes ninguna cuenta?"
+  "noAccount": "No tienes ninguna cuenta?",
+  "logout": "Cerrar",
+  "logoutTitle": "Oh, no! Te vas... Estás seguro?"
 }

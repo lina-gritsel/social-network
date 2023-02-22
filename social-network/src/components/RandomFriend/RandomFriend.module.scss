@@ -81,13 +81,13 @@
 }
 
 .ignorFriends {
-  border: 2px solid var(--light-gray-color);
+  border: var(--border-primary);
   color: var(--gray-color);
   opacity: 0.6;
 }
 
 .followFriends {
-  color: var(--gray-color);
+  color: var(--light-color);
 }
 
 .avatar {
