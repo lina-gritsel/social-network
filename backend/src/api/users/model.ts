@@ -36,12 +36,12 @@ const UserModel = sequelize.define('user', {
     defaultValue: DataTypes.NOW,
     allowNull: false,
   },
-  following: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+  followings: {
+    type: DataTypes.JSON,
     allowNull: true,
   },
   followers: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.JSON,
     allowNull: true,
   },
   password: {

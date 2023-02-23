@@ -222,3 +222,14 @@ export const changeLikes = async (req: Request<any>, res: Response) => {
     })
   }
 }
+
+
+// const userExist = !!followings.find(
+//   (item) => item?.currentUserId === currentUserId,
+// )
+
+// if (userExist) {
+//   const arrFollowings = followings.filter(
+//     ({ currentUserId }) => currentUserId !== req.body.currentUserId,
+//   )
+// }
