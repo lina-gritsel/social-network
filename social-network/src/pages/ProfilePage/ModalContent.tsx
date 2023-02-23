@@ -5,12 +5,12 @@ import { FC, Dispatch, SetStateAction, MouseEvent } from 'react'
 
 import Loader from '../../components/Loader'
 import Button from '../../components/Button'
+import { changeUser } from '../../api'
 
 import { DEFAULT_ARR_LENGTH } from './constants'
 import { useModalContent } from './hooks'
 
 import styles from './Profile.module.scss'
-import { changeUser } from '../../api'
 
 interface IModalContent {
   setBgImage: Dispatch<SetStateAction<string>>

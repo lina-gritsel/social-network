@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 import { Favorite, ChatBubbleOutline } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
+import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 
+import { PATHS } from '../../router/paths'
 import Avatar from '../Avatar'
 import Loader from '../Loader'
 
 import { useChangeLike } from './hooks'
 
 import styles from './FooterPanelPost.module.scss'
-import { NavLink } from 'react-router-dom'
-import { PATHS } from '../../router/paths'
 
 interface FooterPanelPostProps {
   postId: string
@@ -34,6 +34,9 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
     postId,
   })
   const { t } = useTranslation()
+
+  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+
   const amountComments = allComments.length
 
   return (
@@ -41,13 +44,15 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
       <div className={styles.actionAmount}>
         <div className={styles.avatarWrapper}>
           {isLoading ? (
-            <Loader className={styles.loading} />
+            <Loader classNameCircular={styles.loading} />
           ) : (
             <>
               {avatarArr.map((avatar, index) => (
                 <NavLink
                   key={index}
-                  to={`${PATHS.PROFILE}/${likesUsersId[index]}`}
+                  to={`${PATHS.PROFILE}/${
+                    likesUsersId[index] === userId ? 'me' : likesUsersId[index]
+                  }`}
                   className={styles.likeAvatar}
                 >
                   <Avatar imageUrl={avatar} className={styles.likeAvatar} />

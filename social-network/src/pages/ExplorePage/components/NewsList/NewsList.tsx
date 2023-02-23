@@ -4,6 +4,7 @@ import { NewsInfo } from '../../../../requests/news'
 import { dateConversion } from '../../../../utils'
 
 import NewsCard from '../NewsCard'
+
 import styles from './NewsList.module.scss'
 
 interface NewsListProps {

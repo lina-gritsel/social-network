@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-
 import {
   Card,
   CardMedia,
@@ -52,7 +51,6 @@ const PostCard: FC<News> = ({
   createdAt,
   image,
   content,
-  avatar,
   className,
   id,
   setIsAllPosts,

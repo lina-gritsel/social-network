@@ -67,7 +67,7 @@ export const getAllUsers = async (): Promise<UsersInfo> => {
   }
 }
 
-export const updateUser = async (user): Promise<User> => {
+export const updateUser = async (user: User): Promise<User> => {
   try {
     const data = await fetch(`${USERS_URL}/${user.id}`, {
       method: 'PATCH',

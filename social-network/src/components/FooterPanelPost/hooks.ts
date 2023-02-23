@@ -67,6 +67,7 @@ export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
     const isLike =
       dataLikes.filter(({ userId }) => userId === currentUserId).length === 1
     setIsLike(isLike)
+
   }, [dataLikes, currentUserId])
 
   useEffect(() => {
@@ -87,9 +88,9 @@ export const useChangeLike = ({ postId }: UseChangeLikeProps) => {
   return {
     isLike,
     isLoading,
-    likeOnclick,
     avatarArr,
     likesUsersId,
     amountMoreLikes,
+    likeOnclick,
   }
 }

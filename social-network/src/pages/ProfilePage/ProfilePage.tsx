@@ -24,6 +24,8 @@ import {
 import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
+  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+
   const { t } = useTranslation()
 
   const { id: profileId } = useParams<{ id: string }>()

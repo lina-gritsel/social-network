@@ -25,7 +25,7 @@ export const useProfilePage = () => {
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [bgImageArr, setBgImageArr] = useState<string[]>([])
-  const [bgImage, setBgImage] = useState<string>(DEFAULT_WALLPAPER)
+  const [bgImage, setBgImage] = useState<string>(userInfo?.background || DEFAULT_WALLPAPER)
 
   const userWallpapers = userInfo?.wallpapers || []
 

@@ -3,12 +3,13 @@ import { Box, CircularProgress } from '@mui/material'
 
 interface LoaderProps {
   className?: string
+  classNameCircular?: string
 }
 
-const Loader: FC<LoaderProps> = ({ className }) => {
+const Loader: FC<LoaderProps> = ({ className, classNameCircular }) => {
   return (
     <Box className={className}>
-      <CircularProgress className={className}/>
+      <CircularProgress className={classNameCircular}/>
     </Box>
   )
 }

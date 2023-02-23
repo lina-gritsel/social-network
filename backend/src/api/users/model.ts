@@ -36,7 +36,7 @@ const UserModel = sequelize.define('user', {
     defaultValue: DataTypes.NOW,
     allowNull: false,
   },
-  following: {
+  followings: {
     type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: true,
   },
