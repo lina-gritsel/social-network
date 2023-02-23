@@ -7,7 +7,7 @@ import Loader from '../../components/Loader'
 import Button from '../../components/Button'
 import { changeUser } from '../../api'
 
-import { DEFAULT_ARR_LENGTH } from './constants'
+import { DEFAULT_NUMBER_PICTURES } from './constants'
 import { useModalContent } from './hooks'
 
 import styles from './Profile.module.scss'
@@ -58,7 +58,7 @@ const ModalContent: FC<IModalContent> = ({
     const newImageArr = bgImageArr.filter((img, index) => index !== indexNumber)
     setBgImageArr(newImageArr)
     const wallpapers = newImageArr.filter(
-      (el, index) => index >= DEFAULT_ARR_LENGTH,
+      (el, index) => index >= DEFAULT_NUMBER_PICTURES,
     )
     await changeUser({ wallpapers: wallpapers }, userId)
   }
@@ -71,7 +71,7 @@ const ModalContent: FC<IModalContent> = ({
         ) : (
           bgImageArr?.map((img, index) => (
             <div className={styles.imgItem} key={index}>
-              {index >= DEFAULT_ARR_LENGTH && (
+              {index >= DEFAULT_NUMBER_PICTURES && (
                 <CancelIcon
                   className={styles.cancel}
                   id={index.toString()}
