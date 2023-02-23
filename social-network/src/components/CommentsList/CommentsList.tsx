@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import classNames from 'classnames'
 
 import Comment from '../Comment'
 import Loader from '../Loader'
@@ -7,29 +6,23 @@ import Loader from '../Loader'
 import styles from './CommentsList.module.scss'
 
 interface CommentsListProps {
-  showComments: boolean
-  allComments: any
+  allComments: any[]
   isLoading: boolean
 }
 
-const CommentsList: FC<CommentsListProps> = ({
-  allComments,
-  showComments,
-  isLoading,
-}) => {
+const CommentsList: FC<CommentsListProps> = ({ allComments, isLoading }) => {
   return (
-    <div className={classNames(styles.list, { [styles.show]: showComments })}>
+    <div className={styles.list}>
       {isLoading ? (
         <Loader />
       ) : (
-        allComments.map(({ comment, user, createdAt }, index) => {
+        allComments.map(({ comment, user, createAt }, index) => {
           return (
             <Comment
-              key={index}
-              userName={user.name}
-              comment={comment}
-              createdAt={createdAt}
-              avatarAuthorComment={user.avatar}
+            key={index}
+            author={user}
+            comment={comment}
+            createAt={createAt}
             />
           )
         })

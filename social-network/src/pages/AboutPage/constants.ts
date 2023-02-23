@@ -1,4 +1,4 @@
-export const GITHUB_LINKS = {
+export const LINKS = {
     RS_SCHOOL: 'https://rs.school/js/',
     PASHA: 'https://github.com/pashashchuka',
     LINA: 'https://github.com/lina-gritsel',

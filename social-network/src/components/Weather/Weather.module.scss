@@ -53,6 +53,7 @@
 }
 
 .city {
+  color: var(--light-color);
   font: var(--font-text-2);
   font-weight: 600;
   text-transform: capitalize;
@@ -85,13 +86,17 @@
   background: none;
   border: 0;
   outline: 0;
-  color: var(--white-color);
+  color: var(--light-color) !important;
   font: var(--font-text-3);
   font-weight: 700;
   line-height: 20px;
 
   &:focus {
     border-bottom: 1px solid var(--white-color);
+  }
+
+  &::placeholder {
+    color: var(--light-color);
   }
 }
 
@@ -108,5 +113,6 @@
 }
 
 .temperature {
+  color: var(--light-color);
   font-size: 42px;
 }

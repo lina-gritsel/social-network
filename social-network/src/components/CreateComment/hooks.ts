@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { createComment, getPost } from '../../api'
 
 import { getUserInfoSelector } from '../../store/selectors'
+import { createComment, getPost } from '../../api'
 import { sortNews } from '../../utils/utils'
 
 interface UseCreateCommentProps {
@@ -21,8 +21,8 @@ export const useCreateComment = ({
 
   const [allComments, setAllComments] = useState([])
 
-  const sortedComments = allComments.sort((a, b) =>
-    sortNews(a.createAt, b.createAt),
+  const sortedComments = allComments.sort((currentComment, nextComment) =>
+    sortNews(currentComment.createAt, nextComment.createAt),
   )
 
   useEffect(() => {

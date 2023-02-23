@@ -1,30 +1,44 @@
+import { FC, useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import moment from 'moment'
-import { FC } from 'react'
+
+import { PATHS } from '../../router/paths'
+import { getUser } from '../../api'
+
 import Avatar from '../Avatar'
 
 import styles from './Comment.module.scss'
 
 interface ExistCommentProps {
   comment: string
-  userName: string
-  createdAt: number
-  avatarAuthorComment: string
+  createAt: number
+  author: any
 }
 
 const ExistComment: FC<ExistCommentProps> = ({
   comment,
-  userName,
-  createdAt,
-  avatarAuthorComment,
+  createAt,
+  author,
 }) => {
-  const createdCommentTime = moment(createdAt).fromNow()
+  const createdCommentTime = moment(createAt).fromNow()
+  const [authorComment, setAuthorComment] = useState(null)
+
+  useEffect(() => {
+    const getAuthorComment = async () => {
+      const authorInfo = await getUser(author.id)
+      setAuthorComment(authorInfo?.data?.user)
+    }
+    getAuthorComment()
+  }, [author])
 
   return (
     <div className={styles.wrapperExistComment}>
-      <Avatar imageUrl={avatarAuthorComment} />
+      <NavLink to={`${PATHS.PROFILE}/${authorComment?.id}`}>
+        <Avatar imageUrl={authorComment?.avatar} />
+      </NavLink>
       <div className={styles.container}>
         <div className={styles.commentHeader}>
-          <div className={styles.name}>{userName}</div>
+          <div className={styles.name}>{authorComment?.name} </div>
           <div className={styles.time}>{createdCommentTime}</div>
         </div>
         <div className={styles.content}>{comment}</div>

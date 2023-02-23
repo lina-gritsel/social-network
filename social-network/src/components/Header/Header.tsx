@@ -18,7 +18,7 @@ const Header: FC = () => {
       <Avatar
         imageUrl={userInfo?.avatar}
         className={styles.avatar}
-        onClick={() => navigate(PATHS.PROFILE)}
+        onClick={() => navigate(`${PATHS.PROFILE}/me`)}
       />
     </div>
   )
