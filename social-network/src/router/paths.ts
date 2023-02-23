@@ -9,4 +9,5 @@ export const PATHS = {
   EXPLORE: '/explore',
   SETTINGS: '/settings',
   REGISTRATION: '/registration',
+  FRIENDS: '/friends'
 }
