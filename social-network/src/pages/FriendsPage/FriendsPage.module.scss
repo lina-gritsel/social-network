@@ -1,0 +1,25 @@
+.container {
+  background-color: var(--light-gray-color);
+  border-radius: 16px;
+  display: flex;
+  gap: 30px;
+  margin: 0 32px;
+  padding: 32px;
+}
+
+.myFriends {
+  background-color: var(--white-color);
+  border-radius: 16px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.allFollowers,
+.mightLike {
+  background-color: var(--white-color);
+  border-radius: 16px;
+}
