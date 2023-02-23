@@ -3,6 +3,7 @@
   border-radius: 16px;
   display: flex;
   gap: 30px;
+  justify-content: center;
   margin: 0 32px;
   padding: 32px;
 }
@@ -10,6 +11,8 @@
 .myFriends {
   background-color: var(--white-color);
   border-radius: 16px;
+  padding: 14px;
+  min-width: 600px;
 }
 
 .wrapper {
@@ -18,8 +21,14 @@
   gap: 20px;
 }
 
-.allFollowers,
 .mightLike {
   background-color: var(--white-color);
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 300px;
+  padding: 14px;
+  text-transform: capitalize;
 }
+
