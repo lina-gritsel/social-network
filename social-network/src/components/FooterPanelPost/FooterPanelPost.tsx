@@ -59,10 +59,7 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
                 </NavLink>
               ))}
               {amountMoreLikes && (
-                <Avatar
-                  className={styles.likeAvatar}
-                  title={`+${amountMoreLikes}`}
-                />
+                <div className={styles.likeAvatar}>+{amountMoreLikes}</div>
               )}
             </>
           )}

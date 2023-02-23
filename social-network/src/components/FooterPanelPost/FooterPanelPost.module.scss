@@ -66,11 +66,16 @@
     position: relative;
     right: 15px;
     font-size: 14px;
+    border-radius: 50%;
     background: var(--dark-gray-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 .loading {
-  width: 25px !important;
-  height: 25px !important;
+  width: 21px !important;
+  height: 21px !important;
 }

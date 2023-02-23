@@ -8,10 +8,9 @@ interface AvatarProps {
   imageUrl?: string
   className?: string
   onClick?: () => void
-  title?: string
 }
 
-const Avatar: FC<AvatarProps> = ({ imageUrl, className, onClick, title }) => {
+const Avatar: FC<AvatarProps> = ({ imageUrl, className, onClick }) => {
   return (
     <AvatarMui
       src={imageUrl}
@@ -19,9 +18,7 @@ const Avatar: FC<AvatarProps> = ({ imageUrl, className, onClick, title }) => {
       aria-label="recipe"
       className={classNames(styles.root, className)}
       alt="avatar"
-    >
-      {title}
-    </AvatarMui>
+    />
   )
 }
 

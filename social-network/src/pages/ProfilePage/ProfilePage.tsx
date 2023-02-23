@@ -52,7 +52,7 @@ const ProfilePage: FC = () => {
 
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
 
-  const isMyProfile = profileId === 'me'
+  const isMyProfile = profileId === 'me' || profileId === userId
 
   const userInfo = isMyProfile ? rawUserInfo : user
   const profileInfoArr = isMyProfile ? rawProfileInfoArr : userProfileInfoArr
