@@ -3,14 +3,14 @@ import { Box, CircularProgress } from '@mui/material'
 
 import PostCard, { News } from '../PostCard/PostCard'
 import { getAllPosts } from '../../api/requests'
-import { sortNews } from '../../utils/utils'
+import { sortNews } from '../../utils'
 
 import styles from './PostsList.module.scss'
 
 interface PostsListProps {
   isAllPosts: boolean
   filterPostsForProfilePage?: boolean
-  name?: string
+  filterId?: string
   isProfilePage?: boolean
   setIsAllPosts?: (boolean) => void
 }
@@ -20,10 +20,10 @@ const PostsList: FC<PostsListProps> = ({
   filterPostsForProfilePage,
   isProfilePage,
   setIsAllPosts,
+  filterId,
 }) => {
   const [allPosts, setAllPosts] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   useEffect(() => {
     const getAllExistPosts = async () => {
@@ -34,14 +34,14 @@ const PostsList: FC<PostsListProps> = ({
       )
 
       if (filterPostsForProfilePage) {
-        setAllPosts(sortedPosts.filter((post) => post.userId))
+        setAllPosts(sortedPosts.filter((post) => post.userId === filterId))
       } else {
         setAllPosts(sortedPosts)
       }
       setIsLoading(false)
     }
     getAllExistPosts()
-  }, [isAllPosts, filterPostsForProfilePage, userId])
+  }, [isAllPosts, filterPostsForProfilePage, filterId])
 
   if (isLoading)
     return (

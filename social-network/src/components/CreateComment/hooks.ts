@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { getUserInfoSelector } from '../../store/selectors'
 import { createComment, getPost } from '../../api'
-import { sortNews } from '../../utils/utils'
+import { sortNews } from '../../utils'
 
 interface UseCreateCommentProps {
   postId: string

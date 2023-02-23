@@ -4,11 +4,13 @@ import { NavLink } from 'react-router-dom'
 import { Card } from '@mui/material'
 import moment from 'moment'
 
-import { getRandomInt } from '../../utils/utils'
+import { getRandomInt } from '../../utils'
 import { PATHS } from '../../router/paths'
 import { User } from '../../api'
 import Avatar from '../Avatar'
 import Button from '../Button'
+
+import { FIELD } from './constants'
 
 import styles from './RandomFriend.module.scss'
 import { FIELD } from './constants'

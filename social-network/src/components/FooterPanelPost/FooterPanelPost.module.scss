@@ -20,6 +20,10 @@
   color: var(--dark-gray-color);
 }
 
+.isLike {
+  color: red !important;
+}
+
 .actionOnPost {
   align-items: center;
   display: flex;
@@ -31,7 +35,47 @@
   display: flex;
   font-weight: 500;
   font-size: 14px;
-  justify-content: flex-end;
   line-height: 22px;
   opacity: 0.6;
+}
+
+.actionAmount {
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatarWrapper {
+  display: flex;
+}
+
+.likeAvatar {
+  width: 25px !important;
+  height: 25px !important;
+
+  &:nth-child(2) {
+    position: relative;
+    right: 5px;
+  }
+
+  &:nth-child(3) {
+    position: relative;
+    right: 10px;
+  }
+
+  &:nth-child(4) {
+    position: relative;
+    right: 15px;
+    font-size: 14px;
+    border-radius: 50%;
+    background: var(--dark-gray-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.loading {
+  width: 21px !important;
+  height: 21px !important;
 }

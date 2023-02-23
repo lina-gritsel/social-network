@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import {
   Card,
   CardMedia,
@@ -12,6 +13,7 @@ import classNames from 'classnames'
 import moment from 'moment'
 
 import { getUser } from '../../api/requests'
+import { getUserInfoSelector } from '../../store/selectors'
 import { PATHS } from '../../router/paths'
 import { User } from '../../api'
 
@@ -27,6 +29,7 @@ import styles from './PostCard.module.scss'
 
 export const DEFAULT_IMG =
   'https://bazatoka.ru/image/cache/no_image-800x800.png'
+
 
 export interface News {
   userId: string
@@ -48,7 +51,6 @@ const PostCard: FC<News> = ({
   createdAt,
   image,
   content,
-  avatar,
   className,
   id,
   setIsAllPosts,
@@ -58,6 +60,8 @@ const PostCard: FC<News> = ({
   const [author, setAuthor] = useState<User>()
   const [showMore, setShowMore] = useState(true)
   const [showComments, setSchowComments] = useState(false)
+
+  const userInfo = useSelector(getUserInfoSelector)
 
   useEffect(() => {
     const getAuthor = async () => {
@@ -140,6 +144,7 @@ const PostCard: FC<News> = ({
           </Typography>
         </CardContent>
         <FooterPanelPost
+          postId={id}
           setSchowComments={setSchowComments}
           allComments={allComments}
         />
