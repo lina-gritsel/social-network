@@ -28,7 +28,11 @@ const ProfilePage: FC = () => {
 
   const { t } = useTranslation()
 
-  const { id: profileId } = useParams<{ id: string }>()
+  const profileId =
+    useParams<{ id: string }>().id === 'me'
+      ? userId
+      : useParams<{ id: string }>().id
+
   const {
     user,
     isLoading: isLoadingUserInfo,
@@ -52,7 +56,7 @@ const ProfilePage: FC = () => {
 
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
 
-  const isMyProfile = profileId === 'me' || profileId === userId
+  const isMyProfile = profileId === userId
 
   const userInfo = isMyProfile ? rawUserInfo : user
   const profileInfoArr = isMyProfile ? rawProfileInfoArr : userProfileInfoArr

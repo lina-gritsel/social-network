@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Card } from '@mui/material'
 import moment from 'moment'
 
-import { getRandomInt } from '../../utils'
+import { getRandomElemArr, getRandomInt } from '../../utils'
 import { PATHS } from '../../router/paths'
 import { User } from '../../api'
 import Avatar from '../Avatar'
@@ -26,10 +26,7 @@ interface RandomUser {
 }
 
 const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
-  const indexArr = [
-    getRandomInt(0, allUsers?.length),
-    getRandomInt(0, allUsers?.length),
-  ]
+  const indexArr = getRandomElemArr(2)
   const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
 
   return (
