@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const createPostSchema = z.object({
   body: z.object({
-    username: z.string({
+    userId: z.string({
       required_error: '',
     }),
     content: z.string({

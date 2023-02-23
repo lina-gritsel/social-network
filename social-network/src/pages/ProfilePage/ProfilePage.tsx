@@ -8,7 +8,7 @@ import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
 import Avatar from '../../components/Avatar'
-import NewsList from '../../components/PostsList'
+import PostList from '../../components/PostsList'
 import CreatePost from '../../components/CreatePost'
 
 import { useFetchProfileInfo, useProfilePage } from './hooks'
@@ -18,11 +18,14 @@ import {
   FIRST_LINKS_INDEX,
   LAST_LINKS_INDEX,
   LINKS,
+  DEFAULT_WALLPAPER,
 } from './constants'
 
 import styles from './Profile.module.scss'
 
 const ProfilePage: FC = () => {
+  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+
   const { t } = useTranslation()
 
   const { id: profileId } = useParams<{ id: string }>()
@@ -39,6 +42,7 @@ const ProfilePage: FC = () => {
     bgImageArr,
     isErrorImg,
     profileInfoArr: rawProfileInfoArr,
+    onLoadImg,
     errorImg,
     setIsOpen,
     setBgImage,
@@ -48,9 +52,10 @@ const ProfilePage: FC = () => {
 
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
 
-  const userInfo = profileId === 'me' ? rawUserInfo : user
-  const profileInfoArr =
-    profileId === 'me' ? rawProfileInfoArr : userProfileInfoArr
+  const isMyProfile = profileId === 'me' || profileId === userId
+
+  const userInfo = isMyProfile ? rawUserInfo : user
+  const profileInfoArr = isMyProfile ? rawProfileInfoArr : userProfileInfoArr
 
   if (isLoadingUserInfo || !userInfo)
     return <Loader className={styles.loading} />
@@ -80,19 +85,22 @@ const ProfilePage: FC = () => {
           <div className={styles.wrapperCover}>
             <img
               className={styles.bgProfile}
-              src={bgImage}
+              src={isMyProfile ? bgImage : user.background || DEFAULT_WALLPAPER}
               alt="background"
               onError={(e) => errorImg(e)}
+              onLoad={(e) => isMyProfile && onLoadImg(e)}
             />
-            <Button
-              className={styles.editCoverPhoto}
-              onClick={() => {
-                setIsOpen(true)
-                setIsErrorImg(false)
-              }}
-            >
-              {t('editCoverPhoto')}
-            </Button>
+            {isMyProfile && (
+              <Button
+                className={styles.editCoverPhoto}
+                onClick={() => {
+                  setIsOpen(true)
+                  setIsErrorImg(false)
+                }}
+              >
+                {t('editCoverPhoto')}
+              </Button>
+            )}
           </div>
           <Avatar
             imageUrl={userInfo?.avatar}
@@ -103,9 +111,11 @@ const ProfilePage: FC = () => {
               <div className={styles.nameUser}>{userInfo?.name}</div>
               <div className={styles.workUser}>{userInfo?.bio}</div>
             </div>
-            <NavLink to={PATHS.SETTINGS}>
-              <Button className={styles.editInfo}>{t('settings')}</Button>
-            </NavLink>
+            {isMyProfile && (
+              <NavLink to={PATHS.SETTINGS}>
+                <Button className={styles.editInfo}>{t('settings')}</Button>
+              </NavLink>
+            )}
           </div>
         </div>
         <div className={styles.wrapperContent}>
@@ -139,18 +149,20 @@ const ProfilePage: FC = () => {
             )}
           </div>
           <div className={styles.content}>
-            <CreatePost
-              name={userInfo?.name}
-              userId={userInfo?.id}
-              avatarImg={userInfo?.avatar}
-              setIsAllPosts={setIsAllPosts}
-              className={styles.postInput}
-            />
-            <NewsList
+            {isMyProfile && (
+              <CreatePost
+                name={userInfo?.name}
+                userId={userInfo?.id}
+                avatarImg={userInfo?.avatar}
+                setIsAllPosts={setIsAllPosts}
+                className={styles.postInput}
+              />
+            )}
+            <PostList
               isAllPosts={isAllPosts}
               filterPostsForProfilePage
-              name={userInfo?.name}
-              isProfilePage={true}
+              filterId={userInfo?.id}
+              isProfilePage={isMyProfile}
               setIsAllPosts={setIsAllPosts}
             />
           </div>

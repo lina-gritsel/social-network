@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import styles from './Avatar.module.scss'
 
 interface AvatarProps {
-  imageUrl: string
+  imageUrl?: string
   className?: string
   onClick?: () => void
 }

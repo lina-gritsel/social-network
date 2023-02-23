@@ -25,7 +25,7 @@ const CreateComment: FC<CommentProps> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <Avatar imageUrl={userInfo.avatar} className={styles.avatar} />
+        <Avatar imageUrl={userInfo?.avatar} className={styles.avatar} />
         <input
           placeholder={t('comment')}
           className={styles.input}

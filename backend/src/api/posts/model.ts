@@ -10,11 +10,11 @@ const PostModel = sequelize.define('post', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  image: {
+  userId: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  username: {
+  image: {
     type: DataTypes.STRING,
     allowNull: false,
   },

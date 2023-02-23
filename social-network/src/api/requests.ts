@@ -7,6 +7,7 @@ import {
   CreatePostParams,
   DeleteUserStatus,
   ChangePostParams,
+  ChangeUserParams,
   CreateComment,
 } from './types'
 
@@ -16,6 +17,7 @@ const USERS_URL = `${BASE_URL}/users`
 const LOGIN_URL = `${BASE_URL}/login`
 const POSTS_URL = `${BASE_URL}/posts`
 const COMMETS_URL = `${POSTS_URL}/comments`
+const LIKES_URL = `${POSTS_URL}/likes`
 const WALLPAPER_URL = `${BASE_URL}/wallpaper`
 
 export const createUser = async (user: User): Promise<RegistrationData> => {
@@ -133,6 +135,20 @@ export const changePost = async (content: ChangePostParams, id: string) => {
   }
 }
 
+export const changeUser = async (params: ChangeUserParams, id: string) => {
+  try {
+    await fetch(`${USERS_URL}/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(params),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error) {
+    throw new Error(`${error}`)
+  }
+}
+
 export const getPost = async (id: string) => {
   try {
     const response = await fetch(`${POSTS_URL}/${id}`)
@@ -168,6 +184,21 @@ export const createComment = async ({
     return response.json()
   } catch (error) {
     throw new Error(`${error}`)
+  }
+}
+export const changeLike = async (postId, userId) => {
+  try {
+    const response = await fetch(`${LIKES_URL}/${postId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ userId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
   }
 }
 

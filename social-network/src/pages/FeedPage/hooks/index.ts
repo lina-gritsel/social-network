@@ -11,7 +11,7 @@ type UseFetchAllUsers = () => {
 
 export const useNewsPage: UseFetchAllUsers = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [userswWithoutMe, setUsers] = useState<User[]>([])
+  const [userswWithoutMe, setUserswWithoutMe] = useState<User[]>([])
 
   const dispatch = useAppDispatch()
 
@@ -22,13 +22,13 @@ export const useNewsPage: UseFetchAllUsers = () => {
   }, [dispatch, userId])
 
   useEffect(() => {
-    const getUsers = async () => {
+    const getUserswWithoutMe = async () => {
       const res = (await getAllUsers()).users
-      setUsers(res.filter(({ id }) => id !== userId))
+      setUserswWithoutMe(res.filter(({ id }) => id !== userId))
 
       setIsLoading(false)
     }
-    getUsers()
+    getUserswWithoutMe()
   }, [userId])
 
   return { isLoading, userswWithoutMe }
