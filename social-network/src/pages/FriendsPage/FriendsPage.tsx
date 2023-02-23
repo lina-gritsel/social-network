@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import Layout from '../../components/Layout'
+import FriendsList from './components/FriendsList'
 
 import FriendsMenu from './components/FriendsMenu'
 import PossibleFriends from './components/FriendsPossible'
@@ -11,7 +12,7 @@ const FriendsPage: FC = () => {
   return (
     <Layout>
       <div className={styles.container}>
-        <div className={styles.myFriends}>FriendsPage</div>
+        <FriendsList/>
         <div className={styles.wrapper}>
           <FriendsMenu />
           <PossibleFriends />
