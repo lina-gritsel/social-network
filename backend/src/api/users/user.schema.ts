@@ -40,6 +40,13 @@ export const updateUserSchema = z.object({
     .partial(),
 })
 
+export const friends = z.object({
+  params,
+  body: z.object({
+    currentUserId: z.string()
+  }) 
+})
+
 export const filterQuery = z.object({
   limit: z.number().default(10),
   page: z.number().default(100),
@@ -49,3 +56,4 @@ export type ParamsInput = z.TypeOf<typeof params>
 export type FilterQueryInput = z.TypeOf<typeof filterQuery>
 export type CreateUserInput = z.TypeOf<typeof createUserSchema>['body']
 export type UpdateUserInput = z.TypeOf<typeof updateUserSchema>
+export type Friends = z.TypeOf<typeof friends>

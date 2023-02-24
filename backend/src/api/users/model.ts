@@ -37,11 +37,11 @@ const UserModel = sequelize.define('user', {
     allowNull: false,
   },
   followings: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.JSON,
     allowNull: true,
   },
   followers: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.JSON,
     allowNull: true,
   },
   password: {
