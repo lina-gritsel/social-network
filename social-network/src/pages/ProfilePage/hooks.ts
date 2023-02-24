@@ -1,9 +1,11 @@
 import moment from 'moment'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 
 import { getUser, getWallpapers, changeUser, User } from '../../api'
 import { getUserInfoSelector } from '../../store/selectors'
+import { PATHS } from '../../router/paths'
 
 import { DEFAULT_WALLPAPER, DEFAULT_NUMBER_PICTURES } from './constants'
 
@@ -17,15 +19,17 @@ export const useProfilePage = () => {
     userInfo?.facebook,
     userInfo?.twitter,
     userInfo?.instagram,
-    userInfo?.followers,
-    userInfo?.followings,
+    userInfo?.followers?.length || '-',
+    userInfo?.followings?.length || '-',
   ]
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [bgImageArr, setBgImageArr] = useState<string[]>([])
-  const [bgImage, setBgImage] = useState<string>(userInfo?.background || DEFAULT_WALLPAPER)
+  const [bgImage, setBgImage] = useState<string>(
+    userInfo?.background || DEFAULT_WALLPAPER,
+  )
 
   const userWallpapers = userInfo?.wallpapers || []
 
@@ -102,12 +106,19 @@ export const useFetchProfileInfo = (id: string) => {
   const [user, setUser] = useState<User>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     const fetchUserProfileInfo = async () => {
       setIsLoading(true)
 
-      const { data } = await getUser(id)
-      setUser(data?.user)
+      const { data, status } = await getUser(id)
+      if (status === 'success') {
+        setUser(data?.user)
+      } else {
+        
+        navigate(PATHS.PAGE_404, { replace: true })
+      }
 
       setIsLoading(false)
     }
@@ -122,8 +133,8 @@ export const useFetchProfileInfo = (id: string) => {
     user?.facebook,
     user?.twitter,
     user?.instagram,
-    user?.followers,
-    user?.followings,
+    user?.followers?.length || '-',
+    user?.followings?.length || '-',
   ]
 
   return {

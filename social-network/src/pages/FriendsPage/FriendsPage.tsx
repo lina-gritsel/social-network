@@ -13,15 +13,20 @@ import { Tabs } from './types'
 
 const FriendsPage: FC = () => {
   const userInfo = useSelector(getUserInfoSelector)
-  const followers = userInfo.followers
+  const followers = userInfo?.followers
   const followings = userInfo?.followings
+  const friends =
+    (followers?.length !== 0 && followers)
+      ? followers?.filter((user) => followings?.includes(user))
+      : []
 
   const [activeMenuItem, setActiveMenuItem] = useState<Tabs>(Tabs.FRIENDS)
-  
+
   return (
     <Layout>
       <div className={styles.container}>
         <FriendsList
+          friends={friends}
           followers={followers}
           followings={followings}
           activeMenuItem={activeMenuItem}

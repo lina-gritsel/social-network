@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import { Request, Response } from 'express'
 import UserModel from './model'
 import {
+  Friends,
   CreateUserInput,
   FilterQueryInput,
   ParamsInput,
@@ -13,13 +14,7 @@ export const createUserController = async (
   res: Response,
 ) => {
   try {
-    const {
-      name,
-      email,
-      date,
-      gender,
-      password,
-    } = req.body
+    const { name, email, date, gender, password } = req.body
 
     const salt = await bcrypt.genSalt(10)
     const hashedPass = await bcrypt.hash(password, salt)
@@ -182,38 +177,118 @@ export const deleteUserController = async (
   }
 }
 
-// export const followUserController = async (
-//   req: Request<ParamsInput>,
-//   res: Response,
-// ) => {
-//   const user = req.params.userId
-//   const currentUserId = req.body.currentUserId
+export const followUserController = async (
+  req: Request<Friends['params'], {}, Friends['body']>,
+  res: Response,
+) => {
+  const user = req.params.userId
+  const currentUserId = req.body.currentUserId
 
-//   if (user === currentUserId) {
-//     res.status(403).json("Action forbidden")
-//   } else {
-//     try {
-//       const followUser = (await UserModel.findByPk(user)) as any
+  if (user === currentUserId) {
+    res.status(403).json('Action forbidden')
+  } else {
+    try {
+      const subscribingUser = await UserModel.findByPk(user)
+      const currentUser = await UserModel.findByPk(currentUserId)
 
-//       if (!followUser?.followers?.includes(currentUserId)) {
-//         await UserModel.update(
-//           { updatedAt: Date.now(), following: [user] },
-//           { where: { id: user } },
-//         )
-//         await UserModel.update(
-//           { updatedAt: Date.now(), followers: [currentUserId] },
-//           { where: { id: currentUserId } },
-//         )
-//         res.status(200).json("User followed!")
-//       } else {
-//         res.status(403).json("User is Already followed by you")
-//       }
-//       res.status(204).json()
-//     } catch (error: any) {
-//       res.status(500).json({
-//         status: "error",
-//         message: error.message,
-//       })
-//     }
-//   }
-// }
+      const followingExist = subscribingUser?.dataValues?.followings
+      const followersExist = currentUser?.dataValues?.followers
+      const followings = followingExist
+        ? [...subscribingUser?.dataValues?.followings]
+        : []
+
+      const followers = followersExist
+        ? [...currentUser?.dataValues?.followers]
+        : []
+
+      if (currentUser) {
+        followings.push(currentUserId)
+        followers.push(user)
+
+        subscribingUser?.update(
+          { updatedAt: Date.now(), followings },
+          {
+            where: {
+              id: user,
+            },
+          },
+        )
+        currentUser?.update(
+          { updatedAt: Date.now(), followers },
+          {
+            where: {
+              id: currentUser,
+            },
+          },
+        )
+
+        res.status(200).json({
+          status: 'success',
+          data: {
+            subscribingUser,
+          },
+        })
+      } else {
+        res.status(404).json({
+          status: 'error',
+          message: 'User with this id does not exist',
+        })
+      }
+    } catch (error: any) {
+      res.status(500).json({
+        status: 'error',
+        message: error.message,
+      })
+    }
+  }
+}
+
+export const unsubscribeFromUserController = async (
+  req: Request<Friends['params'], {}, Friends['body']>,
+  res: Response,
+) => {
+  try {
+    const user = req.params.userId
+    const currentUser = req.body.currentUserId
+
+    const data = await UserModel.findByPk(user)
+    const unsubscribe = await UserModel.findByPk(currentUser)
+
+    const followings = data?.dataValues?.followings
+    const followers = unsubscribe?.dataValues.followers
+
+    const userExist = !!followings.find((item: string) => item === currentUser)
+
+    if (userExist) {
+      const followingList = followings.filter(
+        (item: string) => item !== currentUser,
+      )
+      const followersList = followers.filter((item: string) => {
+        item !== user
+      })
+
+      data?.update(
+        { updatedAt: Date.now(), followings: followingList },
+        { where: { id: user } },
+      )
+      unsubscribe?.update(
+        { updatedAt: Date.now(), followers: followersList },
+        { where: { id: currentUser } },
+      )
+      res.status(200).json({
+        status: 'success',
+        data: data?.dataValues,
+      })
+    } else {
+      res.status(404).json({
+        status: 'error',
+        message: 'User with this id does not exist',
+      })
+    }
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+    })
+  }
+}
