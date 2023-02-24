@@ -1,17 +1,18 @@
 import classNames from 'classnames'
-import { FC, useState } from 'react'
+import { FC } from 'react'
+import { Tabs } from '../../types'
 
 import styles from './FriendsMenu.module.scss'
 
-enum Tabs {
-  FRIENDS = 'friedns',
-  FOLLOWINGS = 'followings',
-  FOLLOWERS = 'followers',
+interface FriendsMenuProps {
+  activeMenuItem: string
+  setActiveMenuItem: (value) => void
 }
 
-const FriendsMenu: FC = () => {
-  const [activeMenuItem, setActiveMenuItem] = useState<Tabs>(Tabs.FRIENDS)
-
+const FriendsMenu: FC<FriendsMenuProps> = ({
+  activeMenuItem,
+  setActiveMenuItem,
+}) => {
   return (
     <div className={styles.container}>
       <div

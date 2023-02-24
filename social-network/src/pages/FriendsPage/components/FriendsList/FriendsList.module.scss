@@ -4,3 +4,10 @@
   padding: 14px;
   min-width: 600px;
 }
+
+.wrapperFriends {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 32px 0;
+}
