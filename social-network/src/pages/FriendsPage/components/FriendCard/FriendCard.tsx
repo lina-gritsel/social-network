@@ -1,24 +1,25 @@
 import { FC, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
+import Button from '../../../../components/Button'
 import Avatar from '../../../../components/Avatar'
 import { PATHS } from '../../../../router/paths'
 import { getUser } from '../../../../api'
 
+import styles from './FriendCard.module.scss'
+
 interface FriendProps {
   userId: string
-  nameButton: string
+  activeTab: string
 }
 
-import styles from './FriendCard.module.scss'
-import Button from '../../../../components/Button'
-
-const Friend: FC<FriendProps> = ({ userId, nameButton }) => {
+const Friend: FC<FriendProps> = ({ userId, activeTab}) => {
   const [currentFriend, setCurrentFriend] = useState(null)
+
   useEffect(() => {
     const getCurrentFriend = async () => {
-      const user = await getUser(userId)
-      setCurrentFriend(user.data.user)
+      const { data } = await getUser(userId)
+      setCurrentFriend(data.user)
     }
     getCurrentFriend()
   }, [userId])
@@ -34,7 +35,9 @@ const Friend: FC<FriendProps> = ({ userId, nameButton }) => {
           <div className={styles.bio}>{currentFriend?.bio}</div>
         </div>
       </div>
-      <Button outlined className={styles.btnFriend}>{nameButton}</Button>
+      <Button outlined className={styles.btnFriend}>
+        {activeTab === 'follower' ? 'follow' : 'unfollow'}
+      </Button>
     </div>
   )
 }
