@@ -1,8 +1,15 @@
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useTabs } from '../../hooks/useTabs'
+
 import { getUserInfoSelector } from '../../store/selectors'
+import { useDebounce } from '../../hooks'
+import { useTabs } from '../../hooks/useTabs'
 
 export const useFriendsPage = () => {
+  const [searchString, setSearchString] = useState<string>('')
+
+  const searchDebounced = useDebounce(searchString, 500)
+
   const { followers, followings } = useSelector(getUserInfoSelector)
 
   const friends = followers?.length
@@ -25,6 +32,8 @@ export const useFriendsPage = () => {
     friendsTabs,
     tabValue,
     setTabValue,
+    searchString: searchDebounced,
+    setSearch: setSearchString,
     list: getCertainList(),
   }
 }

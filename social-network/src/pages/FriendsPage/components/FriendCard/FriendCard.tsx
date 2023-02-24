@@ -13,9 +13,9 @@ interface FriendProps {
   activeTab: string
 }
 
-const Friend: FC<FriendProps> = ({ userId, activeTab}) => {
+const Friend: FC<FriendProps> = ({ userId, activeTab }) => {
   const [currentFriend, setCurrentFriend] = useState(null)
-
+  console.log(activeTab)
   useEffect(() => {
     const getCurrentFriend = async () => {
       const { data } = await getUser(userId)
@@ -36,7 +36,9 @@ const Friend: FC<FriendProps> = ({ userId, activeTab}) => {
         </div>
       </div>
       <Button outlined className={styles.btnFriend}>
-        {activeTab === 'follower' ? 'follow' : 'unfollow'}
+        {activeTab === 'followings' || activeTab === 'friends'
+          ? 'unfollow'
+          : 'follow'}
       </Button>
     </div>
   )

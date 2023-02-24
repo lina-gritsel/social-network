@@ -9,6 +9,15 @@
   height: 90vh;
 }
 
+.wrapperList {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white-color);
+  border-radius: 16px;
+  padding: 14px;
+  min-width: 600px;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;

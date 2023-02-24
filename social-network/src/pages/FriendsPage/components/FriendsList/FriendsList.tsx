@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import Friend from '../FriendCard'
 
@@ -10,20 +11,18 @@ interface FriendsListProps {
 }
 
 const FriendsList: FC<FriendsListProps> = ({ list, activeTab }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={styles.myFriends}>
-      {list.length && (
+      {!!list.length && (
         <div className={styles.wrapperFriends}>
           {list?.map((userId, index) => (
-            <Friend
-              key={index}
-              userId={userId}
-              activeTab={activeTab}
-            />
+            <Friend key={index} userId={userId} activeTab={activeTab} />
           ))}
         </div>
       )}
-      {!list.length && <>У тебя нет друзей плак плак</>}
+      {!list.length && <div className={styles.emtyList}>{t('notFriends')}</div>}
     </div>
   )
 }
