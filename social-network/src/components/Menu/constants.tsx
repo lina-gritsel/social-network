@@ -5,6 +5,7 @@ import {
   PeopleOutline,
   ExploreOutlined,
   SettingsOutlined,
+  Diversity3Outlined
 } from '@mui/icons-material'
 
 import { PATHS } from '../../router/paths'
@@ -19,6 +20,11 @@ export const NAVIGATION_MENU = [
     to: PATHS.FEED,
     label: 'feed',
     icon: <GridView />,
+  },
+  {
+    to: PATHS.FRIENDS,
+    label: 'my community',
+    icon: <Diversity3Outlined />,
   },
   {
     to: PATHS.EXPLORE,

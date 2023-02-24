@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 import { Card } from '@mui/material'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
 
 import { getRandomInt } from '../../utils'
 import { PATHS } from '../../router/paths'
+import { getUserInfoSelector } from '../../store/selectors'
 import { followUser, unsubsribeUser, User } from '../../api'
 import Avatar from '../Avatar'
 import Button from '../Button'
@@ -26,10 +28,21 @@ interface RandomUser {
 }
 
 const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
+  const userInfo = useSelector(getUserInfoSelector)
   const indexArr = [
     getRandomInt(0, allUsers?.length),
     getRandomInt(0, allUsers?.length),
   ]
+  // const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
+
+
+  // const possibleFrieds = allUsers?.filter(
+  //   (user) => !userInfo?.followings.includes(user?.id),
+  // )
+  // const indexArr = [
+  //   getRandomInt(0, possibleFrieds?.length),
+  //   getRandomInt(0, possibleFrieds?.length),
+  // ]
   const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
 
   return (

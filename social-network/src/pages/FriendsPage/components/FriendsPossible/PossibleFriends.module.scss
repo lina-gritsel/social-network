@@ -1,0 +1,22 @@
+.container {
+  background-color: var(--white-color);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 300px;
+  text-transform: capitalize;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: var(--gray-color);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-color);
+}
+
+.friends {
+  padding: 14px;
+}
