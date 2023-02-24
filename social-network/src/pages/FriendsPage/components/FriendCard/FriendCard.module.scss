@@ -1,9 +1,15 @@
 .container {
   align-items: center;
   display: flex;
-  gap: 15px;
   border-bottom: 1px solid var(--medium-gray-color);
   padding: 10px;
+  justify-content: space-between;
+}
+
+.wrapperFriend {
+  align-items: center;
+  display: flex;
+  gap: 15px;
 }
 
 .avatar {
@@ -28,4 +34,8 @@
   color: var(--gray-color);
   font: var(--font-text-4);
   opacity: 0.6;
+}
+
+.btnFriend {
+  font: var(--font-text-4);
 }
