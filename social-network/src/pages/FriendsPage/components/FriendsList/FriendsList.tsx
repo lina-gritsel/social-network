@@ -31,8 +31,6 @@ const FriendsList: FC<FriendsListProps> = ({
     }
   }, [activeMenuItem])
 
-  const isFriendsExist = selectedList ? selectedList : []
-
   return (
     <div className={styles.myFriends}>
       <InputSearch
@@ -40,10 +38,9 @@ const FriendsList: FC<FriendsListProps> = ({
         onChange={(e) => setSearch(e.target.value.trim().toLocaleLowerCase())}
       />
       <div className={styles.wrapperFriends}>
-        {isFriendsExist &&
-          isFriendsExist?.map((userId, index) => {
-            return <Friend key={index} userId={userId}/>
-          })}
+        {selectedList?.map((userId, index) => {
+          return <Friend key={index} userId={userId} />
+        })}
       </div>
     </div>
   )

@@ -14,11 +14,18 @@
 .friendInfo {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   padding: 14px 0;
 }
 
 .name {
   color: var(--gray-color);
   font: var(--font-text-3);
+  font-weight: 500;
+}
+
+.bio {
+  color: var(--gray-color);
+  font: var(--font-text-4);
+  opacity: 0.6;
 }
