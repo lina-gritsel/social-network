@@ -33,16 +33,7 @@ const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
     getRandomInt(0, allUsers?.length),
     getRandomInt(0, allUsers?.length),
   ]
-  // const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
 
-
-  // const possibleFrieds = allUsers?.filter(
-  //   (user) => !userInfo?.followings.includes(user?.id),
-  // )
-  // const indexArr = [
-  //   getRandomInt(0, possibleFrieds?.length),
-  //   getRandomInt(0, possibleFrieds?.length),
-  // ]
   const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
 
   return (
