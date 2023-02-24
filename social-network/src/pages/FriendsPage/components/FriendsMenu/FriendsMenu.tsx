@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Tabs } from '../../types'
 
 import styles from './FriendsMenu.module.scss'
@@ -13,6 +14,7 @@ const FriendsMenu: FC<FriendsMenuProps> = ({
   activeMenuItem,
   setActiveMenuItem,
 }) => {
+  const { t } = useTranslation()
   return (
     <div className={styles.container}>
       <div
@@ -20,8 +22,7 @@ const FriendsMenu: FC<FriendsMenuProps> = ({
           [styles.active]: activeMenuItem === Tabs.FRIENDS,
         })}
         onClick={() => setActiveMenuItem(Tabs.FRIENDS)}
-      >
-        my friends
+      >{t('myFriends')}
       </div>
       <div
         className={classNames(styles.menuItem, {
@@ -29,7 +30,7 @@ const FriendsMenu: FC<FriendsMenuProps> = ({
         })}
         onClick={() => setActiveMenuItem(Tabs.FOLLOWERS)}
       >
-        followers
+        {t('followers')}
       </div>
       <div
         className={classNames(styles.menuItem, {
@@ -37,7 +38,7 @@ const FriendsMenu: FC<FriendsMenuProps> = ({
         })}
         onClick={() => setActiveMenuItem(Tabs.FOLLOWINGS)}
       >
-        followings
+        {t('following')}
       </div>
     </div>
   )

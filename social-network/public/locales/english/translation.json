@@ -89,6 +89,9 @@
   "greatDay": "Have a great day :)",
   "youBest": "You are the best :)",
   "activity": "Activity graph",
+  "feed": "Feed",
+  "community": "My community",
+  "myFriends": "My friends",
   "firstAboutText": "OurNetwork is a social media networks web App. The social media networks is for people that like to meet new people and enjoy their time together. Our users will love our site because it gives them a unique user experience, clean, modern and beautiful design. Well layered and organized, responsive resize, global color and text styles, and dark or light theme of app and five most popular languages.",
   "secondAboutText": "OurNetwork app has a profile page where you can view your posts and your information. There is also a feed page where you can view posts created by users, leave a comment, find friends and more. On the explore page, you can find out the latest news, and on the settings page, you can update your profile information, change the theme or language of the application, and delete your profile",
   "thirdAboutText": "OurNetwork is written in a programming language TypeScript, using the React framework and a data state and user interface tool Redux. Also, various libraries were used during creation, for example, Material UI for various components, yup for validation, i18next to translate the application into popular languages, moment, dayjs, emoji-mart, sass and many other popular libraries."

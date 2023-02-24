@@ -23,7 +23,7 @@ export const NAVIGATION_MENU = [
   },
   {
     to: PATHS.FRIENDS,
-    label: 'my community',
+    label: 'community',
     icon: <Diversity3Outlined />,
   },
   {
