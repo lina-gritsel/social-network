@@ -19,8 +19,8 @@ export const useProfilePage = () => {
     userInfo?.facebook,
     userInfo?.twitter,
     userInfo?.instagram,
-    userInfo?.followers,
-    userInfo?.following,
+    userInfo?.followers?.length || '-',
+    userInfo?.followings?.length || '-',
   ]
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -133,8 +133,8 @@ export const useFetchProfileInfo = (id: string) => {
     user?.facebook,
     user?.twitter,
     user?.instagram,
-    user?.followers,
-    user?.following,
+    user?.followers?.length || '-',
+    user?.followings?.length || '-',
   ]
 
   return {

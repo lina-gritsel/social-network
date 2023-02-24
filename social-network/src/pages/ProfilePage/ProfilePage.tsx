@@ -61,9 +61,6 @@ const ProfilePage: FC = () => {
   const userInfo = isMyProfile ? rawUserInfo : user
   const profileInfoArr = isMyProfile ? rawProfileInfoArr : userProfileInfoArr
 
-  if (isLoadingUserInfo || !userInfo)
-    return <Loader className={styles.loading} />
-
   return (
     <Layout>
       <Modal
@@ -84,94 +81,100 @@ const ProfilePage: FC = () => {
           />
         }
       />
-      <div className={styles.container}>
-        <div className={styles.pofileHeader}>
-          <div className={styles.wrapperCover}>
-            <img
-              className={styles.bgProfile}
-              src={isMyProfile ? bgImage : user.background || DEFAULT_WALLPAPER}
-              alt="background"
-              onError={(e) => errorImg(e)}
-              onLoad={(e) => isMyProfile && onLoadImg(e)}
-            />
-            {isMyProfile && (
-              <Button
-                className={styles.editCoverPhoto}
-                onClick={() => {
-                  setIsOpen(true)
-                  setIsErrorImg(false)
-                }}
-              >
-                {t('editCoverPhoto')}
-              </Button>
-            )}
-          </div>
-          <Avatar
-            imageUrl={userInfo?.avatar}
-            className={styles.profileAvatar}
-          />
-          <div className={styles.wrapperInfoUser}>
-            <div className={styles.userInfo}>
-              <div className={styles.nameUser}>{userInfo?.name}</div>
-              <div className={styles.workUser}>{userInfo?.bio}</div>
-            </div>
-            {isMyProfile && (
-              <NavLink to={PATHS.SETTINGS}>
-                <Button className={styles.editInfo}>{t('settings')}</Button>
-              </NavLink>
-            )}
-          </div>
-        </div>
-        <div className={styles.wrapperContent}>
-          <div className={styles.intro}>
-            <div className={styles.title}>{t('intro')}</div>
-            {FIELD_INTO.map(({ icon, label }, index) =>
-              index >= FIRST_LINKS_INDEX && index <= LAST_LINKS_INDEX ? (
-                <a
-                  key={index}
-                  href={LINKS[label] + (profileInfoArr[index] || '')}
-                  target="_blank"
-                  rel="noreferrer"
+      {isLoadingUserInfo || !userInfo ? (
+        <Loader className={styles.loading} />
+      ) : (
+        <div className={styles.container}>
+          <div className={styles.pofileHeader}>
+            <div className={styles.wrapperCover}>
+              <img
+                className={styles.bgProfile}
+                src={
+                  isMyProfile ? bgImage : user.background || DEFAULT_WALLPAPER
+                }
+                alt="background"
+                onError={(e) => errorImg(e)}
+                onLoad={(e) => isMyProfile && onLoadImg(e)}
+              />
+              {isMyProfile && (
+                <Button
+                  className={styles.editCoverPhoto}
+                  onClick={() => {
+                    setIsOpen(true)
+                    setIsErrorImg(false)
+                  }}
                 >
-                  <div className={styles.intoItem}>
+                  {t('editCoverPhoto')}
+                </Button>
+              )}
+            </div>
+            <Avatar
+              imageUrl={userInfo?.avatar}
+              className={styles.profileAvatar}
+            />
+            <div className={styles.wrapperInfoUser}>
+              <div className={styles.userInfo}>
+                <div className={styles.nameUser}>{userInfo?.name}</div>
+                <div className={styles.workUser}>{userInfo?.bio}</div>
+              </div>
+              {isMyProfile && (
+                <NavLink to={PATHS.SETTINGS}>
+                  <Button className={styles.editInfo}>{t('settings')}</Button>
+                </NavLink>
+              )}
+            </div>
+          </div>
+          <div className={styles.wrapperContent}>
+            <div className={styles.intro}>
+              <div className={styles.title}>{t('intro')}</div>
+              {FIELD_INTO.map(({ icon, label }, index) =>
+                index >= FIRST_LINKS_INDEX && index <= LAST_LINKS_INDEX ? (
+                  <a
+                    key={index}
+                    href={LINKS[label] + (profileInfoArr[index] || '')}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className={styles.intoItem}>
+                      <Field
+                        icon={icon}
+                        label={label}
+                        profileInfo={profileInfoArr[index]}
+                      />
+                    </div>
+                  </a>
+                ) : (
+                  <div key={index} className={styles.intoItem}>
                     <Field
                       icon={icon}
                       label={label}
                       profileInfo={profileInfoArr[index]}
                     />
                   </div>
-                </a>
-              ) : (
-                <div key={index} className={styles.intoItem}>
-                  <Field
-                    icon={icon}
-                    label={label}
-                    profileInfo={profileInfoArr[index]}
-                  />
-                </div>
-              ),
-            )}
-          </div>
-          <div className={styles.content}>
-            {isMyProfile && (
-              <CreatePost
-                name={userInfo?.name}
-                userId={userInfo?.id}
-                avatarImg={userInfo?.avatar}
+                ),
+              )}
+            </div>
+            <div className={styles.content}>
+              {isMyProfile && (
+                <CreatePost
+                  name={userInfo?.name}
+                  userId={userInfo?.id}
+                  avatarImg={userInfo?.avatar}
+                  setIsAllPosts={setIsAllPosts}
+                  className={styles.postInput}
+                />
+              )}
+              <PostList
+                isAllPosts={isAllPosts}
+                filterPostsForProfilePage
+                filterId={userInfo?.id}
+                isProfilePage={isMyProfile}
                 setIsAllPosts={setIsAllPosts}
-                className={styles.postInput}
               />
-            )}
-            <PostList
-              isAllPosts={isAllPosts}
-              filterPostsForProfilePage
-              filterId={userInfo?.id}
-              isProfilePage={isMyProfile}
-              setIsAllPosts={setIsAllPosts}
-            />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Layout>
   )
 }
@@ -179,7 +182,7 @@ const ProfilePage: FC = () => {
 interface FieldProps {
   icon: JSX.Element
   label: string
-  profileInfo: string | string[]
+  profileInfo: string | number | string[]
 }
 
 const Field: FC<FieldProps> = ({ icon, label, profileInfo }) => {
