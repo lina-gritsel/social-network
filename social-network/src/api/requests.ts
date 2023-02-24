@@ -19,6 +19,8 @@ const POSTS_URL = `${BASE_URL}/posts`
 const COMMETS_URL = `${POSTS_URL}/comments`
 const LIKES_URL = `${POSTS_URL}/likes`
 const WALLPAPER_URL = `${BASE_URL}/wallpaper`
+const FOLLOW_URL = `${USERS_URL}/follow`
+const UNSUBSCRIBE_URL = `${USERS_URL}/unsubscribe`
 
 export const createUser = async (user: User): Promise<RegistrationData> => {
   try {
@@ -186,7 +188,7 @@ export const createComment = async ({
     throw new Error(`${error}`)
   }
 }
-export const changeLike = async (postId, userId) => {
+export const changeLike = async (postId: string, userId: string) => {
   try {
     const response = await fetch(`${LIKES_URL}/${postId}`, {
       method: 'PATCH',
@@ -208,5 +210,37 @@ export const getWallpapers = async (): Promise<string[]> => {
     return response.data
   } catch (error) {
     throw new Error(`${error}`)
+  }
+}
+
+export const followUser = async (myId: string, { currentUserId }) => {
+  try {
+    const response = await fetch(`${FOLLOW_URL}/${myId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({currentUserId}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const unsubsribeUser = async (myId: string, { currentUserId }) => {
+  try {
+    const response = await fetch(`${UNSUBSCRIBE_URL}/${myId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ currentUserId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    return response.json()
+  } catch (error) {
+    console.log(error)
   }
 }
