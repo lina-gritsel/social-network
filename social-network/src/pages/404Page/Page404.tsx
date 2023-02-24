@@ -14,7 +14,7 @@ const Page404: FC = () => {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{t('notFound')}</h1>
-      <p onClick={() => navigate(PATHS.FEED)} className={styles.text}>
+      <p onClick={() => navigate(-1)} className={styles.text}>
         {t('keepCalm')}
       </p>
     </div>
