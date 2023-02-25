@@ -7,10 +7,12 @@ import { sortNews } from '../../utils'
 
 interface UseCreateCommentProps {
   postId: string
+  setSchowComments: (value: boolean) => void
 }
 
 export const useCreateComment = ({
   postId,
+  setSchowComments,
 }: UseCreateCommentProps) => {
   const userInfo = useSelector(getUserInfoSelector)
 
@@ -41,6 +43,7 @@ export const useCreateComment = ({
     })
     setAllComments(comments)
     setComment('')
+    setSchowComments(true)
   }
 
   return {

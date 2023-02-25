@@ -1,1 +1,2 @@
-export { default } from './RandomFriend'
+export { RandomFriend } from './RandomFriend'
+export { BirthdayFriend } from './BirthdayFriend'

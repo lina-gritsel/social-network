@@ -2,8 +2,6 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
-import { PATHS } from '../../router/paths'
-
 import styles from './Page404.module.scss'
 
 const Page404: FC = () => {

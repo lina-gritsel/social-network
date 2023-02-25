@@ -16,8 +16,15 @@ export interface User {
   updatedAt: string
   background?: string
   wallpapers?: string[]
-  followers?: string[]
-  followings?: string[]
+  followers?: Follow[]
+  followings?: Follow[]
+}
+
+export interface Follow {
+  id: string
+  name: string
+  bio: string
+  avatar?: string
 }
 
 export interface RegistrationData {

@@ -43,7 +43,7 @@
   "twitter": "Twitter: ",
   "instagram": "Instagram: ",
   "followers": "Seguidores: ",
-  "following": "Siguiente: ",
+  "followings": "Siguiente: ",
   "editAvatar": "Editar foto",
   "socialLinks": "Vínculos sociales",
   "general": "general",
@@ -89,8 +89,11 @@
   "greatDay": "Gran dia para ti :)",
   "youBest": "Eres el mejor :)",
   "activity": "Gráfico de actividad",
+  "feed": "Fuente ",
+  "friends": "Amigos",
   "firstAboutText": "OurNetwork es una aplicación web de redes sociales. Las redes sociales son para personas a las que les gusta conocer gente nueva y disfrutar de su tiempo juntos. A nuestros usuarios les encantará nuestro sitio porque les brinda una experiencia de usuario única, un diseño limpio, moderno y hermoso. Bien en capas y organizado, cambio de tamaño receptivo, colores globales y estilos de texto, y tema claro o oscuro de la aplicación y los cinco idiomas más populares.",
   "secondAboutText": "La aplicación OurNetwork tiene una página de perfil donde puede ver sus publicaciones y su información. También hay una página de noticias donde puede ver las publicaciones creadas por los usuarios, dejar un comentario, encontrar amigos y más. En la página de exploración, puede encontrar las últimas noticias y en la página de configuración, puede actualizar la información de su perfil, cambiar el tema o el idioma de la aplicación y eliminar su perfil.",
   "thirdAboutText": "OurNetwork está escrito en un lenguaje de programación TypeScript, utilizando el marco React y una herramienta de interfaz de usuario y estado de datos Redux. Además, se usaron varias bibliotecas durante la creación, por ejemplo, Material UI para varios componentes, sí para validación, i18next para traducir la aplicación a idiomas populares, moment, dayjs, emoji-mart, sass y muchas otras bibliotecas populares.",
-  "notFriends" : "Vaya... Parece que todavía no tienes nada aquí :("
+  "notFriends" : "Vaya... Parece que todavía no tienes nada aquí :(",
+  "unfollow": "Dejar de Seguir"
 }

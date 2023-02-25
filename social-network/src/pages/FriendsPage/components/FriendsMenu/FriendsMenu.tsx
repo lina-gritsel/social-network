@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
 
 import { Tab } from '../../../../hooks/useTabs'
 
@@ -12,6 +13,8 @@ interface FriendsMenuProps {
 }
 
 const FriendsMenu: FC<FriendsMenuProps> = ({ tabs, value, setValue }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={styles.container}>
       {tabs.map(({ value: tabValue, label }, index) => (
@@ -22,7 +25,7 @@ const FriendsMenu: FC<FriendsMenuProps> = ({ tabs, value, setValue }) => {
           })}
           onClick={() => setValue(tabValue)}
         >
-          {label}
+          {t(label).split(':')[0]}
         </div>
       ))}
     </div>

@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import {
   Card,
   CardMedia,
@@ -13,7 +12,6 @@ import classNames from 'classnames'
 import moment from 'moment'
 
 import { getUser } from '../../api/requests'
-import { getUserInfoSelector } from '../../store/selectors'
 import { PATHS } from '../../router/paths'
 import { User } from '../../api'
 
@@ -61,8 +59,6 @@ const PostCard: FC<News> = ({
   const [showMore, setShowMore] = useState(true)
   const [showComments, setSchowComments] = useState(false)
 
-  const userInfo = useSelector(getUserInfoSelector)
-
   useEffect(() => {
     const getAuthor = async () => {
       const user = await getUser(userId)
@@ -75,7 +71,7 @@ const PostCard: FC<News> = ({
   const createdPostTime = moment(createdAt).fromNow()
 
   const { isLoading, allComments, onSubmit, onChangeComment, comment } =
-    useCreateComment({ postId: id })
+    useCreateComment({ postId: id, setSchowComments })
 
   return (
     <>

@@ -1,16 +1,18 @@
-import { FC } from 'react'
+import { FC, useEffect, useState, Dispatch, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 import { Card } from '@mui/material'
-import moment from 'moment'
 import { useSelector } from 'react-redux'
 
 import { getRandomInt } from '../../utils'
 import { PATHS } from '../../router/paths'
 import { getUserInfoSelector } from '../../store/selectors'
-import { followUser, unsubsribeUser, User } from '../../api'
+import { useAppDispatch } from '../../store'
+import { fetchUser } from '../../store/actions'
+import { followUser, User } from '../../api'
 import Avatar from '../Avatar'
 import Button from '../Button'
+import Loader from '../Loader'
 
 import { FIELD } from './constants'
 
@@ -22,47 +24,69 @@ interface RandomFriend {
 }
 interface RandomUser {
   user: User
-  isBirthday?: boolean
+  setUsers?: Dispatch<SetStateAction<User[]>>
   title: string
   isLoading: boolean
 }
 
-const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
+export const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
   const userInfo = useSelector(getUserInfoSelector)
-  const indexArr = [
-    getRandomInt(0, allUsers?.length),
-    getRandomInt(0, allUsers?.length),
-  ]
+  const [randomUser, setRandomUser] = useState<User>()
+  const [users, setUsers] = useState<User[]>([])
 
-  const randomUsers = [allUsers[indexArr[0]], allUsers[indexArr[1]]]
+  useEffect(() => {
+    setUsers(allUsers)
+  }, [isLoading])
+
+  useEffect(() => {
+    const followingsId = userInfo?.followings?.map(({ id }) => id)
+    const possibleFrieds = users?.filter(
+      (user) => !followingsId?.includes(user?.id),
+    )
+    const randomIndex = getRandomInt(0, possibleFrieds?.length)
+
+    setRandomUser(possibleFrieds[randomIndex])
+  }, [users, userInfo?.followings])
+
+  if (isLoading) {
+    return <Loader className={styles.loader} />
+  }
 
   return (
-    <div className={styles.friends}>
-      <Friend user={randomUsers[0]} isLoading={isLoading} title="mightLike" />
+    randomUser && (
       <Friend
-        user={randomUsers[1]}
+        user={randomUser}
         isLoading={isLoading}
-        title="birthday"
-        isBirthday={true}
+        title="mightLike"
+        setUsers={setUsers}
       />
-    </div>
+    )
   )
 }
 
-const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
-  const { t } = useTranslation()
+const Friend: FC<RandomUser> = ({ user, title, isLoading, setUsers }) => {
+  const [isFetchLoading, setIsFetchLoading] = useState<boolean>(false)
 
-  const formattedBirthdayDate = moment.unix(user?.date).format('DD/MM')
+  const { t } = useTranslation()
+  const dispatch = useAppDispatch()
 
   const myId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   const userLink = [user?.instagram, user?.twitter, user?.facebook]
 
   const follow = async () => {
+    setIsFetchLoading(true)
     await followUser(myId, { currentUserId: user?.id })
+    setUsers((prev) =>
+      prev.filter((currentUser) => currentUser?.id !== user?.id),
+    )
+    dispatch(fetchUser(myId))
+    setIsFetchLoading(false)
   }
-  const unsubscribe = async () => {
-    await unsubsribeUser(myId, { currentUserId: user?.id })
+  const ignore = () => {
+    setUsers((prev) =>
+      prev.filter((currentUser) => currentUser?.id !== user?.id),
+    )
   }
 
   return (
@@ -80,44 +104,40 @@ const Friend: FC<RandomUser> = ({ user, isBirthday, title, isLoading }) => {
               <NavLink to={`${PATHS.PROFILE}/${user?.id}`}>
                 <div className={styles.title}>{user?.name}</div>
               </NavLink>
-              <div className={styles.subTitle}>
-                {isBirthday
-                  ? t(title) + ' ' + formattedBirthdayDate
-                  : user?.bio}
-              </div>
+              <div className={styles.subTitle}>{user?.bio}</div>
             </div>
           )}
         </div>
-        {!isBirthday && (
-          <>
-            <div className={styles.icons}>
-              {FIELD.map(({ icon, path }, index) => (
-                <a
-                  key={index}
-                  href={path + (userLink[index] || '')}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {icon}
-                </a>
-              ))}
-            </div>
-            <div className={styles.btnWrapper}>
-              <Button
-                onClick={() => unsubscribe()}
-                className={styles.ignorFriends}
-                outlined
-              >
-                {t('ignore')}
-              </Button>
-              <Button onClick={() => follow()} className={styles.followFriends}>
-                {t('follow')}
-              </Button>
-            </div>
-          </>
-        )}
+
+        <div className={styles.icons}>
+          {FIELD.map(({ icon, path }, index) => (
+            <a
+              key={index}
+              href={path + (userLink[index] || '')}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {icon}
+            </a>
+          ))}
+        </div>
+        <div className={styles.btnWrapper}>
+          <Button
+            onClick={() => ignore()}
+            className={styles.ignorFriends}
+            outlined
+          >
+            {t('ignore')}
+          </Button>
+          <Button
+            onClick={() => follow()}
+            className={styles.followFriends}
+            isDisabled={isFetchLoading}
+          >
+            {t('follow')}
+          </Button>
+        </div>
       </div>
     </Card>
   )
 }
-export default RandomFriend

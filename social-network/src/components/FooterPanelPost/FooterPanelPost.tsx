@@ -6,7 +6,6 @@ import classNames from 'classnames'
 
 import { PATHS } from '../../router/paths'
 import Avatar from '../Avatar'
-import Loader from '../Loader'
 
 import { useChangeLike } from './hooks'
 
@@ -23,19 +22,12 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
   setSchowComments,
   allComments,
 }) => {
-  const {
-    isLike,
-    likeOnclick,
-    avatarArr,
-    amountMoreLikes,
-    isLoading,
-    likesUsersId,
-  } = useChangeLike({
+  const { isLike, likeOnclick, avatarArr, amountMoreLikes } = useChangeLike({
     postId,
   })
   const { t } = useTranslation()
 
-  const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+  const myId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   const amountComments = allComments.length
 
@@ -43,25 +35,17 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
     <>
       <div className={styles.actionAmount}>
         <div className={styles.avatarWrapper}>
-          {isLoading ? (
-            <Loader classNameCircular={styles.loading} />
-          ) : (
-            <>
-              {avatarArr.map((avatar, index) => (
-                <NavLink
-                  key={index}
-                  to={`${PATHS.PROFILE}/${
-                    likesUsersId[index] === userId ? 'me' : likesUsersId[index]
-                  }`}
-                  className={styles.likeAvatar}
-                >
-                  <Avatar imageUrl={avatar} className={styles.likeAvatar} />
-                </NavLink>
-              ))}
-              {amountMoreLikes && (
-                <div className={styles.likeAvatar}>+{amountMoreLikes}</div>
-              )}
-            </>
+          {avatarArr.map(({ userId, avatar }, index) => (
+            <NavLink
+              key={index}
+              to={`${PATHS.PROFILE}/${userId === myId ? 'me' : userId}`}
+              className={styles.likeAvatar}
+            >
+              <Avatar imageUrl={avatar} className={styles.likeAvatar} />
+            </NavLink>
+          ))}
+          {amountMoreLikes && (
+            <div className={styles.likeAvatar}>+{amountMoreLikes}</div>
           )}
         </div>
         <div className={styles.allComments}>

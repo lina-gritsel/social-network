@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { getUserInfoSelector } from '../../store/selectors'
 import FriendsOnline from '../../components/FriendsOnline'
-import RandomFriend from '../../components/RandomFriend'
+import { RandomFriend, BirthdayFriend } from '../../components/RandomFriend'
 import CreatePost from '../../components/CreatePost'
 import PostsList from '../../components/PostsList'
 import Weather from '../../components/Weather'
@@ -34,6 +34,7 @@ const FeedPage: FC = () => {
           </div>
           <div className={styles.friendAndWeather}>
             <RandomFriend allUsers={userswWithoutMe} isLoading={isLoading} />
+            <BirthdayFriend allUsers={userswWithoutMe} isLoading={isLoading} />
             <Weather />
           </div>
         </div>

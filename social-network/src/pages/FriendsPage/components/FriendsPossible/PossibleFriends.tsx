@@ -1,17 +1,12 @@
 import { FC } from 'react'
-import { useTranslation } from 'react-i18next'
 
-import styles from './PossibleFriends.module.scss'
+import { RandomFriend } from '../../../../components/RandomFriend'
+import { useNewsPage } from '../../../FeedPage/hooks'
 
 const PossibleFriends: FC = () => {
-  const { t } = useTranslation()
+  const { isLoading, userswWithoutMe } = useNewsPage()
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>{t('mightLike')}</div>
-      <div className={styles.friends}></div>
-    </div>
-  )
+  return <RandomFriend isLoading={isLoading} allUsers={userswWithoutMe} />
 }
 
 export default PossibleFriends
