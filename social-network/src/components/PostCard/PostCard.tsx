@@ -75,7 +75,7 @@ const PostCard: FC<News> = ({
   const createdPostTime = moment(createdAt).fromNow()
 
   const { isLoading, allComments, onSubmit, onChangeComment, comment } =
-    useCreateComment({ postId: id })
+    useCreateComment({ postId: id, setSchowComments })
 
   return (
     <>
