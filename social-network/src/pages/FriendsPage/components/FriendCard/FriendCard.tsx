@@ -25,7 +25,7 @@ const Friend: FC<FriendProps> = ({ userId, activeTab }) => {
   const { t } = useTranslation()
 
   const [currentFriend, setCurrentFriend] = useState(null)
-
+  
   useEffect(() => {
     const getCurrentFriend = async () => {
       const { data } = await getUser(userId)
