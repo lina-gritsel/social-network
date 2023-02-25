@@ -143,3 +143,24 @@ export const useFetchProfileInfo = (id: string) => {
     userProfileInfoArr,
   }
 }
+
+export const chekingForFriends = (userInfo, selectedUserInfo) => {
+const followers = userInfo.followers
+const followings = userInfo.followings
+
+// const selectedUserId = selectedUserInfo.id
+// const followersSelecedUser = selectedUserInfo.followers
+
+const friends = followers
+? followers?.filter(({ id }) =>
+    followings?.map(({ id }) => id).includes(id),
+  )
+: []
+
+const isFriend = !!friends.map(({id})=> id === selectedUserInfo.id)
+
+console.log(friends)
+console.log(isFriend)
+
+
+}

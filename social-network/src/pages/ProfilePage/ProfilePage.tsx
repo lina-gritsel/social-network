@@ -11,7 +11,7 @@ import Avatar from '../../components/Avatar'
 import PostList from '../../components/PostsList'
 import CreatePost from '../../components/CreatePost'
 
-import { useFetchProfileInfo, useProfilePage } from './hooks'
+import { chekingForFriends, useFetchProfileInfo, useProfilePage } from './hooks'
 import ModalContent from './ModalContent'
 import {
   FIELD_INTO,
@@ -53,6 +53,8 @@ const ProfilePage: FC = () => {
     setBgImageArr,
     setIsErrorImg,
   } = useProfilePage()
+
+  chekingForFriends(rawUserInfo, user)
 
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
 
