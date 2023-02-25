@@ -24,7 +24,7 @@ export const BirthdayFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
   const followers = userInfo?.followers || []
   const followings = userInfo?.followings || []
 
-  const friendsArr = [...followers, ...followings]
+  const friendsArr = [...followers, ...followings].map(({ id }) => id)
   const randomIndex = getRandomInt(0, friendsArr?.length)
 
   const birthdayUser = allUsers.filter(
@@ -35,31 +35,33 @@ export const BirthdayFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
 
   return (
     <div className={styles.friends}>
-      <Card className={styles.friendCard}>
-        <div className={styles.mightLike}>{t('birthday')}</div>
-        <div className={styles.wrapperContent}>
-          <div className={styles.cardHeader}>
-            <NavLink to={`${PATHS.PROFILE}/${birthdayUser?.id}`}>
-              <Avatar
-                imageUrl={birthdayUser?.avatar}
-                className={styles.avatar}
-              />
-            </NavLink>
-            {isLoading ? (
-              <div className={styles.loading}>{t('loading')}</div>
-            ) : (
-              <div>
-                <NavLink to={`${PATHS.PROFILE}/${birthdayUser?.id}`}>
-                  <div className={styles.title}>{birthdayUser?.name}</div>
-                </NavLink>
-                <div className={styles.subTitle}>
-                  {t('birthday') + ' ' + formattedBirthdayDate}
+      {birthdayUser && (
+        <Card className={styles.friendCard}>
+          <div className={styles.mightLike}>{t('birthday')}</div>
+          <div className={styles.wrapperContent}>
+            <div className={styles.cardHeader}>
+              <NavLink to={`${PATHS.PROFILE}/${birthdayUser?.id}`}>
+                <Avatar
+                  imageUrl={birthdayUser?.avatar}
+                  className={styles.avatar}
+                />
+              </NavLink>
+              {isLoading ? (
+                <div className={styles.loading}>{t('loading')}</div>
+              ) : (
+                <div>
+                  <NavLink to={`${PATHS.PROFILE}/${birthdayUser?.id}`}>
+                    <div className={styles.title}>{birthdayUser?.name}</div>
+                  </NavLink>
+                  <div className={styles.subTitle}>
+                    {t('birthday') + ' ' + formattedBirthdayDate}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      )}
     </div>
   )
 }

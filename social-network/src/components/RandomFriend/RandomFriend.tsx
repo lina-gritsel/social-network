@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux'
 import { getRandomInt } from '../../utils'
 import { PATHS } from '../../router/paths'
 import { getUserInfoSelector } from '../../store/selectors'
+import { useAppDispatch } from '../../store'
+import { fetchUser } from '../../store/actions'
 import { followUser, User } from '../../api'
 import Avatar from '../Avatar'
 import Button from '../Button'
@@ -37,8 +39,9 @@ export const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
   }, [isLoading])
 
   useEffect(() => {
+    const followingsId = userInfo?.followings?.map(({ id }) => id)
     const possibleFrieds = users?.filter(
-      (user) => !userInfo?.followings?.includes(user?.id),
+      (user) => !followingsId?.includes(user?.id),
     )
     const randomIndex = getRandomInt(0, possibleFrieds?.length)
 
@@ -46,7 +49,7 @@ export const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
   }, [users, userInfo?.followings])
 
   if (isLoading) {
-    return <Loader className={styles.loader}/>
+    return <Loader className={styles.loader} />
   }
 
   return (
@@ -62,17 +65,23 @@ export const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
 }
 
 const Friend: FC<RandomUser> = ({ user, title, isLoading, setUsers }) => {
+  const [isFetchLoading, setIsFetchLoading] = useState<boolean>(false)
+
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
 
   const myId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   const userLink = [user?.instagram, user?.twitter, user?.facebook]
 
   const follow = async () => {
+    setIsFetchLoading(true)
     await followUser(myId, { currentUserId: user?.id })
     setUsers((prev) =>
       prev.filter((currentUser) => currentUser?.id !== user?.id),
     )
+    dispatch(fetchUser(myId))
+    setIsFetchLoading(false)
   }
   const ignore = () => {
     setUsers((prev) =>
@@ -120,7 +129,11 @@ const Friend: FC<RandomUser> = ({ user, title, isLoading, setUsers }) => {
           >
             {t('ignore')}
           </Button>
-          <Button onClick={() => follow()} className={styles.followFriends}>
+          <Button
+            onClick={() => follow()}
+            className={styles.followFriends}
+            isDisabled={isFetchLoading}
+          >
             {t('follow')}
           </Button>
         </div>
