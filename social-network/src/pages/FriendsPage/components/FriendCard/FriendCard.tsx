@@ -18,7 +18,7 @@ interface FriendProps {
   activeTab: string
 }
 
-const Friend: FC<FriendProps> = ({ userId, activeTab }) => {
+const Friend: FC<FriendProps> = ({ userId }) => {
   const userInfo = useSelector(getUserInfoSelector)
   const dispatch = useAppDispatch()
 

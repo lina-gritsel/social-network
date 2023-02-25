@@ -38,7 +38,7 @@ export const FIELD_INTO = [
   },
   {
     icon: <PeopleAltOutlinedIcon />,
-    label: 'following',
+    label: 'followings',
   },
 ]
 

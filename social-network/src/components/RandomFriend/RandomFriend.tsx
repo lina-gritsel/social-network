@@ -40,7 +40,6 @@ export const RandomFriend: FC<RandomFriend> = ({ allUsers, isLoading }) => {
     const possibleFrieds = users?.filter(
       (user) => !userInfo?.followings?.includes(user?.id),
     )
-    console.log(possibleFrieds)
     const randomIndex = getRandomInt(0, possibleFrieds?.length)
 
     setRandomUser(possibleFrieds[randomIndex])
