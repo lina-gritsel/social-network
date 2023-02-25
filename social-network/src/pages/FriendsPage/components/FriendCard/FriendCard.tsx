@@ -15,7 +15,7 @@ interface FriendProps {
 
 const Friend: FC<FriendProps> = ({ userId, activeTab }) => {
   const [currentFriend, setCurrentFriend] = useState(null)
-  console.log(activeTab)
+  
   useEffect(() => {
     const getCurrentFriend = async () => {
       const { data } = await getUser(userId)
