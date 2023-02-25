@@ -6,6 +6,7 @@ import About from '../pages/AboutPage'
 import FeedPage from '../pages/FeedPage'
 import LoginPage from '../pages/LoginPage'
 import LogoutPage from '../pages/LogoutPage'
+import FriendsPage from '../pages/FriendsPage'
 import ProfilePage from '../pages/ProfilePage'
 import ExplorePage from '../pages/ExplorePage'
 import SettingsPage from '../pages/SettingsPage'
@@ -52,5 +53,9 @@ export const routes: Routes[] = [
   {
     path: PATHS.ABOUT,
     component: About,
+  },
+  {
+    path: PATHS.FRIENDS,
+    component: FriendsPage,
   },
 ]
