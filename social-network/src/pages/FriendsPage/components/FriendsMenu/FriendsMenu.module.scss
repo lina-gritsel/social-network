@@ -1,0 +1,31 @@
+
+.container {
+    background-color: var(--white-color);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 300px;
+    padding: 14px;
+    text-transform: capitalize;
+  }
+
+.menuItem {
+    border-radius: 10px;
+    color: var(--gray-color);
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .menuItem:hover {
+    background-color: var(--light-gray-color);
+  }
+  
+  .active {
+    background-color: var(--light-gray-color);
+  }
+  
+  .active:hover {
+    background-color: var(--light-gray-color);
+  }
+

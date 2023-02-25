@@ -17,7 +17,7 @@ export interface User {
   background?: string
   wallpapers?: string[]
   followers?: string[]
-  following?: string[]
+  followings?: string[]
 }
 
 export interface RegistrationData {

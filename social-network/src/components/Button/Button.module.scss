@@ -8,13 +8,14 @@
   min-width: 116px;
   height: 40px;
   padding: 0 5px;
+  text-transform: capitalize;
 }
 
 .disabled,
 .outlined {
   background-color: transparent;
-  color: var(--blue-color);
-  border: 1px solid var(--blue-color);
+  color: var(--gray-color);
+  border: 1px solid var(--gray-color);
   cursor: default;
 }
 

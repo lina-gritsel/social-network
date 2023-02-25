@@ -24,13 +24,13 @@ export const sortNews = (a: string, b: string) => {
   return dateLast.getTime() - dateFirst.getTime()
 }
 
-export const getRandomElemArr = (number: number) => {
+export const getRandomElemArr = (quantity: number, maxInt: number) => {
   let randElem: number
   const newElements: number[] = []
-  for (let i = 0; i < number; i++) {
-    randElem = getRandomInt(0, number + 1)
+  for (let i = 0; i < quantity; i++) {
+    randElem = getRandomInt(0, maxInt + 1)
     while (newElements.indexOf(randElem) !== -1) {
-      randElem = getRandomInt(0, number + 1)
+      randElem = getRandomInt(0, maxInt + 1)
     }
     newElements.push(randElem)
   }
