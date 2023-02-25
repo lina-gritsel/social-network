@@ -2,7 +2,7 @@ import { NewsInfo } from './types'
 import axios from 'axios'
 
 const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?country=us'
-const NEWS_API_TOKEN = 'd5bc1a1db88b4f3aadb1383f0d20a11f'
+const NEWS_API_TOKEN = 'c4145b318a6d4ef58fb7e16254538a17'
 
 type FetchNewsByCategory = (
   category: string,

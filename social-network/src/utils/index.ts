@@ -30,3 +30,10 @@ export const getRandomElemArr = (quantity: number, maxInt: number) => {
   return newElements
 }
 
+export const pressEnter = (e, func: () => void) => {
+  const value = (e.target as HTMLInputElement).value
+  if (e.key === 'Enter' && value !== '') {
+    func()
+    e.target.value = ''
+  }
+}
