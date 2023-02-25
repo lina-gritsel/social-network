@@ -1,11 +1,12 @@
 import { TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
-import { FC, Dispatch, SetStateAction, MouseEvent } from 'react'
+import { FC, Dispatch, SetStateAction, MouseEvent, KeyboardEvent } from 'react'
 
 import Loader from '../../components/Loader'
 import Button from '../../components/Button'
 import { changeUser } from '../../api'
+import { pressEnter } from '../../utils'
 
 import { DEFAULT_NUMBER_PICTURES } from './constants'
 import { useModalContent } from './hooks'
@@ -94,6 +95,9 @@ const ModalContent: FC<IModalContent> = ({
           className={styles.imgInput}
           inputRef={inputRef}
           onChange={() => onChangeInput()}
+          onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
+            pressEnter(e, handleClickBtn)
+          }
         />
         <Button
           className={isDisabled ? styles.addImgBtn : styles.addImgActiveBtn}
