@@ -143,11 +143,11 @@ export const updatePost = async (
 
 export const addComment = async (req: Request, res: Response) => {
   try {
-    const post = await PostModel.findByPk(req.params.postId);
-    const commentExist = post?.dataValues?.comments;
-    const comments = commentExist ? [...post?.dataValues?.comments] : [];
+    const post = await PostModel.findByPk(req.params.postId)
+    const commentExist = post?.dataValues?.comments
+    const comments = commentExist ? [...post?.dataValues?.comments] : []
 
-    const user = await UserModel.findByPk(req.body.userId);
+    const user = await UserModel.findByPk(req.body.userId)
 
     comments.push({
       postId: req.body.postId,
@@ -158,18 +158,18 @@ export const addComment = async (req: Request, res: Response) => {
         name: user?.dataValues.name,
         avatar: user?.dataValues.avatar,
       },
-    });
+    })
 
     post
       ?.update({ comments }, { where: { id: req.params.postId } })
-      .then((post: any) => res.json(post));
+      .then((post: any) => res.json(post))
   } catch (error: any) {
     res.status(500).json({
-      status: "error",
+      status: 'error',
       message: error.message,
-    });
+    })
   }
-};
+}
 
 export const changeLikes = async (req: Request<any>, res: Response) => {
   try {
@@ -201,6 +201,12 @@ export const changeLikes = async (req: Request<any>, res: Response) => {
     } else {
       likes.push(req.body)
 
+      const user = await UserModel.findByPk(req.body.userId)
+      const avatar = user?.dataValues.avatar
+      console.log('--------------')
+      console.log(user?.dataValues.avatar)
+      console.log('--------------')
+
       post?.update(
         { likes },
         {
@@ -213,6 +219,7 @@ export const changeLikes = async (req: Request<any>, res: Response) => {
       res.status(200).json({
         status: 'success',
         data: { post },
+        avatar,
       })
     }
   } catch (error: any) {
@@ -222,14 +229,3 @@ export const changeLikes = async (req: Request<any>, res: Response) => {
     })
   }
 }
-
-
-// const userExist = !!followings.find(
-//   (item) => item?.currentUserId === currentUserId,
-// )
-
-// if (userExist) {
-//   const arrFollowings = followings.filter(
-//     ({ currentUserId }) => currentUserId !== req.body.currentUserId,
-//   )
-// }
