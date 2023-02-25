@@ -199,13 +199,10 @@ export const changeLikes = async (req: Request<any>, res: Response) => {
         data: { post },
       })
     } else {
-      likes.push(req.body)
-
       const user = await UserModel.findByPk(req.body.userId)
       const avatar = user?.dataValues.avatar
-      console.log('--------------')
-      console.log(user?.dataValues.avatar)
-      console.log('--------------')
+
+      likes.push({...req.body, avatar})
 
       post?.update(
         { likes },
@@ -219,7 +216,6 @@ export const changeLikes = async (req: Request<any>, res: Response) => {
       res.status(200).json({
         status: 'success',
         data: { post },
-        avatar,
       })
     }
   } catch (error: any) {
