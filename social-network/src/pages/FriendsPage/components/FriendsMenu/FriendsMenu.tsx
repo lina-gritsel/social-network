@@ -1,45 +1,33 @@
-import classNames from 'classnames'
 import { FC } from 'react'
+import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
-import { Tabs } from '../../types'
+
+import { Tab } from '../../../../hooks/useTabs'
 
 import styles from './FriendsMenu.module.scss'
 
 interface FriendsMenuProps {
-  activeMenuItem: string
-  setActiveMenuItem: (value) => void
+  tabs: Tab[]
+  value: string
+  setValue: (value: string) => void
 }
 
-const FriendsMenu: FC<FriendsMenuProps> = ({
-  activeMenuItem,
-  setActiveMenuItem,
-}) => {
+const FriendsMenu: FC<FriendsMenuProps> = ({ tabs, value, setValue }) => {
   const { t } = useTranslation()
+
   return (
     <div className={styles.container}>
-      <div
-        className={classNames(styles.menuItem, {
-          [styles.active]: activeMenuItem === Tabs.FRIENDS,
-        })}
-        onClick={() => setActiveMenuItem(Tabs.FRIENDS)}
-      >{t('myFriends')}
-      </div>
-      <div
-        className={classNames(styles.menuItem, {
-          [styles.active]: activeMenuItem === Tabs.FOLLOWERS,
-        })}
-        onClick={() => setActiveMenuItem(Tabs.FOLLOWERS)}
-      >
-        {t('followers')}
-      </div>
-      <div
-        className={classNames(styles.menuItem, {
-          [styles.active]: activeMenuItem === Tabs.FOLLOWINGS,
-        })}
-        onClick={() => setActiveMenuItem(Tabs.FOLLOWINGS)}
-      >
-        {t('following')}
-      </div>
+      {tabs.map(({ value: tabValue, label }, index) => (
+        <div
+          key={index}
+          className={classNames(styles.menuItem, {
+            [styles.active]: value === tabValue,
+          })}
+          onClick={() => setValue(tabValue)}
+        >
+          {t(label).split(':')[0]}
+        </div>
+      ))}
     </div>
   )
 }

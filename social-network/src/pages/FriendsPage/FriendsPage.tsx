@@ -1,40 +1,37 @@
-import { FC, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { getUserInfoSelector } from '../../store/selectors'
 import Layout from '../../components/Layout'
 
 import PossibleFriends from './components/FriendsPossible'
 import FriendsList from './components/FriendsList'
 import FriendsMenu from './components/FriendsMenu'
 
+import InputSearch from '../../components/InputSearch'
 import styles from './FriendsPage.module.scss'
-import { Tabs } from './types'
+import { useFriendsPage } from './hooks'
 
 const FriendsPage: FC = () => {
-  const userInfo = useSelector(getUserInfoSelector)
-  const followers = userInfo?.followers
-  const followings = userInfo?.followings
-  const friends =
-    (followers?.length !== 0 && followers)
-      ? followers?.filter((user) => followings?.includes(user))
-      : []
+  const { t } = useTranslation()
 
-  const [activeMenuItem, setActiveMenuItem] = useState<Tabs>(Tabs.FRIENDS)
+  const { list, friendsTabs, tabValue, setTabValue, setSearch } =
+    useFriendsPage()
 
   return (
     <Layout>
       <div className={styles.container}>
-        <FriendsList
-          friends={friends}
-          followers={followers}
-          followings={followings}
-          activeMenuItem={activeMenuItem}
-        />
+        <div className={styles.wrapperList}>
+          <InputSearch
+            placeholder={t('searchFriends')}
+            onChange={(e) => setSearch(e.target.value.toUpperCase())}
+          />
+          <FriendsList list={list} activeTab={tabValue} />
+        </div>
         <div className={styles.wrapper}>
           <FriendsMenu
-            activeMenuItem={activeMenuItem}
-            setActiveMenuItem={setActiveMenuItem}
+            tabs={friendsTabs}
+            value={tabValue}
+            setValue={setTabValue}
           />
           <PossibleFriends />
         </div>
