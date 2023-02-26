@@ -116,10 +116,8 @@ export const useFetchProfileInfo = (id: string) => {
       if (status === 'success') {
         setUser(data?.user)
       } else {
-        
         navigate(PATHS.PAGE_404, { replace: true })
       }
-
       setIsLoading(false)
     }
 

@@ -10,6 +10,7 @@ import Loader from '../../components/Loader'
 import Avatar from '../../components/Avatar'
 import PostList from '../../components/PostsList'
 import CreatePost from '../../components/CreatePost'
+import { useFollowFriends } from '../../hooks'
 
 import { useFetchProfileInfo, useProfilePage } from './hooks'
 import ModalContent from './ModalContent'
@@ -60,6 +61,11 @@ const ProfilePage: FC = () => {
 
   const userInfo = isMyProfile ? rawUserInfo : user
   const profileInfoArr = isMyProfile ? rawProfileInfoArr : userProfileInfoArr
+
+  const { followingExist, changeFollow, isLoadingFollow } = useFollowFriends(
+    rawUserInfo,
+    user?.id,
+  )
 
   return (
     <Layout>
@@ -117,7 +123,16 @@ const ProfilePage: FC = () => {
                 <div className={styles.nameUser}>{userInfo?.name}</div>
                 <div className={styles.workUser}>{userInfo?.bio}</div>
               </div>
-              {isMyProfile && (
+              {!isMyProfile ? (
+                <Button
+                  isDisabled={isLoadingFollow}
+                  outlined
+                  className={styles.btnFriend}
+                  onClick={changeFollow}
+                >
+                  {followingExist ? t('unfollow') : t('follow')}
+                </Button>
+              ) : (
                 <NavLink to={PATHS.SETTINGS}>
                   <Button className={styles.editInfo}>{t('settings')}</Button>
                 </NavLink>
