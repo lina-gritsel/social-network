@@ -23,6 +23,8 @@ import { DEFAULT_WALLPAPER } from './constants'
 import styles from './Profile.module.scss'
 import UserDetails from './components/UserDetails'
 import GeneralUserInfo from './components/GeneralUserInfo'
+import { useSelector } from 'react-redux'
+import { getUserInfoSelector } from '../../store/selectors'
 
 const ProfilePage: FC = () => {
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
@@ -37,15 +39,11 @@ const ProfilePage: FC = () => {
 
   const { user, isLoading: isLoadingUserInfo } = useFetchProfileInfo(profileId)
 
-  const userProfileInfoArr = parseUserData(user)
-
   const {
     isLoading,
     bgImage,
-    userInfo: rawUserInfo,
     bgImageArr,
     isErrorImg,
-    profileInfoArr: rawProfileInfoArr,
     onLoadImg,
     errorImg,
     setBgImage,
@@ -53,12 +51,16 @@ const ProfilePage: FC = () => {
     setIsErrorImg,
   } = useProfilePage()
 
+  const rawUserInfo = useSelector(getUserInfoSelector)
+  const profileInfoArr = isMyProfile
+    ? parseUserData(rawUserInfo)
+    : parseUserData(user)
+
   const { isFollowing, setIsFollowing } = chekingForFriends(rawUserInfo, user)
 
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
 
   const userInfo = isMyProfile ? rawUserInfo : user
-  const profileInfoArr = isMyProfile ? rawProfileInfoArr : userProfileInfoArr
 
   const {
     visible: visibleWallpapersModal,
@@ -71,7 +73,6 @@ const ProfilePage: FC = () => {
       <Modal
         open={visibleWallpapersModal}
         onClose={closeWallpapersModal}
-        onConfirm={closeWallpapersModal}
         title={t('backgroundTitle')}
         isDialogActions={false}
         className={styles.dialogContent}

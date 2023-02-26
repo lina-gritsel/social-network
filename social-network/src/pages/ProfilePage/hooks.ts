@@ -12,17 +12,6 @@ import { DEFAULT_WALLPAPER, DEFAULT_NUMBER_PICTURES } from './constants'
 export const useProfilePage = () => {
   const userInfo = useSelector(getUserInfoSelector)
 
-  const profileInfoArr = [
-    userInfo?.gender,
-    moment.unix(userInfo?.date).format('DD/MM/YYYY'),
-    userInfo?.location,
-    userInfo?.facebook,
-    userInfo?.twitter,
-    userInfo?.instagram,
-    userInfo?.followers?.length || '-',
-    userInfo?.followings?.length || '-',
-  ]
-
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [bgImageArr, setBgImageArr] = useState<string[]>([])
@@ -78,7 +67,6 @@ export const useProfilePage = () => {
     bgImageArr,
     isErrorImg,
     userWallpapers,
-    profileInfoArr,
     errorImg,
     onLoadImg,
     setBgImage,
@@ -99,7 +87,7 @@ export const useModalContent = () => {
   }
 }
 
-export const parseUserData = (user: User) => {
+export const parseUserData = (user) => {
   return {
     gender: user?.gender,
     birthday: moment.unix(user?.date).format('DD/MM/YYYY'),
@@ -119,7 +107,7 @@ export const useFetchProfileInfo = (id: string) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) return
 
     const fetchUserProfileInfo = async () => {
       setIsLoading(true)
