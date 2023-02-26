@@ -56,16 +56,7 @@ const AboutPage: FC = () => {
               />
             </div>
           </div>
-          <div className={styles.line}>
-            <div className={styles.activityBlock}>
-              <p className={styles.activity}>{t('activity')}</p>
-              <img
-                className={styles.graph}
-                src={theme === 'light' ? linaGraph : linaDarkGraph}
-                alt="graph"
-              />
-            </div>
-            <p className={styles.description}>{t('secondAboutText')}</p>
+          <div className={styles.reverseLine}>
             <div className={styles.block}>
               <div className={styles.authorBlock}>
                 <img
@@ -82,6 +73,15 @@ const AboutPage: FC = () => {
               </div>
               <img className={styles.speech} src={speech} alt="" />
               <p className={styles.text}>{t('greatDay')}</p>
+            </div>
+            <p className={styles.description}>{t('secondAboutText')}</p>
+            <div className={styles.activityBlock}>
+              <p className={styles.activity}>{t('activity')}</p>
+              <img
+                className={styles.graph}
+                src={theme === 'light' ? linaGraph : linaDarkGraph}
+                alt="graph"
+              />
             </div>
           </div>
           <div className={styles.line}>
