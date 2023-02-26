@@ -45,7 +45,8 @@
 }
 
 .imgInput {
-  min-width: 340px !important;
+  max-width: 340px;
+  width: 100% !important;
 }
 
 .addingImg {
@@ -54,4 +55,11 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
+}
+
+@media (max-width: 560px) {
+  .imgInput {
+    max-width: 250px;
+    width: 100% !important;
+  }
 }
