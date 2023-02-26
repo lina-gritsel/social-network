@@ -38,12 +38,6 @@
   color: var(--gray-color) !important;
 }
 
-@media (max-width: 1320px) {
-  .friendsOnlineBlock {
-    display: none;
-  }
-}
-
 @media (max-width: 1070px) {
   .friendAndWeather {
     display: none;
