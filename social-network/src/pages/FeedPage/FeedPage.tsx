@@ -38,7 +38,9 @@ const FeedPage: FC = () => {
             <Weather />
           </div>
         </div>
-        <FriendsOnline allUsers={userswWithoutMe} isLoading={isLoading} />
+        <div className={styles.friendsOnlineBlock}>
+          <FriendsOnline allUsers={userswWithoutMe} isLoading={isLoading} />
+        </div>
       </div>
     </Layout>
   )

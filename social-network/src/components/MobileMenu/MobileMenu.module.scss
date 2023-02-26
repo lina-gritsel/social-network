@@ -1,9 +1,12 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 240px;
-  padding: 16px;
+  bottom: 0;
+  background-color: var(--white-color);
+  display: none;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-evenly;
+  padding: 6px;
+  position: fixed;
   width: 100%;
 }
 
@@ -11,6 +14,7 @@
   align-items: center;
   color: var(--gray-color);
   display: flex;
+  flex-direction: column;
   font: var(--font-text-4);
   font-weight: 700;
   gap: 10px;
@@ -20,6 +24,10 @@
 
 @media (max-width: 768px) {
   .container {
-    display: none;
+    display: flex;
+  }
+
+  .menuItem {
+    font: var(--font-text-5);
   }
 }
