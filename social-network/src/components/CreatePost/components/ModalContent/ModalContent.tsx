@@ -1,9 +1,10 @@
-import { FC, useRef, useState, SyntheticEvent } from 'react'
+import { FC, useRef, useState, SyntheticEvent, KeyboardEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import TextField from '@mui/material/TextField'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
 
 import Button from '../../../Button'
+import { pressEnter } from '../../../../utils'
 
 import styles from './ModalContent.module.scss'
 
@@ -61,6 +62,9 @@ const ModalContent: FC<ModalContentProps> = ({ currentImg, setCurrentImg }) => {
         className={styles.imgInput}
         inputRef={inputRef}
         onChange={() => onChangeInput()}
+        onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
+          pressEnter(e, handleClickBtn)
+        }
       />
       <Button
         className={isDisabled ? styles.addImgBtn : styles.addImgActiveBtn}
