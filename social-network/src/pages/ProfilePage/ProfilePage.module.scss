@@ -47,26 +47,9 @@
   padding: 24px;
 }
 
-.addingImg {
-  display: flex;
-  justify-self: center;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-}
-
-.imgInput {
-  width: 48%;
-}
-
-.addImgActiveBtn {
-  color: var(--light-color);
-}
-
 .errMessage {
   color: var(--blue-color);
 }
-
 
 .content {
   border-radius: 20px;

@@ -1,26 +1,37 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
+import { TextField } from '@mui/material'
 
 import Loader from '../../../../components/Loader'
 import Modal from '../../../../components/Modal'
 
 import { DEFAULT_NUMBER_PICTURES } from '../../constants'
 
-import { useWallpaperModal } from './hooks'
-
 import styles from './WallpapersModal.module.scss'
+import Button from '../../../../components/Button'
 
 interface WallpapersModalProps {
   onClose: () => void
   visible: boolean
+  data: string[]
+  isLoading: boolean
+  onAddCurrentImage: (value: string) => void
+  onSaveImage: () => Promise<void>
+  onDeleteImage: (value: string) => Promise<void>
 }
 
-const WallpapersModal: FC<WallpapersModalProps> = ({ onClose, visible }) => {
+const WallpapersModal: FC<WallpapersModalProps> = ({
+  onClose,
+  visible,
+  data,
+  isLoading,
+  onAddCurrentImage,
+  onSaveImage,
+  onDeleteImage,
+}) => {
   const { t } = useTranslation()
-
-  const { deleteImg, isLoading, wallpapers, handleClickImg } =
-    useWallpaperModal()
+  const [input, setInputValue] = useState<string>('')
 
   return (
     <Modal
@@ -35,46 +46,43 @@ const WallpapersModal: FC<WallpapersModalProps> = ({ onClose, visible }) => {
           {isLoading ? (
             <Loader className={styles.loader} />
           ) : (
-            wallpapers?.map((imageUrl, index) => (
+            data?.map((imageUrl, index) => (
               <div className={styles.imgItem} key={index}>
                 {index >= DEFAULT_NUMBER_PICTURES && (
                   <CancelIcon
-                    id={index}
+                    id={index.toString()}
                     className={styles.cancel}
                     fontSize="small"
-                    onClick={(e) => deleteImg(e)}
+                    onClick={() => onDeleteImage(imageUrl)}
                   />
                 )}
                 <img
                   src={imageUrl}
                   className={styles.img}
-                  onClick={(event: any) => handleClickImg(event)}
+                  onClick={() => onAddCurrentImage(imageUrl)}
                 />
               </div>
             ))
           )}
         </div>
-        {/* <div className={styles.addingImg}>
-            <TextField
-              placeholder={t('addImgLabel')}
-              className={styles.imgInput}
-              inputRef={inputRef}
-              onChange={() => onChangeInput()}
-              onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
-                pressEnter(e, handleClickBtn)
-              }
-            />
-            <Button
-              className={isDisabled ? styles.addImgBtn : styles.addImgActiveBtn}
-              onClick={handleClickBtn}
-              isDisabled={isDisabled}
-            >
-              {t('addImg').toLocaleUpperCase()}
-            </Button>
-          </div> */}
+        <div className={styles.addingImg}>
+          <TextField
+            placeholder={t('addImgLabel')}
+            className={styles.imgInput}
+            onChange={(event) => setInputValue(event.target.value)}
+          />
+          <Button
+            className={!input ? styles.addImgBtn : styles.addImgActiveBtn}
+            onClick={() => onAddCurrentImage(input)}
+            isDisabled={!input}
+          >
+            {t('addImg')}
+          </Button>
+        </div>
         {/* {isErrorImg && (
-            <div className={styles.errMessage}>{t('errMessage')}</div>
-          )} */}
+          <div className={styles.errMessage}>{t('errMessage')}</div>
+        )} */}
+        <Button onClick={onSaveImage}>save</Button>
       </div>
     </Modal>
   )

@@ -1,29 +1,23 @@
 import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 
+import CreatePost from '../../components/CreatePost'
+import PostList from '../../components/PostsList'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
-import PostList from '../../components/PostsList'
-import CreatePost from '../../components/CreatePost'
 
-import {
-  chekingForFriends,
-  parseUserData,
-  useFetchProfileInfo,
-  useProfilePage,
-  useWallpapersModal,
-} from './hooks'
+import { chekingForFriends, parseUserData, useFetchProfileInfo } from './hooks'
 
-import { DEFAULT_WALLPAPER } from './constants'
-
-import styles from './Profile.module.scss'
-import UserDetails from './components/UserDetails'
+import { useWallpaperModal } from './components/WallpapersModal/hooks'
 import GeneralUserInfo from './components/GeneralUserInfo'
-import { useSelector } from 'react-redux'
 import { getUserInfoSelector } from '../../store/selectors'
 import WallpapersModal from './components/WallpapersModal'
+import UserDetails from './components/UserDetails'
+import styles from './ProfilePage.module.scss'
+import { DEFAULT_WALLPAPER } from './constants'
 
 const ProfilePage: FC = () => {
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
@@ -38,9 +32,6 @@ const ProfilePage: FC = () => {
 
   const { user, isLoading: isLoadingUserInfo } = useFetchProfileInfo(profileId)
 
-  const { isLoading, bgImage, onLoadImg, errorImg, setIsErrorImg } =
-    useProfilePage()
-
   const rawUserInfo = useSelector(getUserInfoSelector)
   const profileInfoArr = isMyProfile
     ? parseUserData(rawUserInfo)
@@ -51,12 +42,17 @@ const ProfilePage: FC = () => {
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
 
   const userInfo = isMyProfile ? rawUserInfo : user
-
   const {
-    visible: visibleWallpapersModal,
-    open: openWallpapersModal,
-    close: closeWallpapersModal,
-  } = useWallpapersModal()
+    isLoading,
+    wallpapers,
+    onAddCurrentImage,
+    currentImage,
+    onSaveImage,
+    visibleWallpapersModal,
+    openWallpapersModal,
+    closeWallpapersModal,
+    onDeleteImage,
+  } = useWallpaperModal(userInfo)
 
   return (
     <Layout>
@@ -68,20 +64,13 @@ const ProfilePage: FC = () => {
             <div className={styles.wrapperCover}>
               <img
                 className={styles.bgProfile}
-                src={
-                  isMyProfile ? bgImage : user.background || DEFAULT_WALLPAPER
-                }
+                src={currentImage || DEFAULT_WALLPAPER}
                 alt="background"
-                onError={(e) => errorImg(e)}
-                onLoad={(e) => isMyProfile && onLoadImg(e)}
               />
               {isMyProfile && (
                 <Button
                   className={styles.editCoverPhoto}
-                  onClick={() => {
-                    openWallpapersModal()
-                    setIsErrorImg(false)
-                  }}
+                  onClick={openWallpapersModal}
                 >
                   {t('editCoverPhoto')}
                 </Button>
@@ -118,8 +107,13 @@ const ProfilePage: FC = () => {
         </div>
       )}
       <WallpapersModal
+        isLoading={isLoading}
+        data={wallpapers}
         visible={visibleWallpapersModal}
         onClose={closeWallpapersModal}
+        onAddCurrentImage={onAddCurrentImage}
+        onSaveImage={onSaveImage}
+        onDeleteImage={onDeleteImage}
       />
     </Layout>
   )
