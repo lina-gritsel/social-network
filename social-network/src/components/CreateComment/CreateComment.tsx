@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { FC, KeyboardEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
 import sendIcon from '../../assets/icons/send.svg'
 import { getUserInfoSelector } from '../../store/selectors'
+import { pressEnter } from '../../utils'
 import Avatar from '../Avatar'
 
 import styles from './CreateComment.module.scss'
@@ -31,6 +32,9 @@ const CreateComment: FC<CommentProps> = ({
           className={styles.input}
           onChange={onChangeComment}
           value={comment}
+          onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
+            pressEnter(e, onSubmit)
+          }
         />
         <button className={styles.sendComment} onClick={onSubmit}>
           <img src={sendIcon} />
