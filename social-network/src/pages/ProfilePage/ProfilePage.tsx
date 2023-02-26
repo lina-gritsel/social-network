@@ -1,13 +1,12 @@
 import { FC, useState } from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import Modal from '../../components/Modal'
-import { PATHS } from '../../router/paths'
+
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
-import Avatar from '../../components/Avatar'
 import PostList from '../../components/PostsList'
 import CreatePost from '../../components/CreatePost'
 
@@ -23,6 +22,7 @@ import { DEFAULT_WALLPAPER } from './constants'
 
 import styles from './Profile.module.scss'
 import UserDetails from './components/UserDetails'
+import GeneralUserInfo from './components/GeneralUserInfo'
 
 const ProfilePage: FC = () => {
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
@@ -113,30 +113,12 @@ const ProfilePage: FC = () => {
                 </Button>
               )}
             </div>
-            <Avatar
-              imageUrl={userInfo?.avatar}
-              className={styles.profileAvatar}
+            <GeneralUserInfo
+              userInfo={user}
+              isMyProfile={isMyProfile}
+              isFollowing={isFollowing}
+              isLoading={isLoading}
             />
-            <div className={styles.wrapperInfoUser}>
-              <div className={styles.userInfo}>
-                <div className={styles.nameUser}>{userInfo?.name}</div>
-                <div className={styles.workUser}>{userInfo?.bio}</div>
-              </div>
-              {!isMyProfile && (
-                <Button
-                  isDisabled={isLoading}
-                  outlined
-                  className={styles.btnFriend}
-                >
-                  {isFollowing ? t('unfollow') : t('follow')}
-                </Button>
-              )}
-              {isMyProfile && (
-                <NavLink to={PATHS.SETTINGS}>
-                  <Button className={styles.editInfo}>{t('settings')}</Button>
-                </NavLink>
-              )}
-            </div>
           </div>
           <div className={styles.wrapperContent}>
             <UserDetails userInfo={profileInfoArr} />
