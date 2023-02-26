@@ -92,32 +92,6 @@
   padding: 24px;
 }
 
-.intro {
-  background-color: var(--white-color);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
-  min-width: 300px;
-  height: 100%;
-  position: sticky;
-  top: 90px;
-}
-
-.title {
-  color: var(--gray-color);
-  font: var(--font-text-1);
-  text-transform: uppercase;
-}
-
-.intoItem {
-  align-items: center;
-  display: flex;
-  gap: 10px;
-  color: var(--gray-color);
-}
-
 .modal {
   display: flex;
   flex-direction: column;
@@ -183,10 +157,6 @@
   width: 100%;
 }
 
-.profileInfo {
-  font: var(--font-text-5);
-  width: 50%;
-}
 
 .loading {
   align-items: center;

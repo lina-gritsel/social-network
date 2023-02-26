@@ -23,7 +23,6 @@ export const useProfilePage = () => {
     userInfo?.followings?.length || '-',
   ]
 
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [bgImageArr, setBgImageArr] = useState<string[]>([])
@@ -73,7 +72,6 @@ export const useProfilePage = () => {
   }
 
   return {
-    isOpen,
     isLoading,
     bgImage,
     userInfo,
@@ -83,7 +81,6 @@ export const useProfilePage = () => {
     profileInfoArr,
     errorImg,
     onLoadImg,
-    setIsOpen,
     setBgImage,
     setBgImageArr,
     setIsErrorImg,
@@ -102,6 +99,19 @@ export const useModalContent = () => {
   }
 }
 
+export const parseUserData = (user: User) => {
+  return {
+    gender: user?.gender,
+    birthday: moment.unix(user?.date).format('DD/MM/YYYY'),
+    location: user?.location,
+    facebook: user?.facebook,
+    twitter: user?.twitter,
+    instagram: user?.instagram,
+    followers: user?.followers?.length || '-',
+    followings: user?.followings?.length || '-',
+  }
+}
+
 export const useFetchProfileInfo = (id: string) => {
   const [user, setUser] = useState<User>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -109,6 +119,8 @@ export const useFetchProfileInfo = (id: string) => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (!id) return;
+
     const fetchUserProfileInfo = async () => {
       setIsLoading(true)
 
@@ -116,7 +128,6 @@ export const useFetchProfileInfo = (id: string) => {
       if (status === 'success') {
         setUser(data?.user)
       } else {
-        
         navigate(PATHS.PAGE_404, { replace: true })
       }
 
@@ -126,41 +137,37 @@ export const useFetchProfileInfo = (id: string) => {
     fetchUserProfileInfo()
   }, [id])
 
-  const userProfileInfoArr = [
-    user?.gender,
-    moment.unix(user?.date).format('DD/MM/YYYY'),
-    user?.location,
-    user?.facebook,
-    user?.twitter,
-    user?.instagram,
-    user?.followers?.length || '-',
-    user?.followings?.length || '-',
-  ]
-
   return {
     user,
     isLoading,
-    userProfileInfoArr,
   }
 }
 
 export const chekingForFriends = (userInfo, selectedUserInfo) => {
-const followers = userInfo.followers
-const followings = userInfo.followings
+  const [isFollowing, setIsFollowing] = useState<boolean>(false)
 
-// const selectedUserId = selectedUserInfo.id
-// const followersSelecedUser = selectedUserInfo.followers
+  const followings = userInfo.followings
+  const followingExist = followings
+    ?.map(({ id }) => id)
+    .includes(selectedUserInfo?.id)
 
-const friends = followers
-? followers?.filter(({ id }) =>
-    followings?.map(({ id }) => id).includes(id),
-  )
-: []
+  useEffect(() => {
+    if (followingExist) {
+      setIsFollowing(true)
+    } else {
+      setIsFollowing(false)
+    }
+  }, [selectedUserInfo])
 
-const isFriend = !!friends.map(({id})=> id === selectedUserInfo.id)
+  return { isFollowing, setIsFollowing }
+}
 
-console.log(friends)
-console.log(isFriend)
+export const useWallpapersModal = () => {
+  const [visible, setVisible] = useState<boolean>(false)
 
-
+  return {
+    visible,
+    close: () => setVisible(false),
+    open: () => setVisible(true),
+  }
 }

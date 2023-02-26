@@ -11,34 +11,45 @@ export const FIELD_INTO = [
   {
     icon: <PermIdentityIcon />,
     label: 'profileGender',
+    value: 'gender',
   },
   {
     icon: <CakeIcon />,
     label: 'born',
+    value: 'birthday',
   },
   {
     icon: <LocationOnIcon />,
     label: 'profileLocation',
+    value: 'location',
   },
   {
     icon: <FacebookIcon />,
     label: 'facebook',
+    value: 'facebook',
+    link: 'http://www.facebook.com/',
   },
   {
     icon: <TwitterIcon />,
     label: 'twitter',
+    value: 'twitter',
+    link: 'http://www.twitter.com/',
   },
   {
     icon: <InstagramIcon />,
     label: 'instagram',
+    value: 'instagram',
+    link: 'http://www.instagram.com/',
   },
   {
     icon: <GroupsOutlinedIcon />,
     label: 'followers',
+    value: 'followers',
   },
   {
     icon: <PeopleAltOutlinedIcon />,
     label: 'followings',
+    value: 'followings',
   },
 ]
 
@@ -55,4 +66,3 @@ export const DEFAULT_NUMBER_PICTURES = 10
 
 export const DEFAULT_WALLPAPER =
   'https://images.unsplash.com/photo-1450387635522-8ecb968079bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2017&q=80'
-

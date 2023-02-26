@@ -11,35 +11,35 @@ import Avatar from '../../components/Avatar'
 import PostList from '../../components/PostsList'
 import CreatePost from '../../components/CreatePost'
 
-import { chekingForFriends, useFetchProfileInfo, useProfilePage } from './hooks'
-import ModalContent from './ModalContent'
 import {
-  FIELD_INTO,
-  FIRST_LINKS_INDEX,
-  LAST_LINKS_INDEX,
-  LINKS,
-  DEFAULT_WALLPAPER,
-} from './constants'
+  chekingForFriends,
+  parseUserData,
+  useFetchProfileInfo,
+  useProfilePage,
+  useWallpapersModal,
+} from './hooks'
+import ModalContent from './ModalContent'
+import { DEFAULT_WALLPAPER } from './constants'
 
 import styles from './Profile.module.scss'
+import UserDetails from './components/UserDetails'
 
 const ProfilePage: FC = () => {
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   const { t } = useTranslation()
 
-  const profileId =
-    useParams<{ id: string }>().id === 'me'
-      ? userId
-      : useParams<{ id: string }>().id
+  const { id: rawId } = useParams<{ id: string }>()
+
+  const profileId = rawId === 'me' ? userId : rawId
+
+  const isMyProfile = profileId === userId
+
+  const { user, isLoading: isLoadingUserInfo } = useFetchProfileInfo(profileId)
+
+  const userProfileInfoArr = parseUserData(user)
 
   const {
-    user,
-    isLoading: isLoadingUserInfo,
-    userProfileInfoArr,
-  } = useFetchProfileInfo(profileId)
-  const {
-    isOpen,
     isLoading,
     bgImage,
     userInfo: rawUserInfo,
@@ -48,27 +48,30 @@ const ProfilePage: FC = () => {
     profileInfoArr: rawProfileInfoArr,
     onLoadImg,
     errorImg,
-    setIsOpen,
     setBgImage,
     setBgImageArr,
     setIsErrorImg,
   } = useProfilePage()
 
-  chekingForFriends(rawUserInfo, user)
+  const { isFollowing, setIsFollowing } = chekingForFriends(rawUserInfo, user)
 
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
-
-  const isMyProfile = profileId === userId
 
   const userInfo = isMyProfile ? rawUserInfo : user
   const profileInfoArr = isMyProfile ? rawProfileInfoArr : userProfileInfoArr
 
+  const {
+    visible: visibleWallpapersModal,
+    open: openWallpapersModal,
+    close: closeWallpapersModal,
+  } = useWallpapersModal()
+
   return (
     <Layout>
       <Modal
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        onConfirm={() => setIsOpen(false)}
+        open={visibleWallpapersModal}
+        onClose={closeWallpapersModal}
+        onConfirm={closeWallpapersModal}
         title={t('backgroundTitle')}
         isDialogActions={false}
         className={styles.dialogContent}
@@ -102,7 +105,7 @@ const ProfilePage: FC = () => {
                 <Button
                   className={styles.editCoverPhoto}
                   onClick={() => {
-                    setIsOpen(true)
+                    openWallpapersModal()
                     setIsErrorImg(false)
                   }}
                 >
@@ -119,6 +122,15 @@ const ProfilePage: FC = () => {
                 <div className={styles.nameUser}>{userInfo?.name}</div>
                 <div className={styles.workUser}>{userInfo?.bio}</div>
               </div>
+              {!isMyProfile && (
+                <Button
+                  isDisabled={isLoading}
+                  outlined
+                  className={styles.btnFriend}
+                >
+                  {isFollowing ? t('unfollow') : t('follow')}
+                </Button>
+              )}
               {isMyProfile && (
                 <NavLink to={PATHS.SETTINGS}>
                   <Button className={styles.editInfo}>{t('settings')}</Button>
@@ -127,35 +139,7 @@ const ProfilePage: FC = () => {
             </div>
           </div>
           <div className={styles.wrapperContent}>
-            <div className={styles.intro}>
-              <div className={styles.title}>{t('intro')}</div>
-              {FIELD_INTO.map(({ icon, label }, index) =>
-                index >= FIRST_LINKS_INDEX && index <= LAST_LINKS_INDEX ? (
-                  <a
-                    key={index}
-                    href={LINKS[label] + (profileInfoArr[index] || '')}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <div className={styles.intoItem}>
-                      <Field
-                        icon={icon}
-                        label={label}
-                        profileInfo={profileInfoArr[index]}
-                      />
-                    </div>
-                  </a>
-                ) : (
-                  <div key={index} className={styles.intoItem}>
-                    <Field
-                      icon={icon}
-                      label={label}
-                      profileInfo={profileInfoArr[index]}
-                    />
-                  </div>
-                ),
-              )}
-            </div>
+            <UserDetails userInfo={profileInfoArr} />
             <div className={styles.content}>
               {isMyProfile && (
                 <CreatePost
@@ -178,24 +162,6 @@ const ProfilePage: FC = () => {
         </div>
       )}
     </Layout>
-  )
-}
-
-interface FieldProps {
-  icon: JSX.Element
-  label: string
-  profileInfo: string | number | string[]
-}
-
-const Field: FC<FieldProps> = ({ icon, label, profileInfo }) => {
-  const { t } = useTranslation()
-
-  return (
-    <>
-      {icon}
-      <div>{t(label)}</div>
-      <div className={styles.profileInfo}>{profileInfo}</div>
-    </>
   )
 }
 
