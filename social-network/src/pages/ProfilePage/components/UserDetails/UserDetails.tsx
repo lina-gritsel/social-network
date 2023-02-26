@@ -49,7 +49,12 @@ const Field = ({
 
   if (link)
     return (
-      <a href={`${link}/${value}`} target="_blank" rel="noreferrer">
+      <a
+        className={styles.intoItem}
+        href={`${link}/${value}`}
+        target="_blank"
+        rel="noreferrer"
+      >
         <FieldValue />
       </a>
     )
