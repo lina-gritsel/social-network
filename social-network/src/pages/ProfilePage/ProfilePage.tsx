@@ -2,8 +2,6 @@ import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-import Modal from '../../components/Modal'
-
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
@@ -17,7 +15,7 @@ import {
   useProfilePage,
   useWallpapersModal,
 } from './hooks'
-import ModalContent from './ModalContent'
+
 import { DEFAULT_WALLPAPER } from './constants'
 
 import styles from './Profile.module.scss'
@@ -25,6 +23,7 @@ import UserDetails from './components/UserDetails'
 import GeneralUserInfo from './components/GeneralUserInfo'
 import { useSelector } from 'react-redux'
 import { getUserInfoSelector } from '../../store/selectors'
+import WallpapersModal from './components/WallpapersModal'
 
 const ProfilePage: FC = () => {
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
@@ -39,17 +38,8 @@ const ProfilePage: FC = () => {
 
   const { user, isLoading: isLoadingUserInfo } = useFetchProfileInfo(profileId)
 
-  const {
-    isLoading,
-    bgImage,
-    bgImageArr,
-    isErrorImg,
-    onLoadImg,
-    errorImg,
-    setBgImage,
-    setBgImageArr,
-    setIsErrorImg,
-  } = useProfilePage()
+  const { isLoading, bgImage, onLoadImg, errorImg, setIsErrorImg } =
+    useProfilePage()
 
   const rawUserInfo = useSelector(getUserInfoSelector)
   const profileInfoArr = isMyProfile
@@ -70,23 +60,6 @@ const ProfilePage: FC = () => {
 
   return (
     <Layout>
-      <Modal
-        open={visibleWallpapersModal}
-        onClose={closeWallpapersModal}
-        title={t('backgroundTitle')}
-        isDialogActions={false}
-        className={styles.dialogContent}
-        content={
-          <ModalContent
-            setBgImage={setBgImage}
-            isErrorImg={isErrorImg}
-            setIsErrorImg={setIsErrorImg}
-            bgImageArr={bgImageArr}
-            setBgImageArr={setBgImageArr}
-            isLoading={isLoading}
-          />
-        }
-      />
       {isLoadingUserInfo || !userInfo ? (
         <Loader className={styles.loading} />
       ) : (
@@ -144,6 +117,10 @@ const ProfilePage: FC = () => {
           </div>
         </div>
       )}
+      <WallpapersModal
+        visible={visibleWallpapersModal}
+        onClose={closeWallpapersModal}
+      />
     </Layout>
   )
 }

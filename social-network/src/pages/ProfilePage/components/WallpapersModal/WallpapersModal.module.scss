@@ -1,0 +1,39 @@
+.dialogContent {
+  background-color: var(--white-color) !important;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.imgContainer {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 625px;
+  overflow: scroll;
+}
+.cancel {
+  color: var(--white-color);
+  position: absolute;
+  right: 35px;
+  top: 2px;
+  right: 7px;
+}
+
+.imgItem {
+  width: 40%;
+  cursor: pointer;
+  position: relative;
+}
+
+.img {
+  width: 100%;
+  height: 70px;
+  border-radius: 10px;
+}

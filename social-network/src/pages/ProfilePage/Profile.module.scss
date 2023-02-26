@@ -23,9 +23,6 @@
   position: relative;
 }
 
-.dialogContent {
-  background-color: var(--white-color) !important;
-}
 
 .postInput {
   color: var(--gray-color) !important;
@@ -50,35 +47,6 @@
   padding: 24px;
 }
 
-.modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-.imgContainer {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-height: 625px;
-  overflow: scroll;
-}
-
-.imgItem {
-  width: 40%;
-  cursor: pointer;
-  position: relative;
-}
-
-.img {
-  width: 100%;
-  height: 70px;
-  border-radius: 10px;
-}
-
 .addingImg {
   display: flex;
   justify-self: center;
@@ -99,13 +67,6 @@
   color: var(--blue-color);
 }
 
-.cancel {
-  color: var(--white-color);
-  position: absolute;
-  right: 35px;
-  top: 2px;
-  right: 7px;
-}
 
 .content {
   border-radius: 20px;

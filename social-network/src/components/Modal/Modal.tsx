@@ -18,6 +18,7 @@ interface ModalProps {
   className?: string
   isDialogActions?: boolean
   ref?: any
+  children?: ReactNode
 }
 
 const Modal: FC<ModalProps> = ({
@@ -28,6 +29,7 @@ const Modal: FC<ModalProps> = ({
   onConfirm,
   className,
   ref,
+  children,
   isDialogActions = true,
 }) => {
   return (
@@ -40,6 +42,9 @@ const Modal: FC<ModalProps> = ({
       onClose={onClose}
     >
       {title && <DialogTitle className={styles.title}>{title}</DialogTitle>}
+      {children && (
+        <DialogContent className={className}>{children}</DialogContent>
+      )}
       <DialogContent className={className}>{content}</DialogContent>
       {isDialogActions && (
         <DialogActions>
