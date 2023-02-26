@@ -21,7 +21,11 @@
   color: var(--blue-color) !important;
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1164px) {
+  .tabs {
+    flex-wrap: wrap;
+  }
+
   .options {
     gap: 15px;
 
