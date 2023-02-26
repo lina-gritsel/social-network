@@ -19,12 +19,17 @@ const FriendsPage: FC = () => {
 
   const { t } = useTranslation()
 
-  const { list, friendsTabs, tabValue, setTabValue, name } = useFriendsPage()
+  const { isMyPage, list, friendsTabs, tabValue, setTabValue, name } =
+    useFriendsPage()
 
   return (
     <Layout>
       <div className={styles.container}>
-        <h1>{t('friends')} {name}</h1>
+        {!isMyPage && (
+          <h2>
+            {t('friends')} {name}
+          </h2>
+        )}
         <div className={styles.mainContent}>
           <div className={styles.wrapperList}>
             <InputSearch

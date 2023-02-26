@@ -1,92 +1,59 @@
 import { FC, useState } from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 
-import Modal from '../../components/Modal'
-import { PATHS } from '../../router/paths'
+import CreatePost from '../../components/CreatePost'
+import PostList from '../../components/PostsList'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
-import Avatar from '../../components/Avatar'
-import PostList from '../../components/PostsList'
-import CreatePost from '../../components/CreatePost'
-import { useFollowFriends } from '../../hooks'
 
-import { useFetchProfileInfo, useProfilePage } from './hooks'
-import ModalContent from './ModalContent'
-import {
-  FIELD_INTO,
-  FIRST_LINKS_INDEX,
-  LAST_LINKS_INDEX,
-  LINKS,
-  DEFAULT_WALLPAPER,
-} from './constants'
+import { parseUserData, useFetchProfileInfo } from './hooks'
 
-import styles from './Profile.module.scss'
+import { useWallpaperModal } from './components/WallpapersModal/hooks'
+import GeneralUserInfo from './components/GeneralUserInfo'
+import { getUserInfoSelector } from '../../store/selectors'
+import WallpapersModal from './components/WallpapersModal'
+import UserDetails from './components/UserDetails'
+import styles from './ProfilePage.module.scss'
+import { DEFAULT_WALLPAPER } from './constants'
 
 const ProfilePage: FC = () => {
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
 
   const { t } = useTranslation()
 
-  const profileId =
-    useParams<{ id: string }>().id === 'me'
-      ? userId
-      : useParams<{ id: string }>().id
+  const { id: rawId } = useParams<{ id: string }>()
 
-  const {
-    user,
-    isLoading: isLoadingUserInfo,
-    userProfileInfoArr,
-  } = useFetchProfileInfo(profileId)
-  const {
-    isOpen,
-    isLoading,
-    bgImage,
-    userInfo: rawUserInfo,
-    bgImageArr,
-    isErrorImg,
-    profileInfoArr: rawProfileInfoArr,
-    onLoadImg,
-    errorImg,
-    setIsOpen,
-    setBgImage,
-    setBgImageArr,
-    setIsErrorImg,
-  } = useProfilePage()
-
-  const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
+  const profileId = rawId === 'me' ? userId : rawId
 
   const isMyProfile = profileId === userId
 
-  const userInfo = isMyProfile ? rawUserInfo : user
-  const profileInfoArr = isMyProfile ? rawProfileInfoArr : userProfileInfoArr
+  const { user, isLoading: isLoadingUserInfo } = useFetchProfileInfo(profileId)
 
-  const { followingExist, changeFollow, isLoadingFollow } = useFollowFriends(
-    rawUserInfo,
-    user?.id,
-  )
+  const rawUserInfo = useSelector(getUserInfoSelector)
+  const profileInfoArr = isMyProfile
+    ? parseUserData(rawUserInfo)
+    : parseUserData(user)
+
+  const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
+
+  const userInfo = isMyProfile ? rawUserInfo : user
+  const {
+    isLoading,
+    wallpapers,
+    onAddCurrentImage,
+    currentImage,
+    onSaveImage,
+    visibleWallpapersModal,
+    openWallpapersModal,
+    closeWallpapersModal,
+    onDeleteImage,
+  } = useWallpaperModal(userInfo)
 
   return (
     <Layout>
-      <Modal
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        onConfirm={() => setIsOpen(false)}
-        title={t('backgroundTitle')}
-        isDialogActions={false}
-        className={styles.dialogContent}
-        content={
-          <ModalContent
-            setBgImage={setBgImage}
-            isErrorImg={isErrorImg}
-            setIsErrorImg={setIsErrorImg}
-            bgImageArr={bgImageArr}
-            setBgImageArr={setBgImageArr}
-            isLoading={isLoading}
-          />
-        }
-      />
       {isLoadingUserInfo || !userInfo ? (
         <Loader className={styles.loading} />
       ) : (
@@ -95,81 +62,26 @@ const ProfilePage: FC = () => {
             <div className={styles.wrapperCover}>
               <img
                 className={styles.bgProfile}
-                src={
-                  isMyProfile ? bgImage : user.background || DEFAULT_WALLPAPER
-                }
+                src={currentImage || DEFAULT_WALLPAPER}
                 alt="background"
-                onError={(e) => errorImg(e)}
-                onLoad={(e) => isMyProfile && onLoadImg(e)}
               />
               {isMyProfile && (
                 <Button
                   className={styles.editCoverPhoto}
-                  onClick={() => {
-                    setIsOpen(true)
-                    setIsErrorImg(false)
-                  }}
+                  onClick={openWallpapersModal}
                 >
                   {t('editCoverPhoto')}
                 </Button>
               )}
             </div>
-            <Avatar
-              imageUrl={userInfo?.avatar}
-              className={styles.profileAvatar}
+            <GeneralUserInfo
+              userInfo={user}
+              myInfo={rawUserInfo}
+              isMyProfile={isMyProfile}
             />
-            <div className={styles.wrapperInfoUser}>
-              <div className={styles.userInfo}>
-                <div className={styles.nameUser}>{userInfo?.name}</div>
-                <div className={styles.workUser}>{userInfo?.bio}</div>
-              </div>
-              {!isMyProfile ? (
-                <Button
-                  isDisabled={isLoadingFollow}
-                  outlined
-                  className={styles.btnFriend}
-                  onClick={changeFollow}
-                >
-                  {followingExist ? t('unfollow') : t('follow')}
-                </Button>
-              ) : (
-                <NavLink to={PATHS.SETTINGS}>
-                  <Button className={styles.editInfo}>{t('settings')}</Button>
-                </NavLink>
-              )}
-            </div>
           </div>
           <div className={styles.wrapperContent}>
-            <div className={styles.intro}>
-              <div className={styles.title}>{t('intro')}</div>
-              {FIELD_INTO.map(({ icon, label }, index) =>
-                index >= FIRST_LINKS_INDEX && index <= LAST_LINKS_INDEX ? (
-                  <a
-                    key={index}
-                    href={LINKS[label] + (profileInfoArr[index] || '')}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <div className={styles.intoItem}>
-                      <Field
-                        icon={icon}
-                        label={label}
-                        profileInfo={profileInfoArr[index]}
-                      />
-                    </div>
-                  </a>
-                ) : (
-                  <div key={index} className={styles.intoItem}>
-                    <Field
-                      icon={icon}
-                      label={label}
-                      profileInfo={profileInfoArr[index]}
-                      id={userInfo?.id}
-                    />
-                  </div>
-                ),
-              )}
-            </div>
+            <UserDetails userInfo={profileInfoArr} userId={profileId}/>
             <div className={styles.content}>
               {isMyProfile && (
                 <CreatePost
@@ -191,34 +103,16 @@ const ProfilePage: FC = () => {
           </div>
         </div>
       )}
+      <WallpapersModal
+        isLoading={isLoading}
+        data={wallpapers}
+        visible={visibleWallpapersModal}
+        onClose={closeWallpapersModal}
+        onAddCurrentImage={onAddCurrentImage}
+        onSaveImage={onSaveImage}
+        onDeleteImage={onDeleteImage}
+      />
     </Layout>
-  )
-}
-
-interface FieldProps {
-  icon: JSX.Element
-  label: string
-  id?: string
-  profileInfo: string | number | string[]
-}
-
-const Field: FC<FieldProps> = ({ icon, label, profileInfo, id }) => {
-  const { t } = useTranslation()
-
-  const isLinkToFriends = label === 'followers' || label === 'followings'
-
-  return isLinkToFriends ? (
-    <NavLink to={`${PATHS.FRIENDS}/${id}`}>
-      {icon}
-      <div>{t(label)}</div>
-      <div className={styles.profileInfo}>{profileInfo}</div>
-    </NavLink>
-  ) : (
-    <>
-      {icon}
-      <div>{t(label)}</div>
-      <div className={styles.profileInfo}>{profileInfo}</div>
-    </>
   )
 }
 

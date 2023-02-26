@@ -1,3 +1,7 @@
+import { followUser, unsubsribeUser } from '../api'
+import { useAppDispatch } from '../store'
+import { fetchUser } from '../store/actions'
+
 export const getRandomInt = (max: number, min: number): number => {
   return Math.floor(Math.random() * (max - min)) + min
 }
@@ -30,10 +34,24 @@ export const getRandomElemArr = (quantity: number, maxInt: number) => {
   return newElements
 }
 
-export const pressEnter = (e, func: () => void) => {
+export const pressEnter = (e, func: (params?) => void) => {
   const value = (e.target as HTMLInputElement).value
   if (e.key === 'Enter' && value !== '') {
     func()
     e.target.value = ''
   }
+}
+
+export const changeFollow = async (
+  isTrue: boolean,
+  userInfo: any,
+  currentUserId: any,
+  setIsFollowing?: (boolean) => void,
+) => {
+  const dispatch = useAppDispatch()
+
+  isTrue
+    ? await unsubsribeUser(userInfo?.id, { currentUserId })
+    : await followUser(userInfo?.id, { currentUserId })
+  dispatch(fetchUser(userInfo?.id))
 }

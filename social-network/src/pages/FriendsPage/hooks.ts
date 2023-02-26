@@ -34,10 +34,11 @@ export const useFriendsPage = () => {
   const isMyPage = currentUserId === myId || currentUserId === 'me'
 
   const myInfo = useSelector(getUserInfoSelector)
+  const userInfo = fetchUserInfo(currentUserId)
 
-  const { followers, followings, name } = isMyPage
-    ? myInfo
-    : fetchUserInfo(currentUserId)
+  const currentUserInfo = isMyPage? myInfo : userInfo
+
+  const { followers, followings, name } = currentUserInfo
 
   const friends = followers
     ? followers?.filter(({ id }) =>
@@ -62,6 +63,7 @@ export const useFriendsPage = () => {
     tabValue,
     setTabValue,
     name,
+    isMyPage,
     list: getCertainList(),
   }
 }
