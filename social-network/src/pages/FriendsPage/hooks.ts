@@ -1,10 +1,43 @@
 import { useSelector } from 'react-redux'
+import { useParams } from 'react-router'
 
 import { getUserInfoSelector } from '../../store/selectors'
 import { useTabs } from '../../hooks/useTabs'
+import { useEffect, useState } from 'react'
+import { getUser, User } from '../../api'
+
+const fetchUserInfo = (id: string) => {
+  const [user, setUser] = useState<User>()
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const { data } = await getUser(id)
+      setUser(data?.user)
+    }
+    fetchUserInfo()
+  }, [id])
+
+  const userInfo = {
+    followers: user?.followers,
+    followings: user?.followings,
+    avatar: user?.avatar,
+    name: user?.name,
+  }
+
+  return userInfo
+}
 
 export const useFriendsPage = () => {
-  const { followers, followings } = useSelector(getUserInfoSelector)
+  const myId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+  const currentUserId = useParams<{ id: string }>().id
+
+  const isMyPage = currentUserId === myId || currentUserId === 'me'
+
+  const myInfo = useSelector(getUserInfoSelector)
+
+  const { followers, followings, name } = isMyPage
+    ? myInfo
+    : fetchUserInfo(currentUserId)
 
   const friends = followers
     ? followers?.filter(({ id }) =>
@@ -28,6 +61,7 @@ export const useFriendsPage = () => {
     friendsTabs,
     tabValue,
     setTabValue,
+    name,
     list: getCertainList(),
   }
 }

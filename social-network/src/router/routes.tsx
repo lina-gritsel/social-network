@@ -55,7 +55,7 @@ export const routes: Routes[] = [
     component: About,
   },
   {
-    path: PATHS.FRIENDS,
+    path: `${PATHS.FRIENDS}/:id`,
     component: FriendsPage,
   },
 ]

@@ -164,6 +164,7 @@ const ProfilePage: FC = () => {
                       icon={icon}
                       label={label}
                       profileInfo={profileInfoArr[index]}
+                      id={userInfo?.id}
                     />
                   </div>
                 ),
@@ -197,13 +198,22 @@ const ProfilePage: FC = () => {
 interface FieldProps {
   icon: JSX.Element
   label: string
+  id?: string
   profileInfo: string | number | string[]
 }
 
-const Field: FC<FieldProps> = ({ icon, label, profileInfo }) => {
+const Field: FC<FieldProps> = ({ icon, label, profileInfo, id }) => {
   const { t } = useTranslation()
 
-  return (
+  const isLinkToFriends = label === 'followers' || label === 'followings'
+
+  return isLinkToFriends ? (
+    <NavLink to={`${PATHS.FRIENDS}/${id}`}>
+      {icon}
+      <div>{t(label)}</div>
+      <div className={styles.profileInfo}>{profileInfo}</div>
+    </NavLink>
+  ) : (
     <>
       {icon}
       <div>{t(label)}</div>

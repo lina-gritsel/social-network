@@ -23,6 +23,8 @@ const Friend: FC<FriendProps> = ({ id, name, bio, avatar }) => {
 
   const { t } = useTranslation()
 
+  const isButton = id !== myInfo?.id
+
   const { followingExist, changeFollow, isLoadingFollow } = useFollowFriends(
     myInfo,
     id,
@@ -39,14 +41,16 @@ const Friend: FC<FriendProps> = ({ id, name, bio, avatar }) => {
           </div>
         </div>
       </NavLink>
-      <Button
-        isDisabled={isLoadingFollow}
-        outlined
-        className={styles.btnFriend}
-        onClick={changeFollow}
-      >
-        {followingExist ? t('unfollow') : t('follow')}
-      </Button>
+      {isButton && (
+        <Button
+          isDisabled={isLoadingFollow}
+          outlined
+          className={styles.btnFriend}
+          onClick={changeFollow}
+        >
+          {followingExist ? t('unfollow') : t('follow')}
+        </Button>
+      )}
     </div>
   )
 }

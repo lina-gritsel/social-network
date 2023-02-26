@@ -19,26 +19,28 @@ const FriendsPage: FC = () => {
 
   const { t } = useTranslation()
 
-  const { list, friendsTabs, tabValue, setTabValue } =
-    useFriendsPage()
+  const { list, friendsTabs, tabValue, setTabValue, name } = useFriendsPage()
 
   return (
     <Layout>
       <div className={styles.container}>
-        <div className={styles.wrapperList}>
-          <InputSearch
-            placeholder={t('searchFriends')}
-            onChange={(e) => setSearchString(e.target.value.toUpperCase())}
-          />
-          <FriendsList list={list} searchDebounced={searchDebounced}/>
-        </div>
-        <div className={styles.wrapper}>
-          <FriendsMenu
-            tabs={friendsTabs}
-            value={tabValue}
-            setValue={setTabValue}
-          />
-          <PossibleFriends />
+        <h1>{t('friends')} {name}</h1>
+        <div className={styles.mainContent}>
+          <div className={styles.wrapperList}>
+            <InputSearch
+              placeholder={t('searchFriends')}
+              onChange={(e) => setSearchString(e.target.value.toUpperCase())}
+            />
+            <FriendsList list={list} searchDebounced={searchDebounced} />
+          </div>
+          <div className={styles.wrapper}>
+            <FriendsMenu
+              tabs={friendsTabs}
+              value={tabValue}
+              setValue={setTabValue}
+            />
+            <PossibleFriends />
+          </div>
         </div>
       </div>
     </Layout>
