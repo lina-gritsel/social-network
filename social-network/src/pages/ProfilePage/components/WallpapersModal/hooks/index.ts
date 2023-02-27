@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { getWallpapers, updateUser, User } from '../../../../../api'
 import { useModal } from '../../../../../hooks'
@@ -8,6 +8,8 @@ export const useWallpaperModal = (userInfo: User) => {
   const [currentImage, setCurrentImage] = useState<string>('')
   const [savedImage, setSavedImage] = useState<string>('')
   const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
+
+  const inputRef = useRef<HTMLInputElement>()
 
   const {
     visible: visibleWallpapersModal,
@@ -88,11 +90,14 @@ export const useWallpaperModal = (userInfo: User) => {
   }
   const onErrorImage = () => {
     setAllWallpapers((prev) => prev.slice(0, -1))
+    setUserWallpapers((prev) => prev.slice(0, -1))
     setCurrentImage(userInfo?.background)
     setIsErrorImg(true)
+    inputRef.current.value = ''
   }
 
   return {
+    inputRef,
     isLoading,
     isErrorImg,
     onAddCurrentImage,

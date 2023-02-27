@@ -30,7 +30,6 @@ interface CreatePostProps {
 }
 
 const CreatePost: FC<CreatePostProps> = ({
-  name,
   avatarImg,
   content,
   image,
@@ -38,7 +37,6 @@ const CreatePost: FC<CreatePostProps> = ({
   editMode,
   id,
   userId,
-  className,
 }) => {
   const { t } = useTranslation()
   const theme = useSelector(selectTheme)
