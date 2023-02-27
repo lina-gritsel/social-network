@@ -159,7 +159,7 @@
   }
 }
 
-@media (max-width: 990px) {
+@media (max-width: 768px) {
   .block {
     margin-left: 50px;
     max-width: 210px;
@@ -181,5 +181,9 @@
 
   .graph {
     margin-bottom: 50px;
+  }
+
+  .wrapper {
+    padding-bottom: 70px;
   }
 }

@@ -7,3 +7,9 @@
 .show {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .list {
+    padding: 0 10px;
+  }
+}

@@ -67,11 +67,11 @@ const SettingsModal: FC<SettingsModalProps> = ({
         }
       />
       <div className={styles.settingsModal} ref={modalRef}>
-        <div onClick={editPost}>
+        <div onClick={editPost} className={styles.changePost}>
           <Changes />
-          {t('change')}
+          <div className={styles.changePost}>{t('change')}</div>
         </div>
-        <div onClick={onDeletePost}>
+        <div onClick={onDeletePost} className={styles.changePost}>
           <Delete />
           {t('delete')}
         </div>

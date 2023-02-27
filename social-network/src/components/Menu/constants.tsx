@@ -5,45 +5,47 @@ import {
   PeopleOutline,
   ExploreOutlined,
   SettingsOutlined,
-  Diversity3Outlined
+  Diversity3Outlined,
 } from '@mui/icons-material'
 
 import { PATHS } from '../../router/paths'
+
+import styles from '../MobileMenu/MobileMenu.module.scss'
 
 export const NAVIGATION_MENU = [
   {
     to: `${PATHS.PROFILE}/me`,
     label: 'profile',
-    icon: <PersonOutline />,
+    icon: <PersonOutline className={styles.icon} />,
   },
   {
     to: PATHS.FEED,
     label: 'feed',
-    icon: <GridView />,
+    icon: <GridView className={styles.icon} />,
   },
   {
     to: `${PATHS.FRIENDS}/me`,
     label: 'friends',
-    icon: <Diversity3Outlined />,
+    icon: <Diversity3Outlined className={styles.icon} />,
   },
   {
     to: PATHS.EXPLORE,
     label: 'explore',
-    icon: <ExploreOutlined />,
+    icon: <ExploreOutlined className={styles.icon} />,
   },
   {
     to: PATHS.SETTINGS,
     label: 'settings',
-    icon: <SettingsOutlined />,
+    icon: <SettingsOutlined className={styles.icon} />,
   },
   {
     to: PATHS.ABOUT,
     label: 'about',
-    icon: <PeopleOutline />,
+    icon: <PeopleOutline className={styles.icon} />,
   },
   {
     to: PATHS.LOGOUT,
     label: 'logout',
-    icon: <LogoutOutlinedIcon />,
+    icon: <LogoutOutlinedIcon className={styles.icon} />,
   },
 ]

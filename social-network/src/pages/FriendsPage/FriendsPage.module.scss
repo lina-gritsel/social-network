@@ -47,11 +47,15 @@
   }
 }
 
-@media (max-width: 872px) {
+@media (max-width: 768px) {
   .wrapper {
     flex-direction: column-reverse;
     & > * {
       width: 100%;
     }
+  }
+
+  .possibleFriend {
+    display: none;
   }
 }

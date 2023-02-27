@@ -13,8 +13,8 @@ const MobileMenu: FC = () => {
     <nav className={styles.container}>
       {NAVIGATION_MENU.map(({ to, label, icon }, index) => (
         <NavLink key={index} to={to} className={styles.menuItem}>
-          {icon}
-          {t(label)}
+          <div>{icon}</div>
+          <div className={styles.label}>{t(label)}</div>
         </NavLink>
       ))}
     </nav>

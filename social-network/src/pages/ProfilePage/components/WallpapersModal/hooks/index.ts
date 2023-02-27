@@ -34,7 +34,7 @@ export const useWallpaperModal = (userInfo: User) => {
     try {
       const wallpapers = userWallpapers.filter((image) => image !== imageUrl)
       const isCurrentUserImage = imageUrl === currentImage
-      console.log(currentImage)
+      
       await updateUser({
         ...userInfo,
         date: parseFloat(userInfo.date as any),

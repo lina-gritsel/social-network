@@ -29,10 +29,46 @@
   display: flex;
   font: var(--font-text-2);
   font-weight: 700;
+  gap: 10px;
   min-height: 64px;
 }
 
 .forum {
   color: var(--blue-color) !important;
   font: var(--font-subtitle);
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    max-height: 40px !important;
+  }
+
+  .mainMenuItem {
+    font: var(--font-text-4);
+    font-weight: 500;
+  }
+
+  .avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .userName {
+    font: var(--font-text-4);
+    font-weight: 500;
+  }
+
+  .mainMenuItem {
+    gap: 5px;
+  }
+
+  .logo {
+    height: 30px;
+    width: 30px;
+  }
 }

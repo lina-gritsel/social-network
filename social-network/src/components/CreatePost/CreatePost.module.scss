@@ -114,22 +114,35 @@
   top: 30% !important;
 }
 
-@media (max-width: 563px) {
+@media (max-width: 768px) {
   .create {
-    min-height: 140px;
+    min-height: 0;
     min-width: 310px;
     width: 100%;
+    border-radius: 0;
+    padding: 0;
   }
 
   .createPost {
-    height: 20px;
+    height: 30px;
     font: var(--font-text-5);
-    min-width: 20px !important;
+    min-width: 58px !important;
   }
 
   .createPostActive {
     height: 20px;
     font: var(--font-text-5);
     min-width: 20px !important;
+  }
+
+  .avatar {
+    height: 32px !important;
+    width: 32px !important;
+  }
+
+  .createPostInput {
+    max-height: 32px !important;
+    min-height: 32px !important;
+    font: var(--font-text-5);
   }
 }

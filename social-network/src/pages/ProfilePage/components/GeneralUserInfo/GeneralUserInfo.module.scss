@@ -36,6 +36,37 @@
   background-color: var(--light-gray-color);
   color: var(--gray-color);
   font: var(--font-text-4);
+  font-weight: 500;
   padding: 10px;
   width: 140px;
+}
+
+
+@media (max-width: 768px) {
+  .profileAvatar {
+    width: 84px !important;
+    height: 84px !important;
+    bottom: 65px;
+  }
+
+  .wrapperInfoUser {
+    display: block;
+    bottom: 0;
+  }
+
+  .nameUser {
+    font: var(--font-text-4);
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .workUser {
+    font: var(--font-text-5);
+  }
+
+  .editInfo {
+    height: 38px;
+    width: 100%;
+    margin-top: 14px;
+  }
 }

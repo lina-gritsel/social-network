@@ -129,6 +129,13 @@
   color: var(--light-color);
 }
 
+@media (max-width: 1140px) {
+  .inputGender {
+    min-height: 80px;
+    gap: 0;
+  }
+}
+
 @media (max-width: 1030px) {
   .form {
     gap: 10px;
@@ -159,10 +166,14 @@
     font-size: 7px !important;
     max-width: 90px;
   }
-}
 
-@media (max-width: 1030px) {
   .btnBlock {
     margin-top: 15px;
   }
+
+  .inputGender {
+    min-height: 40px;
+    gap: 0;
+  }
 }
+
