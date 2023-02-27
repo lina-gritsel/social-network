@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { useSelector } from 'react-redux'
-import { ForumRounded } from '@mui/icons-material'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PATHS } from '../../router/paths'
 import { getUserInfoSelector } from '../../store/selectors'
+import logo from '../../assets/images/network.png'
 
 import Avatar from '../Avatar'
 
@@ -17,8 +17,8 @@ const Header: FC = () => {
   return (
     <div className={styles.content}>
       <Link to={PATHS.FEED} className={styles.mainMenuItem}>
-        <ForumRounded className={styles.forum} />
-        OurNetwork
+        <img alt="" src={logo} className={styles.logo} />
+        <div>OurNetwork</div>
       </Link>
       <div className={styles.avatarBlock}>
         <div className={styles.userName}>{userInfo?.name}</div>
