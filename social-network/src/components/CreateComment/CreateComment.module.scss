@@ -35,3 +35,17 @@
 .sendComment:hover {
   background: var(--white-color);
 }
+
+.feeling {
+  position: relative;
+  right: 50px;
+  top: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.feelingModal {
+  background-color: var(--white-color) !important;
+}
