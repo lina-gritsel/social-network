@@ -8,6 +8,7 @@ import data from '@emoji-mart/data'
 import sendIcon from '../../assets/icons/send.svg'
 import { getUserInfoSelector, selectTheme } from '../../store/selectors'
 import { pressEnter } from '../../utils'
+import { useModal } from '../../hooks'
 import Avatar from '../Avatar'
 import Modal from '../Modal'
 
@@ -16,17 +17,21 @@ import styles from './CreateComment.module.scss'
 interface CommentProps {
   onSubmit: () => void
   onChangeComment: (event) => void
+  onEmojiSelect: (event) => void
   comment: string
 }
 
 const CreateComment: FC<CommentProps> = ({
   onSubmit,
   onChangeComment,
+  onEmojiSelect,
   comment,
 }) => {
   const { t } = useTranslation()
   const userInfo = useSelector(getUserInfoSelector)
   const theme = useSelector(selectTheme)
+
+  const { visible, open, close } = useModal()
 
   return (
     <div className={styles.wrapper}>
@@ -41,14 +46,14 @@ const CreateComment: FC<CommentProps> = ({
             pressEnter(e, onSubmit)
           }
         />
-        <MoodOutlined className={styles.feeling}/>
+        <MoodOutlined className={styles.feeling} onClick={() => open()} />
         <button className={styles.sendComment} onClick={onSubmit}>
           <img src={sendIcon} />
         </button>
       </div>
-      {/* <Modal
-        open={isEmojiModalVisible}
-        onClose={closeEmojiModal}
+      <Modal
+        open={visible}
+        onClose={close}
         isDialogActions={false}
         className={styles.feelingModal}
         content={
@@ -58,8 +63,7 @@ const CreateComment: FC<CommentProps> = ({
             onEmojiSelect={(e) => onEmojiSelect(e)}
           />
         }
-      /> */}
-
+      />
     </div>
   )
 }

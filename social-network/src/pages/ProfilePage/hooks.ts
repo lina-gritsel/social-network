@@ -59,13 +59,3 @@ export const useFetchProfileInfo = (id: string) => {
     isLoading,
   }
 }
-
-export const useWallpapersModal = () => {
-  const [visible, setVisible] = useState<boolean>(false)
-
-  return {
-    visible,
-    close: () => setVisible(false),
-    open: () => setVisible(true),
-  }
-}

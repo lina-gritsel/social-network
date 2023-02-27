@@ -34,6 +34,9 @@ export const useCreateComment = ({
   const onChangeComment = (event) => {
     setComment(event.target.value)
   }
+  const onEmojiSelect = (event) => {
+    setComment(prev=> prev + event.native)
+  }
 
   const onSubmit = async () => {
     const { comments } = await createComment({
@@ -50,6 +53,7 @@ export const useCreateComment = ({
     onSubmit,
     comment,
     onChangeComment,
+    onEmojiSelect,
     allComments: sortedComments,
     isLoading,
   }

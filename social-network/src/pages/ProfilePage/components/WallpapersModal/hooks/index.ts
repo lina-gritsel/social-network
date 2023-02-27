@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { getWallpapers, updateUser, User } from '../../../../../api'
+import { useModal } from '../../../../../hooks'
 import { DEFAULT_WALLPAPER } from '../../../constants'
-import { useWallpapersModal } from '../../../hooks'
 
 export const useWallpaperModal = (userInfo: User) => {
   const [currentImage, setCurrentImage] = useState<string>('')
@@ -13,7 +13,7 @@ export const useWallpaperModal = (userInfo: User) => {
     visible: visibleWallpapersModal,
     open: openWallpapersModal,
     close,
-  } = useWallpapersModal()
+  } = useModal()
 
   const closeWallpapersModal = (): void => {
     close()
