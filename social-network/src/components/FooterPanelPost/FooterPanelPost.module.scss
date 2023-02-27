@@ -79,3 +79,27 @@
   width: 21px !important;
   height: 21px !important;
 }
+
+@media (max-width: 768px) {
+  .likeAvatar {
+    height: 18px !important;
+    width: 18px !important;
+    font-size: 10px !important;
+  }
+  .allComments {
+    font: var(--font-text-5);
+  }
+
+  .icon {
+    height: 16px !important;
+    width: 16px !important;
+  }
+
+  .addToPost {
+    padding: 5px 0 !important;
+  }
+
+  .actionOnPost {
+    gap: 5px;
+  }
+}

@@ -40,11 +40,11 @@ const Field = ({
   const { t } = useTranslation()
 
   const FieldValue = () => (
-    <>
-      {icon}
-      {t(label)}
+    <div className={styles.field}>
+      <div>{icon}</div>
+      <div className={styles.label}>{t(label)}</div>
       <div className={styles.profileInfo}>{value}</div>
-    </>
+    </div>
   )
 
   if (link)

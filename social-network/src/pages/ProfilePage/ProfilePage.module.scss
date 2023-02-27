@@ -92,9 +92,17 @@
 }
 
 @media (max-width: 768px) {
+  .wrapperContent {
+    padding: 0;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    gap: 8px;
+  }
+
   .container {
     gap: 20px;
     padding: 0;
+    padding-bottom: 100px;
   }
 
   .pofileHeader {
@@ -120,5 +128,13 @@
 
   .wrapperImg {
     display: block;
+  }
+
+  .wrapperContent {
+    border-radius: 0;
+  }
+
+  .content {
+    gap: 8px;
   }
 }

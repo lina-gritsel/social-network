@@ -36,3 +36,23 @@
   color: var(--blue-color) !important;
   font: var(--font-subtitle);
 }
+@media (max-width: 768px) {
+  .content {
+    max-height: 40px !important;
+  }
+
+  .mainMenuItem {
+    font: var(--font-text-4);
+    font-weight: 500;
+  }
+
+  .avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .userName {
+    font: var(--font-text-4);
+    font-weight: 500;
+  }
+}
