@@ -43,3 +43,14 @@
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  .containerWrapper {
+    padding-bottom: 80px;
+  }
+
+  .container {
+    border-radius: 0;
+    padding: 0;
+  }
+}
