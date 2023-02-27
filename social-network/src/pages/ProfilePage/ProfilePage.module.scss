@@ -65,6 +65,22 @@
   padding-top: 30px;
 }
 
+.wrapperImg {
+  border-radius: 50px;
+  display: none;
+  padding: 4px;
+  padding-bottom: 0;
+  background-color: var(--light-gray-color);
+  bottom: 20px;
+  position: absolute;
+  right: 40px;
+}
+
+.changeWallpaper {
+  height: 16px;
+  width: 16px;
+}
+
 @media (max-width: 1084px) {
   .bgProfile {
     height: 250px;
@@ -72,5 +88,37 @@
 
   .wrapperContent {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: 20px;
+    padding: 0;
+  }
+
+  .pofileHeader {
+    border-radius: 0;
+    box-shadow: none;
+    height: 230px;
+    width: 100%;
+  }
+
+  .bgProfile {
+    border-radius: 0;
+    height: 112px;
+  }
+
+  .userInfo {
+    position: relative;
+    left: 0;
+  }
+
+  .editCoverPhoto {
+    display: none;
+  }
+
+  .wrapperImg {
+    display: block;
   }
 }

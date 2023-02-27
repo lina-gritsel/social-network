@@ -2,13 +2,14 @@ import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
+import WallpaperIcon from '@mui/icons-material/Wallpaper'
 
+import setWallpaper from '../../assets/images/setWallpaper.png'
 import CreatePost from '../../components/CreatePost'
 import PostList from '../../components/PostsList'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
-
 import { chekingForFriends, parseUserData, useFetchProfileInfo } from './hooks'
 
 import { useWallpaperModal } from './components/WallpapersModal/hooks'
@@ -68,12 +69,20 @@ const ProfilePage: FC = () => {
                 alt="background"
               />
               {isMyProfile && (
-                <Button
-                  className={styles.editCoverPhoto}
-                  onClick={openWallpapersModal}
-                >
-                  {t('editCoverPhoto')}
-                </Button>
+                <>
+                  <Button
+                    onClick={openWallpapersModal}
+                    className={styles.editCoverPhoto}
+                  >
+                    {t('editCoverPhoto')}
+                  </Button>
+                  <div className={styles.wrapperImg}>
+                    <WallpaperIcon
+                      onClick={openWallpapersModal}
+                      className={styles.changeWallpaper}
+                    />
+                  </div>
+                </>
               )}
             </div>
             <GeneralUserInfo
