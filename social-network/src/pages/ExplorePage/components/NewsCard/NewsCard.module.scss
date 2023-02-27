@@ -30,4 +30,15 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  margin-bottom: 15px !important;}
+  margin-bottom: 15px !important;
+}
+
+@media (max-width: 768px) {
+  .image {
+    border-radius: 0;
+  }
+
+  .card {
+    border-radius: 0 !important;
+  }
+}

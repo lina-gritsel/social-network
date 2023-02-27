@@ -34,3 +34,14 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .tabs {
+    gap: 10px;
+  }
+
+  .tabsCategory {
+    font: var(--font-text-5);
+    height: 35px;
+  }
+}

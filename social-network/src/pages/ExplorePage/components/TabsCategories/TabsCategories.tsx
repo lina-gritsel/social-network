@@ -28,7 +28,7 @@ const TabsCategories: FC<TabsCategoriesProps> = ({
           key={index}
           className={classNames(
             { [styles.activeTab]: category === option },
-            className,
+            styles.tabsCategory,
           )}
           onClick={() => onChange(option)}
         >
