@@ -57,6 +57,10 @@
   width: 100%;
 }
 
+.errMessage {
+  color: var(--gray-color);
+}
+
 @media (max-width: 560px) {
   .imgInput {
     max-width: 250px;

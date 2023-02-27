@@ -42,6 +42,7 @@ const ProfilePage: FC = () => {
   const userInfo = isMyProfile ? rawUserInfo : user
   const {
     isLoading,
+    isErrorImg,
     wallpapers,
     onAddCurrentImage,
     currentImage,
@@ -50,6 +51,8 @@ const ProfilePage: FC = () => {
     openWallpapersModal,
     closeWallpapersModal,
     onDeleteImage,
+    onErrorImage,
+    setIsErrorImg,
   } = useWallpaperModal(userInfo)
 
   return (
@@ -111,6 +114,9 @@ const ProfilePage: FC = () => {
         onAddCurrentImage={onAddCurrentImage}
         onSaveImage={onSaveImage}
         onDeleteImage={onDeleteImage}
+        onErrorImage={onErrorImage}
+        isErrorImg={isErrorImg}
+        setIsErrorImg={setIsErrorImg}
       />
     </Layout>
   )
