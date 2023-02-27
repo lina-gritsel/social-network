@@ -19,7 +19,7 @@ const FooterPanel: FC<FooterPanelProps> = ({
     <div className={styles.createIcons}>
       <div className={styles.createItem} onClick={openAddImageModal}>
         <InsertPhotoOutlined fontSize="medium" className={styles.icon} />
-        {t('photo')} / {t('video')}
+        {t('photo')}
       </div>
       <div className={styles.createItem} onClick={openEmojiModal}>
         <MoodOutlined fontSize="medium" className={styles.icon} />

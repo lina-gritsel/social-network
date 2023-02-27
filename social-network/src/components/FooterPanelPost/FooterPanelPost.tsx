@@ -49,7 +49,7 @@ const FooterPanelPost: FC<FooterPanelPostProps> = ({
           )}
         </div>
         <div className={styles.allComments}>
-          {amountComments} {t('comments')}
+          {t('comments')} {amountComments}
         </div>
       </div>
       <div className={styles.addToPost}>

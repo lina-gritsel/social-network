@@ -28,6 +28,16 @@
   font: var(--font-text-4);
 }
 
+.showElement {
+  display: block;
+}
+
+@media (max-width: 770px) {
+  .settingsWrapper {
+    padding-bottom: 60px;
+  }
+}
+
 @media (max-width: 620px) {
   .layout {
     padding: 15px;
@@ -40,5 +50,11 @@
   .title {
     font: var(--font-text-3);
     font-weight: 700;
+  }
+}
+
+@media (max-width: 510px) {
+  .layout {
+    background: var(--white-color);
   }
 }

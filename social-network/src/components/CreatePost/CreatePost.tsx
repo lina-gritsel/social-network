@@ -94,7 +94,7 @@ const CreatePost: FC<CreatePostProps> = ({
         <CreatePostInput
           value={contentInput}
           onChange={(event) => setContentInput(event.target.value)}
-          className={className}
+          className={styles.createPostInput}
         />
       </div>
       {currentImg && <img className={styles.createImg} src={currentImg} />}

@@ -13,7 +13,13 @@
   gap: 5px;
 }
 
-@media (max-width: 563px) {
+@media (max-width: 768px) {
+  .icon {
+    width: 16px !important;
+    height: 16px !important;
+    font: var(--font-text-5);
+  }
+
   .createIcons {
     gap: 10px;
   }

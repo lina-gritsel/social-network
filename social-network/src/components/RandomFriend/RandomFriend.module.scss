@@ -105,3 +105,9 @@
 .loader {
   margin: 0 auto;
 }
+
+@media (max-width: 678px) {
+  .friendCard {
+    display: none;
+  }
+}

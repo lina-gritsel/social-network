@@ -27,3 +27,36 @@
   font: var(--font-text-5);
   width: 50%;
 }
+
+.field {
+  width: 100%;
+  display: flex;
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .intro {
+    border-radius: 0;
+  }
+
+  .title {
+    font: var(--font-text-5);
+    font-weight: 500;
+  }
+
+  .icon {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .label,
+  .profileInfo {
+    font: var(--font-text-5);
+  }
+
+  .field {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+}

@@ -4,10 +4,11 @@
   display: none;
   flex-direction: row;
   gap: 10px;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 6px;
   position: fixed;
   width: 100%;
+  overflow: auto;
 }
 
 .menuItem {
@@ -28,6 +29,18 @@
   }
 
   .menuItem {
-    font: var(--font-text-5);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 5px;
+    min-width: 66px;
+  }
+
+  .icon {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .label {
+    font-size: 12px;
   }
 }

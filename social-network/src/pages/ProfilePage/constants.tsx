@@ -7,48 +7,50 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined'
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined'
 
+import styles from './components/UserDetails/UserDetails.module.scss'
+
 export const FIELD_INTO = [
   {
-    icon: <PermIdentityIcon />,
+    icon: <PermIdentityIcon className={styles.icon} />,
     label: 'profileGender',
     value: 'gender',
   },
   {
-    icon: <CakeIcon />,
+    icon: <CakeIcon className={styles.icon} />,
     label: 'born',
     value: 'birthday',
   },
   {
-    icon: <LocationOnIcon />,
+    icon: <LocationOnIcon className={styles.icon} />,
     label: 'profileLocation',
     value: 'location',
   },
   {
-    icon: <FacebookIcon />,
+    icon: <FacebookIcon className={styles.icon} />,
     label: 'facebook',
     value: 'facebook',
     link: 'http://www.facebook.com/',
   },
   {
-    icon: <TwitterIcon />,
+    icon: <TwitterIcon className={styles.icon} />,
     label: 'twitter',
     value: 'twitter',
     link: 'http://www.twitter.com/',
   },
   {
-    icon: <InstagramIcon />,
+    icon: <InstagramIcon className={styles.icon} />,
     label: 'instagram',
     value: 'instagram',
     link: 'http://www.instagram.com/',
   },
   {
-    icon: <GroupsOutlinedIcon />,
+    icon: <GroupsOutlinedIcon className={styles.icon} />,
     label: 'followers',
     value: 'followers',
     navLink: true,
   },
   {
-    icon: <PeopleAltOutlinedIcon />,
+    icon: <PeopleAltOutlinedIcon className={styles.icon} />,
     label: 'followings',
     value: 'followings',
     navLink: true,
