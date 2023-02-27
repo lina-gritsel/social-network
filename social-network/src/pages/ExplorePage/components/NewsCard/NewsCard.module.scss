@@ -2,7 +2,6 @@
   border-radius: 20px 20px 0 0;
   max-width: 500px;
   max-height: 300px;
-  object-fit: contain;
   margin: 0 auto;
 }
 
@@ -24,4 +23,11 @@
 
 .content {
   color: var(--gray-color) !important;
-}
+  max-height: 64px;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: 15px !important;}

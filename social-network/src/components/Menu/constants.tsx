@@ -24,7 +24,7 @@ export const NAVIGATION_MENU = [
     icon: <GridView className={styles.icon} />,
   },
   {
-    to: PATHS.FRIENDS,
+    to: `${PATHS.FRIENDS}/me`,
     label: 'friends',
     icon: <Diversity3Outlined className={styles.icon} />,
   },

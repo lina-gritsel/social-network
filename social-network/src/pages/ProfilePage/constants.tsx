@@ -47,11 +47,13 @@ export const FIELD_INTO = [
     icon: <GroupsOutlinedIcon className={styles.icon} />,
     label: 'followers',
     value: 'followers',
+    navLink: true,
   },
   {
     icon: <PeopleAltOutlinedIcon className={styles.icon} />,
     label: 'followings',
     value: 'followings',
+    navLink: true,
   },
 ]
 

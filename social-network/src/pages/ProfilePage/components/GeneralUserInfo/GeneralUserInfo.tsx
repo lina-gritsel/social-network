@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 
+import { useFollowFriends } from '../../../../hooks'
 import Avatar from '../../../../components/Avatar'
 import Button from '../../../../components/Button'
 import { PATHS } from '../../../../router/paths'
@@ -11,18 +12,21 @@ import styles from './GeneralUserInfo.module.scss'
 
 interface GeneralUserInfoProps {
   userInfo: User
+  myInfo: User
   isMyProfile: boolean
-  isFollowing: boolean
-  isLoading: boolean
 }
 
 const GeneralUserInfo: FC<GeneralUserInfoProps> = ({
   userInfo,
+  myInfo,
   isMyProfile,
-  isFollowing,
-  isLoading,
 }) => {
   const { t } = useTranslation()
+
+  const { followingExist, changeFollow, isLoadingFollow } = useFollowFriends(
+    myInfo,
+    userInfo?.id,
+  )
 
   return (
     <>
@@ -33,9 +37,14 @@ const GeneralUserInfo: FC<GeneralUserInfoProps> = ({
           <div className={styles.workUser}>{userInfo?.bio}</div>
         </div>
         {!isMyProfile && (
-          <Button isDisabled={isLoading} outlined className={styles.btnFriend}>
-            {isFollowing ? t('unfollow') : t('follow')}
-          </Button>
+          <Button
+          isDisabled={isLoadingFollow}
+          outlined
+          className={styles.btnFriend}
+          onClick={changeFollow}
+        >
+          {followingExist ? t('unfollow') : t('follow')}
+        </Button>
         )}
         {isMyProfile && (
           <NavLink to={PATHS.SETTINGS}>

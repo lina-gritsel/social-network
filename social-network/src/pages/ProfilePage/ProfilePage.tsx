@@ -10,7 +10,8 @@ import PostList from '../../components/PostsList'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
-import { chekingForFriends, parseUserData, useFetchProfileInfo } from './hooks'
+
+import { parseUserData, useFetchProfileInfo } from './hooks'
 
 import { useWallpaperModal } from './components/WallpapersModal/hooks'
 import GeneralUserInfo from './components/GeneralUserInfo'
@@ -37,8 +38,6 @@ const ProfilePage: FC = () => {
   const profileInfoArr = isMyProfile
     ? parseUserData(rawUserInfo)
     : parseUserData(user)
-
-  const { isFollowing, setIsFollowing } = chekingForFriends(rawUserInfo, user)
 
   const [isAllPosts, setIsAllPosts] = useState<boolean>(false)
 
@@ -87,13 +86,12 @@ const ProfilePage: FC = () => {
             </div>
             <GeneralUserInfo
               userInfo={user}
+              myInfo={rawUserInfo}
               isMyProfile={isMyProfile}
-              isFollowing={isFollowing}
-              isLoading={isLoading}
             />
           </div>
           <div className={styles.wrapperContent}>
-            <UserDetails userInfo={profileInfoArr} />
+            <UserDetails userInfo={profileInfoArr} userId={profileId}/>
             <div className={styles.content}>
               {isMyProfile && (
                 <CreatePost

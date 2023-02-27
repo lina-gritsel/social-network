@@ -1,11 +1,21 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: var(--light-gray-color);
   border-radius: 16px;
+  margin: 0 32px;
+  padding: 12px 32px 32px;
+  color: var(--gray-color);
+}
+.mainContent {
   display: flex;
   gap: 30px;
   justify-content: center;
-  margin: 0 32px;
-  padding: 32px;
+  height: 100%;
+  width: 100%;
+  padding-top: 20px;
 }
 
 .wrapperList {
@@ -14,7 +24,6 @@
   background-color: var(--white-color);
   border-radius: 16px;
   padding: 14px;
-  max-width: 600px;
   width: 100%;
 }
 
@@ -25,19 +34,25 @@
 }
 
 @media (max-width: 1240px) {
-  .container {
+  .mainContent {
     flex-direction: column-reverse;
     justify-content: flex-end;
   }
 
   .wrapper {
     flex-direction: row;
+    & > * {
+      width: 50%;
+    }
   }
 }
 
 @media (max-width: 768px) {
   .wrapper {
     flex-direction: column-reverse;
+    & > * {
+      width: 100%;
+    }
   }
 
   .possibleFriend {

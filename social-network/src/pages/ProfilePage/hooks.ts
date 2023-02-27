@@ -48,7 +48,6 @@ export const useFetchProfileInfo = (id: string) => {
       } else {
         navigate(PATHS.PAGE_404, { replace: true })
       }
-
       setIsLoading(false)
     }
 
@@ -59,25 +58,6 @@ export const useFetchProfileInfo = (id: string) => {
     user,
     isLoading,
   }
-}
-
-export const chekingForFriends = (userInfo, selectedUserInfo) => {
-  const [isFollowing, setIsFollowing] = useState<boolean>(false)
-
-  const followings = userInfo.followings
-  const followingExist = followings
-    ?.map(({ id }) => id)
-    .includes(selectedUserInfo?.id)
-
-  useEffect(() => {
-    if (followingExist) {
-      setIsFollowing(true)
-    } else {
-      setIsFollowing(false)
-    }
-  }, [selectedUserInfo])
-
-  return { isFollowing, setIsFollowing }
 }
 
 export const useWallpapersModal = () => {
