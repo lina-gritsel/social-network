@@ -29,6 +29,10 @@
 }
 
 @media (max-width: 620px) {
+  .layout {
+    padding: 15px;
+  }
+
   .wrapper {
     gap: 10px;
   }

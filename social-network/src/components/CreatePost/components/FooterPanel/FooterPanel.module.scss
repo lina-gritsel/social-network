@@ -1,14 +1,24 @@
 .createIcons {
-    display: flex;
-    gap: 25px;
+  display: flex;
+  gap: 25px;
+}
+
+.createItem {
+  align-items: center;
+  color: var(--gray-color);
+  cursor: pointer;
+  display: flex;
+  font: var(--font-text-4);
+  font-weight: 600;
+  gap: 5px;
+}
+
+@media (max-width: 563px) {
+  .createIcons {
+    gap: 10px;
   }
-  
+
   .createItem {
-    align-items: center;
-    color: var(--gray-color);
-    cursor: pointer;
-    display: flex;
-    font: var(--font-text-4);
-    font-weight: 600;
-    gap: 5px;
+    font: var(--font-text-5);
   }
+}

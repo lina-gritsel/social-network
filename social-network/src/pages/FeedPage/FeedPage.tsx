@@ -8,6 +8,7 @@ import CreatePost from '../../components/CreatePost'
 import PostsList from '../../components/PostsList'
 import Weather from '../../components/Weather'
 import Layout from '../../components/Layout'
+import FriendsOnlineMobile from '../../components/FriendsOnlineMobile'
 
 import { useNewsPage } from './hooks'
 
@@ -23,6 +24,10 @@ const FeedPage: FC = () => {
       <div className={styles.containerWrapper}>
         <div className={styles.container}>
           <div className={styles.news}>
+            <FriendsOnlineMobile
+              allUsers={userswWithoutMe}
+              isLoading={isLoading}
+            />
             <CreatePost
               setIsAllPosts={setIsAllPosts}
               name={userInfo?.name}

@@ -23,7 +23,6 @@
   position: relative;
 }
 
-
 .postInput {
   color: var(--gray-color) !important;
 }
@@ -64,4 +63,14 @@
   display: flex;
   justify-content: center;
   padding-top: 30px;
+}
+
+@media (max-width: 1084px) {
+  .bgProfile {
+    height: 250px;
+  }
+
+  .wrapperContent {
+    flex-direction: column;
+  }
 }

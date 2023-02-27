@@ -129,7 +129,7 @@
   color: var(--light-color);
 }
 
-@media (max-width: 620px) {
+@media (max-width: 1030px) {
   .form {
     gap: 10px;
     max-width: 300px;
@@ -158,5 +158,11 @@
   .editAvatar {
     font-size: 7px !important;
     max-width: 90px;
+  }
+}
+
+@media (max-width: 1030px) {
+  .btnBlock {
+    margin-top: 15px;
   }
 }
