@@ -1,15 +1,15 @@
-import { FC, useState } from 'react'
+import { FC, useState, KeyboardEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
 import { TextField } from '@mui/material'
 
 import Loader from '../../../../components/Loader'
 import Modal from '../../../../components/Modal'
+import Button from '../../../../components/Button'
 
 import { DEFAULT_NUMBER_PICTURES } from '../../constants'
 
 import styles from './WallpapersModal.module.scss'
-import Button from '../../../../components/Button'
 
 interface WallpapersModalProps {
   onClose: () => void
@@ -70,14 +70,10 @@ const WallpapersModal: FC<WallpapersModalProps> = ({
             placeholder={t('addImgLabel')}
             className={styles.imgInput}
             onChange={(event) => setInputValue(event.target.value)}
+            onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
+              e.key === 'Enter' && input ? onAddCurrentImage(input) : null
+            }
           />
-          <Button
-            className={!input ? styles.addImgBtn : styles.addImgActiveBtn}
-            onClick={() => onAddCurrentImage(input)}
-            isDisabled={!input}
-          >
-            {t('addImg')}
-          </Button>
         </div>
         {/* {isErrorImg && (
           <div className={styles.errMessage}>{t('errMessage')}</div>
