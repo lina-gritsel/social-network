@@ -66,23 +66,3 @@ export const useCreatePost: UseCreatePost = ({
     setCurrentImg,
   }
 }
-
-export const useEmojiModal = () => {
-  const [isVisible, setVisible] = useState<boolean>(false)
-
-  return {
-    isVisible,
-    close: () => setVisible(false),
-    open: () => setVisible(true),
-  }
-}
-
-export const useAddImageModal = () => {
-  const [isVisible, setVisible] = useState<boolean>(false)
-
-  return {
-    isVisible,
-    close: () => setVisible(false),
-    open: () => setVisible(true),
-  }
-}

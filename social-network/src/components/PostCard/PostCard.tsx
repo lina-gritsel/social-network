@@ -70,7 +70,7 @@ const PostCard: FC<News> = ({
 
   const createdPostTime = moment(createdAt).fromNow()
 
-  const { isLoading, allComments, onSubmit, onChangeComment, comment } =
+  const { isLoading, allComments, onSubmit, onChangeComment, comment, onEmojiSelect } =
     useCreateComment({ postId: id, setSchowComments })
 
   return (
@@ -148,6 +148,7 @@ const PostCard: FC<News> = ({
           onSubmit={() => comment && onSubmit()}
           onChangeComment={onChangeComment}
           comment={comment}
+          onEmojiSelect={onEmojiSelect}
         />
       </Card>
       {showComments && (

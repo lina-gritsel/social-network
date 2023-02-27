@@ -5,14 +5,15 @@ import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
 import { selectTheme } from '../../store/selectors'
-
 import Modal from '../Modal'
 import Avatar from '../Avatar'
 import Button from '../Button'
+import { useModal } from '../../hooks'
+
 import ModalContent from './components/ModalContent'
 import FooterPanel from './components/FooterPanel'
 import CreatePostInput from './components/CreatePostInput'
-import { useAddImageModal, useCreatePost, useEmojiModal } from './hooks'
+import { useCreatePost } from './hooks'
 
 import styles from './CreatePost.module.scss'
 
@@ -52,16 +53,16 @@ const CreatePost: FC<CreatePostProps> = ({
   } = useCreatePost({ content, image, editMode, id, setIsAllPosts, userId })
 
   const {
-    isVisible: isEmojiModalVisible,
+    visible: isEmojiModalVisible,
     close: closeEmojiModal,
     open: openEmojiModal,
-  } = useEmojiModal()
+  } = useModal()
 
   const {
-    isVisible: isAddImageModalVisible,
+    visible: isAddImageModalVisible,
     close: closeAddImageModal,
     open: openAddImageModal,
-  } = useAddImageModal()
+  } = useModal()
 
   return (
     <div className={styles.create}>

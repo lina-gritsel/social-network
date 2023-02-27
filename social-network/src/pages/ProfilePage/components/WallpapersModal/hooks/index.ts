@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react'
 
 import { getWallpapers, updateUser, User } from '../../../../../api'
+import { useModal } from '../../../../../hooks'
 import { DEFAULT_WALLPAPER } from '../../../constants'
-import { useWallpapersModal } from '../../../hooks'
 
 export const useWallpaperModal = (userInfo: User) => {
   const [currentImage, setCurrentImage] = useState<string>('')
   const [savedImage, setSavedImage] = useState<string>('')
+  const [isErrorImg, setIsErrorImg] = useState<boolean>(false)
 
   const {
     visible: visibleWallpapersModal,
     open: openWallpapersModal,
     close,
-  } = useWallpapersModal()
+  } = useModal()
 
   const closeWallpapersModal = (): void => {
     close()
     setCurrentImage(savedImage || userInfo?.background)
+    setIsErrorImg(false)
   }
 
   const {
@@ -42,12 +44,8 @@ export const useWallpaperModal = (userInfo: User) => {
       setUserWallpapers(userWallpapers.filter((image) => image !== imageUrl))
       setAllWallpapers(allWallpapers.filter((image) => image !== imageUrl))
 
-      setCurrentImage(
-        isCurrentUserImage ? DEFAULT_WALLPAPER : currentImage,
-      )
-      setSavedImage(
-        isCurrentUserImage ? DEFAULT_WALLPAPER : currentImage,
-      )
+      setCurrentImage(isCurrentUserImage ? DEFAULT_WALLPAPER : currentImage)
+      setSavedImage(isCurrentUserImage ? DEFAULT_WALLPAPER : currentImage)
     } catch (error) {
       console.log(error)
     }
@@ -82,14 +80,21 @@ export const useWallpaperModal = (userInfo: User) => {
         setUserWallpapers([...userWallpapers, imageUrl])
       }
 
+      setIsErrorImg(false)
       setCurrentImage(imageUrl)
     } catch (error) {
       console.log(error)
     }
   }
+  const onErrorImage = () => {
+    setAllWallpapers((prev) => prev.slice(0, -1))
+    setCurrentImage(userInfo?.background)
+    setIsErrorImg(true)
+  }
 
   return {
     isLoading,
+    isErrorImg,
     onAddCurrentImage,
     wallpapers: allWallpapers,
     currentImage: currentImage || savedImage || userInfo?.background,
@@ -98,6 +103,8 @@ export const useWallpaperModal = (userInfo: User) => {
     openWallpapersModal,
     closeWallpapersModal,
     onDeleteImage,
+    onErrorImage,
+    setIsErrorImg,
   }
 }
 
