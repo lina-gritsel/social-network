@@ -17,14 +17,11 @@ const fetchUserInfo = (id: string) => {
     fetchUserInfo()
   }, [id])
 
-  const userInfo = {
+  return {
     followers: user?.followers,
     followings: user?.followings,
-    avatar: user?.avatar,
     name: user?.name,
   }
-
-  return userInfo
 }
 
 export const useFriendsPage = () => {

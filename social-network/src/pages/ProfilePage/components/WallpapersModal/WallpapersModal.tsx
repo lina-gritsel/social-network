@@ -10,7 +10,6 @@ import Button from '../../../../components/Button'
 import { DEFAULT_NUMBER_PICTURES } from '../../constants'
 
 import styles from './WallpapersModal.module.scss'
-import { pressEnter } from '../../../../utils'
 
 interface WallpapersModalProps {
   onClose: () => void
@@ -75,13 +74,6 @@ const WallpapersModal: FC<WallpapersModalProps> = ({
               e.key === 'Enter' && input ? onAddCurrentImage(input) : null
             }
           />
-          {/* <Button
-            className={!input ? styles.addImgBtn : styles.addImgActiveBtn}
-            onClick={() => onAddCurrentImage(input)}
-            isDisabled={!input}
-          >
-            {t('addImg')}
-          </Button> */}
         </div>
         {/* {isErrorImg && (
           <div className={styles.errMessage}>{t('errMessage')}</div>

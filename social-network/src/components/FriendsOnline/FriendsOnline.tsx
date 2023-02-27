@@ -5,12 +5,12 @@ import { Box, CircularProgress } from '@mui/material'
 
 import { User } from '../../api'
 import { PATHS } from '../../router/paths'
-
-import InputSearch from '../InputSearch'
 import { useDebounce } from '../../hooks/useDebounce'
 
-import styles from './FriendsOnline.module.scss'
 import Avatar from '../Avatar'
+import InputSearch from '../InputSearch'
+
+import styles from './FriendsOnline.module.scss'
 
 interface Friends {
   id: string

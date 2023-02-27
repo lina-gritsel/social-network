@@ -17,6 +17,14 @@
   padding: 0 30px;
 }
 
+.reverseLine {
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
 .block {
   align-items: center;
   display: flex;
@@ -128,4 +136,50 @@
 .year {
   color: var(--gray-color);
   font: var(--font-text-4);
+}
+
+@media (max-width: 1280px) {
+  .line {
+    align-items: center;
+    border-bottom: var(--border-photo);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+
+  .reverseLine {
+    align-items: center;
+    border-bottom: var(--border-photo);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+@media (max-width: 990px) {
+  .block {
+    margin-left: 50px;
+    max-width: 210px;
+    width: 100%;
+  }
+
+  .speech {
+    right: 0;
+  }
+
+  .text {
+    right: 11%;
+  }
+
+  .description {
+    padding-bottom: 50px;
+    text-align: center;
+  }
+
+  .graph {
+    margin-bottom: 50px;
+  }
 }

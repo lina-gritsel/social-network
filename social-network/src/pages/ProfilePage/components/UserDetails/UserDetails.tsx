@@ -1,4 +1,4 @@
-import { FC, useId } from 'react'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 
@@ -7,7 +7,10 @@ import { FIELD_INTO } from '../../constants'
 
 import styles from './UserDetails.module.scss'
 
-const UserDetails: FC<{ userInfo: any, userId: string }> = ({ userInfo, userId }) => {
+const UserDetails: FC<{ userInfo: any; userId: string }> = ({
+  userInfo,
+  userId,
+}) => {
   const { t } = useTranslation()
 
   return (
@@ -58,13 +61,18 @@ const Field = ({
 
   if (link)
     return (
-      <a href={`${link}/${value}`} target="_blank" rel="noreferrer">
+      <a
+        className={styles.intoItem}
+        href={`${link}/${value}`}
+        target="_blank"
+        rel="noreferrer"
+      >
         <FieldValue />
       </a>
     )
   if (navLink)
     return (
-      <NavLink to={`${PATHS.FRIENDS}/${userId}`}>
+      <NavLink to={`${PATHS.FRIENDS}/${userId}`} className={styles.intoItem}>
         <FieldValue />
       </NavLink>
     )

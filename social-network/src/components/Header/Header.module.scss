@@ -2,17 +2,8 @@
   align-items: center;
   display: flex;
   gap: 10px;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-.searchInput {
-  border: 2px solid var(--light-gray-color);
-  border-radius: 10px;
-  height: 40px;
-  margin: 10px;
-  padding-left: 10px;
-  width: 350px;
+  justify-content: space-between;
+  padding: 0 25px;
 }
 
 .userName {
@@ -21,6 +12,27 @@
   font-weight: 700;
 }
 
+.avatarBlock {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .avatar {
   cursor: pointer;
+}
+
+.mainMenuItem {
+  align-items: center;
+  color: var(--gray-color);
+  display: flex;
+  font: var(--font-text-2);
+  font-weight: 700;
+  min-height: 64px;
+}
+
+.forum {
+  color: var(--blue-color) !important;
+  font: var(--font-subtitle);
 }
