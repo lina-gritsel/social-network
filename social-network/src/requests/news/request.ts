@@ -1,7 +1,7 @@
 import { NewsInfo } from './types'
 import axios from 'axios'
 
-const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?'
+const NEWS_API_URL = 'https://nodenews.up.railway.app/top-headlines?'
 const NEWS_API_TOKEN = 'c4145b318a6d4ef58fb7e16254538a17'
 
 type FetchNewsByCategory = (

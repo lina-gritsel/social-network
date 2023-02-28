@@ -1,10 +1,8 @@
-import { FC, useState, KeyboardEvent } from 'react'
-import { useSelector } from 'react-redux'
+import { FC, useState, KeyboardEvent, MutableRefObject } from 'react'
 import { useTranslation } from 'react-i18next'
 import CancelIcon from '@mui/icons-material/CancelOutlined'
 import { TextField } from '@mui/material'
 
-import { getUserInfoSelector } from '../../../../store/selectors'
 import Loader from '../../../../components/Loader'
 import Modal from '../../../../components/Modal'
 import Button from '../../../../components/Button'
@@ -12,11 +10,11 @@ import Button from '../../../../components/Button'
 import { DEFAULT_NUMBER_PICTURES } from '../../constants'
 
 import styles from './WallpapersModal.module.scss'
-import { useWallpaperModal } from './hooks'
 
 interface WallpapersModalProps {
   onClose: () => void
   visible: boolean
+  inputRef: MutableRefObject<HTMLInputElement>
   data: string[]
   isLoading: boolean
   isErrorImg: boolean
@@ -31,13 +29,13 @@ const WallpapersModal: FC<WallpapersModalProps> = ({
   onClose,
   visible,
   data,
+  inputRef,
   isLoading,
   isErrorImg,
   setIsErrorImg,
   onAddCurrentImage,
   onSaveImage,
   onDeleteImage,
-  onErrorImage,
 }) => {
   const { t } = useTranslation()
   const [input, setInputValue] = useState<string>('')
@@ -79,7 +77,6 @@ const WallpapersModal: FC<WallpapersModalProps> = ({
                   src={imageUrl}
                   className={styles.img}
                   onClick={() => onAddCurrentImage(imageUrl)}
-                  onError={onErrorImage}
                 />
               </div>
             ))
@@ -87,6 +84,7 @@ const WallpapersModal: FC<WallpapersModalProps> = ({
         </div>
         <div className={styles.addingImg}>
           <TextField
+            inputRef={inputRef}
             placeholder={t('addImgLabel')}
             className={styles.imgInput}
             onChange={(event) => changeInput(event)}
@@ -94,11 +92,18 @@ const WallpapersModal: FC<WallpapersModalProps> = ({
               e.key === 'Enter' && input ? onAddCurrentImage(input) : null
             }
           />
+          <Button
+            className={!input ? styles.addImgBtn : styles.addImgActiveBtn}
+            onClick={() => onAddCurrentImage(input)}
+            isDisabled={!input}
+          >
+            {t('addImg')}
+          </Button>
         </div>
         {isErrorImg && (
           <div className={styles.errMessage}>{t('errMessage')}</div>
         )}
-        <Button onClick={onSaveImage}>save</Button>
+        <Button onClick={onSaveImage}>{t('save')}</Button>
       </div>
     </Modal>
   )

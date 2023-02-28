@@ -1,18 +1,18 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import WallpaperIcon from '@mui/icons-material/Wallpaper'
 
-import setWallpaper from '../../assets/images/setWallpaper.png'
 import CreatePost from '../../components/CreatePost'
 import PostList from '../../components/PostsList'
 import Layout from '../../components/Layout'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
+import { useAppDispatch } from '../../store'
+import { fetchUser } from '../../store/actions'
 
 import { parseUserData, useFetchProfileInfo } from './hooks'
-
 import { useWallpaperModal } from './components/WallpapersModal/hooks'
 import GeneralUserInfo from './components/GeneralUserInfo'
 import { getUserInfoSelector } from '../../store/selectors'
@@ -23,6 +23,12 @@ import { DEFAULT_WALLPAPER } from './constants'
 
 const ProfilePage: FC = () => {
   const userId = (JSON.parse(localStorage.getItem('userId')) as string) || ''
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(fetchUser(userId))
+  }, [dispatch, userId])
+
 
   const { t } = useTranslation()
 
@@ -43,6 +49,7 @@ const ProfilePage: FC = () => {
 
   const userInfo = isMyProfile ? rawUserInfo : user
   const {
+    inputRef,
     isLoading,
     isErrorImg,
     wallpapers,
@@ -68,6 +75,7 @@ const ProfilePage: FC = () => {
               <img
                 className={styles.bgProfile}
                 src={currentImage || DEFAULT_WALLPAPER}
+                onError={onErrorImage}
                 alt="background"
               />
               {isMyProfile && (
@@ -118,6 +126,7 @@ const ProfilePage: FC = () => {
       )}
       <WallpapersModal
         isLoading={isLoading}
+        inputRef={inputRef}
         data={wallpapers}
         visible={visibleWallpapersModal}
         onClose={closeWallpapersModal}
