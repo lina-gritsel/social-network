@@ -187,3 +187,26 @@
     padding-bottom: 70px;
   }
 }
+
+@media (max-width: 348px) {
+  .speech {
+    right: -20%;
+  }
+
+  .text {
+    right: -2%;
+  }
+
+  .description {
+    padding-bottom: 50px;
+    text-align: center;
+  }
+
+  .graph {
+    margin-bottom: 50px;
+  }
+
+  .wrapper {
+    padding-bottom: 70px;
+  }
+}
