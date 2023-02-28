@@ -29,11 +29,6 @@ export const NAVIGATION_MENU = [
     icon: <Diversity3Outlined className={styles.icon} />,
   },
   {
-    to: PATHS.EXPLORE,
-    label: 'explore',
-    icon: <ExploreOutlined className={styles.icon} />,
-  },
-  {
     to: PATHS.SETTINGS,
     label: 'settings',
     icon: <SettingsOutlined className={styles.icon} />,

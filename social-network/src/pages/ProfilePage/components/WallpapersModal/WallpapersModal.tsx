@@ -103,7 +103,7 @@ const WallpapersModal: FC<WallpapersModalProps> = ({
         {isErrorImg && (
           <div className={styles.errMessage}>{t('errMessage')}</div>
         )}
-        <Button onClick={onSaveImage}>{t('save')}</Button>
+        <Button className={styles.addImgActiveBtn} onClick={onSaveImage}>{t('save')}</Button>
       </div>
     </Modal>
   )
