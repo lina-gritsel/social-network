@@ -63,8 +63,16 @@
 }
 
 @media (max-width: 560px) {
+  .addingImg {
+    gap: 5px;
+  }
+
   .imgInput {
-    max-width: 250px;
+    max-width: 200px;
     width: 100% !important;
+  }
+
+  .addImgBtn {
+    min-width: 30px !important;
   }
 }
