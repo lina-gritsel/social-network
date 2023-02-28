@@ -47,6 +47,8 @@ export const useRegistrationForm = () => {
     })
 
     if (result.status === 'success') {
+      localStorage.setItem('i18nextLng', 'english')
+
       localStorage.setItem('userId', JSON.stringify(result.data.user.id))
       navigate(PATHS.FEED)
     } else {
