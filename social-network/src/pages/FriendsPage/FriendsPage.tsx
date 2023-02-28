@@ -44,7 +44,9 @@ const FriendsPage: FC = () => {
               value={tabValue}
               setValue={setTabValue}
             />
-            <PossibleFriends />
+            <div className={styles.possibleFriend}>
+              <PossibleFriends />
+            </div>
           </div>
         </div>
       </div>
