@@ -58,3 +58,10 @@
     background: var(--white-color);
   }
 }
+
+@media (max-width: 490px) {
+  .wrapper {
+    align-items: center;
+    justify-content: center;
+  }
+}

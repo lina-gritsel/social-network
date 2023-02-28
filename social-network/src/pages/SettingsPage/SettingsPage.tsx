@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar'
 import ThemeForm from './components/ThemeForm'
 import SecureForm from './components/SecureForm'
 import EditProfile from './components/EditProfile'
+import SidebarMobile from './components/SidebarMobile'
 
 import styles from './SettingsPage.module.scss'
 
@@ -26,6 +27,7 @@ const SettingsPage: FC = () => {
   return (
     <Layout>
       <div className={styles.layout}>
+      <SidebarMobile settingsTab={settingsTab} setSettingsTab={setSettingsTab} />
         <div className={styles.settingsWrapper}>
           <Sidebar settingsTab={settingsTab} setSettingsTab={setSettingsTab} />
           <div className={styles.wrapper}>
