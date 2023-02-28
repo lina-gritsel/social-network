@@ -25,6 +25,7 @@
   border-radius: 16px;
   padding: 14px;
   width: 100%;
+  min-width: 700px;
 }
 
 .wrapper {
@@ -45,6 +46,10 @@
       width: 50%;
     }
   }
+
+  .wrapperList {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -55,7 +60,24 @@
     }
   }
 
+  .container {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .wrapperList {
+    border-radius: 0;
+    padding-bottom: 60px;
+    width: 100%;
+  }
+
+  .mainContent {
+    gap: 8px;
+    padding: 10px 0;
+  }
+
   .possibleFriend {
-    display: none;
+    display: none !important;
   }
 }

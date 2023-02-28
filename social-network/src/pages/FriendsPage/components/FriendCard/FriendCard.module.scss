@@ -40,3 +40,19 @@
 .btnFriend {
   font: var(--font-text-4);
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+    min-height: 64px;
+  }
+  .btnFriend {
+    font-size: 14px;
+  }
+
+  .avatar {
+    width: 40px !important;
+    height: 40px !important;
+  }
+ 
+}
