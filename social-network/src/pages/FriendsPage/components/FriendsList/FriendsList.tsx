@@ -19,7 +19,7 @@ const FriendsList: FC<FriendsListProps> = ({ list, searchDebounced }) => {
       {!!list?.length && (
         <div className={styles.wrapperFriends}>
           {list
-            ?.filter(({ name }) => name.toUpperCase().includes(searchDebounced))
+            ?.filter(({ name }) => name?.toUpperCase().includes(searchDebounced))
             .map((user, index) => (
               <Friend key={index} {...user} />
             ))}

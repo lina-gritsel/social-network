@@ -17,6 +17,15 @@
   font-weight: 600;
   flex-direction: column;
   gap: 20px;
+  height: 100vh;
+  // overflow: scroll
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
 }
 
 .friend {
