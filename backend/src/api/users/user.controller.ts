@@ -275,9 +275,7 @@ export const unsubscribeFromUserController = async (
       const followingList = followings.filter(
         (item: any) => item.id !== currentUser,
       )
-      const followersList = followers.filter((item: any) => {
-        item.id !== user
-      })
+      const followersList = followers.filter((item: any) => item.id !== user)
 
       data?.update(
         { updatedAt: Date.now(), followings: followingList },
