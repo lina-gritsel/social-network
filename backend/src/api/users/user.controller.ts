@@ -134,7 +134,7 @@ export const findAllUserController = async (
 ) => {
   try {
     const page = req.query.page || 1
-    const limit = req.query.limit || 10
+    const limit = req.query.limit || 100
     const skip = (page - 1) * limit
 
     const users = await UserModel.findAll({ limit, offset: skip })
@@ -269,14 +269,14 @@ export const unsubscribeFromUserController = async (
     const followings = data?.dataValues?.followings
     const followers = unsubscribe?.dataValues.followers
 
-    const userExist = !!followings.find((item: string) => item === currentUser)
+    const userExist = !!followings.find((item: any) => item.id === currentUser)
 
     if (userExist) {
       const followingList = followings.filter(
-        (item: string) => item !== currentUser,
+        (item: any) => item.id !== currentUser,
       )
-      const followersList = followers.filter((item: string) => {
-        item !== user
+      const followersList = followers.filter((item: any) => {
+        item.id !== user
       })
 
       data?.update(
