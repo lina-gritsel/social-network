@@ -1,0 +1,26 @@
+.wrapperFriends {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 32px 0;
+}
+
+.myFriends {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.emtyList {
+  color: var(--gray-color);
+  font: var(--font-text-3);
+  text-align: center;
+  padding-top: 50px;
+}
+
+@media (max-width: 768px) {
+  .wrapperFriends {
+    gap: 10px;
+    padding: 10px 0;
+  }
+}

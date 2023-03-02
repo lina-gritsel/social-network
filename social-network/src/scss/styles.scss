@@ -1,0 +1,66 @@
+@import './variables.scss';
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font-family-roboto);
+  margin: 0;
+  padding: 0;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--gray-color);
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:horizontal {
+    border-radius: 5px;
+    background-color: var(--gray-color);
+    width: 10px;
+  }
+}
+
+body {
+  background-color: var(--white-color);
+}
+
+a {
+  color: var(--dark-gray-color);
+  text-decoration: none;
+}
+
+.active {
+  background-color: var(--dark-gray-color);
+  border-radius: 10px;
+  color: var(--light-color) !important;
+}
+
+.active svg {
+  color: var(--light-color) !important;
+}
+
+.activeBtn {
+  background-color: transparent;
+  border: 1px solid var(--blue-color);
+  color: var(--blue-color);
+}
+
+fieldset {
+  border-radius: 10px !important;
+  border: var(--border-primary) !important;
+}
+
+svg {
+  color: var(--gray-color) !important;
+}
+
+input {
+  color: var(--gray-color) !important;
+}

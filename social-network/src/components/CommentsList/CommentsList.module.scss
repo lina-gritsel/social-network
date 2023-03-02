@@ -1,0 +1,15 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.show {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .list {
+    padding: 0 10px;
+  }
+}

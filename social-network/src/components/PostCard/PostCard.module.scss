@@ -1,0 +1,185 @@
+.card {
+  background-color: var(--white-color) !important;
+  border-radius: 16px !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px;
+  position: relative;
+  width: 100%;
+
+  & a {
+    color: var(--blue-color);
+    font-weight: 800;
+  }
+}
+
+.cardHeader {
+  padding: 0 !important;
+  display: flex;
+}
+
+.cardAvatar {
+  height: 50px !important;
+  margin-right: 20px;
+  width: 50px !important;
+}
+
+.wrapperCardHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapperCard {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.author {
+  color: var(--gray-color);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.createAt {
+  color: var(--gray-color);
+  opacity: 0.6;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.editPostIcon {
+  transform: rotate(90deg);
+}
+
+.content {
+  font: var(--font-text-3) !important;
+  line-height: 1.5 !important;
+}
+
+.contentText {
+  color: var(--gray-color);
+  font: var(--font-text-5);
+  line-height: 22px;
+}
+
+.textTruncate {
+  max-height: 100px;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.moreContent {
+  color: var(--gray-color) !important;
+  padding: 0 15px;
+  font: var(--font-text-4) !important;
+  line-height: 1.5 !important;
+}
+
+.image {
+  border-radius: 16px;
+  max-width: 550px;
+  max-height: 300px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.settingsModal {
+  position: absolute;
+  right: 32px;
+  top: 50px;
+  min-width: 150px;
+  min-height: 50px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  background: var(--white-color);
+  color: var(--gray-color);
+  font: var(--font-text-2);
+  z-index: 10;
+  animation: ani 1s forwards;
+  box-shadow: 0px 2px 1px -1px var(--shadow-dark-color),
+    0px 1px 1px 0px var(--shadow-dark-color),
+    0px 1px 3px 0px var(--shadow-dark-color);
+
+  & > div {
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  & > div:hover {
+    cursor: pointer;
+    background: var(--dark-gray-color);
+    color: var(--white-color);
+  }
+}
+
+.modal {
+  min-width: 500px !important;
+  padding: 0 !important;
+}
+
+.editInput {
+  height: 200px !important;
+}
+
+.cardContent {
+  padding: 0 !important;
+}
+
+.cardActions {
+  padding: 0 !important;
+}
+
+.changePost {
+  font: var(--font-text-3);
+}
+
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.profileLink {
+  background-color: var(--white-color) !important;
+}
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 0 !important;
+  }
+
+  .cardAvatar {
+    height: 32px !important;
+    width: 32px !important;
+  }
+
+  .author {
+    font: var(--font-text-5);
+  }
+
+  .createAt {
+    font-size: 12px;
+  }
+
+  .image {
+    max-height: 188px;
+  }
+}

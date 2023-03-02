@@ -1,0 +1,42 @@
+.input {
+  width: 100% !important;
+
+  & > :not(style) {
+    background-color: var(--light-gray-color);
+    margin: 1;
+  }
+}
+
+.textfield {
+  font: var(--font-text-4);
+  color: var(--gray-color) !important;
+  letter-spacing: inherit;
+  color: currentColor;
+  border: 0;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px 15px;
+  line-height: 25px;
+  min-height: 50px;
+  max-height: 250px;
+  resize: vertical;
+
+  &:focus {
+    border: 2px solid var(--blue-color);
+  }
+
+  &::placeholder {
+    opacity: 0.8;
+  }
+
+  &:focus::placeholder {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  &:focus-visible {
+    outline: transparent !important;
+  }
+}

@@ -1,0 +1,60 @@
+.containerWrapper {
+  display: flex;
+}
+
+.container {
+  background-color: var(--light-gray-color);
+  border-radius: 20px;
+  gap: 24px;
+  padding: 32px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.news {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.friendAndWeather {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 100px;
+  min-width: 290px;
+  max-width: 290px;
+  height: 100%;
+}
+
+.cardNews {
+  padding: 0 20px;
+}
+
+.postInput {
+  color: var(--gray-color) !important;
+}
+
+@media (max-width: 1070px) {
+  .friendAndWeather {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .containerWrapper {
+    padding-bottom: 80px;
+  }
+
+  .container {
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .news {
+    gap: 8px;
+  }
+}

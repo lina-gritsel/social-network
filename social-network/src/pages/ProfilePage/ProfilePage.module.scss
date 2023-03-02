@@ -1,0 +1,140 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 32px;
+}
+
+.pofileHeader {
+  border-radius: 20px;
+  background-color: var(--white-color);
+  box-shadow: 0 5px 5px -2px var(--medium-gray-color);
+  max-height: 470px;
+  position: relative;
+}
+
+.bgProfile {
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+}
+
+.wrapperCover {
+  position: relative;
+}
+
+.postInput {
+  color: var(--gray-color) !important;
+}
+
+.editCoverPhoto {
+  background-color: var(--light-gray-color);
+  bottom: 20px;
+  color: var(--gray-color);
+  font: var(--font-text-5);
+  position: absolute;
+  padding: 0 5px;
+  right: 40px;
+  width: 140px;
+}
+
+.wrapperContent {
+  background-color: var(--light-gray-color);
+  border-radius: 20px;
+  display: flex;
+  gap: 34px;
+  padding: 24px;
+}
+
+.errMessage {
+  color: var(--blue-color);
+}
+
+.content {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.loading {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.wrapperImg {
+  border-radius: 50px;
+  display: none;
+  padding: 4px;
+  padding-bottom: 0;
+  background-color: var(--light-gray-color);
+  bottom: 20px;
+  position: absolute;
+  right: 40px;
+}
+
+.changeWallpaper {
+  height: 16px;
+  width: 16px;
+}
+
+@media (max-width: 1084px) {
+  .bgProfile {
+    height: 250px;
+  }
+
+  .wrapperContent {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapperContent {
+    padding: 0;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    gap: 8px;
+  }
+
+  .container {
+    gap: 20px;
+    padding: 0;
+    padding-bottom: 60px;
+  }
+
+  .pofileHeader {
+    border-radius: 0;
+    box-shadow: none;
+    height: 230px;
+    width: 100%;
+  }
+
+  .bgProfile {
+    border-radius: 0;
+    height: 112px;
+  }
+
+  .userInfo {
+    position: relative;
+    left: 0;
+  }
+
+  .editCoverPhoto {
+    display: none;
+  }
+
+  .wrapperImg {
+    display: block;
+  }
+
+  .wrapperContent {
+    border-radius: 0;
+  }
+
+  .content {
+    gap: 8px;
+  }
+}

@@ -1,0 +1,78 @@
+.dialogContent {
+  background-color: var(--white-color) !important;
+  padding: 0 !important;
+}
+
+.modal {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.imgContainer {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 335px;
+  overflow: auto;
+}
+
+.cancel {
+  color: var(--white-color);
+  position: absolute;
+  right: 35px;
+  top: 2px;
+  right: 7px;
+}
+
+.imgItem {
+  width: 40%;
+  cursor: pointer;
+  position: relative;
+}
+
+.img {
+  width: 100%;
+  height: 70px;
+  border-radius: 10px;
+}
+
+.addImgActiveBtn {
+  color: var(--light-color);
+}
+
+.imgInput {
+  max-width: 340px;
+  width: 100% !important;
+}
+
+.addingImg {
+  display: flex;
+  justify-self: center;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.errMessage {
+  color: var(--gray-color);
+}
+
+@media (max-width: 560px) {
+  .addingImg {
+    gap: 5px;
+  }
+
+  .imgInput {
+    max-width: 200px;
+    width: 100% !important;
+  }
+
+  .addImgBtn {
+    min-width: 30px !important;
+  }
+}

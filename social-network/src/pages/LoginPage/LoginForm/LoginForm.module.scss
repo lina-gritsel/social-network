@@ -1,0 +1,70 @@
+.form {
+  align-items: center;
+  background: var(--light-gray-color);
+  border: var(--border-primary);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-width: 500px;
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+}
+
+.errorMessage {
+  color: var(--red-color);
+  font: var(--font-text-4);
+  text-align: center;
+}
+
+.logInBtn {
+  color: var(--light-color);
+  width: 100%;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.link {
+  color: var(--blue-color);
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+
+  &:before {
+    background-color: var(--blue-color);
+    bottom: -10%;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transition: width 0.5s;
+    width: 0;
+  }
+
+  &:hover:before {
+    width: 100%;
+  }
+}
+
+.account {
+  color: var(--gray-color);
+  text-align: center;
+}
+
+@media (max-width: 620px) {
+  .form {
+    max-width: 300px;
+  }
+
+  .block {
+    flex-direction: column;
+  }
+}

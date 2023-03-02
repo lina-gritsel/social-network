@@ -1,0 +1,179 @@
+.form {
+  align-items: flex-start;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.dialogContent {
+  background-color: var(--white-color) !important;
+}
+
+.labelBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 50%;
+}
+
+.inputDate {
+  width: 100%;
+}
+
+.inputGender {
+  align-items: center;
+  border: var(--border-primary);
+  border-radius: 10px;
+  color: var(--gray-color);
+  display: flex;
+  gap: 15px;
+  height: 56px;
+  padding-left: 15px;
+  width: 100%;
+
+  &:hover {
+    border: 2px solid var(--black-color);
+  }
+}
+
+.btnBlock {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.label {
+  color: var(--gray-color) !important;
+  font: var(--font-text-4) !important;
+  font-weight: 700 !important;
+}
+
+.title {
+  color: var(--gray-color);
+  font: var(--font-subtitle);
+  font-weight: 700;
+  text-align: start;
+  width: 100%;
+}
+
+.loading {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.avatarBlock {
+  display: flex;
+  position: relative;
+}
+
+.editAvatar {
+  align-items: center;
+  border-radius: 50%;
+  bottom: 0;
+  background-color: var(--light-bone-color);
+  box-shadow: 0px 4px 8px var(--shadow-dark-color);
+  color: var(--gray-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  height: 30px !important;
+  right: 0;
+  padding: 3px;
+  position: absolute;
+  width: 30px !important;
+}
+
+.profileAvatar {
+  background-color: var(--blue-color) !important;
+  font: var(--font-h1) !important;
+  height: 100px !important;
+  width: 100px !important;
+}
+
+.addingImg {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.imgInput {
+  width: 70% !important;
+}
+
+.cancelBtn {
+  cursor: pointer;
+}
+
+.saveBtn {
+  color: var(--light-color);
+}
+
+.addBtn {
+  color: var(--light-color);
+}
+
+@media (max-width: 1140px) {
+  .inputGender {
+    min-height: 80px;
+    gap: 0;
+  }
+}
+
+@media (max-width: 1030px) {
+  .form {
+    gap: 10px;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .block {
+    flex-direction: column;
+  }
+
+  .labelBlock {
+    gap: 5px;
+    width: 100%;
+  }
+
+  .label {
+    font: var(--font-text-5) !important;
+    font-weight: 700 !important;
+  }
+
+  .title {
+    font: var(--font-text-3);
+    font-weight: 700;
+  }
+
+  .editAvatar {
+    font-size: 7px !important;
+    max-width: 90px;
+  }
+
+  .btnBlock {
+    margin-top: 15px;
+  }
+
+  .inputGender {
+    min-height: 40px;
+    gap: 0;
+  }
+}
+

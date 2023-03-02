@@ -1,0 +1,25 @@
+.primaryButton {
+  background-color: var(--blue-color);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--white-color);
+  font: var(--font-text-3);
+  min-width: 116px;
+  height: 40px;
+  padding: 0 5px;
+  text-transform: capitalize;
+}
+
+.disabled,
+.outlined {
+  background-color: transparent;
+  color: var(--gray-color);
+  border: 1px solid var(--gray-color);
+  cursor: default;
+}
+
+.outlined {
+  cursor: pointer;
+}
+

@@ -1,0 +1,72 @@
+.profileAvatar {
+  border: 4px solid var(--white-color);
+  bottom: 120px;
+  height: 150px !important;
+  left: 50px;
+  position: relative;
+  width: 150px !important;
+}
+
+.wrapperInfoUser {
+  align-items: center;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 20px;
+  padding: 0 40px;
+  width: 100%;
+}
+
+.userInfo {
+  padding-left: 30px;
+}
+
+.nameUser {
+  color: var(--gray-color);
+  font: var(--font-text-1);
+  font-weight: 700;
+}
+
+.workUser {
+  color: var(--gray-color);
+  font: var(--font-text-4);
+}
+
+.editInfo {
+  background-color: var(--light-gray-color);
+  color: var(--gray-color);
+  font: var(--font-text-4);
+  font-weight: 500;
+  padding: 10px;
+  width: 140px;
+}
+
+
+@media (max-width: 768px) {
+  .profileAvatar {
+    width: 84px !important;
+    height: 84px !important;
+    bottom: 65px;
+  }
+
+  .wrapperInfoUser {
+    display: block;
+    bottom: 0;
+  }
+
+  .nameUser {
+    font: var(--font-text-4);
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .workUser {
+    font: var(--font-text-5);
+  }
+
+  .editInfo {
+    height: 38px;
+    width: 100%;
+    margin-top: 14px;
+  }
+}

@@ -1,0 +1,43 @@
+.friends {
+  align-items: center;
+  background-color: var(--white-color);
+  display: none;
+  flex-direction: row;
+  gap: 20px;
+  overflow: auto;
+  padding: 10px;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.friend {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 15px;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.name {
+  color: var(--gray-color);
+  font: var(--font-text-5);
+  max-width: 50px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.loading {
+  margin: 0 auto;
+}
+
+@media (max-width: 1320px) {
+  .friends {
+    display: flex;
+  }
+}

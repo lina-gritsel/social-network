@@ -1,0 +1,105 @@
+.addToPost {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 1px solid var(--medium-gray-color);
+  border-bottom: 1px solid var(--medium-gray-color);
+  padding: 10px 0 !important;
+}
+
+.like {
+  color: var(--gray-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.icon {
+  color: var(--dark-gray-color);
+}
+
+.isLike {
+  color: red !important;
+}
+
+.actionOnPost {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.allComments {
+  color: var(--gray-color);
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  opacity: 0.6;
+}
+
+.actionAmount {
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatarWrapper {
+  display: flex;
+}
+
+.likeAvatar {
+  width: 25px !important;
+  height: 25px !important;
+
+  &:nth-child(2) {
+    position: relative;
+    right: 5px;
+  }
+
+  &:nth-child(3) {
+    position: relative;
+    right: 10px;
+  }
+
+  &:nth-child(4) {
+    position: relative;
+    right: 15px;
+    font-size: 14px;
+    border-radius: 50%;
+    background: var(--dark-gray-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.loading {
+  width: 21px !important;
+  height: 21px !important;
+}
+
+@media (max-width: 768px) {
+  .likeAvatar {
+    height: 18px !important;
+    width: 18px !important;
+    font-size: 10px !important;
+  }
+  .allComments {
+    font: var(--font-text-5);
+  }
+
+  .icon {
+    height: 16px !important;
+    width: 16px !important;
+  }
+
+  .addToPost {
+    padding: 5px 0 !important;
+  }
+
+  .actionOnPost {
+    gap: 5px;
+  }
+}
